@@ -7,6 +7,7 @@
           <element id="module-output" name="TRTPOControlSystem" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.1" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: javaee:javaee-api:5" />
         </element>
