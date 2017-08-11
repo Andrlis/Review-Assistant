@@ -4,4 +4,13 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <listener>
+    <listener-class>timerTasks.ScheduleCheckerListener</listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>timerTasks.RepositoryCheckerListener</listener-class>
+  </listener>
+
 </web-app>
