@@ -1,9 +1,14 @@
 package Checker;
 
 
-import Data.Lab;
+
+import Data.Group.Group;
+import Data.Group.GroupsKeeper;
+import Data.Group.SubGroup;
+import Data.Lab.IssuedLab;
+import Data.Lab.Lab;
+import Data.Mark.LabMark;
 import Data.Student;
-import Data.SubGroup;
 import gitAPI.GitInfoClasses.GitCommitInfo.GitCommit;
 import gitAPI.GitInfoClasses.GitCommitInfo.GitCommitHistory;
 import gitAPI.GitParser;
@@ -14,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -96,7 +102,7 @@ public class Checker {
         try {
             answer = Checker.messageCheck(
                     git.getCommitList(student.getGitUserName(), student.getGitRepoName()),
-                    lab.getIssuedLad().getInformation().getKeyWord());
+                    lab.getKeyWord());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,51 +120,38 @@ public class Checker {
     }
 
     /**
-     * @param student - сткдент для проверки
-     * @return - true - есть изменения, false - нет изменений
-     * Изенения сохраняются в объекте student
-     * если коэффициент = -1 - лабараторная не сдана, -2 - дата и время коммита были изменены(фальсификация)
+     *
+     * @param groupsKeeper
      */
-    static public boolean checkTheChangeInStudentCommits(Student student) {
-        boolean flag = false;
+    static public void checkForCommitsInGroups(GroupsKeeper groupsKeeper) {
+        //loop by group
+        for(Group currentGroup : groupsKeeper.getGroupList()) {
+            //loop by subgroup
+            for(SubGroup currentSubGroup : currentGroup.getSubGroupList()) {
+                //loop by issued lab for subgroup
+                for(IssuedLab currentIssuedLab : currentSubGroup.getIssuedLabsList()) {
+                    Date newDateOfLastRepoCheck = new Date();
+                    //loop by students who did not pass the lab
+                    for(Student currentStudent : currentIssuedLab.getStudentControlList()) {
+                        LabMark labMark = currentStudent.getLabMark(currentIssuedLab.getLabDescription());
 
-        for (Lab currentLab : student.getLabs()) { //цикл по всем выданым лабараторным студента
-            if (currentLab.getCoefficient() >= 0)
-                continue;
+                        if(labMark.getCoefficient() >= 0)
+                            continue;
 
-            Date commitDate = Checker.getDateOfTheCommit(student, currentLab);
+                        Date commitDate = Checker.getDateOfTheCommit(currentStudent, currentIssuedLab.getLabDescription());
+                        if(commitDate == null)
+                            continue;
 
-            if (commitDate == null)
-                continue;
-
-            if (commitDate.getTime() < currentLab.getIssuedLad().getLastCheckDateAndTime().getTime()) {
-                currentLab.setCoefficient(-2);
-            } else {
-                flag = true;
-                currentLab.setCoefficient(currentLab.getIssuedLad().getCoefficient());
-                student.setNumberOfPasses(student.getNumberOfPasses() - 1);
-                //ToDo сохранить в бд коэффициент сданной лабы
-                if(student.getNumberOfPasses() == 0)
-                    break;
-            }
-        }
-
-        return flag;
-    }
-
-    /**
-     * алгоритм проверки лабараторных
-     * @param subGroups список групп
-     */
-    static public void checkForCommitsInTheSubGroups(ArrayList<SubGroup> subGroups){
-        for(SubGroup currentSubGroup: subGroups) {
-
-            ArrayList<Student> students = null;
-            //ToDo выбрать из бд студентов из выбранной подгруппы с задолжностями
-
-            for (Student currentStudent : students) {
-                if (Checker.checkTheChangeInStudentCommits(currentStudent)) {
-                    //ToDo сохранение в бд колличество долгов
+                        if(commitDate.getTime() < currentIssuedLab.getDateOfLastRepoCheck().getTime()) {
+                            labMark.setCoefficient(new Double(-2));
+                        } else {
+                            currentIssuedLab.deleteStudentFromControlList(currentStudent);
+                            labMark.setCoefficient(currentIssuedLab.getCoefficientOfCurrentDeadline());
+                            //TODO save change for database
+                        }
+                    }
+                    //save new date of last lab checking
+                    currentIssuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
                 }
             }
         }
