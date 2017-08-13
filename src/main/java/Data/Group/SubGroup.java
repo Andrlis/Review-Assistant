@@ -76,8 +76,12 @@ public class SubGroup {
         this.universityClassesList.add(universityClass);
     }
 
-    public UniversityClass getNextUniversityClass() {
-        //TODO
+    public UniversityClass getNextUniversityClass(UniversityClass universityClass) {
+        for(UniversityClass currentClass : universityClassesList) {
+            if(currentClass.getDate().getTime() > universityClass.getDate().getTime()) {
+                return currentClass;
+            }
+        }
         return null;
     }
 }

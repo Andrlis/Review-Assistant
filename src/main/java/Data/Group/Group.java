@@ -66,6 +66,6 @@ public class Group {
     }
 
     public void addTest() {
-        //TODO
+        this.amountOfTest++;
     }
 }
