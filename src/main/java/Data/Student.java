@@ -1,53 +1,53 @@
 package Data;
 
-import java.util.ArrayList;
+import Data.Lab.Lab;
+import Data.Mark.LabMark;
+import Data.Mark.Mark;
+
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by kesso on 08.08.17.
+ * class containing information about the student and list of marks for the lab,
+ * list of bonuses, list of missed classes
  */
 public class Student {
-    private long id;
-    private String name;
-    private String gitUserName;
+    private Long id;
+    private String fulName;
     private String gitRepoName;
+    private String gitUserName;
     private String eMail;
-    private SubGroup subGroup;
-    private int numberOfPasses;
-    private ArrayList<Lab> labs;
+    private Map<Lab, LabMark> labMarksMap;
+    private Map<Integer, Mark> testMarksMap;
+    private List<Mark> bonusMarks;
+    private List<UniversityClass> missedUniversityClassesList;
 
-    public Student(long id, String name, String gitUserName, String gitRepoName, String eMail, SubGroup subGroup, int numberOfPasses, ArrayList<Lab> labs) {
+    public Student(Long id, String fulName, String gitRepoName, String gitUserName, String eMail, Map<Lab, LabMark> labMarksMap, Map<Integer, Mark> testMarksMap, List<Mark> bonusMarks, List<UniversityClass> missedUniversityClassesList) {
         this.id = id;
-        this.name = name;
-        this.gitUserName = gitUserName;
+        this.fulName = fulName;
         this.gitRepoName = gitRepoName;
+        this.gitUserName = gitUserName;
         this.eMail = eMail;
-        this.subGroup = subGroup;
-        this.numberOfPasses = numberOfPasses;
-        this.labs = labs;
+        this.labMarksMap = labMarksMap;
+        this.testMarksMap = testMarksMap;
+        this.bonusMarks = bonusMarks;
+        this.missedUniversityClassesList = missedUniversityClassesList;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFulName() {
+        return fulName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGitUserName() {
-        return gitUserName;
-    }
-
-    public void setGitUserName(String gitUserName) {
-        this.gitUserName = gitUserName;
+    public void setFulName(String fulName) {
+        this.fulName = fulName;
     }
 
     public String getGitRepoName() {
@@ -58,6 +58,14 @@ public class Student {
         this.gitRepoName = gitRepoName;
     }
 
+    public String getGitUserName() {
+        return gitUserName;
+    }
+
+    public void setGitUserName(String gitUserName) {
+        this.gitUserName = gitUserName;
+    }
+
     public String geteMail() {
         return eMail;
     }
@@ -66,27 +74,77 @@ public class Student {
         this.eMail = eMail;
     }
 
-    public SubGroup getSubGroup() {
-        return subGroup;
+    public Map<Lab, LabMark> getLabMarksMap() {
+        return labMarksMap;
     }
 
-    public void setSubGroup(SubGroup subGroup) {
-        this.subGroup = subGroup;
+    public void setLabMarksMap(Map<Lab, LabMark> labMarksMap) {
+        this.labMarksMap = labMarksMap;
     }
 
-    public ArrayList<Lab> getLabs() {
-        return labs;
+    public List<Mark> getBonusMarks() {
+        return bonusMarks;
     }
 
-    public void setLabs(ArrayList<Lab> labs) {
-        this.labs = labs;
+    public void setBonusMarks(List<Mark> bonusMarks) {
+        this.bonusMarks = bonusMarks;
     }
 
-    public int getNumberOfPasses() {
-        return numberOfPasses;
+    public List<UniversityClass> getMissedUniversityClassesList() {
+        return missedUniversityClassesList;
     }
 
-    public void setNumberOfPasses(int numberOfPasses) {
-        this.numberOfPasses = numberOfPasses;
+    public void setMissedUniversityClassesList(List<UniversityClass> missedUniversityClassesList) {
+        this.missedUniversityClassesList = missedUniversityClassesList;
+    }
+
+    public Map<Integer, Mark> getTestMarksMap() {
+        return testMarksMap;
+    }
+
+
+    public void setTestMarksMap(Map<Integer, Mark> testMarksMap) {
+        this.testMarksMap = testMarksMap;
+    }
+
+    public void addCoefficientToCommitedLab(Lab lab,Double coefficient) {
+        LabMark labMark = this.labMarksMap.get(lab);
+        if(labMark != null){
+            labMark.setCoefficient(coefficient);
+        }
+    }
+
+    public void addMarkToCommiteLab(Lab lab, int mark) {
+        LabMark labMark = this.labMarksMap.get(lab);
+        if(labMark != null){
+            labMark.setMark(mark);
+        }
+    }
+
+    private void addLabMark(Lab lab, LabMark labMark) {
+        if(this.labMarksMap.containsKey(lab)){
+            this.labMarksMap.get(lab).setMark(labMark.getMark());
+        } else {
+            this.labMarksMap.put(lab, labMark);
+        }
+        this.labMarksMap.put(lab,labMark);
+    }
+
+    private void addTestMark(Integer number, Integer mark) {
+        if(this.testMarksMap.containsKey(number)) {
+            Mark m = this.testMarksMap.get(number);
+            m.setMark(mark);
+        } else {
+            Mark m = new Mark(mark);
+            this.testMarksMap.put(number, m);
+        }
+    }
+
+    public LabMark getLabMark(Lab lab) {
+        return this.labMarksMap.get(lab);
+    }
+
+    public Mark getTestMark(Integer number) {
+        return this.testMarksMap.get(number);
     }
 }

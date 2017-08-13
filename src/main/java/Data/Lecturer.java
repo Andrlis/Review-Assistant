@@ -1,50 +1,44 @@
 package Data;
 
+import Data.Group.SubGroup;
+
+import java.util.List;
+
 /**
- * Created by kesso on 08.08.17.
+ * lecturer
  */
 public class Lecturer {
-    private long id;
-    private String name;
-    private String userName;
-    private String password;
+    private Long id;
+    private String fullName;
+    private List<SubGroup> subGroupList;
 
-    public Lecturer(long id, String name, String userName, String password) {
+    public Lecturer(Long id, String fullName, List<SubGroup> subGroupList) {
         this.id = id;
-        this.name = name;
-        this.userName = userName;
-        this.password = password;
+        this.fullName = fullName;
+        this.subGroupList = subGroupList;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getUserName() {
-        return userName;
+    public List<SubGroup> getSubGroupList() {
+        return subGroupList;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSubGroupList(List<SubGroup> subGroupList) {
+        this.subGroupList = subGroupList;
     }
 }
