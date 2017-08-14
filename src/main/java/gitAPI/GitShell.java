@@ -26,7 +26,7 @@ public class GitShell {
         ArrayList<GitCommitHistory> commitHistories = null;
 
         try {
-            commitHistories = parser.readCommitHistory(git.getCommitList(gitUserName,gitRepoName));
+            commitHistories = parser.readCommitHistory(git.getCommitList(gitUserName, gitRepoName));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,9 +46,6 @@ public class GitShell {
     static public Date getDateOfTheCommit(Student student, Lab lab) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("GTM"));
-
-
-        GitRequests git = new GitRequests();
 
         GitCommitHistory answer = null;
 

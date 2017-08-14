@@ -107,31 +107,31 @@ public class Student {
         this.testMarksMap = testMarksMap;
     }
 
-    public void addCoefficientToCommitedLab(Lab lab,Double coefficient) {
+    public void addCoefficientToCommitedLab(Lab lab, Double coefficient) {
         LabMark labMark = this.labMarksMap.get(lab);
-        if(labMark != null){
+        if (labMark != null) {
             labMark.setCoefficient(coefficient);
         }
     }
 
     public void addMarkToCommiteLab(Lab lab, int mark) {
         LabMark labMark = this.labMarksMap.get(lab);
-        if(labMark != null){
+        if (labMark != null) {
             labMark.setMark(mark);
         }
     }
 
     private void addLabMark(Lab lab, LabMark labMark) {
-        if(this.labMarksMap.containsKey(lab)){
+        if (this.labMarksMap.containsKey(lab)) {
             this.labMarksMap.get(lab).setMark(labMark.getMark());
         } else {
             this.labMarksMap.put(lab, labMark);
         }
-        this.labMarksMap.put(lab,labMark);
+        this.labMarksMap.put(lab, labMark);
     }
 
     private void addTestMark(Integer number, Integer mark) {
-        if(this.testMarksMap.containsKey(number)) {
+        if (this.testMarksMap.containsKey(number)) {
             Mark m = this.testMarksMap.get(number);
             m.setMark(mark);
         } else {

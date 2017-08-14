@@ -13,7 +13,7 @@ public class GitRepository {
     private int size;
     private String language;
 
-    public GitRepository(){
+    public GitRepository() {
         id = null;
         owner = null;
         created_at = null;

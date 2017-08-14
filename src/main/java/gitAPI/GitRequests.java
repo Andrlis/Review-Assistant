@@ -3,7 +3,8 @@ package gitAPI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.URL;
+import java.net.URLConnection;
 
 
 /**
@@ -16,6 +17,7 @@ public class GitRequests {
 
     /**
      * Get repository info.
+     *
      * @param userName
      * @param repoName
      * @return
@@ -34,6 +36,7 @@ public class GitRequests {
 
     /**
      * Get commits history in repository.
+     *
      * @param userName
      * @param repoName
      * @return

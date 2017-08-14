@@ -14,7 +14,7 @@ public class Subject {
     private String subGroup;
     private ArrayList<String> weeks;
 
-    public Subject(){
+    public Subject() {
         this.lessonName = "null";
         this.time = "null";
         this.classroom = "null";
@@ -71,7 +71,7 @@ public class Subject {
         this.weeks = weeks;
     }
 
-    public void setWeek(String week){
+    public void setWeek(String week) {
         this.weeks.add(week);
     }
 }

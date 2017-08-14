@@ -1,7 +1,5 @@
 package bsuirAPI.bsuirTimetable;
 
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
-
 import java.util.ArrayList;
 
 /**
@@ -12,7 +10,7 @@ public class Timetable {
     private String currentWeek;
     private ArrayList<DayTimetable> days;
 
-    public Timetable(){
+    public Timetable() {
         this.currentWeek = "0";
         this.days = new ArrayList<DayTimetable>();
     }
@@ -33,7 +31,7 @@ public class Timetable {
         this.days = days;
     }
 
-    public void setDay(DayTimetable day){
+    public void setDay(DayTimetable day) {
         this.days.add(day);
     }
 }

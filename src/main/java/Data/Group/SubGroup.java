@@ -14,7 +14,7 @@ public class SubGroup {
     private String subGroupNumber;
     private List<Student> studentsList;
     private List<UniversityClass> universityClassesList;
-    private List<IssuedLab>issuedLabsList;
+    private List<IssuedLab> issuedLabsList;
 
     public SubGroup(Long id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
         this.id = id;
@@ -64,7 +64,7 @@ public class SubGroup {
         this.issuedLabsList = issuedLabsList;
     }
 
-    public  void addStudent(Student student) {
+    public void addStudent(Student student) {
         this.studentsList.add(student);
     }
 
@@ -77,8 +77,8 @@ public class SubGroup {
     }
 
     public UniversityClass getNextUniversityClass(UniversityClass universityClass) {
-        for(UniversityClass currentClass : universityClassesList) {
-            if(currentClass.getDate().getTime() > universityClass.getDate().getTime()) {
+        for (UniversityClass currentClass : universityClassesList) {
+            if (currentClass.getDate().getTime() > universityClass.getDate().getTime()) {
                 return currentClass;
             }
         }

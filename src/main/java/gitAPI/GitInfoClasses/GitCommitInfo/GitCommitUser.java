@@ -8,7 +8,7 @@ public class GitCommitUser {
     private String email;
     private String date;
 
-    GitCommitUser(){
+    GitCommitUser() {
         name = null;
         email = null;
         date = null;
@@ -40,7 +40,7 @@ public class GitCommitUser {
 
     @Override
     public String toString() {
-        return  "       name=" + name + '\n' +
+        return "       name=" + name + '\n' +
                 "       email=" + email + '\n' +
                 "       date=" + date + '\n' +
                 "\n";
