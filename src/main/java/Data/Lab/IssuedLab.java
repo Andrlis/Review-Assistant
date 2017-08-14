@@ -87,7 +87,7 @@ public class IssuedLab {
         this.studentControlList = studentControlList;
     }
 
-    public void deleteStudentFromControlList(Student student){
+    public void deleteStudentFromControlList(Student student) {
         this.studentControlList.remove(student);
     }
 }

@@ -53,8 +53,8 @@ public class Lab {
         this.issuedLabMap = issuedLabMap;
     }
 
-    public void addIssuedLab(SubGroup subGroup,IssuedLab issuedLab) {
-        this.issuedLabMap.put(subGroup,issuedLab);
+    public void addIssuedLab(SubGroup subGroup, IssuedLab issuedLab) {
+        this.issuedLabMap.put(subGroup, issuedLab);
     }
 
     public IssuedLab getIssuedLab(SubGroup subGroup) {

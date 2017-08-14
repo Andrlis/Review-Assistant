@@ -21,7 +21,7 @@ public class GroupsKeeper {
     }
 
     public void addGroup(Group group) {
-        if(!this.groupList.contains(group)) {
+        if (!this.groupList.contains(group)) {
             this.groupList.add(group);
         }
     }

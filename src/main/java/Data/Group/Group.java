@@ -61,7 +61,7 @@ public class Group {
     }
 
     public void addSubGroup(SubGroup subGroup) {
-        if(!this.subGroupList.contains(subGroup))
+        if (!this.subGroupList.contains(subGroup))
             this.subGroupList.add(subGroup);
     }
 
