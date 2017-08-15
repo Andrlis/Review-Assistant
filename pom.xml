@@ -42,14 +42,12 @@
       <version>6.0</version>
       <scope>provided</scope>
     </dependency>
-
       <dependency>
           <groupId>javax.j2ee</groupId>
           <artifactId>j2ee</artifactId>
           <version>1.4</version>
           <scope>provided</scope>
       </dependency>
-
       <dependency>
           <groupId>org.quartz-scheduler</groupId>
           <artifactId>quartz</artifactId>

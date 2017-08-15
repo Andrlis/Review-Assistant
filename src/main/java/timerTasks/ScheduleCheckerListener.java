@@ -1,7 +1,6 @@
 package timerTasks;
 
 import org.quartz.*;
-import static org.quartz.TriggerBuilder.newTrigger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.quartz.impl.StdSchedulerFactory;
@@ -20,7 +19,7 @@ public class ScheduleCheckerListener implements ServletContextListener {
             Trigger trigger = TriggerBuilder.newTrigger().withIdentity("ScheduleTrigger", "Group2")
                     .startNow()
                     .withSchedule(
-                            CronScheduleBuilder.dailyAtHourAndMinute(14, 12))       //Для обновления в 00.20 подставить 0 20 0 1/1 * ? *
+                            CronScheduleBuilder.dailyAtHourAndMinute(0, 30))
                     .forJob(job)
                     .build();
 

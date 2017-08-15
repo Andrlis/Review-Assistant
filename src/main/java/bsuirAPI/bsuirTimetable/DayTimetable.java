@@ -34,4 +34,13 @@ public class DayTimetable {
     public void setLesson(Subject subject) {
         this.lessons.add(subject);
     }
+
+    public ArrayList<Subject>getCurrentDayLessons(String curentWeek){
+        ArrayList<Subject> currentDayLessons = new ArrayList<Subject>();
+        for(Subject subject: lessons){
+            if(subject.getWeeks().contains(curentWeek))
+                currentDayLessons.add(subject);
+        }
+        return currentDayLessons;
+    }
 }

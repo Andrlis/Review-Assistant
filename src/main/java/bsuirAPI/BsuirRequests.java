@@ -40,20 +40,6 @@ public class BsuirRequests {
         return in.readLine();
     }
 
-    /**
-     * !!!Can`t check this method. I think it should return xml-file with group`s timetable.
-     *
-     * @param groupName
-     * @return
-     * @throws IOException
-     */
-    public String getGroupTimetable(String groupName) throws IOException {
-        URL url = new URL(String.format("https://www.bsuir.by/schedule/rest/schedule.xhtml?id=%s", groupName));
-        URLConnection connection = url.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-        return in.readLine();
-    }
 
     /**
      * Return current week.
