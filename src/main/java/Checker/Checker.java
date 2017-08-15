@@ -38,11 +38,11 @@ public class Checker {
                         if (commitDate.getTime() < currentIssuedLab.getDateOfLastRepoCheck().getTime()) {
                             labMark.setCoefficient(new Double(-2));
                         } else {
-                            if(commitDate.getTime() < currentIssuedLab.getCurrentDeadline().getDate().getTime()) {
+                            if (commitDate.getTime() < currentIssuedLab.getCurrentDeadline().getDate().getTime()) {
                                 currentIssuedLab.deleteStudentFromControlList(currentStudent);
                                 labMark.setCoefficient(currentIssuedLab.getCoefficientOfCurrentDeadline());
-                                //TODO save change for database
                             }
+                            //TODO save change for database
                         }
                     }
                     //save new date of last lab checking
