@@ -8,6 +8,8 @@ import java.util.List;
 public class GroupsKeeper {
     private List<Group> groupList;
 
+    public GroupsKeeper(){}
+
     public GroupsKeeper(List<Group> groupList) {
         this.groupList = groupList;
     }

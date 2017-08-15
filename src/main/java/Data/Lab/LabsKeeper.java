@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class LabsKeeper {
     private ArrayList<Lab> labArrayList;
 
+    public LabsKeeper(){}
+
     public LabsKeeper(ArrayList<Lab> labArrayList) {
         this.labArrayList = labArrayList;
     }

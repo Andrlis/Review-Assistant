@@ -7,6 +7,8 @@ public class Mark {
     private Long id;
     private Integer mark;
 
+    public Mark(){}
+
     public Mark(Long id, Integer mark) {
         this.id = id;
         this.mark = mark;

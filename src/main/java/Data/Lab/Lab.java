@@ -14,6 +14,8 @@ public class Lab {
     private String keyWord;
     private Map<SubGroup, IssuedLab> issuedLabMap;
 
+    public Lab(){}
+
     public Lab(Long id, Integer numberOfLab, String keyWord, Map<SubGroup, IssuedLab> issuedLabMap) {
         this.id = id;
         this.numberOfLab = numberOfLab;

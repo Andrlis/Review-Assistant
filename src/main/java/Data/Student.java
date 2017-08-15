@@ -22,6 +22,8 @@ public class Student {
     private List<Mark> bonusMarks;
     private List<UniversityClass> missedUniversityClassesList;
 
+    public Student(){}
+
     public Student(Long id, String fulName, String gitRepoName, String gitUserName, String eMail, Map<Lab, LabMark> labMarksMap, Map<Integer, Mark> testMarksMap, List<Mark> bonusMarks, List<UniversityClass> missedUniversityClassesList) {
         this.id = id;
         this.fulName = fulName;

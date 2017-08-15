@@ -19,6 +19,8 @@ public class IssuedLab {
     private Date dateOfLastRepoCheck;
     private List<Student> studentControlList;
 
+    public IssuedLab(){}
+
     public IssuedLab(Long id, Lab labDescription, UniversityClass universityClassOfIssue,
                      Double coefficientOfCurrentDeadline, UniversityClass currentDeadline,
                      Date dateOfLastRepoCheck, List<Student> studentControlList) {

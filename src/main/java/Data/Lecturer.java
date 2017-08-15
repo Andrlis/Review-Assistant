@@ -2,15 +2,25 @@ package Data;
 
 import Data.Group.SubGroup;
 
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * lecturer
  */
+@Entity
+@Table(name= "lecturers")
 public class Lecturer {
+    @Id
+    @Column(name= "id_lecturer")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name= "full_name", length = 100)
     private String fullName;
     private List<SubGroup> subGroupList;
+
+    public Lecturer() {}
 
     public Lecturer(Long id, String fullName, List<SubGroup> subGroupList) {
         this.id = id;

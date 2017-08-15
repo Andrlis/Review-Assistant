@@ -12,6 +12,8 @@ public class Group {
     private List<SubGroup> subGroupList;
     private Integer amountOfTest;
 
+    public Group(){}
+
     public Group(Long id, String numberOfGroup, String scheduleApiGroupNumber, List<SubGroup> subGroupList, Integer amountOfTest) {
         this.id = id;
         this.numberOfGroup = numberOfGroup;

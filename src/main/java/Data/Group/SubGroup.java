@@ -16,6 +16,8 @@ public class SubGroup {
     private List<UniversityClass> universityClassesList;
     private List<IssuedLab> issuedLabsList;
 
+    public SubGroup(){}
+
     public SubGroup(Long id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
         this.id = id;
         this.subGroupNumber = subGroupNumber;
