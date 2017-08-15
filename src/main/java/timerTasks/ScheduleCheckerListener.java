@@ -1,36 +1,45 @@
 package timerTasks;
 
-import javax.servlet.*;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Timer;
+import org.quartz.*;
+import static org.quartz.TriggerBuilder.newTrigger;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import org.quartz.impl.StdSchedulerFactory;
 
-/*Обновляет расписание каждый день в 00:15*/
 public class ScheduleCheckerListener implements ServletContextListener {
+    private Scheduler scheduler = null;
 
-    public void contextInitialized(ServletContextEvent sce ){
-        ServletContext  servletContext = sce.getServletContext();
-        try{
-            Timer scheduleTimer = new Timer();
-            ScheduleCheckerTask task = new ScheduleCheckerTask();
-            Date startTime = new GregorianCalendar(2017, 9, 1, 0, 15, 0).getTime();
+    @Override
+    public void contextInitialized(ServletContextEvent servletContext) {
+        try {
+            // Setup the Job class and the Job group
+            JobDetail job = JobBuilder.newJob(ScheduleCheckerTask.class).withIdentity(
+                    "ScheduleQuartzJob", "Group2").build();
 
-            // startTime is in past, so task will be runned during deployment. Period = ms*sec*min*h
-            scheduleTimer.scheduleAtFixedRate(task, startTime, 1000 * 60 * 60 * 24);
-            servletContext.setAttribute("scheduletimer", scheduleTimer);
-        }catch (Exception exc){
-            exc.printStackTrace();
+            // Create a Trigger that fires every 5 minutes.
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("ScheduleTrigger", "Group2")
+                    .startNow()
+                    .withSchedule(
+                            CronScheduleBuilder.dailyAtHourAndMinute(14, 12))       //Для обновления в 00.20 подставить 0 20 0 1/1 * ? *
+                    .forJob(job)
+                    .build();
+
+            // Setup the Job and Trigger with Scheduler & schedule jobs
+            scheduler = new StdSchedulerFactory().getScheduler();
+            scheduler.start();
+            scheduler.scheduleJob(job, trigger);
         }
-
+        catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void contextDestroyed(ServletContextEvent sce){
-        ServletContext servletContext = sce.getServletContext();
-        // get our timer from the Context
-        Timer scheduleTimer = (Timer) servletContext.getAttribute("scheduletimer");
-        if (scheduleTimer != null) {
-            scheduleTimer.cancel();
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContext) {
+        try {
+            scheduler.shutdown();
+        }   catch (SchedulerException e) {
+            e.printStackTrace();
         }
-        servletContext.removeAttribute("scheduletimer");
     }
 }

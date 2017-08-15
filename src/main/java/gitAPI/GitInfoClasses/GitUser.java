@@ -8,7 +8,7 @@ public class GitUser {
     private String login;
     private String html_url;
 
-    public GitUser(){
+    public GitUser() {
         login = null;
         html_url = null;
     }

@@ -10,7 +10,7 @@ public class GitCommit {
     private String url;
     private int comment_count;
 
-    public GitCommit(){
+    public GitCommit() {
         author = new GitCommitUser();
         committer = new GitCommitUser();
         message = null;

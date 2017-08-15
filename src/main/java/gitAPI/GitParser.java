@@ -1,10 +1,9 @@
 package gitAPI;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import gitAPI.GitInfoClasses.GitCommitInfo.GitCommit;
 import gitAPI.GitInfoClasses.GitCommitInfo.GitCommitHistory;
 import gitAPI.GitInfoClasses.GitRepository;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -13,10 +12,10 @@ import java.util.ArrayList;
 /**
  * Created by Andrey on 13.07.2017.
  */
-public class GitParser{
+public class GitParser {
     private Gson gson;
 
-    public GitParser(){
+    public GitParser() {
         gson = new Gson();
     }
 
@@ -26,8 +25,9 @@ public class GitParser{
     }
 
     public ArrayList<GitCommitHistory> readCommitHistory(String json) throws IOException {
-        Type type = new TypeToken<ArrayList<GitCommitHistory>>(){}.getType();
-        ArrayList<GitCommitHistory> commitList = gson.fromJson(json,type);
+        Type type = new TypeToken<ArrayList<GitCommitHistory>>() {
+        }.getType();
+        ArrayList<GitCommitHistory> commitList = gson.fromJson(json, type);
         return commitList;
     }
 }

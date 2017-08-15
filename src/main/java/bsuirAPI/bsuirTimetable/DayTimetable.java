@@ -1,7 +1,5 @@
 package bsuirAPI.bsuirTimetable;
 
-import org.omg.CORBA.DATA_CONVERSION;
-
 import java.util.ArrayList;
 
 /**
@@ -12,7 +10,7 @@ public class DayTimetable {
     private String day;
     private ArrayList<Subject> lessons;
 
-    public DayTimetable(){
+    public DayTimetable() {
         this.day = "0";
         this.lessons = new ArrayList<Subject>();
     }
@@ -33,7 +31,7 @@ public class DayTimetable {
         this.lessons = lessons;
     }
 
-    public void setLesson(Subject subject){
+    public void setLesson(Subject subject) {
         this.lessons.add(subject);
     }
 }
