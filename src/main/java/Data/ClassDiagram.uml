@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="357.3693181818182" y="182.0">Data.Lab.LabsKeeper</node>
+    <node x="187.75" y="506.0">Data.Group.GroupsKeeper</node>
+    <node x="210.75" y="425.0">Data.Group.Group</node>
+    <node x="159.57954545454544" y="182.0">Data.Student</node>
+    <node x="144.75" y="344.0">Data.Group.SubGroup</node>
+    <node x="93.75000000000001" y="425.0">Data.Lecturer</node>
+    <node x="155.57954545454547" y="0.0">Data.Mark.Mark</node>
+    <node x="168.0" y="81.0">Data.Mark.LabMark</node>
+    <node x="305.25" y="81.0">Data.Lab.Lab</node>
+    <node x="202.2443181818182" y="263.0">Data.Lab.IssuedLab</node>
+    <node x="0.0" y="81.0">Data.UniversityClass</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Data.Group.Group" target="Data.Group.SubGroup">
+      <point x="0.0" y="-15.5" />
+      <point x="253.25" y="400.0" />
+      <point x="224.25" y="400.0" />
+      <point x="26.5" y="15.5" />
+    </edge>
+    <edge source="Data.Lab.IssuedLab" target="Data.Student">
+      <point x="-13.25" y="-15.5" />
+      <point x="241.9943181818182" y="243.0" />
+      <point x="229.32954545454544" y="243.0" />
+      <point x="23.25" y="15.5" />
+    </edge>
+    <edge source="Data.Lab.Lab" target="Data.Lab.IssuedLab">
+      <point x="0.0" y="15.5" />
+      <point x="340.25" y="162.0" />
+      <point x="315.3693181818182" y="162.0" />
+      <point x="315.3693181818182" y="243.0" />
+      <point x="294.9943181818182" y="243.0" />
+      <point x="39.75" y="-15.5" />
+    </edge>
+    <edge source="Data.Student" target="Data.UniversityClass">
+      <point x="-38.75" y="-15.5" />
+      <point x="167.32954545454544" y="162.0" />
+      <point x="113.33333333333334" y="162.0" />
+      <point x="45.33333333333334" y="15.5" />
+    </edge>
+    <edge source="Data.Group.SubGroup" target="Data.Lab.IssuedLab">
+      <point x="13.25" y="-15.5" />
+      <point x="211.0" y="314.0" />
+      <point x="255.2443181818182" y="314.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Data.Student" target="Data.Mark.Mark">
+      <point x="-7.75" y="-15.5" />
+      <point x="198.32954545454544" y="142.0" />
+      <point x="157.5" y="142.0" />
+      <point x="157.5" y="61.0" />
+      <point x="185.20454545454547" y="61.0" />
+      <point x="-9.875" y="15.5" />
+    </edge>
+    <edge source="Data.Lab.LabsKeeper" target="Data.Lab.Lab">
+      <point x="0.0" y="-15.5" />
+      <point x="415.3693181818182" y="162.0" />
+      <point x="368.25" y="162.0" />
+      <point x="28.0" y="15.5" />
+    </edge>
+    <edge source="Data.Group.SubGroup" target="Data.Student">
+      <point x="-13.25" y="-15.5" />
+      <point x="184.5" y="324.0" />
+      <point x="164.25" y="324.0" />
+      <point x="164.25" y="243.0" />
+      <point x="182.82954545454544" y="243.0" />
+      <point x="-23.25" y="15.5" />
+    </edge>
+    <edge source="Data.Student" target="Data.Mark.LabMark">
+      <point x="7.75" y="-15.5" />
+      <point x="213.82954545454544" y="162.0" />
+      <point x="217.5" y="162.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Data.Lecturer" target="Data.Group.SubGroup">
+      <point x="0.0" y="-15.5" />
+      <point x="142.25" y="400.0" />
+      <point x="171.25" y="400.0" />
+      <point x="-26.5" y="15.5" />
+    </edge>
+    <edge source="Data.Lab.IssuedLab" target="Data.UniversityClass">
+      <point x="-39.75" y="-15.5" />
+      <point x="215.4943181818182" y="233.0" />
+      <point x="50.83333333333337" y="233.0" />
+      <point x="50.83333333333337" y="162.0" />
+      <point x="68.0" y="162.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Data.Student" target="Data.Lab.Lab">
+      <point x="38.75" y="-15.5" />
+      <point x="244.82954545454544" y="142.0" />
+      <point x="312.25" y="142.0" />
+      <point x="-28.0" y="15.5" />
+    </edge>
+    <edge source="Data.Group.SubGroup" target="Data.UniversityClass">
+      <point x="-39.75" y="-15.5" />
+      <point x="158.0" y="324.0" />
+      <point x="39.83333333333337" y="324.0" />
+      <point x="39.83333333333337" y="162.0" />
+      <point x="22.666666666666686" y="162.0" />
+      <point x="-45.333333333333314" y="15.5" />
+    </edge>
+    <edge source="Data.Mark.LabMark" target="Data.Mark.Mark">
+      <point x="0.0" y="-15.5" />
+      <point x="217.5" y="61.0" />
+      <point x="204.95454545454547" y="61.0" />
+      <point x="9.875" y="15.5" />
+    </edge>
+    <edge source="Data.Group.GroupsKeeper" target="Data.Group.Group">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="Data.Lab.Lab" target="Data.Group.SubGroup">
+      <point x="13.999999999999986" y="15.5" />
+      <point x="354.25" y="162.0" />
+      <point x="346.8693181818182" y="162.0" />
+      <point x="346.8693181818182" y="324.0" />
+      <point x="237.5" y="324.0" />
+      <point x="39.75" y="-15.5" />
+    </edge>
+    <edge source="Data.Lab.IssuedLab" target="Data.Lab.Lab">
+      <point x="13.25" y="-15.5" />
+      <point x="268.4943181818182" y="243.0" />
+      <point x="279.5738636363636" y="243.0" />
+      <point x="279.5738636363636" y="152.0" />
+      <point x="326.25" y="152.0" />
+      <point x="-14.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="237.0" y="268.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
