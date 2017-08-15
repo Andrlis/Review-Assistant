@@ -17,10 +17,12 @@ public class ScheduleCheckerListener implements ServletContextListener {
                     "ScheduleQuartzJob", "Group2").build();
 
             // Create a Trigger that fires every 5 minutes.
-            Trigger trigger = newTrigger()
-                    .withIdentity("ScheduleTrigger", "Group2")
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(15)
-                            .repeatForever()).build();    //Setup interval
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity("ScheduleTrigger", "Group2")
+                    .startNow()
+                    .withSchedule(
+                            CronScheduleBuilder.dailyAtHourAndMinute(14, 12))       //Для обновления в 00.20 подставить 0 20 0 1/1 * ? *
+                    .forJob(job)
+                    .build();
 
             // Setup the Job and Trigger with Scheduler & schedule jobs
             scheduler = new StdSchedulerFactory().getScheduler();

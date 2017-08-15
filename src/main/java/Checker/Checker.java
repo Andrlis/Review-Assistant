@@ -10,7 +10,6 @@ import Data.Student;
 import gitAPI.GitShell;
 
 import java.util.Date;
-
 /**
  * Created by kesso on 01.08.17.
  */
