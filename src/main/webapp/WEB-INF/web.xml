@@ -5,12 +5,28 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <context-param>
+    <param-name>quartz:shutdown-on-unload</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>quartz:wait-on-shutdown</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>quartz:start-on-load</param-name>
+    <param-value>true</param-value>
+  </context-param>
+
   <listener>
-    <listener-class>timerTasks.ScheduleCheckerListener</listener-class>
+    <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
   </listener>
 
   <listener>
     <listener-class>timerTasks.RepositoryCheckerListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>timerTasks.ScheduleCheckerListener</listener-class>
   </listener>
 
 </web-app>

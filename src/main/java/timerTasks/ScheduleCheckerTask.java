@@ -1,11 +1,16 @@
 package timerTasks;
 
-import java.util.TimerTask;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import java.util.Date;
 
-/*Таск для обновления расписания подгрупп*/
-public class ScheduleCheckerTask extends TimerTask {
-    @Override
-    public void run() {
+public class ScheduleCheckerTask implements Job {
 
+    public ScheduleCheckerTask() {
+    }
+
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        System.out.println("ScheduleCheckerTask"+ new Date());
     }
 }

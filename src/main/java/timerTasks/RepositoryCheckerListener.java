@@ -1,37 +1,44 @@
 package timerTasks;
 
-import javax.servlet.ServletContext;
+import org.quartz.*;
+import static org.quartz.TriggerBuilder.newTrigger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Timer;
+import org.quartz.impl.StdSchedulerFactory;
+
 
 public class RepositoryCheckerListener implements ServletContextListener {
+    private Scheduler scheduler = null;
 
-    public void contextInitialized(ServletContextEvent sce) {
-        ServletContext servletContext = sce.getServletContext();
+    @Override
+    public void contextInitialized(ServletContextEvent servletContext) {
         try {
-            Timer repositoryTimer = new Timer();
-            RepositoryCheckerTask task = new RepositoryCheckerTask();
-            Date startTime = new GregorianCalendar(2017, 9, 1, 0, 05, 0).getTime();
+            // Setup the Job class and the Job group
+            JobDetail job = JobBuilder.newJob(RepositoryCheckerTask.class).withIdentity(
+                    "RepositoryJob", "Group1").build();
 
-            // startTime is in past, so task will be runned during deployment. Period = ms*sec*min
-            repositoryTimer.scheduleAtFixedRate(task, startTime, 1000 * 60 * 30);
-            servletContext.setAttribute("repotimer", repositoryTimer);
-        } catch (Exception exc) {
-            exc.printStackTrace();
+            // Create a Trigger that fires every 5 minutes.
+            Trigger trigger = newTrigger()
+                    .withIdentity("RepositoryTrigger", "Group1")
+                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                            .withIntervalInSeconds(10).repeatForever()).build();            //Setup interval
+
+            // Setup the Job and Trigger with Scheduler & schedule jobs
+            scheduler = new StdSchedulerFactory().getScheduler();
+            scheduler.start();
+            scheduler.scheduleJob(job, trigger);
         }
-
+        catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void contextDestroyed(ServletContextEvent sce) {
-        ServletContext servletContext = sce.getServletContext();
-        // get our timer from the Context
-        Timer repositoryTimer = (Timer) servletContext.getAttribute("repotimer");
-        if (repositoryTimer != null) {
-            repositoryTimer.cancel();
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContext) {
+        try {
+            scheduler.shutdown();
+        }   catch (SchedulerException e) {
+            e.printStackTrace();
         }
-        servletContext.removeAttribute("repotimer");
     }
 }
