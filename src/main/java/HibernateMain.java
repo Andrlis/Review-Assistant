@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by kesso on 15.08.17.
  */
-public class Main {
+public class HibernateMain {
     private static final SessionFactory ourSessionFactory;
 
     static {
