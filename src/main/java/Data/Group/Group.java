@@ -12,7 +12,13 @@ public class Group {
     private List<SubGroup> subGroupList;
     private Integer amountOfTest;
 
-    public Group(){}
+    public Group(){
+        this.id = null;
+        this.numberOfGroup = null;
+        this.scheduleApiGroupNumber = null;
+        this.subGroupList = null;
+        this.amountOfTest = null;
+    }
 
     public Group(Long id, String numberOfGroup, String scheduleApiGroupNumber, List<SubGroup> subGroupList, Integer amountOfTest) {
         this.id = id;

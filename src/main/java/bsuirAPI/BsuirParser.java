@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
+import Data.Group.Group;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
@@ -40,8 +40,8 @@ public class BsuirParser {
             Group group = new Group();
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
-                group.setId(element.getElementsByTagName("id").item(0).getTextContent());
-                group.setName(element.getElementsByTagName("name").item(0).getTextContent());
+                group.setScheduleApiGroupNumber(element.getElementsByTagName("id").item(0).getTextContent());
+                group.setNumberOfGroup(element.getElementsByTagName("name").item(0).getTextContent());
                 groupList.add(group);
             }
         }
@@ -69,7 +69,7 @@ public class BsuirParser {
                     subject.setLessonName(xmlSubject.getElementsByTagName("subject").item(0).getTextContent());
                     subject.setLessonType(xmlSubject.getElementsByTagName("lessonType").item(0).getTextContent());
                     subject.setTime(xmlSubject.getElementsByTagName("lessonTime").item(0).getTextContent());
-                    subject.setClassroom(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent());
+                    //subject.setClassroom(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent());       //для Физкультуры нет аудитории. Null pointer Exception
                     subject.setSubGroup(xmlSubject.getElementsByTagName("numSubgroup").item(0).getTextContent());
                     for (int week_id = 0; week_id < xmlSubject.getElementsByTagName("weekNumber").getLength(); week_id++) {
                         subject.setWeek(xmlSubject.getElementsByTagName("weekNumber").item(week_id).getTextContent());

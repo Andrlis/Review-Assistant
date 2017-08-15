@@ -1,26 +1,17 @@
 package bsuirAPI.bsuirTimetable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Andrey on 17.07.2017.
  */
 public class Timetable {
 
-    private String currentWeek;
-    private ArrayList<DayTimetable> days;
+     private ArrayList<DayTimetable> days;
 
     public Timetable() {
-        this.currentWeek = "0";
         this.days = new ArrayList<DayTimetable>();
-    }
-
-    public String getCurrentWeek() {
-        return currentWeek;
-    }
-
-    public void setCurrentWeek(String currentWeek) {
-        this.currentWeek = currentWeek;
     }
 
     public ArrayList<DayTimetable> getDays() {
@@ -33,5 +24,12 @@ public class Timetable {
 
     public void setDay(DayTimetable day) {
         this.days.add(day);
+    }
+
+    public DayTimetable getCurrentDaySchedule(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        return days.get((day == 1) ? 6 : day-2);
     }
 }
