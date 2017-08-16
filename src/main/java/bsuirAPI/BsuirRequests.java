@@ -17,7 +17,7 @@ public class BsuirRequests {
      *
      * @return String
      */
-    public String getGroups() throws IOException {
+    public static String getGroups() throws IOException {
         URL url = new URL("https://www.bsuir.by/schedule/rest/studentGroup");
         URLConnection connection = url.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -32,7 +32,7 @@ public class BsuirRequests {
      * @return
      * @throws IOException
      */
-    public String getTimetable(String groupId) throws IOException {
+    public static String getTimetable(String groupId) throws IOException {
         URL url = new URL(String.format("https://www.bsuir.by/schedule/rest/schedule/%s", groupId));
         URLConnection connection = url.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -47,7 +47,7 @@ public class BsuirRequests {
      * @return
      * @throws IOException
      */
-    public String getCurrentWeek() throws IOException {
+    public static String getCurrentWeek() throws IOException {
         URL url = new URL(String.format("https://www.bsuir.by/schedule/rest/currentWeek/date/%s",
                 new SimpleDateFormat("dd.MM.yyyy").format(System.currentTimeMillis())));     //something strange. It shows previous day. Date change at 1.00
         URLConnection connection = url.openConnection();

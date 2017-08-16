@@ -4,25 +4,29 @@ import Data.Group.Group;
 import Data.Group.GroupsKeeper;
 import bsuirAPI.BsuirParser;
 import bsuirAPI.BsuirRequests;
+import bsuirAPI.bsuirTimetable.DayTimetable;
+import bsuirAPI.bsuirTimetable.Subject;
 import bsuirAPI.bsuirTimetable.Timetable;
 
 
-public class ScheduleChecker {
-    private BsuirParser parser;
-    private BsuirRequests requests;
-    private Timetable timetable;
-    private String currentWeek;
+public class ScheduleChecker{
 
+      public static void groupScheduleCheck(GroupsKeeper groups) throws Exception{
+          DayTimetable currentDaySchedule;
+          Timetable timetable;
 
-    public  void groupScheduleCheck(GroupsKeeper groups){
-        for(Group group: groups.getGroupList()){
-            try {
-                timetable = parser.parseTimetable(requests.getTimetable(group.getScheduleApiGroupNumber()));
+          for(Group group: groups.getGroupList()){
 
-            }catch (Exception exc){
-                exc.printStackTrace();
-            }
-        }
+              timetable = BsuirParser.parseTimetable(BsuirRequests.getTimetable(group.getScheduleApiGroupNumber()));
+              currentDaySchedule = timetable.getCurrentDaySchedule();
 
-    }
+              for(Subject lesson: currentDaySchedule.getCurrentDayLessons(BsuirRequests.getCurrentWeek())){
+                  if(lesson.getLessonName().equals("ТРиТПО")){
+                       //TODO save lesson`s date and time at database.
+                       break;
+                  }
+              }
+          }
+
+      }
 }

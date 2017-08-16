@@ -17,9 +17,9 @@ CREATE TABLE  groups(
 id_group INTEGER AUTO_INCREMENT,
 group_number VARCHAR(20) NOT NULL,
 bsuir_api_group_id VARCHAR(20) NOT NULL,
+amount_of_test INTEGER NOT NULL,
 PRIMARY KEY(id_group)
 );
-
 
 
 CREATE TABLE subgroups (
@@ -36,6 +36,7 @@ id_group INTEGER NOT NULL,
 id_lecturer INTEGER NOT NULL,
 PRIMARY KEY(id_group_subgroup)
 );
+
 
 CREATE TABLE students(
 id_student INTEGER AUTO_INCREMENT,
@@ -55,6 +56,7 @@ id_student INTEGER NOT NULL,
 PRIMARY KEY(id_absence)
 );
 
+
 CREATE TABLE classes(
 id_class INTEGER AUTO_INCREMENT,
 class_date DATE NOT NULL,
@@ -62,6 +64,7 @@ class_time TIME NOT NULL,
 id_group_subgroup INTEGER NOT NULL,
 PRIMARY KEY(id_class)
 );
+
 
 CREATE TABLE issued_labs(
 id_issued_lab INTEGER AUTO_INCREMENT,
@@ -100,6 +103,7 @@ test_date TIMESTAMP NOT NULL,
 PRIMARY KEY(id_test)
 );
 
+
 CREATE TABLE tests_result(
 id_test_result INTEGER AUTO_INCREMENT,
 id_student INTEGER NOT NULL,
@@ -108,6 +112,7 @@ mark INTEGER NOT NULL,
 PRIMARY KEY(id_test_result),
 FOREIGN KEY(id_test) REFERENCES tests(id_test)
 );
+
 
 CREATE TABLE bonuses(
 id_bonus INTEGER AUTO_INCREMENT,

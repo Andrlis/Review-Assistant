@@ -26,7 +26,7 @@ public class BsuirParser {
      * @return
      * @throws Exception
      */
-    public ArrayList<Group> parseGroups(String groups) throws Exception {
+    public static ArrayList<Group> parseGroups(String groups) throws Exception {
         ArrayList<Group> groupList = new ArrayList<Group>();
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -48,7 +48,7 @@ public class BsuirParser {
         return groupList;
     }
 
-    public Timetable parseTimetable(String xmlTimetable) throws Exception {
+    public static Timetable parseTimetable(String xmlTimetable) throws Exception {
         Timetable timetable = new Timetable();
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
