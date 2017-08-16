@@ -1,15 +1,25 @@
 package Data.Group;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * class containing information abput group and list of subgroup
  */
+@Entity
+@Table(name = "groups")
 public class Group {
-    private Long id;
+    @Id
+    @Column(name ="id_group")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name ="group_number", length = 10)
     private String numberOfGroup;
+    @Column(name ="bsuir_api_group_id", length = 10)
     private String scheduleApiGroupNumber;
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<SubGroup> subGroupList;
+    @Column(name = "amount_of_test")
     private Integer amountOfTest;
 
     public Group(){
@@ -20,7 +30,7 @@ public class Group {
         this.amountOfTest = null;
     }
 
-    public Group(Long id, String numberOfGroup, String scheduleApiGroupNumber, List<SubGroup> subGroupList, Integer amountOfTest) {
+    public Group(Integer id, String numberOfGroup, String scheduleApiGroupNumber, List<SubGroup> subGroupList, Integer amountOfTest) {
         this.id = id;
         this.numberOfGroup = numberOfGroup;
         this.scheduleApiGroupNumber = scheduleApiGroupNumber;
@@ -28,11 +38,11 @@ public class Group {
         this.amountOfTest = amountOfTest;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

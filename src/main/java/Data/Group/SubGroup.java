@@ -4,33 +4,48 @@ import Data.Lab.IssuedLab;
 import Data.Student;
 import Data.UniversityClass;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * class containing information about subgroup and list of classes, list of laboratory work
  */
+@Entity
+@Table(name = "groups_subgroups")
+@SecondaryTable(name = "subgruops", pkJoinColumns =
+    @PrimaryKeyJoinColumn(name = "id_subgroup",referencedColumnName = "id_subgroup"))
 public class SubGroup {
-    private Long id;
+    @Id
+    @Column(name ="id_group_subgroup")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "subgroup_number", table = "subgruops", length = 5)
     private String subGroupNumber;
+    @ManyToOne
+    @JoinColumn(name = "id_group")
+    private Group group;
+    @OneToMany(mappedBy = "subgroup")
     private List<Student> studentsList;
+    @OneToMany(mappedBy = "subGroup", cascade = CascadeType.ALL)
     private List<UniversityClass> universityClassesList;
     private List<IssuedLab> issuedLabsList;
 
     public SubGroup(){}
 
-    public SubGroup(Long id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
+    public SubGroup(Integer id, String subGroupNumber, Group group, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
         this.id = id;
         this.subGroupNumber = subGroupNumber;
+        this.group = group;
         this.studentsList = studentsList;
         this.universityClassesList = universityClassesList;
         this.issuedLabsList = issuedLabsList;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -85,6 +100,14 @@ public class SubGroup {
             }
         }
         return null;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
 

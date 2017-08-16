@@ -25,5 +25,8 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
 
         <mapping class="Data.UniversityClass"/>
+        <mapping class="Data.Group.Group"/>
+        <mapping class="Data.Group.SubGroup"/>
+        <mapping class="Data.Student"/>
     </session-factory>
 </hibernate-configuration>

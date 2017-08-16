@@ -1,5 +1,7 @@
 package Data;
 
+import Data.Group.SubGroup;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,15 +18,16 @@ public class UniversityClass {
     @Column(name ="class_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @Column(name ="id_group_subgroup")
-    private Integer subGroupID;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="id_group_subgroup")
+    private SubGroup subGroup;
 
     public UniversityClass(){}
 
-    public UniversityClass(Integer id, Date date, Integer subGroupID) {
+    public UniversityClass(Integer id, Date date, SubGroup subGroup) {
         this.id = id;
         this.date = date;
-        this.subGroupID = subGroupID;
+        this.subGroup = subGroup;
     }
 
     public Date getDate() {
@@ -47,11 +50,11 @@ public class UniversityClass {
         return "University class: id = " + id + " date & time = " + date;
     }
 
-    public Integer getSubGroupID() {
-        return subGroupID;
+    public SubGroup getSubGroup() {
+        return subGroup;
     }
 
-    public void setSubGroupID(Integer subGroupID) {
-        this.subGroupID = subGroupID;
+    public void setSubGroup(SubGroup subGroup) {
+        this.subGroup = subGroup;
     }
 }

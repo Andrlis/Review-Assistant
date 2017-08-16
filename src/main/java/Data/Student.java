@@ -3,7 +3,9 @@ package Data;
 import Data.Lab.Lab;
 import Data.Mark.LabMark;
 import Data.Mark.Mark;
+import org.hibernate.annotations.Tables;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
@@ -11,20 +13,30 @@ import java.util.Map;
  * class containing information about the student and list of marks for the lab,
  * list of bonuses, list of missed classes
  */
+@Entity
+@Table(name ="students")
 public class Student {
-    private Long id;
+    @Id
+    @Column(name ="id_student")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "full_name", length = 100)
     private String fulName;
+    @Column(name = "git_repo_name", length = 30)
     private String gitRepoName;
+    @Column(name = "git_user_name", length = 30)
     private String gitUserName;
+    @Column(name = "email", length = 30)
     private String eMail;
     private Map<Lab, LabMark> labMarksMap;
     private Map<Integer, Mark> testMarksMap;
-    private List<Mark> bonusMarks;
+    private Mark bonusMark;
+    //класс пропуск либо список пропустивших занятие в классе пара
     private List<UniversityClass> missedUniversityClassesList;
 
     public Student(){}
 
-    public Student(Long id, String fulName, String gitRepoName, String gitUserName, String eMail, Map<Lab, LabMark> labMarksMap, Map<Integer, Mark> testMarksMap, List<Mark> bonusMarks, List<UniversityClass> missedUniversityClassesList) {
+    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, Map<Lab, LabMark> labMarksMap, Map<Integer, Mark> testMarksMap, Mark bonusMark, List<UniversityClass> missedUniversityClassesList) {
         this.id = id;
         this.fulName = fulName;
         this.gitRepoName = gitRepoName;
@@ -32,15 +44,15 @@ public class Student {
         this.eMail = eMail;
         this.labMarksMap = labMarksMap;
         this.testMarksMap = testMarksMap;
-        this.bonusMarks = bonusMarks;
+        this.bonusMark = bonusMark;
         this.missedUniversityClassesList = missedUniversityClassesList;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -84,12 +96,12 @@ public class Student {
         this.labMarksMap = labMarksMap;
     }
 
-    public List<Mark> getBonusMarks() {
-        return bonusMarks;
+    public Mark getBonusMark() {
+        return bonusMark;
     }
 
-    public void setBonusMarks(List<Mark> bonusMarks) {
-        this.bonusMarks = bonusMarks;
+    public void setBonusMark(Mark bonusMark) {
+        this.bonusMark = bonusMark;
     }
 
     public List<UniversityClass> getMissedUniversityClassesList() {
