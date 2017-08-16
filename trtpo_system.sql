@@ -41,7 +41,8 @@ PRIMARY KEY(id_group_subgroup)
 CREATE TABLE students(
 id_student INTEGER AUTO_INCREMENT,
 full_name VARCHAR(100) NOT NULL,
-git_link VARCHAR(30) NOT NULL,
+git_repo_name VARCHAR(30) NOT NULL,
+git_user_name VARCHAR(30) NOT NULL,
 email VARCHAR(30) NULL,
 id_group_subgroup INTEGER NOT NULL,
 PRIMARY KEY(id_student),
