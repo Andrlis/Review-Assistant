@@ -28,5 +28,6 @@
         <mapping class="Data.Group.Group"/>
         <mapping class="Data.Group.SubGroup"/>
         <mapping class="Data.Student"/>
+        <mapping class="Data.Lecturer"/>
     </session-factory>
 </hibernate-configuration>

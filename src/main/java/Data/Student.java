@@ -28,11 +28,15 @@ public class Student {
     private String gitUserName;
     @Column(name = "email", length = 30)
     private String eMail;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "absentees",
+                joinColumns = @JoinColumn(name = "id_student"),
+                inverseJoinColumns = @JoinColumn(name = "id_class"))
+    private List<UniversityClass> missedUniversityClassesList;
+
     private Map<Lab, LabMark> labMarksMap;
     private Map<Integer, Mark> testMarksMap;
     private Mark bonusMark;
-    //класс пропуск либо список пропустивших занятие в классе пара
-    private List<UniversityClass> missedUniversityClassesList;
 
     public Student(){}
 
