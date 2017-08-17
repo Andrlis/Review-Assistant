@@ -60,8 +60,7 @@ PRIMARY KEY(id_absence)
 
 CREATE TABLE classes(
 id_class INTEGER AUTO_INCREMENT,
-class_date DATE NOT NULL,
-class_time TIME NOT NULL,
+class_date DATETIME NOT NULL,
 id_group_subgroup INTEGER NOT NULL,
 PRIMARY KEY(id_class)
 );
@@ -74,7 +73,7 @@ id_group_subgroup INTEGER NOT NULL,
 id_class_of_issue INTEGER NOT NULL,
 coefficient DECIMAL NOT NULL,
 id_class_deadline INTEGER NOT NULL,
-last_check_date_time TIMESTAMP NOT NULL,
+last_check_date_time DATETIME NOT NULL,
 PRIMARY KEY(id_issued_lab)
 );
 

@@ -27,6 +27,8 @@ public class SubGroup {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="id_group_subgroup")
     private List<UniversityClass> universityClassesList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_group_subgroup")
     private List<IssuedLab> issuedLabsList;
 
     public SubGroup(){}

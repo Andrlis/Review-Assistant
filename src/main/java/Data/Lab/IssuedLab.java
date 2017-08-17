@@ -2,7 +2,12 @@ package Data.Lab;
 
 import Data.Student;
 import Data.UniversityClass;
+import org.hibernate.annotations.*;
 
+import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -10,18 +15,40 @@ import java.util.List;
  * class containing information about issued laboratory work and list of students
  * who did not pass the laboratory work
  */
+@Entity
+@Table(name = "issued_labs")
+@FilterDef(name ="coefficientFilter",
+        parameters = @ParamDef(name ="coefficientFilterParam", type = "int"))
 public class IssuedLab {
-    private Long id;
+    @Id
+    @Column(name ="id_issued_lab")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "id_lab")
     private Lab labDescription;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_class_of_issue")
     private UniversityClass universityClassOfIssue;
+    @Column(name = "coefficient")
     private Double coefficientOfCurrentDeadline;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_class_deadline")
     private UniversityClass currentDeadline;
+    @Column(name ="last_check_date_time", columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfLastRepoCheck;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "labs_marks",
+            joinColumns = @JoinColumn(name = "id_issued_lab"),
+            inverseJoinColumns = @JoinColumn(name = "id_student"))
+    @Filter(name ="coefficientFilterParam",condition = "coefficient == :coefficientFilterParam")
     private List<Student> studentControlList;
+
 
     public IssuedLab(){}
 
-    public IssuedLab(Long id, Lab labDescription, UniversityClass universityClassOfIssue,
+    public IssuedLab(Integer id, Lab labDescription, UniversityClass universityClassOfIssue,
                      Double coefficientOfCurrentDeadline, UniversityClass currentDeadline,
                      Date dateOfLastRepoCheck, List<Student> studentControlList) {
         this.id = id;
@@ -33,11 +60,11 @@ public class IssuedLab {
         this.studentControlList = studentControlList;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

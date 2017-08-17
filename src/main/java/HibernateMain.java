@@ -38,7 +38,6 @@ public class HibernateMain {
         try {
             UniversityClass universityClass = new UniversityClass();
             universityClass.setDate(new Date());
-            universityClass.setSubGroupID(0);
             System.out.println(universityClass);
 
             session.beginTransaction();

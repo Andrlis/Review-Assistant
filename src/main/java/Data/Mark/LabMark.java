@@ -1,8 +1,12 @@
 package Data.Mark;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Lab mark
  */
+
 public class LabMark extends Mark {
     private Double coefficient;
 
@@ -10,8 +14,8 @@ public class LabMark extends Mark {
         super();
     }
 
-    public LabMark(Long id, Integer mark, Double coefficient) {
-        super(id, mark);
+    public LabMark(Integer mark, Double coefficient) {
+        super(mark);
         this.coefficient = coefficient;
     }
 

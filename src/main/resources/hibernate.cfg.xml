@@ -29,5 +29,8 @@
         <mapping class="Data.Group.SubGroup"/>
         <mapping class="Data.Student"/>
         <mapping class="Data.Lecturer"/>
+        <mapping class="Data.Mark.Mark"/>
+        <mapping class="Data.Lab.Lab"/>
+        <mapping class="Data.Lab.IssuedLab"/>
     </session-factory>
 </hibernate-configuration>
