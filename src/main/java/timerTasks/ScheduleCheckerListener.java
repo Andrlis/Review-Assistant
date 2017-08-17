@@ -5,6 +5,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.quartz.impl.StdSchedulerFactory;
 
+/**
+ * Start task which check groups` schedule.
+ */
 public class ScheduleCheckerListener implements ServletContextListener {
     private Scheduler scheduler = null;
 

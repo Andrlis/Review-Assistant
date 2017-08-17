@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 /**
  * Created by Andrey on 17.07.2017.
+ * Contains all timetable for group.
  */
 public class Timetable {
 
@@ -26,6 +27,10 @@ public class Timetable {
         this.days.add(day);
     }
 
+    /**
+     * Return timetable for current day of week.
+     * @return
+     */
     public DayTimetable getCurrentDaySchedule(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new java.util.Date());

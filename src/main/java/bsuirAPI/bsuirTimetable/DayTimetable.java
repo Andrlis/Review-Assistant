@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Andrey on 17.07.2017.
+ * Contains day timetable.
  */
 public class DayTimetable {
 
@@ -35,6 +36,11 @@ public class DayTimetable {
         this.lessons.add(subject);
     }
 
+    /**
+     * Return day timetable for current week.
+     * @param curentWeek
+     * @return
+     */
     public ArrayList<Subject>getCurrentDayLessons(String curentWeek){
         ArrayList<Subject> currentDayLessons = new ArrayList<Subject>();
         for(Subject subject: lessons){

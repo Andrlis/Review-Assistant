@@ -8,7 +8,10 @@ import bsuirAPI.bsuirTimetable.DayTimetable;
 import bsuirAPI.bsuirTimetable.Subject;
 import bsuirAPI.bsuirTimetable.Timetable;
 
-
+/**
+ * Created by Andrey.
+ * Search "ТРиТПО" laboratory work for all groups on current day.
+ */
 public class ScheduleChecker{
 
       public static void groupScheduleCheck(GroupsKeeper groups) throws Exception{
@@ -21,7 +24,7 @@ public class ScheduleChecker{
               currentDaySchedule = timetable.getCurrentDaySchedule();
 
               for(Subject lesson: currentDaySchedule.getCurrentDayLessons(BsuirRequests.getCurrentWeek())){
-                  if(lesson.getLessonName().equals("ТРиТПО")){
+                  if(lesson.getLessonName().equals("ТРиТПО")&&lesson.getLessonType().equals("ЛР")){
                        //TODO save lesson`s date and time at database.
                        break;
                   }

@@ -6,7 +6,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.quartz.impl.StdSchedulerFactory;
 
-
+/**
+ * Start task which check students` repo.
+ */
 public class RepositoryCheckerListener implements ServletContextListener {
     private Scheduler scheduler = null;
 

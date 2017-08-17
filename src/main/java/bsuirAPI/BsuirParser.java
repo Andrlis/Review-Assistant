@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Andrey on 14.07.2017.
+ * Parse BSUIR server`s responses.
  */
 public class BsuirParser {
 
@@ -48,6 +49,12 @@ public class BsuirParser {
         return groupList;
     }
 
+    /**
+     * Parse xml-file with groups`s timetable.
+     * @param xmlTimetable
+     * @return
+     * @throws Exception
+     */
     public static Timetable parseTimetable(String xmlTimetable) throws Exception {
         Timetable timetable = new Timetable();
 

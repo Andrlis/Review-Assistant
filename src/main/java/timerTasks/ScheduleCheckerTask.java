@@ -6,13 +6,15 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import java.util.Date;
 
+/**
+ * Task for checking groups` schedule.
+ */
 public class ScheduleCheckerTask implements Job {
 
     public ScheduleCheckerTask() {
     }
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.out.println("ScheduleCheckerTask"+ new Date());
         try {
             //ScheduleChecker.groupScheduleCheck();
         } catch (Exception exc) {

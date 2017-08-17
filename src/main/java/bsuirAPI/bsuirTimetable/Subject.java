@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Andrey on 17.07.2017.
+ * Contains lesson information.
  */
 public class Subject {
 
