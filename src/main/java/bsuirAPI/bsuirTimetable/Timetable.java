@@ -8,7 +8,7 @@ import java.util.Calendar;
  */
 public class Timetable {
 
-     private ArrayList<DayTimetable> days;
+    private ArrayList<DayTimetable> days;
 
     public Timetable() {
         this.days = new ArrayList<DayTimetable>();

@@ -1,6 +1,8 @@
 package timerTasks;
 
 import java.util.Date;
+
+import Checker.Checker;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -12,5 +14,6 @@ public class RepositoryCheckerTask implements Job {
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("RepositoryCheckerTask"+ new Date());
+        //Checker.checkForCommitsInGroups();
     }
 }
