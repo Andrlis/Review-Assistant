@@ -3,6 +3,7 @@ package Data;
 import Data.Lab.Lab;
 import Data.Mark.LabMark;
 import Data.Mark.Mark;
+import org.hibernate.annotations.AttributeAccessor;
 import org.hibernate.annotations.Tables;
 
 import javax.persistence.*;
@@ -15,6 +16,8 @@ import java.util.Map;
  */
 @Entity
 @Table(name ="students")
+@SecondaryTable(name = "bonuses", pkJoinColumns =
+    @PrimaryKeyJoinColumn(name = "id_student",referencedColumnName = "id_student"))
 public class Student {
     @Id
     @Column(name ="id_student")
@@ -28,11 +31,20 @@ public class Student {
     private String gitUserName;
     @Column(name = "email", length = 30)
     private String eMail;
-    private Map<Lab, LabMark> labMarksMap;
-    private Map<Integer, Mark> testMarksMap;
-    private Mark bonusMark;
-    //класс пропуск либо список пропустивших занятие в классе пара
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "absentees",
+                joinColumns = @JoinColumn(name = "id_student"),
+                inverseJoinColumns = @JoinColumn(name = "id_class"))
     private List<UniversityClass> missedUniversityClassesList;
+    //TODO
+    private Map<Lab, LabMark> labMarksMap;
+    //TODO
+    private Map<Integer, Mark> testMarksMap;
+    @Embedded
+    @AttributeOverrides(
+            @AttributeOverride(name ="mark", column = @Column(name = "bonus", table = "bonuses"))
+    )
+    private Mark bonusMark;
 
     public Student(){}
 

@@ -15,24 +15,26 @@ public class Lecturer {
     @Id
     @Column(name= "id_lecturer")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     @Column(name= "full_name", length = 100)
     private String fullName;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_lecturer")
     private List<SubGroup> subGroupList;
 
     public Lecturer() {}
 
-    public Lecturer(Long id, String fullName, List<SubGroup> subGroupList) {
+    public Lecturer(Integer id, String fullName, List<SubGroup> subGroupList) {
         this.id = id;
         this.fullName = fullName;
         this.subGroupList = subGroupList;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

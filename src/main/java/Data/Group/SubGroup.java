@@ -21,21 +21,21 @@ public class SubGroup {
     private Integer id;
     @Column(name = "subgroup_number", table = "subgruops", length = 5)
     private String subGroupNumber;
-    @ManyToOne
-    @JoinColumn(name = "id_group")
-    private Group group;
-    @OneToMany(mappedBy = "subgroup")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_group_subgroup")
     private List<Student> studentsList;
-    @OneToMany(mappedBy = "subGroup", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="id_group_subgroup")
     private List<UniversityClass> universityClassesList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_group_subgroup")
     private List<IssuedLab> issuedLabsList;
 
     public SubGroup(){}
 
-    public SubGroup(Integer id, String subGroupNumber, Group group, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
+    public SubGroup(Integer id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
         this.id = id;
         this.subGroupNumber = subGroupNumber;
-        this.group = group;
         this.studentsList = studentsList;
         this.universityClassesList = universityClassesList;
         this.issuedLabsList = issuedLabsList;
@@ -100,14 +100,6 @@ public class SubGroup {
             }
         }
         return null;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
     }
 }
 
