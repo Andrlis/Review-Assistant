@@ -3,10 +3,10 @@ package Data;
 import Data.Lab.Lab;
 import Data.Mark.LabMark;
 import Data.Mark.Mark;
-import org.hibernate.annotations.AttributeAccessor;
-import org.hibernate.annotations.Tables;
+import Data.Mark.TestMark;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,26 +36,32 @@ public class Student {
                 joinColumns = @JoinColumn(name = "id_student"),
                 inverseJoinColumns = @JoinColumn(name = "id_class"))
     private List<UniversityClass> missedUniversityClassesList;
-    //TODO
-    private Map<Lab, LabMark> labMarksMap;
-    //TODO
-    private Map<Integer, Mark> testMarksMap;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_student")
+    private List<LabMark> labMarkList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_student")
+    private List<TestMark> testMarkList;
     @Embedded
     @AttributeOverrides(
             @AttributeOverride(name ="mark", column = @Column(name = "bonus", table = "bonuses"))
     )
     private Mark bonusMark;
 
-    public Student(){}
+    public Student(){
+        this.missedUniversityClassesList = new ArrayList<UniversityClass>();
+        this.labMarkList = new ArrayList<LabMark>();
+        this.testMarkList = new ArrayList<TestMark>();
+    }
 
-    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, Map<Lab, LabMark> labMarksMap, Map<Integer, Mark> testMarksMap, Mark bonusMark, List<UniversityClass> missedUniversityClassesList) {
+    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, List<LabMark> labMarkList, List<TestMark> testMarkList, Mark bonusMark, List<UniversityClass> missedUniversityClassesList) {
         this.id = id;
         this.fulName = fulName;
         this.gitRepoName = gitRepoName;
         this.gitUserName = gitUserName;
         this.eMail = eMail;
-        this.labMarksMap = labMarksMap;
-        this.testMarksMap = testMarksMap;
+        this.labMarkList = labMarkList;
+        this.testMarkList = testMarkList;
         this.bonusMark = bonusMark;
         this.missedUniversityClassesList = missedUniversityClassesList;
     }
@@ -100,12 +106,12 @@ public class Student {
         this.eMail = eMail;
     }
 
-    public Map<Lab, LabMark> getLabMarksMap() {
-        return labMarksMap;
+    public List<LabMark> getLabMarkList() {
+        return labMarkList;
     }
 
-    public void setLabMarksMap(Map<Lab, LabMark> labMarksMap) {
-        this.labMarksMap = labMarksMap;
+    public void setLabMarkList(List<LabMark> labMarksMap) {
+        this.labMarkList = labMarksMap;
     }
 
     public Mark getBonusMark() {
@@ -124,53 +130,51 @@ public class Student {
         this.missedUniversityClassesList = missedUniversityClassesList;
     }
 
-    public Map<Integer, Mark> getTestMarksMap() {
-        return testMarksMap;
+    public List<TestMark> getTestMarkList() {
+        return testMarkList;
     }
 
 
-    public void setTestMarksMap(Map<Integer, Mark> testMarksMap) {
-        this.testMarksMap = testMarksMap;
+    public void setTestMarkList(List<TestMark> testMarksMap) {
+        this.testMarkList = testMarksMap;
     }
 
     public void addCoefficientToCommitedLab(Lab lab, Double coefficient) {
-        LabMark labMark = this.labMarksMap.get(lab);
+        LabMark labMark = this.getLabMark(lab);
         if (labMark != null) {
             labMark.setCoefficient(coefficient);
         }
     }
 
     public void addMarkToCommiteLab(Lab lab, int mark) {
-        LabMark labMark = this.labMarksMap.get(lab);
+        LabMark labMark = this.getLabMark(lab);
         if (labMark != null) {
             labMark.setMark(mark);
         }
     }
 
-    private void addLabMark(Lab lab, LabMark labMark) {
-        if (this.labMarksMap.containsKey(lab)) {
-            this.labMarksMap.get(lab).setMark(labMark.getMark());
-        } else {
-            this.labMarksMap.put(lab, labMark);
-        }
-        this.labMarksMap.put(lab, labMark);
+    private void addLabMark(LabMark labMark) {
+        this.labMarkList.add(labMark);
     }
 
-    private void addTestMark(Integer number, Integer mark) {
-        if (this.testMarksMap.containsKey(number)) {
-            Mark m = this.testMarksMap.get(number);
-            m.setMark(mark);
-        } else {
-            Mark m = new Mark(mark);
-            this.testMarksMap.put(number, m);
-        }
+    private void addTestMark(TestMark testMark) {
+        this.testMarkList.add(testMark);
     }
 
     public LabMark getLabMark(Lab lab) {
-        return this.labMarksMap.get(lab);
+
+        for(LabMark currentLabMark: this.labMarkList){
+            if(currentLabMark.getLab().equals(lab))
+                return currentLabMark;
+        }
+        return null;
     }
 
     public Mark getTestMark(Integer number) {
-        return this.testMarksMap.get(number);
+        for(TestMark currentTestMark: this.testMarkList){
+            if(currentTestMark.getTest().getTestNumber().equals(number))
+                return currentTestMark;
+        }
+        return null;
     }
 }

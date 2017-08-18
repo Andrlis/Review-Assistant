@@ -5,6 +5,7 @@ import Data.Student;
 import Data.UniversityClass;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,11 @@ public class SubGroup {
     @JoinColumn(name = "id_group_subgroup")
     private List<IssuedLab> issuedLabsList;
 
-    public SubGroup(){}
+    public SubGroup(){
+        this.studentsList = new ArrayList<Student>();
+        this.universityClassesList = new ArrayList<UniversityClass>();
+        this.issuedLabsList = new ArrayList<IssuedLab>();
+    }
 
     public SubGroup(Integer id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
         this.id = id;

@@ -1,6 +1,7 @@
 package Data.Group;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,11 +25,7 @@ public class Group {
     private Integer amountOfTest;
 
     public Group(){
-        this.id = null;
-        this.numberOfGroup = null;
-        this.scheduleApiGroupNumber = null;
-        this.subGroupList = null;
-        this.amountOfTest = null;
+        this.subGroupList = new ArrayList<SubGroup>();
     }
 
     public Group(Integer id, String numberOfGroup, String scheduleApiGroupNumber, List<SubGroup> subGroupList, Integer amountOfTest) {

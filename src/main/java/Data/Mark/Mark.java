@@ -1,13 +1,12 @@
 package Data.Mark;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Mark
  */
 @Embeddable
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Mark {
     private Integer mark;
 

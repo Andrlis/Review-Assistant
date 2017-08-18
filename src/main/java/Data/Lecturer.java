@@ -4,6 +4,7 @@ import Data.Group.SubGroup;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,9 @@ public class Lecturer {
     @JoinColumn(name = "id_lecturer")
     private List<SubGroup> subGroupList;
 
-    public Lecturer() {}
+    public Lecturer() {
+        this.subGroupList = new ArrayList<SubGroup>();
+    }
 
     public Lecturer(Integer id, String fullName, List<SubGroup> subGroupList) {
         this.id = id;

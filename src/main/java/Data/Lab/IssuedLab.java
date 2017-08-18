@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +47,9 @@ public class IssuedLab {
     private List<Student> studentControlList;
 
 
-    public IssuedLab(){}
+    public IssuedLab(){
+        this.studentControlList = new ArrayList<Student>();
+    }
 
     public IssuedLab(Integer id, Lab labDescription, UniversityClass universityClassOfIssue,
                      Double coefficientOfCurrentDeadline, UniversityClass currentDeadline,
