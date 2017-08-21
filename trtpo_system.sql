@@ -7,8 +7,6 @@ USE trtpo_system;
 CREATE TABLE lecturers(
 id_lecturer INTEGER AUTO_INCREMENT,
 full_name VARCHAR(100) NOT NULL,
-login VARCHAR(20) NOT NULL,
-password VARCHAR(20) NOT NULL,
 PRIMARY KEY(id_lecturer)
 );
 
@@ -22,29 +20,30 @@ PRIMARY KEY(id_group)
 );
 
 
-CREATE TABLE subgroups (
-id_subgroup INTEGER AUTO_INCREMENT,
-subgroup_number VARCHAR(5) NOT NULL,
-PRIMARY KEY(id_subgroup)
-);
 
 
 CREATE TABLE groups_subgroups (
 id_group_subgroup INTEGER AUTO_INCREMENT,
-id_subgroup INTEGER NOT NULL,
 id_group INTEGER NOT NULL,
 id_lecturer INTEGER NOT NULL,
 PRIMARY KEY(id_group_subgroup)
 );
 
+CREATE TABLE subgroups (
+id_subgroup int AUTO_INCREMENT,
+id_group_subgroup INTEGER NOT NULL,
+subgroup_number varchar(5) NOT NULL,
+PRIMARY KEY(id_subgroup),
+FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
+);
 
 CREATE TABLE students(
-id_student INTEGER AUTO_INCREMENT,
-full_name VARCHAR(100) NOT NULL,
-git_repo_name VARCHAR(30) NOT NULL,
-git_user_name VARCHAR(30) NOT NULL,
-email VARCHAR(30) NULL,
-id_group_subgroup INTEGER NOT NULL,
+id_student int AUTO_INCREMENT,
+full_name varchar(100) NOT NULL,
+git_user_name varchar(30) NOT NULL,
+git_repo_name varchar(30) NOT NULL,
+email varchar(30) NULL,
+id_group_subgroup int NOT NULL,
 PRIMARY KEY(id_student),
 FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
 );

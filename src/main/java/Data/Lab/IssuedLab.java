@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +32,7 @@ public class IssuedLab {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_class_of_issue")
     private UniversityClass universityClassOfIssue;
-    @Column(name = "coefficient")
+    @Column(name = "coefficient", columnDefinition="Decimal(10,2)")
     private Double coefficientOfCurrentDeadline;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_class_deadline")

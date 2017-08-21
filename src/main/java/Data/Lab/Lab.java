@@ -21,22 +21,12 @@ public class Lab {
     @Column(name = "key_word", length = 20)
     private String keyWord;
 
-    @OneToMany
-    @JoinTable(
-            name = "issued_labs",
-            joinColumns = @JoinColumn(name = "id_lab"),
-            inverseJoinColumns = @JoinColumn(name ="id_issued_lab")
-    )
-    @MapKeyColumn(name = "id_group_subgroup", table = "issued_labs")
-    private Map<SubGroup, IssuedLab> issuedLabMap;
-
     public Lab(){}
 
-    public Lab(Integer id, Integer numberOfLab, String keyWord, Map<SubGroup, IssuedLab> issuedLabMap) {
+    public Lab(Integer id, Integer numberOfLab, String keyWord) {
         this.id = id;
         this.numberOfLab = numberOfLab;
         this.keyWord = keyWord;
-        this.issuedLabMap = issuedLabMap;
     }
 
     public Integer getId() {
@@ -61,21 +51,5 @@ public class Lab {
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
-    }
-
-    public Map<SubGroup, IssuedLab> getIssuedLabMap() {
-        return issuedLabMap;
-    }
-
-    public void setIssuedLabMap(Map<SubGroup, IssuedLab> issuedLabMap) {
-        this.issuedLabMap = issuedLabMap;
-    }
-
-    public void addIssuedLab(SubGroup subGroup, IssuedLab issuedLab) {
-        this.issuedLabMap.put(subGroup, issuedLab);
-    }
-
-    public IssuedLab getIssuedLab(SubGroup subGroup) {
-        return this.issuedLabMap.get(subGroup);
     }
 }

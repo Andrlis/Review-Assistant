@@ -3,27 +3,39 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
+    <node x="119.0" y="81.0">Data.Mark.TestMark</node>
     <node x="176.0" y="157.0">Data.Lab.LabsKeeper</node>
     <node x="0.0" y="157.0">Data.Group.GroupsKeeper</node>
-    <node x="280.0" y="309.0">Data.Group.Group</node>
-    <node x="142.0" y="309.0">Data.Student</node>
-    <node x="0.0" y="309.0">Data.Lecturer</node>
+    <node x="268.0" y="309.0">Data.Test.Test</node>
+    <node x="0.0" y="309.0">Data.Student</node>
+    <node x="138.0" y="309.0">Data.Group.Group</node>
     <node x="0.0" y="233.0">Data.Group.SubGroup</node>
-    <node x="10.0" y="0.0">Data.Mark.Mark</node>
+    <node x="302.0" y="233.0">Data.Lecturer</node>
+    <node x="70.5" y="0.0">Data.Mark.Mark</node>
     <node x="0.0" y="81.0">Data.Mark.LabMark</node>
     <node x="0.0" y="385.0">Data.Lab.Lab</node>
-    <node x="144.0" y="0.0">Data.UniversityClass</node>
     <node x="151.0" y="233.0">Data.Lab.IssuedLab</node>
+    <node x="267.0" y="0.0">Data.UniversityClass</node>
   </nodes>
   <notes />
   <edges>
     <edge source="Data.Mark.LabMark" target="Data.Mark.Mark">
       <point x="0.0" y="-15.5" />
-      <point x="0.0" y="15.5" />
+      <point x="49.5" y="56.0" />
+      <point x="90.25" y="56.0" />
+      <point x="-19.75" y="15.5" />
+    </edge>
+    <edge source="Data.Mark.TestMark" target="Data.Mark.Mark">
+      <point x="0.0" y="-15.5" />
+      <point x="170.5" y="56.0" />
+      <point x="129.75" y="56.0" />
+      <point x="19.75" y="15.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.8142201834862385" x="182.5" y="208.0" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="1.0" x="202.0" y="208.0" />
+  <SelectedNodes>
+    <node>Data.Lab.LabsKeeper</node>
+  </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

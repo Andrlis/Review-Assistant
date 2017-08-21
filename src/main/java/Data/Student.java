@@ -2,7 +2,6 @@ package Data;
 
 import Data.Lab.Lab;
 import Data.Mark.LabMark;
-import Data.Mark.Mark;
 import Data.Mark.TestMark;
 
 import javax.persistence.*;
@@ -16,8 +15,7 @@ import java.util.Map;
  */
 @Entity
 @Table(name ="students")
-@SecondaryTable(name = "bonuses", pkJoinColumns =
-    @PrimaryKeyJoinColumn(name = "id_student",referencedColumnName = "id_student"))
+@SecondaryTable(name = "bonuses",foreignKey = @ForeignKey(name = "id_student", foreignKeyDefinition = "id_student"))
 public class Student {
     @Id
     @Column(name ="id_student")
@@ -42,11 +40,8 @@ public class Student {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
     private List<TestMark> testMarkList;
-    @Embedded
-    @AttributeOverrides(
-            @AttributeOverride(name ="mark", column = @Column(name = "bonus", table = "bonuses"))
-    )
-    private Mark bonusMark;
+    @Column(name = "bonus", table = "bonuses")
+    private Integer bonusMark;
 
     public Student(){
         this.missedUniversityClassesList = new ArrayList<UniversityClass>();
@@ -54,7 +49,7 @@ public class Student {
         this.testMarkList = new ArrayList<TestMark>();
     }
 
-    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, List<LabMark> labMarkList, List<TestMark> testMarkList, Mark bonusMark, List<UniversityClass> missedUniversityClassesList) {
+    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, List<LabMark> labMarkList, List<TestMark> testMarkList, Integer bonusMark, List<UniversityClass> missedUniversityClassesList) {
         this.id = id;
         this.fulName = fulName;
         this.gitRepoName = gitRepoName;
@@ -113,12 +108,11 @@ public class Student {
     public void setLabMarkList(List<LabMark> labMarksMap) {
         this.labMarkList = labMarksMap;
     }
-
-    public Mark getBonusMark() {
+    public Integer getBonusMark() {
         return bonusMark;
     }
 
-    public void setBonusMark(Mark bonusMark) {
+    public void setBonusMark(Integer bonusMark) {
         this.bonusMark = bonusMark;
     }
 
@@ -170,7 +164,7 @@ public class Student {
         return null;
     }
 
-    public Mark getTestMark(Integer number) {
+    public TestMark getTestMark(Integer number) {
         for(TestMark currentTestMark: this.testMarkList){
             if(currentTestMark.getTest().getTestNumber().equals(number))
                 return currentTestMark;

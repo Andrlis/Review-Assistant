@@ -18,8 +18,7 @@ public class Group {
     private String numberOfGroup;
     @Column(name ="bsuir_api_group_id", length = 10)
     private String scheduleApiGroupNumber;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_group")
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<SubGroup> subGroupList;
     @Column(name = "amount_of_test")
     private Integer amountOfTest;

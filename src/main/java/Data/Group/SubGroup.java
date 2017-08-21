@@ -1,6 +1,7 @@
 package Data.Group;
 
 import Data.Lab.IssuedLab;
+import Data.Lecturer;
 import Data.Student;
 import Data.UniversityClass;
 
@@ -13,24 +14,31 @@ import java.util.List;
  */
 @Entity
 @Table(name = "groups_subgroups")
-@SecondaryTable(name = "subgruops", pkJoinColumns =
-    @PrimaryKeyJoinColumn(name = "id_subgroup",referencedColumnName = "id_subgroup"))
+@SecondaryTable(name = "subgroups",pkJoinColumns =
+    @PrimaryKeyJoinColumn(name = "id_group_subgroup",referencedColumnName = "id_group_subgroup"))
 public class SubGroup {
     @Id
     @Column(name ="id_group_subgroup")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "subgroup_number", table = "subgruops", length = 5)
+    @Column(name = "subgroup_number", table = "subgroups", length = 5)
     private String subGroupNumber;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group_subgroup")
     private List<Student> studentsList;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="id_group_subgroup")
+    @JoinColumn(name = "id_group_subgroup")
     private List<UniversityClass> universityClassesList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group_subgroup")
     private List<IssuedLab> issuedLabsList;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_group")
+    private Group group;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_lecturer")
+    private Lecturer lecturer;
+
 
     public SubGroup(){
         this.studentsList = new ArrayList<Student>();
@@ -38,12 +46,14 @@ public class SubGroup {
         this.issuedLabsList = new ArrayList<IssuedLab>();
     }
 
-    public SubGroup(Integer id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList) {
+    public SubGroup(Integer id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList, Group group, Lecturer lecturer) {
         this.id = id;
         this.subGroupNumber = subGroupNumber;
         this.studentsList = studentsList;
         this.universityClassesList = universityClassesList;
         this.issuedLabsList = issuedLabsList;
+        this.group = group;
+        this.lecturer = lecturer;
     }
 
     public Integer getId() {
@@ -105,6 +115,22 @@ public class SubGroup {
             }
         }
         return null;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
     }
 }
 

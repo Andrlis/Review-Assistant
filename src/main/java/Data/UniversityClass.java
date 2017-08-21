@@ -18,12 +18,16 @@ public class UniversityClass {
     @Column(name ="class_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
+    @ManyToOne()
+    @JoinColumn(name = "id_group_subgroup")
+    private SubGroup subGroup;
 
     public UniversityClass(){}
 
-    public UniversityClass(Integer id, Date date) {
+    public UniversityClass(Integer id, Date date, SubGroup subGroup) {
         this.id = id;
         this.date = date;
+        this.subGroup = subGroup;
     }
 
     public Date getDate() {
@@ -44,5 +48,13 @@ public class UniversityClass {
 
     public String toString() {
         return "University class: id = " + id + " date & time = " + date;
+    }
+
+    public SubGroup getSubGroup() {
+        return subGroup;
+    }
+
+    public void setSubGroup(SubGroup subGroup) {
+        this.subGroup = subGroup;
     }
 }

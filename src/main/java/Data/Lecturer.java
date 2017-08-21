@@ -19,9 +19,10 @@ public class Lecturer {
     private Integer id;
     @Column(name= "full_name", length = 100)
     private String fullName;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_lecturer")
+    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL)
     private List<SubGroup> subGroupList;
+
+
 
     public Lecturer() {
         this.subGroupList = new ArrayList<SubGroup>();
