@@ -76,7 +76,8 @@ public class BsuirParser {
                     subject.setLessonName(xmlSubject.getElementsByTagName("subject").item(0).getTextContent());
                     subject.setLessonType(xmlSubject.getElementsByTagName("lessonType").item(0).getTextContent());
                     subject.setTime(xmlSubject.getElementsByTagName("lessonTime").item(0).getTextContent());
-                    //subject.setClassroom(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent());       //для Физкультуры нет аудитории. Null pointer Exception
+                    if(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent()!= null)
+                        subject.setClassroom(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent());       //для Физкультуры нет аудитории. Null pointer Exception
                     subject.setSubGroup(xmlSubject.getElementsByTagName("numSubgroup").item(0).getTextContent());
                     for (int week_id = 0; week_id < xmlSubject.getElementsByTagName("weekNumber").getLength(); week_id++) {
                         subject.setWeek(xmlSubject.getElementsByTagName("weekNumber").item(week_id).getTextContent());

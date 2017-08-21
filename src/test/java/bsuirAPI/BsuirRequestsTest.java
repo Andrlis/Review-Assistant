@@ -19,9 +19,28 @@ public class BsuirRequestsTest extends TestCase {
 
     @Test
     public void testGetGroups() throws Exception {
-        System.out.println("Test BSUIRRequests.getGroups()");
+        System.out.println("Test BsuirRequests.getGroups()");
         response = BsuirRequests.getGroups();
         assertNotNull(response);
-        assertEquals(true, response.contains("studentGroupXmlModels"));
+        assertTrue(response.contains("studentGroupXmlModels"));
+        System.out.println("Test success.");
+    }
+
+    @Test
+    public void testGetTimetable() throws Exception {
+        System.out.println("Test BsuirRequests.getTimetable()");
+        response = BsuirRequests.getTimetable("21366");
+        assertNotNull(response);
+        assertTrue(response.contains("scheduleXmlModels"));
+        System.out.println("Test success.");
+    }
+
+    @Test
+    public void testGetCurrentWeek() throws Exception {
+        System.out.println("Test BsuirRequests.getCurrentWeek()");
+        response = BsuirRequests.getCurrentWeek();
+        assertNotNull(response);
+        assertTrue(Integer.parseInt(response)<5);
+        System.out.println("Test success.");
     }
 }

@@ -16,6 +16,11 @@ public class DayTimetable {
         this.lessons = new ArrayList<Subject>();
     }
 
+    public DayTimetable(ArrayList<Subject> lessons) {
+        this.day = "0";
+        this.lessons = lessons;
+    }
+
     public String getDay() {
         return day;
     }

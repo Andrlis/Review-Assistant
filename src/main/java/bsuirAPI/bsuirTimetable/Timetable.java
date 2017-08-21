@@ -15,6 +15,8 @@ public class Timetable {
         this.days = new ArrayList<DayTimetable>();
     }
 
+    public Timetable(ArrayList<DayTimetable> days){this.days = days;}
+
     public ArrayList<DayTimetable> getDays() {
         return days;
     }

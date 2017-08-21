@@ -24,6 +24,15 @@ public class Subject {
         this.weeks = new ArrayList<String>();
     }
 
+    public Subject(String lessonName, String time, String classroom, String lessonType, String subGroup, ArrayList<String> weeks) {
+        this.lessonName = lessonName;
+        this.time = time;
+        this.classroom = classroom;
+        this.lessonType = lessonType;
+        this.subGroup = subGroup;
+        this.weeks = weeks;
+    }
+
     public String getLessonName() {
         return lessonName;
     }
