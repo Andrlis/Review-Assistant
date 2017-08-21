@@ -88,7 +88,7 @@ PRIMARY KEY(id_lab)
 CREATE TABLE labs_marks(
 id_lab_mark INTEGER AUTO_INCREMENT,
 id_student INTEGER NOT NULL,
-id_issued_lab INTEGER NOT NULL,
+id_lab INTEGER NOT NULL,
 coefficient DECIMAL NOT NULL,
 mark INTEGER NOT NULL,
 PRIMARY KEY(id_lab_mark)

@@ -19,9 +19,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "issued_labs")
-@FilterDef(name ="coefficientFilter",
-        parameters = @ParamDef(name ="coefficientFilterParam", type = "int"))
-public class IssuedLab {
+public class IssuedLab implements Serializable {
     @Id
     @Column(name ="id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +42,7 @@ public class IssuedLab {
     @JoinTable(name = "labs_marks",
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
-    @Filter(name ="coefficientFilterParam",condition = "coefficient == :coefficientFilterParam")
+    @FilterJoinTable(name ="coefficientFilter",condition = "coefficient <= -1")
     private List<Student> studentControlList;
 
 
@@ -117,7 +115,8 @@ public class IssuedLab {
     }
 
     public void setStudentControlList(List<Student> studentControlList) {
-        this.studentControlList = studentControlList;
+        this.studentControlList.clear();
+        this.studentControlList.addAll(studentControlList);
     }
 
     public void deleteStudentFromControlList(Student student) {

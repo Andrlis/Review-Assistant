@@ -152,9 +152,9 @@ public class HibernateMain {
             session.save(group);*/
 
             Filter filter = session.enableFilter("coefficientFilter");
-            filter.setParameter("coefficientFilterParam", -1);
 
             Group group = (Group)session.get(Group.class, 1);
+
             group.getId();
 
         } finally {

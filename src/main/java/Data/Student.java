@@ -3,11 +3,12 @@ package Data;
 import Data.Lab.Lab;
 import Data.Mark.LabMark;
 import Data.Mark.TestMark;
+import org.hibernate.annotations.FilterDef;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * class containing information about the student and list of marks for the lab,
@@ -16,7 +17,8 @@ import java.util.Map;
 @Entity
 @Table(name ="students")
 @SecondaryTable(name = "bonuses",foreignKey = @ForeignKey(name = "id_student", foreignKeyDefinition = "id_student"))
-public class Student {
+@FilterDef(name ="coefficientFilter")
+public class Student implements Serializable{
     @Id
     @Column(name ="id_student")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +36,7 @@ public class Student {
                 joinColumns = @JoinColumn(name = "id_student"),
                 inverseJoinColumns = @JoinColumn(name = "id_class"))
     private List<UniversityClass> missedUniversityClassesList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_student")
     private List<LabMark> labMarkList;
     @OneToMany(cascade = CascadeType.ALL)
@@ -158,7 +160,7 @@ public class Student {
     public LabMark getLabMark(Lab lab) {
 
         for(LabMark currentLabMark: this.labMarkList){
-            if(currentLabMark.getLab().equals(lab))
+            if(currentLabMark.getIssuedLab().getLabDescription().equals(lab))
                 return currentLabMark;
         }
         return null;

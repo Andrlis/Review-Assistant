@@ -1,12 +1,12 @@
 package Data.Mark;
 
-import Data.Lab.Lab;
+import Data.Lab.IssuedLab;
 import Data.Student;
 
 import javax.persistence.*;
 
 /**
- * Lab mark
+ * IssuedLab mark
  */
 @Entity
 @Table(name = "labs_marks")
@@ -21,18 +21,18 @@ public class LabMark {
     private Integer mark;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_issued_lab")
-    private Lab lab;
-    @ManyToOne(cascade = CascadeType.ALL)
+    private IssuedLab issuedLab;
+    @ManyToOne()
     @JoinColumn(name = "id_student")
     private Student student;
 
     public LabMark(){}
 
-    public LabMark(Integer id, Double coefficient, Integer mark, Lab lab, Student student) {
+    public LabMark(Integer id, Double coefficient, Integer mark, IssuedLab issuedLab, Student student) {
         this.id = id;
         this.coefficient = coefficient;
         this.mark = mark;
-        this.lab = lab;
+        this.issuedLab = issuedLab;
         this.student = student;
     }
 
@@ -52,12 +52,12 @@ public class LabMark {
         this.id = id;
     }
 
-    public Lab getLab() {
-        return lab;
+    public IssuedLab getIssuedLab() {
+        return issuedLab;
     }
 
-    public void setLab(Lab lab) {
-        this.lab = lab;
+    public void setIssuedLab(IssuedLab lab) {
+        this.issuedLab = lab;
     }
 
     public Student getStudent() {
