@@ -1,6 +1,8 @@
 package Data.Test;
 
 import Data.Mark.TestMark;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class Test {
     @Temporal(TemporalType.TIMESTAMP)
     private Date testDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "test")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<TestMark> testMarkList;
 
     public Test(){

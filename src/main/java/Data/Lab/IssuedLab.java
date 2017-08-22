@@ -43,6 +43,7 @@ public class IssuedLab implements Serializable {
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
     @FilterJoinTable(name ="coefficientFilter",condition = "coefficient <= -1")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
 
 

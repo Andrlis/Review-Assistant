@@ -1,5 +1,8 @@
 package Data.Group;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ public class Group {
     @Column(name ="bsuir_api_group_id", length = 10)
     private String scheduleApiGroupNumber;
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<SubGroup> subGroupList;
     @Column(name = "amount_of_test")
     private Integer amountOfTest;

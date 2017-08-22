@@ -1,28 +1,33 @@
 package Data.Lab;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class consisting list of information about lab
  */
 public class LabsKeeper {
-    private ArrayList<Lab> labArrayList;
+    private List<Lab> labList;
 
     public LabsKeeper(){}
 
-    public LabsKeeper(ArrayList<Lab> labArrayList) {
-        this.labArrayList = labArrayList;
+    public LabsKeeper(List<Lab> labArrayList) {
+        this.labList = labList;
     }
 
-    public ArrayList<Lab> getLabArrayList() {
-        return labArrayList;
+    public List<Lab> getLabList() {
+        return this.labList;
     }
 
-    public void setLabArrayList(ArrayList<Lab> labArrayList) {
-        this.labArrayList = labArrayList;
+    public void setLabList(List<Lab> labList) {
+        this.labList = labList;
     }
 
     public Lab getLab(int number) {
-        return this.labArrayList.get(number);
+        for(Lab currentLab: this.labList) {
+            if(currentLab.getNumberOfLab().equals(number))
+                return currentLab;
+        }
+        return null;
     }
 }

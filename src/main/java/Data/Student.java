@@ -1,9 +1,12 @@
 package Data;
 
+import Data.Group.SubGroup;
 import Data.Lab.Lab;
 import Data.Mark.LabMark;
 import Data.Mark.TestMark;
 import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,15 +38,21 @@ public class Student implements Serializable{
     @JoinTable(name = "absentees",
                 joinColumns = @JoinColumn(name = "id_student"),
                 inverseJoinColumns = @JoinColumn(name = "id_class"))
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> missedUniversityClassesList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<LabMark> labMarkList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<TestMark> testMarkList;
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_group_subgroup")
+    private SubGroup subGroup;
 
     public Student(){
         this.missedUniversityClassesList = new ArrayList<UniversityClass>();
@@ -51,7 +60,7 @@ public class Student implements Serializable{
         this.testMarkList = new ArrayList<TestMark>();
     }
 
-    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, List<LabMark> labMarkList, List<TestMark> testMarkList, Integer bonusMark, List<UniversityClass> missedUniversityClassesList) {
+    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, List<LabMark> labMarkList, List<TestMark> testMarkList, Integer bonusMark, List<UniversityClass> missedUniversityClassesList, SubGroup subGroup) {
         this.id = id;
         this.fulName = fulName;
         this.gitRepoName = gitRepoName;
@@ -61,6 +70,7 @@ public class Student implements Serializable{
         this.testMarkList = testMarkList;
         this.bonusMark = bonusMark;
         this.missedUniversityClassesList = missedUniversityClassesList;
+        this.subGroup = subGroup;
     }
 
     public Integer getId() {
@@ -172,5 +182,13 @@ public class Student implements Serializable{
                 return currentTestMark;
         }
         return null;
+    }
+
+    public SubGroup getSubGroup() {
+        return subGroup;
+    }
+
+    public void setSubGroup(SubGroup subGroup) {
+        this.subGroup = subGroup;
     }
 }

@@ -4,6 +4,9 @@ import Data.Lab.IssuedLab;
 import Data.Lecturer;
 import Data.Student;
 import Data.UniversityClass;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.List;
 @Table(name = "groups_subgroups")
 @SecondaryTable(name = "subgroups",pkJoinColumns =
     @PrimaryKeyJoinColumn(name = "id_group_subgroup",referencedColumnName = "id_group_subgroup"))
+@Proxy(lazy = false)
 public class SubGroup {
     @Id
     @Column(name ="id_group_subgroup")
@@ -25,12 +29,15 @@ public class SubGroup {
     private String subGroupNumber;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group_subgroup")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentsList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group_subgroup")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> universityClassesList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group_subgroup")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabsList;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group")
