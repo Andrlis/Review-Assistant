@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Table(name = "labs_marks")
 public class LabMark {
     @Id
-    @Column(name ="id_lab_mark")
+    @Column(name = "id_lab_mark")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "coefficient", columnDefinition="Decimal(10,2)")
+    @Column(name = "coefficient")
     private Double coefficient;
     @Column(name = "mark")
     private Integer mark;
@@ -26,7 +26,8 @@ public class LabMark {
     @JoinColumn(name = "id_student")
     private Student student;
 
-    public LabMark(){}
+    public LabMark() {
+    }
 
     public LabMark(Integer id, Double coefficient, Integer mark, IssuedLab issuedLab, Student student) {
         this.id = id;

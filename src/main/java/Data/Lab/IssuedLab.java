@@ -2,12 +2,11 @@ package Data.Lab;
 
 import Data.Student;
 import Data.UniversityClass;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.FilterJoinTable;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +20,7 @@ import java.util.List;
 @Table(name = "issued_labs")
 public class IssuedLab implements Serializable {
     @Id
-    @Column(name ="id_issued_lab")
+    @Column(name = "id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
@@ -30,24 +29,24 @@ public class IssuedLab implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_class_of_issue")
     private UniversityClass universityClassOfIssue;
-    @Column(name = "coefficient", columnDefinition="Decimal(10,2)")
+    @Column(name = "coefficient")
     private Double coefficientOfCurrentDeadline;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_class_deadline")
     private UniversityClass currentDeadline;
-    @Column(name ="last_check_date_time", columnDefinition = "DATETIME")
+    @Column(name = "last_check_date_time", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfLastRepoCheck;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "labs_marks",
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
-    @FilterJoinTable(name ="coefficientFilter",condition = "coefficient <= -1")
+    @FilterJoinTable(name = "coefficientFilter", condition = "coefficient <= -1")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
 
 
-    public IssuedLab(){
+    public IssuedLab() {
         this.studentControlList = new ArrayList<Student>();
     }
 

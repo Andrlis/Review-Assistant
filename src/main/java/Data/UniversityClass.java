@@ -9,20 +9,21 @@ import java.util.Date;
  * University class
  */
 @Entity
-@Table(name="classes")
+@Table(name = "classes")
 public class UniversityClass {
     @Id
-    @Column(name ="id_class")
+    @Column(name = "id_class")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name ="class_date", columnDefinition = "DATETIME")
+    @Column(name = "class_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     @ManyToOne()
     @JoinColumn(name = "id_group_subgroup")
     private SubGroup subGroup;
 
-    public UniversityClass(){}
+    public UniversityClass() {
+    }
 
     public UniversityClass(Integer id, Date date, SubGroup subGroup) {
         this.id = id;

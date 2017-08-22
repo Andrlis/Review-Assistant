@@ -93,10 +93,12 @@ public class HibernateShell {
         return answer;
     }
 
-    public static void saveOrUpdate(Object object) {
+    public static void update(Object object) {
         final Session session = getSession();
         try {
-            session.saveOrUpdate(object);
+            session.getTransaction().begin();
+            session.update(object);
+            session.getTransaction().commit();
         } finally {
             session.close();
         }

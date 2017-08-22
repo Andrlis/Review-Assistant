@@ -1,9 +1,6 @@
 package Data.Lab;
 
-import Data.Group.SubGroup;
-
 import javax.persistence.*;
-import java.util.Map;
 
 /**
  * Class containing basic information about laboratory work(number of laboratory work,
@@ -13,7 +10,7 @@ import java.util.Map;
 @Table(name = "labs")
 public class Lab {
     @Id
-    @Column(name ="id_lab")
+    @Column(name = "id_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "lab_number")
@@ -21,7 +18,8 @@ public class Lab {
     @Column(name = "key_word", length = 20)
     private String keyWord;
 
-    public Lab(){}
+    public Lab() {
+    }
 
     public Lab(Integer id, Integer numberOfLab, String keyWord) {
         this.id = id;

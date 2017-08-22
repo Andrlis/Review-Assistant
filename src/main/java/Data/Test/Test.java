@@ -13,13 +13,13 @@ import java.util.List;
  * Created by kesso on 19.08.17.
  */
 @Entity
-@Table(name ="tests")
+@Table(name = "tests")
 public class Test {
     @Id
-    @Column(name ="id_test")
+    @Column(name = "id_test")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name ="test_number")
+    @Column(name = "test_number")
     private Integer testNumber;
     @Column(name = "test_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
@@ -28,7 +28,7 @@ public class Test {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<TestMark> testMarkList;
 
-    public Test(){
+    public Test() {
         this.testMarkList = new ArrayList<TestMark>();
     }
 
@@ -71,7 +71,7 @@ public class Test {
         this.testMarkList = testMarkList;
     }
 
-    public void addTestMark(TestMark testMark){
+    public void addTestMark(TestMark testMark) {
         this.testMarkList.add(testMark);
     }
 }

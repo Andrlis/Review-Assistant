@@ -3,6 +3,7 @@ import Data.Group.Group;
 import Data.Group.GroupsKeeper;
 import Data.Group.SubGroup;
 import Data.Lab.LabsKeeper;
+import Data.Mark.LabMark;
 import Data.Student;
 import Resources.HibernateShell;
 
@@ -15,6 +16,8 @@ public class Test {
     public static void main(String[] args) {
         GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
 
+
+        //saveOrUpdate
         /*Group group = new Group();
         group.setNumberOfGroup("550503");
         group.setScheduleApiGroupNumber("550503");
@@ -38,17 +41,13 @@ public class Test {
 
         HibernateShell.saveOrUpdate(group);*/
 
-       /*Student student = new Student();
-        student.setFulName("Runova Julia");
-        student.setGitRepoName("123");
-        student.setGitUserName("321");
-        student.seteMail("234");
-
-        HibernateShell.addStudent(student,groupsKeeper.getGroupList().get(0).getSubGroupList().get(0));
-        */
-
         /*LabsKeeper labsKeeper = HibernateShell.getLabsKeeper();
         labsKeeper.getLabList();*/
+
+        /*LabMark labMark = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getLabMarkList().get(0);
+        labMark.setCoefficient(new Double(0.5));
+        labMark.setMark(2);
+        HibernateShell.update(labMark);*/
         return;
     }
 }

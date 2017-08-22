@@ -17,12 +17,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "groups_subgroups")
-@SecondaryTable(name = "subgroups",pkJoinColumns =
-    @PrimaryKeyJoinColumn(name = "id_group_subgroup",referencedColumnName = "id_group_subgroup"))
+@SecondaryTable(name = "subgroups", pkJoinColumns =
+@PrimaryKeyJoinColumn(name = "id_group_subgroup", referencedColumnName = "id_group_subgroup"))
 @Proxy(lazy = false)
 public class SubGroup {
     @Id
-    @Column(name ="id_group_subgroup")
+    @Column(name = "id_group_subgroup")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "subgroup_number", table = "subgroups", length = 5)
@@ -47,7 +47,7 @@ public class SubGroup {
     private Lecturer lecturer;
 
 
-    public SubGroup(){
+    public SubGroup() {
         this.studentsList = new ArrayList<Student>();
         this.universityClassesList = new ArrayList<UniversityClass>();
         this.issuedLabsList = new ArrayList<IssuedLab>();

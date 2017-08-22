@@ -18,12 +18,12 @@ import java.util.List;
  * list of bonuses, list of missed classes
  */
 @Entity
-@Table(name ="students")
-@SecondaryTable(name = "bonuses",foreignKey = @ForeignKey(name = "id_student", foreignKeyDefinition = "id_student"))
-@FilterDef(name ="coefficientFilter")
-public class Student implements Serializable{
+@Table(name = "students")
+@SecondaryTable(name = "bonuses", foreignKey = @ForeignKey(name = "id_student", foreignKeyDefinition = "id_student"))
+@FilterDef(name = "coefficientFilter")
+public class Student implements Serializable {
     @Id
-    @Column(name ="id_student")
+    @Column(name = "id_student")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "full_name", length = 100)
@@ -36,8 +36,8 @@ public class Student implements Serializable{
     private String eMail;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "absentees",
-                joinColumns = @JoinColumn(name = "id_student"),
-                inverseJoinColumns = @JoinColumn(name = "id_class"))
+            joinColumns = @JoinColumn(name = "id_student"),
+            inverseJoinColumns = @JoinColumn(name = "id_class"))
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> missedUniversityClassesList;
     @OneToMany(cascade = CascadeType.ALL)
@@ -54,7 +54,7 @@ public class Student implements Serializable{
     @JoinColumn(name = "id_group_subgroup")
     private SubGroup subGroup;
 
-    public Student(){
+    public Student() {
         this.missedUniversityClassesList = new ArrayList<UniversityClass>();
         this.labMarkList = new ArrayList<LabMark>();
         this.testMarkList = new ArrayList<TestMark>();
@@ -120,6 +120,7 @@ public class Student implements Serializable{
     public void setLabMarkList(List<LabMark> labMarksMap) {
         this.labMarkList = labMarksMap;
     }
+
     public Integer getBonusMark() {
         return bonusMark;
     }
@@ -169,16 +170,16 @@ public class Student implements Serializable{
 
     public LabMark getLabMark(Lab lab) {
 
-        for(LabMark currentLabMark: this.labMarkList){
-            if(currentLabMark.getIssuedLab().getLabDescription().equals(lab))
+        for (LabMark currentLabMark : this.labMarkList) {
+            if (currentLabMark.getIssuedLab().getLabDescription().equals(lab))
                 return currentLabMark;
         }
         return null;
     }
 
     public TestMark getTestMark(Integer number) {
-        for(TestMark currentTestMark: this.testMarkList){
-            if(currentTestMark.getTest().getTestNumber().equals(number))
+        for (TestMark currentTestMark : this.testMarkList) {
+            if (currentTestMark.getTest().getTestNumber().equals(number))
                 return currentTestMark;
         }
         return null;

@@ -70,7 +70,7 @@ id_issued_lab INTEGER AUTO_INCREMENT,
 id_lab INTEGER NOT NULL,
 id_group_subgroup INTEGER NOT NULL,
 id_class_of_issue INTEGER NOT NULL,
-coefficient DECIMAL NOT NULL,
+coefficient DOUBLE NOT NULL,
 id_class_deadline INTEGER NOT NULL,
 last_check_date_time DATETIME NOT NULL,
 PRIMARY KEY(id_issued_lab)
@@ -89,7 +89,7 @@ CREATE TABLE labs_marks(
 id_lab_mark INTEGER AUTO_INCREMENT,
 id_student INTEGER NOT NULL,
 id_lab INTEGER NOT NULL,
-coefficient DECIMAL NOT NULL,
+coefficient DOUBLE NOT NULL,
 mark INTEGER NOT NULL,
 PRIMARY KEY(id_lab_mark)
 );

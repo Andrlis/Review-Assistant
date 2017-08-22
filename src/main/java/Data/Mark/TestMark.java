@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "tests_result")
 public class TestMark {
     @Id
-    @Column(name ="id_test_result")
+    @Column(name = "id_test_result")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -24,7 +24,8 @@ public class TestMark {
     @JoinColumn(name = "id_student")
     private Student student;
 
-    public TestMark(){}
+    public TestMark() {
+    }
 
     public TestMark(Integer id, Test test, Integer mark, Student student) {
         this.id = id;

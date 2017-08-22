@@ -2,7 +2,6 @@ package Data;
 
 import Data.Group.SubGroup;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +10,16 @@ import java.util.List;
  * lecturer
  */
 @Entity
-@Table(name= "lecturers")
+@Table(name = "lecturers")
 public class Lecturer {
     @Id
-    @Column(name= "id_lecturer")
+    @Column(name = "id_lecturer")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name= "full_name", length = 100)
+    @Column(name = "full_name", length = 100)
     private String fullName;
     @OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<SubGroup> subGroupList;
-
 
 
     public Lecturer() {

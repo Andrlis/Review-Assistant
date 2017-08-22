@@ -1,6 +1,5 @@
 package Data.Lab;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +8,8 @@ import java.util.List;
 public class LabsKeeper {
     private List<Lab> labList;
 
-    public LabsKeeper(){}
+    public LabsKeeper() {
+    }
 
     public LabsKeeper(List<Lab> labArrayList) {
         this.labList = labList;
@@ -24,8 +24,8 @@ public class LabsKeeper {
     }
 
     public Lab getLab(int number) {
-        for(Lab currentLab: this.labList) {
-            if(currentLab.getNumberOfLab().equals(number))
+        for (Lab currentLab : this.labList) {
+            if (currentLab.getNumberOfLab().equals(number))
                 return currentLab;
         }
         return null;

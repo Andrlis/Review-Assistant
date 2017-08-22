@@ -14,12 +14,12 @@ import java.util.List;
 @Table(name = "groups")
 public class Group {
     @Id
-    @Column(name ="id_group")
+    @Column(name = "id_group")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name ="group_number", length = 10)
+    @Column(name = "group_number", length = 10)
     private String numberOfGroup;
-    @Column(name ="bsuir_api_group_id", length = 10)
+    @Column(name = "bsuir_api_group_id", length = 10)
     private String scheduleApiGroupNumber;
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -27,7 +27,7 @@ public class Group {
     @Column(name = "amount_of_test")
     private Integer amountOfTest;
 
-    public Group(){
+    public Group() {
         this.subGroupList = new ArrayList<SubGroup>();
     }
 
@@ -65,6 +65,14 @@ public class Group {
 
     public List<SubGroup> getSubGroupList() {
         return subGroupList;
+    }
+
+    public SubGroup getSubGroup(String number) {
+        for (SubGroup subGroup : this.subGroupList) {
+            if (subGroup.getSubGroupNumber().equals(number))
+                return subGroup;
+        }
+        return null;
     }
 
     public void setSubGroupList(List<SubGroup> subGroupList) {
