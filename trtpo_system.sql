@@ -43,7 +43,7 @@ full_name varchar(100) NOT NULL,
 git_user_name varchar(30) NOT NULL,
 git_repo_name varchar(30) NOT NULL,
 email varchar(30) NULL,
-id_group_subgroup int NOT NULL,
+id_group_subgroup int,
 PRIMARY KEY(id_student),
 FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
 );
@@ -88,7 +88,7 @@ PRIMARY KEY(id_lab)
 CREATE TABLE labs_marks(
 id_lab_mark INTEGER AUTO_INCREMENT,
 id_student INTEGER NOT NULL,
-id_lab INTEGER NOT NULL,
+id_issued_lab INTEGER NOT NULL,
 coefficient DOUBLE NOT NULL,
 mark INTEGER NOT NULL,
 PRIMARY KEY(id_lab_mark)

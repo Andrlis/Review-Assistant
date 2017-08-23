@@ -19,10 +19,10 @@ public class LabMark {
     private Double coefficient;
     @Column(name = "mark")
     private Integer mark;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_issued_lab")
     private IssuedLab issuedLab;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_student")
     private Student student;
 

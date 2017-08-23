@@ -1,5 +1,6 @@
 package Data.Lab;
 
+import Data.Mark.LabMark;
 import Data.Student;
 import Data.UniversityClass;
 import org.hibernate.annotations.FilterJoinTable;
@@ -23,27 +24,29 @@ public class IssuedLab implements Serializable {
     @Column(name = "id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_lab")
     private Lab labDescription;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_class_of_issue")
     private UniversityClass universityClassOfIssue;
     @Column(name = "coefficient")
     private Double coefficientOfCurrentDeadline;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_class_deadline")
     private UniversityClass currentDeadline;
     @Column(name = "last_check_date_time", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfLastRepoCheck;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "labs_marks",
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
     @FilterJoinTable(name = "coefficientFilter", condition = "coefficient <= -1")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
+    @OneToMany(mappedBy = "issuedLab", cascade = CascadeType.ALL)
+    private List<LabMark> labMarkList;
 
 
     public IssuedLab() {
@@ -52,7 +55,7 @@ public class IssuedLab implements Serializable {
 
     public IssuedLab(Integer id, Lab labDescription, UniversityClass universityClassOfIssue,
                      Double coefficientOfCurrentDeadline, UniversityClass currentDeadline,
-                     Date dateOfLastRepoCheck, List<Student> studentControlList) {
+                     Date dateOfLastRepoCheck, List<Student> studentControlList, List<LabMark> labMarkList) {
         this.id = id;
         this.labDescription = labDescription;
         this.universityClassOfIssue = universityClassOfIssue;
@@ -60,6 +63,7 @@ public class IssuedLab implements Serializable {
         this.currentDeadline = currentDeadline;
         this.dateOfLastRepoCheck = dateOfLastRepoCheck;
         this.studentControlList = studentControlList;
+        this.labMarkList = labMarkList;
     }
 
     public Integer getId() {
@@ -121,5 +125,13 @@ public class IssuedLab implements Serializable {
 
     public void deleteStudentFromControlList(Student student) {
         this.studentControlList.remove(student);
+    }
+
+    public List<LabMark> getLabMarkList() {
+        return labMarkList;
+    }
+
+    public void setLabMarkList(List<LabMark> labMarkList) {
+        this.labMarkList = labMarkList;
     }
 }

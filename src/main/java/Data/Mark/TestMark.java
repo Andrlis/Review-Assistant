@@ -15,12 +15,12 @@ public class TestMark {
     @Column(name = "id_test_result")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_test")
     private Test test;
     @Column(name = "mark")
     private Integer mark;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_student")
     private Student student;
 

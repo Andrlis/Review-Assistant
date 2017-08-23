@@ -34,7 +34,7 @@ public class Student implements Serializable {
     private String gitUserName;
     @Column(name = "email", length = 30)
     private String eMail;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "absentees",
             joinColumns = @JoinColumn(name = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "id_class"))
@@ -50,7 +50,7 @@ public class Student implements Serializable {
     private List<TestMark> testMarkList;
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group_subgroup")
     private SubGroup subGroup;
 

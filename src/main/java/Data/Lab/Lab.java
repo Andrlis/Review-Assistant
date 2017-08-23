@@ -1,6 +1,7 @@
 package Data.Lab;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Class containing basic information about laboratory work(number of laboratory work,
@@ -17,14 +18,17 @@ public class Lab {
     private Integer numberOfLab;
     @Column(name = "key_word", length = 20)
     private String keyWord;
+    @OneToMany(mappedBy = "labDescription", cascade = CascadeType.ALL)
+    private List<IssuedLab> issuedLabList;
 
     public Lab() {
     }
 
-    public Lab(Integer id, Integer numberOfLab, String keyWord) {
+    public Lab(Integer id, Integer numberOfLab, String keyWord, List<IssuedLab> issuedLabList) {
         this.id = id;
         this.numberOfLab = numberOfLab;
         this.keyWord = keyWord;
+        this.issuedLabList = issuedLabList;
     }
 
     public Integer getId() {
@@ -49,5 +53,13 @@ public class Lab {
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
+    }
+
+    public List<IssuedLab> getIssuedLabList() {
+        return issuedLabList;
+    }
+
+    public void setIssuedLabList(List<IssuedLab> issuedLabList) {
+        this.issuedLabList = issuedLabList;
     }
 }

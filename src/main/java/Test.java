@@ -48,6 +48,17 @@ public class Test {
         labMark.setCoefficient(new Double(0.5));
         labMark.setMark(2);
         HibernateShell.update(labMark);*/
+
+       /* Student student = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0);
+
+        LabMark labMark = student.getLabMarkList().get(0);*/
+
+
+        //Data.Test.Test test = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getTestMarkList().get(0).getTest();
+
+
+        HibernateShell.delete(groupsKeeper.getGroupList().get(0));
+
         return;
     }
 }

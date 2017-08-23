@@ -18,7 +18,7 @@ public class UniversityClass {
     @Column(name = "class_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group_subgroup")
     private SubGroup subGroup;
 

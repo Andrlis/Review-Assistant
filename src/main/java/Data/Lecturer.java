@@ -18,7 +18,7 @@ public class Lecturer {
     private Integer id;
     @Column(name = "full_name", length = 100)
     private String fullName;
-    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private List<SubGroup> subGroupList;
 
 

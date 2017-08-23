@@ -39,10 +39,10 @@ public class SubGroup {
     @JoinColumn(name = "id_group_subgroup")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabsList;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group")
     private Group group;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_lecturer")
     private Lecturer lecturer;
 
