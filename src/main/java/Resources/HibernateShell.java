@@ -104,6 +104,20 @@ public class HibernateShell {
         }
     }
 
+    /*
+    Add by Andrlis.
+     */
+    public static void delete(Object object) {
+        final Session session = getSession();
+        try {
+            session.getTransaction().begin();
+            session.delete(object);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+    }
+
     public static void save(Object object) {
         final Session session = getSession();
         try {
