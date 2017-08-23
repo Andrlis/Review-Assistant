@@ -1,9 +1,11 @@
 $(document).ready(function () {
-    var sel = document.getElementById("group-combo-box");
-    var val = sel.options[sel.selectedIndex].text;
-    $("#group-number").html(val);
+    changeGroupNumberTitle();
 
-    $("#subgroup-tabs").tabs();
+    $("#subgroup-tabs").tabs({
+        select: function(event, ui) {
+            $("#subgroup-number").html(ui.index + 1);
+        }
+    });
 
     $("#hor-buttonset").buttonset();
     $("#presence-button").click(function () {
@@ -20,12 +22,22 @@ $(document).ready(function () {
        CheckLabOrTestMarkEvent();
     });
 
+    $("#group-combo-box").change(function () {
+        changeGroupNumberTitle();
+    });
+
     $("#button-enter").click(function () {
        ShowCreateMarkFieldWind(30, 30);
     });
 
 
 });
+
+function changeGroupNumberTitle() {
+    var sel = document.getElementById("group-combo-box");
+    var val = sel.options[sel.selectedIndex].text;
+    $("#group-number").html(val);
+}
 
 function ShowStudentInformationWind(xCoord, yCoord, studFullName, eMailLink, gitHubRepoLink) {
 
