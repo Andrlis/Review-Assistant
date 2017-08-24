@@ -192,4 +192,14 @@ public class Student implements Serializable {
     public void setSubGroup(SubGroup subGroup) {
         this.subGroup = subGroup;
     }
+
+    public String getGitURL(){
+        return String.format("https://github.com/%s/%s", this.gitUserName, this.gitRepoName);
+    }
+
+    public void setInfoFromURL(String url){
+        String[] parseURL = url.split("/");
+        this.gitUserName = parseURL[parseURL.length-2];
+        this.gitRepoName = parseURL[parseURL.length-1];
+    }
 }

@@ -57,7 +57,8 @@ public class Test {
         //Data.Test.Test test = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getTestMarkList().get(0).getTest();
 
 
-        HibernateShell.delete(groupsKeeper.getGroupList().get(0));
+        //HibernateShell.delete(groupsKeeper.getGroupList().get(0));
+
 
         return;
     }

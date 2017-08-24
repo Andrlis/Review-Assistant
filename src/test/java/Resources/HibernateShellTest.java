@@ -91,16 +91,27 @@ public class HibernateShellTest {
     }
 
 
+    @Ignore
     @Test
     public void testSave() throws Exception {
         System.out.println("Test HibernateShell.save().");
-        try{
-            HibernateShell.save(group);
-            GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
-            assertEquals(1, groupsKeeper.getGroupList().size());
-        } finally {
-            HibernateShell.delete(group);
-        }
+        HibernateShell.save(group);
+        GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+        assertEquals(1, groupsKeeper.getGroupList().size());
+        HibernateShell.delete(group);
         System.out.println("Test success.");
+    }
+
+    @Test
+    public void testAllHibernateShell() throws Exception {
+        System.out.println("****************/Test all HibernateShell/****************");
+        HibernateShell.save(group);
+        GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+        assertEquals(1, groupsKeeper.getGroupList().size());
+        System.out.println("Test HibernateShell.save() success.");
+        HibernateShell.delete(group);
+        groupsKeeper = HibernateShell.getGroupKeeper();
+        assertEquals(0, groupsKeeper.getGroupList().size());
+        System.out.println("Test HibernateShell.delete() success.");
     }
 }
