@@ -44,7 +44,7 @@ public class Student implements Serializable {
     @JoinColumn(name = "id_student")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<LabMark> labMarkList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_student")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<TestMark> testMarkList;

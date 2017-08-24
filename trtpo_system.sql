@@ -60,7 +60,7 @@ PRIMARY KEY(id_absence)
 CREATE TABLE classes(
 id_class INTEGER AUTO_INCREMENT,
 class_date DATETIME NOT NULL,
-id_group_subgroup INTEGER NOT NULL,
+id_group_subgroup INTEGER,
 PRIMARY KEY(id_class)
 );
 
@@ -68,7 +68,7 @@ PRIMARY KEY(id_class)
 CREATE TABLE issued_labs(
 id_issued_lab INTEGER AUTO_INCREMENT,
 id_lab INTEGER NOT NULL,
-id_group_subgroup INTEGER NOT NULL,
+id_group_subgroup INTEGER,
 id_class_of_issue INTEGER NOT NULL,
 coefficient DOUBLE NOT NULL,
 id_class_deadline INTEGER NOT NULL,
@@ -87,8 +87,8 @@ PRIMARY KEY(id_lab)
 
 CREATE TABLE labs_marks(
 id_lab_mark INTEGER AUTO_INCREMENT,
-id_student INTEGER NOT NULL,
-id_issued_lab INTEGER NOT NULL,
+id_student INTEGER,
+id_issued_lab INTEGER,
 coefficient DOUBLE NOT NULL,
 mark INTEGER NOT NULL,
 PRIMARY KEY(id_lab_mark)

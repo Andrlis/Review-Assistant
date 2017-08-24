@@ -1,5 +1,8 @@
 package Data.Lab;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class Lab {
     @Column(name = "key_word", length = 20)
     private String keyWord;
     @OneToMany(mappedBy = "labDescription", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabList;
 
     public Lab() {

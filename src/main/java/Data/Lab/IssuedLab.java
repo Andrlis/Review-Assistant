@@ -45,8 +45,9 @@ public class IssuedLab implements Serializable {
     @FilterJoinTable(name = "coefficientFilter", condition = "coefficient <= -1")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
-    @OneToMany(mappedBy = "issuedLab", cascade = CascadeType.ALL)
-    private List<LabMark> labMarkList;
+  /*  @OneToMany(mappedBy = "issuedLab", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<LabMark> labMarkList;*/
 
 
     public IssuedLab() {
@@ -63,7 +64,7 @@ public class IssuedLab implements Serializable {
         this.currentDeadline = currentDeadline;
         this.dateOfLastRepoCheck = dateOfLastRepoCheck;
         this.studentControlList = studentControlList;
-        this.labMarkList = labMarkList;
+       // this.labMarkList = labMarkList;
     }
 
     public Integer getId() {
@@ -127,11 +128,11 @@ public class IssuedLab implements Serializable {
         this.studentControlList.remove(student);
     }
 
-    public List<LabMark> getLabMarkList() {
+  /*  public List<LabMark> getLabMarkList() {
         return labMarkList;
     }
 
     public void setLabMarkList(List<LabMark> labMarkList) {
         this.labMarkList = labMarkList;
-    }
+    }*/
 }
