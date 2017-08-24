@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data.Lab.IssuedLab;
+import Data.Lab.LabsKeeper;
+import Data.Mark.LabMark;
+import Data.Mark.TestMark;
+import Data.Student;
+import Resources.HibernateShell;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -38,6 +43,9 @@ public class TableGenerator {
             MarkTable markTable = new MarkTable(tableId);
             this.setHeaderToMarkTable(markTable, subGroup);
 
+            List<Student> studentList = subGroup.getStudentsList();
+            for (Student student: studentList)
+                this.addStudentToTable(markTable, student);
 
             // Pretty print the document to System.out
             OutputFormat format = OutputFormat.createPrettyPrint();
@@ -52,6 +60,33 @@ public class TableGenerator {
         }
     }
 
+    private void addStudentToTable(MarkTable markTable, Student student) {
+        markTable.addRow();
+
+        markTable.addCell(MarkTable.studNameTypeOfContent, student.getFulName());
+
+        for(int i = 1; i <= markTable.getAmountColOfLabs(); i++) {
+            LabMark labMark = student.getLabMark(HibernateShell.getLabsKeeper().getLab(i));
+            Integer markInt = labMark.getMark();
+            String markString = "";
+            if (markInt != -1)
+                markString = markInt.toString();
+
+            markTable.addCell(MarkTable.labMarkTypeOfContent, markString, labMark.getCoefficient());
+        }
+
+        for(int i = 1; i <= markTable.getAmountColOfTests(); i++) {
+            TestMark testMark = student.getTestMark(i);
+            Integer markInt = testMark.getMark();
+            String markString = "";
+            if (markInt != -1)
+                markString = markInt.toString();
+
+            markTable.addCell(MarkTable.testMarkTypeOfContent, markString);
+        }
+
+        markTable.addCell(MarkTable.bonusMarkTypeOfContent, student.getBonusMark().toString());
+    }
 
     /*
     @returns structure of the header, which contains numbers of lab, test and bonus
@@ -60,30 +95,27 @@ public class TableGenerator {
     private ArrayList<ArrayList<Integer>> setHeaderToMarkTable(MarkTable markTable, SubGroup subGroup) {
         ArrayList<ArrayList<Integer>> structure = new ArrayList<ArrayList<Integer>>();
         List<IssuedLab> issuedLabList = subGroup.getIssuedLabsList();
-        Integer amountOfTests = subGroup.getGroup().getAmountOfTest();
-        Integer amountOfLabs = subGroup.getIssuedLabsList().size();
+        markTable.setAmountColOfLabs(subGroup.getGroup().getAmountOfTest());
+        markTable.setAmountColOfTests(subGroup.getIssuedLabsList().size());
 
         markTable.addRow();
-
-        //return structure;
 
         markTable.addCell(MarkTable.studNameTypeOfContent + " " + MarkTable.headerCell, "Студент");
 
        // structure.add(TableGenerator.lab, new ArrayList<Integer>());
-        for (int i = 1; i <= amountOfLabs; i++) {
+        for (int i = 1; i <= markTable.getAmountColOfLabs(); i++) {
             markTable.addCell(MarkTable.labMarkTypeOfContent + " " + MarkTable.headerCell, "Лабораторная " + i);
           //  structure.get(TableGenerator.lab).add(issuedLab.getLabDescription().getNumberOfLab());
         }
 
         //structure.add(TableGenerator.test, new ArrayList<Integer>());
-        for (int i = 1; i <= amountOfTests; i++) {
+        for (int i = 1; i <= markTable.getAmountColOfTests(); i++) {
             markTable.addCell(MarkTable.testMarkTypeOfContent  + " " + MarkTable.headerCell, "Тест " + i);
             //structure.get(TableGenerator.test).add(i);
         }
 
         markTable.addCell(MarkTable.bonusMarkTypeOfContent  + " " + MarkTable.headerCell, "Бонус");
-
+        markTable.addButton();
         return structure;
     }
-
 }

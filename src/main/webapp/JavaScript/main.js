@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 
    // $("#information-part").hide();
-    $(".stud-name").hide();
+    //(".stud-name").hide();
 });
 
 function changeGroupNumberTitle() {
