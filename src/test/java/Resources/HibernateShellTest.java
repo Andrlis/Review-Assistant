@@ -5,16 +5,12 @@ import Data.Group.GroupsKeeper;
 import Data.Group.SubGroup;
 import Data.Lab.IssuedLab;
 import Data.Lab.Lab;
-import Data.Lab.LabsKeeper;
-import Data.Lecturer;
+import Data.Lecturer.Lecturer;
 import Data.Mark.LabMark;
 import Data.Mark.TestMark;
 import Data.Student;
 import Data.UniversityClass;
-import org.hibernate.Session;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;

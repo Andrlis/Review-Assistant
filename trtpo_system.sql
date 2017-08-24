@@ -12,7 +12,7 @@ PRIMARY KEY(id_lecturer)
 
 CREATE TABLE  groups(
 id_group INTEGER AUTO_INCREMENT,
-group_number VARCHAR(20) NOT NULL,
+group_number VARCHAR(20),
 bsuir_api_group_id VARCHAR(20) NOT NULL,
 amount_of_test INTEGER NOT NULL,
 PRIMARY KEY(id_group)
@@ -20,14 +20,14 @@ PRIMARY KEY(id_group)
 
 CREATE TABLE groups_subgroups (
 id_group_subgroup INTEGER AUTO_INCREMENT,
-id_group INTEGER NOT NULL,
+id_group INTEGER,
 id_lecturer INTEGER,
 PRIMARY KEY(id_group_subgroup)
 );
 
 CREATE TABLE subgroups (
 id_subgroup int AUTO_INCREMENT,
-id_group_subgroup INTEGER NOT NULL,
+id_group_subgroup INTEGER,
 subgroup_number varchar(5) NOT NULL,
 PRIMARY KEY(id_subgroup),
 FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
@@ -46,8 +46,8 @@ FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
 
 CREATE TABLE absentees(
 id_absence INTEGER AUTO_INCREMENT,
-id_class INTEGER NOT NULL,
-id_student INTEGER NOT NULL,
+id_class INTEGER,
+id_student INTEGER,
 PRIMARY KEY(id_absence)
 );
 
@@ -94,8 +94,8 @@ PRIMARY KEY(id_test)
 
 CREATE TABLE tests_result(
 id_test_result INTEGER AUTO_INCREMENT,
-id_student INTEGER NOT NULL,
-id_test INTEGER NOT NULL,
+id_student INTEGER,
+id_test INTEGER,
 mark INTEGER NOT NULL,
 PRIMARY KEY(id_test_result),
 FOREIGN KEY(id_test) REFERENCES tests(id_test)
@@ -103,7 +103,7 @@ FOREIGN KEY(id_test) REFERENCES tests(id_test)
 
 CREATE TABLE bonuses(
 id_bonus INTEGER AUTO_INCREMENT,
-id_student INTEGER NOT NULL,
+id_student INTEGER,
 bonus INTEGER NOT NULL,
 PRIMARY KEY(id_bonus)
 );

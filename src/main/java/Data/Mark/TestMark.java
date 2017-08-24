@@ -2,6 +2,7 @@ package Data.Mark;
 
 import Data.Student;
 import Data.Test.Test;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -15,7 +16,8 @@ public class TestMark {
     @Column(name = "id_test_result")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "id_test")
     private Test test;
     @Column(name = "mark")

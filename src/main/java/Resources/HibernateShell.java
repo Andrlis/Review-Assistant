@@ -5,9 +5,12 @@ import Data.Group.GroupsKeeper;
 import Data.Group.SubGroup;
 import Data.Lab.IssuedLab;
 import Data.Lab.LabsKeeper;
+import Data.Lecturer.Lecturer;
+import Data.Lecturer.LecturerKeeper;
 import Data.Mark.LabMark;
 import Data.Student;
 import Data.Test.Test;
+import Data.Test.TestKeeper;
 import Data.UniversityClass;
 import org.hibernate.Filter;
 import org.hibernate.HibernateException;
@@ -69,6 +72,34 @@ public class HibernateShell {
             session.close();
         }
         return labsKeeper;
+    }
+
+    public static LecturerKeeper getLecturerKeeper() {
+        final Session session = getSession();
+        LecturerKeeper lecturerKeeper = new LecturerKeeper();
+        try {
+            session.enableFilter("coefficientFilter");
+
+            lecturerKeeper.setLecturerList(session.createQuery("from Lecturer").list());
+
+        } finally {
+            session.close();
+        }
+        return lecturerKeeper;
+    }
+
+    public static TestKeeper getTestKeeper() {
+        final Session session = getSession();
+        TestKeeper testKeeper = new TestKeeper();
+        try {
+            session.enableFilter("coefficientFilter");
+
+            testKeeper.setTestList(session.createQuery("from Test").list());
+
+        } finally {
+            session.close();
+        }
+        return testKeeper;
     }
 
     public static Long getNumberOfTests() {

@@ -1,7 +1,7 @@
 package Data.Group;
 
 import Data.Lab.IssuedLab;
-import Data.Lecturer;
+import Data.Lecturer.Lecturer;
 import Data.Student;
 import Data.UniversityClass;
 import org.hibernate.annotations.*;

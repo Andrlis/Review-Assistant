@@ -1,4 +1,4 @@
-package Data;
+package Data.Lecturer;
 
 import Data.Group.SubGroup;
 import org.hibernate.annotations.LazyCollection;

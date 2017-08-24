@@ -26,7 +26,7 @@
         <property name="hibernate.id.new_generator_mappings">false</property>
 
         <mapping class="Data.UniversityClass"/>
-        <mapping class="Data.Lecturer"/>
+        <mapping class="Data.Lecturer.Lecturer"/>
         <mapping class="Data.Student"/>
         <mapping class="Data.Group.Group"/>
         <mapping class="Data.Group.SubGroup"/>
