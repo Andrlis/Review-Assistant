@@ -103,7 +103,7 @@ public class TableGeneratorTool {
         return (Element)list.get(list.size() - 1);
     }
 
-    public void addCell(String idRowWhereAdd, String typeOfContent, String content, Double coefficient) {
+    public void addCell(/*String idRowWhereAdd, */String typeOfContent, String content, Double coefficient) {
         //Element element = this.getRowElementById(idRowWhereAdd);
         Element element;
 
@@ -124,7 +124,12 @@ public class TableGeneratorTool {
                 .addText(content);
     }
 
-    public void addCell(String idRowWhereAdd, String typeOfContent, String content) {
-        this.addCell(idRowWhereAdd, typeOfContent, content, null);
+
+    /*
+        @param typeOfContent - class for description content
+                content - content of the cell
+    */
+    public void addCell(/*String idRowWhereAdd, */String typeOfContent, String content) {
+        this.addCell(/*idRowWhereAdd, */typeOfContent, content, null);
     }
 }
