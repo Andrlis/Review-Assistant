@@ -4,6 +4,7 @@ import Data.Lab.IssuedLab;
 import Data.Student;
 
 import javax.persistence.*;
+import java.util.Comparator;
 
 /**
  * IssuedLab mark
@@ -76,4 +77,11 @@ public class LabMark {
     public void setMark(Integer mark) {
         this.mark = mark;
     }
+
+    public static final Comparator<LabMark> COMPARATOR_BY_NUMBER_OF_LAB = new Comparator<LabMark>() {
+        @Override
+        public int compare(LabMark labMark, LabMark t1) {
+            return labMark.getIssuedLab().getLabDescription().getNumberOfLab() - t1.getIssuedLab().getLabDescription().getNumberOfLab();
+        }
+    };
 }

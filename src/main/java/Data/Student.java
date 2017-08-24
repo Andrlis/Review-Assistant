@@ -11,6 +11,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -201,5 +202,16 @@ public class Student implements Serializable {
         String[] parseURL = url.split("/");
         this.gitUserName = parseURL[parseURL.length-2];
         this.gitRepoName = parseURL[parseURL.length-1];
+    }
+
+
+    public List<LabMark> sortLabMarkList() {
+        Collections.sort(this.labMarkList,LabMark.COMPARATOR_BY_NUMBER_OF_LAB);
+        return this.labMarkList;
+    }
+
+    public List<TestMark> sortTestMarkList() {
+        Collections.sort(this.testMarkList, TestMark.COMPARATOR_BY_NUMBER_OF_TEST);
+        return this.testMarkList;
     }
 }
