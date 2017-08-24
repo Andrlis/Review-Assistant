@@ -24,19 +24,28 @@ import static org.junit.Assert.*;
 
 public class HibernateShellTest {
     private Group group;
+    Lecturer lecturer;
+    SubGroup subGroup1;
+    UniversityClass universityClass;
+    IssuedLab issuedLab;
+    Lab lab;
+    Student student;
+    TestMark testMark;
+    LabMark labMark;
+    Data.Test.Test test;
 
     @Before
     public void setUp() throws Exception {
         group = new Group();
-        Lecturer lecturer = new Lecturer();
-        SubGroup subGroup1 = new SubGroup();
-        UniversityClass universityClass = new UniversityClass();
-        IssuedLab issuedLab = new IssuedLab();
-        Lab lab = new Lab();
-        Student student = new Student();
-        TestMark testMark = new TestMark();
-        LabMark labMark = new LabMark();
-        Data.Test.Test test = new Data.Test.Test();
+        lecturer = new Lecturer();
+        subGroup1 = new SubGroup();
+        universityClass = new UniversityClass();
+        issuedLab = new IssuedLab();
+        lab = new Lab();
+        student = new Student();
+        testMark = new TestMark();
+        labMark = new LabMark();
+        test = new Data.Test.Test();
 
         lecturer.setFullName("Иванов Иван Иваноыич");
         lecturer.setSubGroupList(Arrays.asList(subGroup1));
@@ -91,27 +100,27 @@ public class HibernateShellTest {
     }
 
 
-    @Ignore
-    @Test
-    public void testSave() throws Exception {
-        System.out.println("Test HibernateShell.save().");
-        HibernateShell.save(group);
-        GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
-        assertEquals(1, groupsKeeper.getGroupList().size());
-        HibernateShell.delete(group);
-        System.out.println("Test success.");
-    }
-
     @Test
     public void testAllHibernateShell() throws Exception {
         System.out.println("****************/Test all HibernateShell/****************");
         HibernateShell.save(group);
         GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
         assertEquals(1, groupsKeeper.getGroupList().size());
-        System.out.println("Test HibernateShell.save() success.");
+        assertEquals(group.getNumberOfGroup(),groupsKeeper.getGroupList().get(0).getNumberOfGroup());
+        assertEquals(group.getScheduleApiGroupNumber(),
+                groupsKeeper.getGroupList().get(0).getScheduleApiGroupNumber());
+        System.out.println("Test HibernateShell.save() & HibernateShell,getGroupKeeper() success.");
+        lab = HibernateShell.getLabsKeeper().getLabList().get(0);
+        lab.setNumberOfLab(2);
+        HibernateShell.update(lab);
+        assertEquals(lab.getNumberOfLab(),
+                HibernateShell.getLabsKeeper().getLabList().get(0).getNumberOfLab());
+        System.out.println("Test HibernateShell.update() & HibernateShell,getLabKeeper() success.");
+        assertTrue(HibernateShell.getNumberOfLab()==1);
+        //assertTrue(HibernateShell.getNumberOfTests().intValue()==1);
+        System.out.println("Test HibernateShell.getNumberOfLab() & HibernateShell,getNumberOfTests() success.");
         HibernateShell.delete(group);
-        groupsKeeper = HibernateShell.getGroupKeeper();
-        assertEquals(0, groupsKeeper.getGroupList().size());
+        assertTrue(HibernateShell.getGroupKeeper().getGroupList().isEmpty());
         System.out.println("Test HibernateShell.delete() success.");
     }
 }
