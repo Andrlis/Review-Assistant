@@ -1,6 +1,8 @@
 $(document).ready(function () {
     changeGroupNumberTitle();
 
+
+
     $("#subgroup-tabs").tabs({
         select: function(event, ui) {
             $("#subgroup-number").html(ui.index + 1);
@@ -30,7 +32,8 @@ $(document).ready(function () {
        ShowCreateMarkFieldWind(30, 30);
     });
 
-
+   // $("#information-part").hide();
+    $(".stud-name").hide();
 });
 
 function changeGroupNumberTitle() {

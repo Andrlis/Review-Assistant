@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by kesso on 22.08.17.
  */
 public class Test {
-    public static void main(String[] args) {
+    private /*static*/ void main(String[] args) {
         GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
 
 
