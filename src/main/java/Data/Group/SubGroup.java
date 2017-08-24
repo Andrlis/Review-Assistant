@@ -4,11 +4,12 @@ import Data.Lab.IssuedLab;
 import Data.Lecturer;
 import Data.Student;
 import Data.UniversityClass;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Proxy;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class SubGroup {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group")
     private Group group;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "id_lecturer")
     private Lecturer lecturer;
 

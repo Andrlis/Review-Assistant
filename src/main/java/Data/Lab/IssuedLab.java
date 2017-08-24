@@ -3,6 +3,7 @@ package Data.Lab;
 import Data.Mark.LabMark;
 import Data.Student;
 import Data.UniversityClass;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -24,7 +25,8 @@ public class IssuedLab implements Serializable {
     @Column(name = "id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "id_lab")
     private Lab labDescription;
     @OneToOne(cascade = CascadeType.MERGE)
@@ -45,10 +47,6 @@ public class IssuedLab implements Serializable {
     @FilterJoinTable(name = "coefficientFilter", condition = "coefficient <= -1")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
-  /*  @OneToMany(mappedBy = "issuedLab", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<LabMark> labMarkList;*/
-
 
     public IssuedLab() {
         this.studentControlList = new ArrayList<Student>();
@@ -64,7 +62,6 @@ public class IssuedLab implements Serializable {
         this.currentDeadline = currentDeadline;
         this.dateOfLastRepoCheck = dateOfLastRepoCheck;
         this.studentControlList = studentControlList;
-       // this.labMarkList = labMarkList;
     }
 
     public Integer getId() {
@@ -127,12 +124,4 @@ public class IssuedLab implements Serializable {
     public void deleteStudentFromControlList(Student student) {
         this.studentControlList.remove(student);
     }
-
-  /*  public List<LabMark> getLabMarkList() {
-        return labMarkList;
-    }
-
-    public void setLabMarkList(List<LabMark> labMarkList) {
-        this.labMarkList = labMarkList;
-    }*/
 }

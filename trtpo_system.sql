@@ -25,7 +25,7 @@ PRIMARY KEY(id_group)
 CREATE TABLE groups_subgroups (
 id_group_subgroup INTEGER AUTO_INCREMENT,
 id_group INTEGER NOT NULL,
-id_lecturer INTEGER NOT NULL,
+id_lecturer INTEGER,
 PRIMARY KEY(id_group_subgroup)
 );
 
@@ -67,11 +67,11 @@ PRIMARY KEY(id_class)
 
 CREATE TABLE issued_labs(
 id_issued_lab INTEGER AUTO_INCREMENT,
-id_lab INTEGER NOT NULL,
+id_lab INTEGER ,
 id_group_subgroup INTEGER,
-id_class_of_issue INTEGER NOT NULL,
+id_class_of_issue INTEGER,
 coefficient DOUBLE NOT NULL,
-id_class_deadline INTEGER NOT NULL,
+id_class_deadline INTEGER,
 last_check_date_time DATETIME NOT NULL,
 PRIMARY KEY(id_issued_lab)
 );

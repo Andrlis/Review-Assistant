@@ -111,7 +111,9 @@ public class HibernateShell {
         final Session session = getSession();
         try {
             session.getTransaction().begin();
+            session.flush();
             session.delete(object);
+            session.flush();
             session.getTransaction().commit();
         } finally {
             session.close();

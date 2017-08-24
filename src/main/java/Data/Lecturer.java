@@ -1,6 +1,8 @@
 package Data;
 
 import Data.Group.SubGroup;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +20,8 @@ public class Lecturer {
     private Integer id;
     @Column(name = "full_name", length = 100)
     private String fullName;
-    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<SubGroup> subGroupList;
 
 
