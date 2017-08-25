@@ -35,6 +35,19 @@ public class Lab {
         this.issuedLabList = issuedLabList;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+
+        if (obj == null || obj.getClass() != this.getClass())
+            return false;
+
+        if (this.getNumberOfLab().equals(((Lab) obj).getNumberOfLab()))
+            return true;
+        else return false;
+    }
+
     public Integer getId() {
         return id;
     }

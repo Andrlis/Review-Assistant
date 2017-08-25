@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data.Lab.IssuedLab;
+import Data.Lab.Lab;
 import Data.Lab.LabsKeeper;
 import Data.Mark.LabMark;
 import Data.Mark.TestMark;
@@ -68,6 +69,7 @@ public class TableGenerator {
         for(int i = 1; i <= markTable.getAmountColOfLabs(); i++) {
             LabMark labMark = student.getLabMark(HibernateShell.getLabsKeeper().getLab(i));
             Integer markInt = labMark.getMark();
+
             String markString = "";
             if (markInt != -1)
                 markString = markInt.toString();
@@ -85,7 +87,12 @@ public class TableGenerator {
             markTable.addCell(MarkTable.testMarkTypeOfContent, markString);
         }
 
-        markTable.addCell(MarkTable.bonusMarkTypeOfContent, student.getBonusMark().toString());
+        String bonusMarkToString = "";
+        Integer bonusMark = student.getBonusMark();
+        if (bonusMark != null)
+            bonusMarkToString = bonusMark.toString();
+        markTable.addCell(MarkTable.bonusMarkTypeOfContent, bonusMarkToString);
+
     }
 
     /*
@@ -95,8 +102,8 @@ public class TableGenerator {
     private ArrayList<ArrayList<Integer>> setHeaderToMarkTable(MarkTable markTable, SubGroup subGroup) {
         ArrayList<ArrayList<Integer>> structure = new ArrayList<ArrayList<Integer>>();
         List<IssuedLab> issuedLabList = subGroup.getIssuedLabsList();
-        markTable.setAmountColOfLabs(subGroup.getGroup().getAmountOfTest());
-        markTable.setAmountColOfTests(subGroup.getIssuedLabsList().size());
+        markTable.setAmountColOfLabs(subGroup.getIssuedLabsList().size());
+        markTable.setAmountColOfTests(subGroup.getGroup().getAmountOfTest());
 
         markTable.addRow();
 
