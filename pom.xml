@@ -8,6 +8,10 @@
   <name>TRTPOControlSystem Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
+  <properties>
+          <powermock.version>1.7.1</powermock.version>
+  </properties>
+
   <dependencies>
      <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -25,6 +29,29 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4-legacy</artifactId>
+      <version>1.7.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-easymock</artifactId>
+      <version>1.7.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>3.1</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -93,8 +120,6 @@
       <artifactId>dom4j</artifactId>
       <version>1.6.1</version>
     </dependency>
-
-
   </dependencies>
 
 

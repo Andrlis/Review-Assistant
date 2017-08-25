@@ -18,9 +18,10 @@ import bsuirAPI.bsuirTimetable.Timetable;
  */
 public class ScheduleChecker {
 
-    public static void groupScheduleCheck(GroupsKeeper groups) throws Exception {
+    public static void groupScheduleCheck() throws Exception {
         DayTimetable currentDaySchedule;
         Timetable timetable;
+        GroupsKeeper groups = HibernateShell.getGroupKeeper();
 
         for (Group group : groups.getGroupList()) {
 
