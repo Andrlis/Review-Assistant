@@ -124,7 +124,7 @@ public class TableGenerator {
         markTable.addCell(MarkTable.bonusMarkTypeOfContent  + " " + MarkTable.headerCell, "Бонус");
         markTable.addButton();
 
-        
+
         return structure;
     }
 }
