@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    position: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    text-align: center;
+}
+
+.input_style
+{
+    background-position: 5px -2px !important;
+}
+
+.password_style
+{
+    background-position: 5px -52px !important;
+}
+
+#frame
+{
+    border: 4px;
+    padding: 15px 15px 15px 15px;
+    margin: 10px 10px 10px 10px;
+    border-radius: 8px;
+}
+
+#action_buttons
+{
+    margin: 10px 10px 10px 10px;
+}
+
+h1
+{
+    text-align: center;
+    margin: 0 0 30px 0;
+	font: normal 26px;
+    letter-spacing: 2px;
+}
+
+input
+{
+    padding: 15px 15px 15px 15px;
+    margin: 0 0 10px 0;
+    width: 300px;
+    height: 5px;
+    border: 1px solid #ccc;
+    border-radius:1px;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+}
+
+button
+{
+	border-width: 5px;
+    border-style: solid;
+    border-radius: 3px;
+    border-style: solid;
+    cursor: pointer;
+    height: 35px;
+    width: 100%;
+    font: normal 20px;
+}
