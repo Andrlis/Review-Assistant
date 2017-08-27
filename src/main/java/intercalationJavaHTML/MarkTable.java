@@ -14,20 +14,38 @@ public class MarkTable extends Table {
     private static final String coef_0_4 = " coef-04";
     private static final String coef_0_0 = " coef-00";
 
-
+    /*Classes for type of cell */
+    public static final String dataCell = "data-cell";
     public static final String headerCell   = "header-cell";
+
+    /*Classes for type of content */
     public static final String labMarkTypeOfContent   = "lab-mark";
     public static final String testMarkTypeOfContent  = "test-mark";
     public static final String studNameTypeOfContent  = "stud-name";
     public static final String bonusMarkTypeOfContent = "bonus-mark";
     public static final String buttonTypeOfContent = "button-cell-div";
+    public static final String presenceTypeOfContent = "presence-cell";
+
+    public static final String editableCell = "editable";
+    //public static final String markCell = "mark";
+
+    public static final String absentClass = "absent";
+    public static final String presentClass = "present";
 
     private int amountColOfLabs = 0;
     private int amountColOfTests = 0;
-
+    private int amountColOfClass = 0;
 
     public MarkTable(String idTable) {
         super(idTable);
+    }
+
+    public int getAmountColOfClass() {
+        return amountColOfClass;
+    }
+
+    public void setAmountColOfClass(int amountColOfClass) {
+        this.amountColOfClass = amountColOfClass;
     }
 
     public int getAmountColOfLabs() {

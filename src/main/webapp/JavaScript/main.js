@@ -1,6 +1,6 @@
 $(document).ready(function () {
     changeGroupNumberTitle();
-
+    ShowMarksTable();
 
 
     $("#subgroup-tabs").tabs({
@@ -11,11 +11,40 @@ $(document).ready(function () {
 
     $("#hor-buttonset").buttonset();
     $("#presence-button").click(function () {
-        ShowStudentInformationWind(550, 500, "Julia Runova", "vk.com", "vk.com");
+        //ShowStudentInformationWind(550, 500, "Julia Runova", "vk.com", "vk.com");
+        ShowClassesTable();
     });
     $("#marks-button").click(function () {
-        HideStudentInformationWind();
+        //HideStudentInformationWind();
+        ShowMarksTable();
     });
+
+    //event for edit conent of cell with marks
+    $(".editable").click(function (e) {
+
+        var t = e.target || e.srcElement;
+        var elm_name = t.tagName.toLowerCase();
+        if(elm_name == 'input')	{return false;}
+
+        var val = $(this).html();
+        var code = '<input type="text" id="edit" pattern="\d{1,5}" value="' + val + '"/>';
+        $(this).html(code);
+        $("#edit").focus();
+
+        $("#edit").blur(function () {
+            var val = $("#edit").val();
+            $("#edit").parent().html(val);
+        });
+    });
+
+    //Event for ENTER key
+    $(window).keydown(function(event){
+        var enterCode = 13;
+        if(event.keyCode == enterCode) {
+            $('#edit').blur();
+        }
+    });
+
     $("#cancel-button-mw").click(function () {
         HideCreateMarkFieldWind();
     });
@@ -31,6 +60,38 @@ $(document).ready(function () {
     $("#button-enter").click(function () {
        ShowCreateMarkFieldWind(30, 30);
     });
+
+    $("button.add-col-button").click(function () {
+        ShowCreateMarkFieldWind();
+    });
+
+    $(".presence-cell.data-cell").click(function () {
+
+        if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if precent
+            $(this).css("background", "rgb(255, 218, 6)");
+            $(this).html("н");
+        } else {                                                         //if absent
+            $(this).css("background", "rgb(194, 255, 10)");
+            $(this).html("");
+        }
+    });
+/*
+    $(".present").click(function (event) {
+        //event = event || window.event;
+        //var element = event.target||event.srcElement;
+        $(this).html("н");
+        //$(this).attr("class", "absent");
+        $(this).removeClass("present");
+        $(this).addClass("absent");
+    });
+
+    $(".absent").click(function (event) {
+        //event = event || window.event;
+        //var element = event.target||event.srcElement;
+        $(this).html("");
+        $(this).removeClass("absent");
+        $(this).addClass("present");
+    });*/
 
    // $("#information-part").hide();
     //(".stud-name").hide();
@@ -87,4 +148,20 @@ function CheckLabOrTestMarkEvent() {
     if ($("#mark-type-combo-box").val() == "lab")
         $("#date-of-lab-mw").css("display", "block");
     else $("#date-of-lab-mw").css("display", "none");
+}
+
+function ShowMarksTable() {
+    $(".bonus-mark").show();
+    $(".test-mark").show();
+    $(".lab-mark").show();
+    $(".button-cell-div").show();
+    $(".presence-cell").hide();
+}
+
+function ShowClassesTable() {
+    $(".presence-cell").show();
+    $(".bonus-mark").hide();
+    $(".test-mark").hide();
+    $(".lab-mark").hide();
+    $(".button-cell-div").hide();
 }

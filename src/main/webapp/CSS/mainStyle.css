@@ -131,3 +131,35 @@ h2{
     align-items: flex-start;
     flex-direction: column;*/
 }
+
+.table-ui {
+    width: 100%;
+}
+
+.cell-ui {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.button-cell-div {
+    border: none;
+}
+
+.header-cell {
+    padding: 7px;
+    background: silver;
+}
+
+.present {
+    background: rgb(194, 255, 10);
+}
+
+.absent {
+    background: rgb(255, 218, 6);
+}
+
+#edit {
+    border-color: white;
+    border: none;
+}
