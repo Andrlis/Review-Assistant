@@ -1,5 +1,7 @@
 package intercalationJavaHTML;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
@@ -23,6 +25,7 @@ import org.dom4j.io.XMLWriter;
 
 import Data.Group.GroupsKeeper;
 import Data.Group.SubGroup;
+import org.omg.CORBA.Request;
 
 
 /**
@@ -48,11 +51,20 @@ public class TableGenerator {
                 attrClass, data);
     }
 
+    private FileOutputStream getFileOutputStream(String fileName) throws IOException {
+        File file = new File("src\\main\\webapp\\tables\\" + fileName + ".html");
+
+        if (!file.exists())
+            file.createNewFile();
+
+        return new FileOutputStream(file, false);
+    }
+
     public void createMarksTable(SubGroup subGroup) {
 
         try {
 
-            String tableId = "table-marks" + "-" + subGroup.getGroup().getNumberOfGroup() + "-" + subGroup.getSubGroupNumber();
+            String tableId = "table-" + subGroup.getGroup().getNumberOfGroup() + "-" + subGroup.getSubGroupNumber();
             MarkTable markTable = new MarkTable(tableId);
             this.setHeaderToMarkTable(markTable, subGroup);
 
@@ -61,11 +73,14 @@ public class TableGenerator {
                 this.addStudentToTable(markTable, student);
 
             // Pretty print the document to System.out
+            //file.
+            FileOutputStream fileOutputStream = this.getFileOutputStream(tableId);
             OutputFormat format = OutputFormat.createPrettyPrint();
-            XMLWriter writer;
-            writer = new XMLWriter( System.out, format );
+            XMLWriter writer = new XMLWriter( fileOutputStream, format );
             writer.write(markTable.getDocument());
+            fileOutputStream.close();
             writer.close();
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

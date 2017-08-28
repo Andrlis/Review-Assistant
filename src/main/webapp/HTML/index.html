@@ -15,122 +15,83 @@
     <title>Система контроля успеваемости</title>
 </head>
 <body>
-< class="parent">
-    <div>                                                                   
-        <div id="choose-group">
-            <strong><label for="group-combo-box">Группа: </label></strong>
-            <select id="group-combo-box">
-                <option value="1">550501</option>
-                <option value="2">550502</option>
-                <option value="3">550503</option>
-                <option value="4">550504</option>
-            </select>
-        </div>
+    <div class="parent">
         <div>
-            <button id="button-enter">Войти</button>
-        </div>
-    </div>
-
-    <div id="table-title" class="container">
-        <h2>Группа <span id="group-number"></span></h2>
-        <h2>Подгруппа <span id="subgroup-number">1</span></h2>
-    </div>
-
-    <div id="information-part">
-        <div id="hor-buttonset">
-            <button id="marks-button" class="button">Оценки</button>
-
-            <button id="presence-button" class="button">Присутсвие</button>
-        </div>
-        <div id="subgroup-tabs">
-            <ul class="ul" id="clicable-tabs">
-                <li class="li"><a href="#subgroup-1">Подгруппа 1</a></li>
-                <li class="li"><a href="#subgroup-2">Подгруппа 2</a></li>
-            </ul>
-            <div id="subgroup-1">
-                <table class="table-ui" id="table-marks-550501-1">
-                    <tr class="row-ui">
-                        <td class="cell-ui stud-name header-cell">Студент</td>
-                        <td class="cell-ui lab-mark header-cell">Лабораторная 1</td>
-                        <td class="cell-ui lab-mark header-cell">Лабораторная 2</td>
-                        <td class="cell-ui test-mark header-cell">Тест 1</td>
-                        <td class="cell-ui test-mark header-cell">Тест 2</td>
-                        <td class="cell-ui bonus-mark header-cell">Бонус</td>
-                        <td class="cell-ui button-cell-div header-cell">
-                            <button class="add-col-button">Добавить</button>
-                        </td>
-                        <td class="cell-ui presence-cell header-cell">27.8.2017</td>
-                        <td class="cell-ui presence-cell header-cell">31.8.2017</td>
-                    </tr>
-                    <tr class="row-ui">
-                        <td class="cell-ui stud-name data-cell">Julia Runova</td>
-                        <td class="cell-ui data-cell editable lab-mark"></td>
-                        <td class="cell-ui data-cell editable lab-mark">9</td>
-                        <td class="cell-ui data-cell editable test-mark">7</td>
-                        <td class="cell-ui data-cell editable test-mark">8</td>
-                        <td class="cell-ui data-cell editable bonus-mark">3</td>
-                        <td class="cell-ui data-cell presence-cell absent">н</td>
-                        <td class="cell-ui data-cell presence-cell present"></td>
-                    </tr>
-                    <tr class="row-ui">
-                        <td class="cell-ui stud-name data-cell">Sasha Runov</td>
-                        <td class="cell-ui data-cell editable lab-mark">9</td>
-                        <td class="cell-ui data-cell editable lab-mark"></td>
-                        <td class="cell-ui data-cell editable test-mark"></td>
-                        <td class="cell-ui data-cell editable test-mark">9</td>
-                        <td class="cell-ui data-cell editable bonus-mark"></td>
-                        <td class="cell-ui data-cell presence-cell present"></td>
-                        <td class="cell-ui data-cell presence-cell present"></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="subgroup-2">
-                <p>Таблица 2ой подгруппы</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="stud-inf-wind" class="modal-wind">
-        <form>
-                <div class="modal-wind-content">
-                    <strong><i><label id="mw-stud-name">ФИО студента</label></i></strong>
-                </div>
-                <div class="modal-wind-content">
-                    <strong><label for="mw-eMail-ln">eMail: </label></strong>
-                    <a id="mw-eMail-ln"></a>
-                </div>
-                <div class="modal-wind-content">
-                    <strong><label for="mw-gitHub-ln">GitHub: </label></strong>
-                    <a target="_blank" id="mw-gitHub-ln"></a>
-                </div>
-        </form>
-    </div>
-
-    <div id="create-mark-field-wind" class="modal-wind">
-        <form>
-            <div class="modal-wind-content">
-                <strong><label for="mark-type-combo-box">Тип: </label></strong>
-                <select id="mark-type-combo-box">
-                    <option value="lab">Лабораторная работа</option>
-                    <option value="test">Контрольная работа</option>
+            <div id="choose-group">
+                <strong><label for="group-combo-box">Группа: </label></strong>
+                <select id="group-combo-box">
+                    <option value="1">550501</option>
+                    <option value="2">550502</option>
+                    <option value="3">550503</option>
+                    <option value="4">550504</option>
                 </select>
             </div>
-            <div class="modal-wind-content">
-                <strong><label for="mark-type-number">Номер: </label></strong>
-                <input type="number" id="mark-type-number" placeholder="Номер эл-та данного типа." min="1" max="6">
+            <div>
+                <button id="button-enter">Войти</button>
             </div>
-            <div class="modal-wind-content" id="date-of-lab-mw">
-                <strong><label for="date-of-giving-lab">Дата выдачи: </label></strong>
-                <input type="date" id="date-of-giving-lab" onfocus="(this.type='date')" onblur="(this.type='text')" >
-            </div>
-            <div class="modal-wind-content">
-                <button id="give-button-mw" class="button">Добавить</button>
-                <button id="cancel-button-mw" class="button">Отменить</button>
-            </div>
-        </form>
-    </div>
+        </div>
 
-<form><input type="text" pattern="\d{1,5}" title="Only digits"/></form>>
-</div>
+        <div id="table-title" class="container">
+            <h2>Группа <span id="group-number"></span></h2>
+            <h2>Подгруппа <span id="subgroup-number">1</span></h2>
+        </div>
+
+        <div id="information-part">
+            <div id="hor-buttonset">
+                <button id="marks-button" class="button">Оценки</button>
+
+                <button id="presence-button" class="button">Присутсвие</button>
+            </div>
+            <div id="subgroup-tabs">
+                <ul class="ul" id="clicable-tabs">
+                    <li class="li"><a href="#subgroup-1">Подгруппа 1</a></li>
+                    <li class="li"><a href="#subgroup-2">Подгруппа 2</a></li>
+                </ul>
+                <div id="subgroup-1">Lol</div>
+                <div id="subgroup-2">Kek</div>
+
+            </div>
+        </div>
+
+        <div id="stud-inf-wind" class="modal-wind">
+            <form>
+                    <div class="modal-wind-content">
+                        <strong><i><label id="mw-stud-name">ФИО студента</label></i></strong>
+                    </div>
+                    <div class="modal-wind-content">
+                        <strong><label for="mw-eMail-ln">eMail: </label></strong>
+                        <a id="mw-eMail-ln"></a>
+                    </div>
+                    <div class="modal-wind-content">
+                        <strong><label for="mw-gitHub-ln">GitHub: </label></strong>
+                        <a target="_blank" id="mw-gitHub-ln"></a>
+                    </div>
+            </form>
+        </div>
+
+        <div id="create-mark-field-wind" class="modal-wind">
+            <form>
+                <div class="modal-wind-content">
+                    <strong><label for="mark-type-combo-box">Тип: </label></strong>
+                    <select id="mark-type-combo-box">
+                        <option value="lab">Лабораторная работа</option>
+                        <option value="test">Контрольная работа</option>
+                    </select>
+                </div>
+                <div class="modal-wind-content">
+                    <strong><label for="mark-type-number">Номер: </label></strong>
+                    <input type="number" id="mark-type-number" placeholder="Номер эл-та данного типа." min="1" max="6">
+                </div>
+                <div class="modal-wind-content" id="date-of-lab-mw">
+                    <strong><label for="date-of-giving-lab">Дата выдачи: </label></strong>
+                    <input type="date" id="date-of-giving-lab" onfocus="(this.type='date')" onblur="(this.type='text')" >
+                </div>
+                <div class="modal-wind-content">
+                    <button id="give-button-mw" class="button">Добавить</button>
+                    <button id="cancel-button-mw" class="button">Отменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

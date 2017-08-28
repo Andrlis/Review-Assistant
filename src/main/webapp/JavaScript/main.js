@@ -1,13 +1,19 @@
 $(document).ready(function () {
     changeGroupNumberTitle();
-    ShowMarksTable();
 
+    loadTable();
 
+    //
     $("#subgroup-tabs").tabs({
         select: function(event, ui) {
             $("#subgroup-number").html(ui.index + 1);
+            //loadTable();
         }
+
     });
+
+    // ShowMarksTable();
+
 
     $("#hor-buttonset").buttonset();
     $("#presence-button").click(function () {
@@ -19,29 +25,12 @@ $(document).ready(function () {
         ShowMarksTable();
     });
 
-    //event for edit conent of cell with marks
-    $(".editable").click(function (e) {
-
-        var t = e.target || e.srcElement;
-        var elm_name = t.tagName.toLowerCase();
-        if(elm_name == 'input')	{return false;}
-
-        var val = $(this).html();
-        var code = '<input type="text" id="edit" pattern="\d{1,5}" value="' + val + '"/>';
-        $(this).html(code);
-        $("#edit").focus();
-
-        $("#edit").blur(function () {
-            var val = $("#edit").val();
-            $("#edit").parent().html(val);
-        });
-    });
 
     //Event for ENTER key
     $(window).keydown(function(event){
         var enterCode = 13;
         if(event.keyCode == enterCode) {
-            $('#edit').blur();
+            $('.edit').blur();
         }
     });
 
@@ -55,26 +44,13 @@ $(document).ready(function () {
 
     $("#group-combo-box").change(function () {
         changeGroupNumberTitle();
+        loadTable();
     });
 
     $("#button-enter").click(function () {
        ShowCreateMarkFieldWind(30, 30);
     });
 
-    $("button.add-col-button").click(function () {
-        ShowCreateMarkFieldWind();
-    });
-
-    $(".presence-cell.data-cell").click(function () {
-
-        if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if precent
-            $(this).css("background", "rgb(255, 218, 6)");
-            $(this).html("н");
-        } else {                                                         //if absent
-            $(this).css("background", "rgb(194, 255, 10)");
-            $(this).html("");
-        }
-    });
 /*
     $(".present").click(function (event) {
         //event = event || window.event;
@@ -96,6 +72,81 @@ $(document).ready(function () {
    // $("#information-part").hide();
     //(".stud-name").hide();
 });
+
+
+function loadTable() {
+    var sel = document.getElementById("group-combo-box");
+    var group = sel.options[sel.selectedIndex].text;
+    /*$("#tab-content").load("../tables/table-" + group + ".html", function () {
+        setEventsToTable();
+
+    });
+
+    $("#subgroup-2").load("../tables/table-" + group + "-2.html", function () {
+        setEventsToTable();
+    });
+
+    $("#subgroup-1").load("../tables/table-" + group + "-1.html", function () {
+        setEventsToTable();
+    });
+    */
+    $.get("../tables/table-" + group + "-2.html", function (data) {
+        $("#subgroup-2").html(data);
+       // setEventsToTable();
+    });
+
+
+    $.get("../tables/table-" + group + "-1.html", function (data) {
+        $("#subgroup-1").html(data);
+        setEventsToTable();
+    });
+
+
+    //setEventsToTable();
+    ShowMarksTable();
+}
+
+function setEventsToTable() {
+    ShowMarksTable();
+
+    $("button.add-col-button").click(function () {
+        ShowCreateMarkFieldWind();
+    });
+
+    $(".presence-cell.data-cell").click(function () {
+        //alert(this.className);
+
+        if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if precent
+            $(this).css("background", "rgb(255, 218, 6)");
+            $(this).html("н");
+        } else {                                                         //if absent
+            $(this).css("background", "rgb(194, 255, 10)");
+            $(this).html("");
+        }
+    });
+
+    //event for edit conent of cell with marks
+    $(".editable").click(function (e) {
+        //alert(this.className);
+
+        e = e||window.event;
+        var t = e.target || e.srcElement;
+        var elm_name = t.tagName.toLowerCase();
+        if(elm_name == 'input')	{return false;}
+       // alert(elm_name);
+
+        var val = $(this).html();
+        var code = '<input type="text" class="edit" value="' + val + '"/>';
+        $(this).html(code);
+        $(".edit").focus();
+
+        $(".edit").blur(function () {
+            var val = $(".edit").val();
+            $(".edit").parent().html(val);
+        });
+    });
+
+}
 
 function changeGroupNumberTitle() {
     var sel = document.getElementById("group-combo-box");
