@@ -65,6 +65,8 @@ public class Test {
 
         //LecturerKeeper lecturerKeeper = HibernateShell.getLecturerKeeper();
 
+
+
         return;
     }
 }

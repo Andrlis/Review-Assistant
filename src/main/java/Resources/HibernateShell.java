@@ -12,6 +12,7 @@ import Data.Student;
 import Data.Test.Test;
 import Data.Test.TestKeeper;
 import Data.UniversityClass;
+import Data.User;
 import org.hibernate.Filter;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -19,8 +20,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kesso on 22.08.17.
@@ -158,5 +161,19 @@ public class HibernateShell {
         } finally {
             session.close();
         }
+    }
+
+    public static User getUserByUserName(String username) {
+        final Session session = getSession();
+        List<User> answer = null;
+        try {
+            answer = session.createQuery("from User user where user.username ='" + username + "'"  ).list();
+        } finally {
+            session.close();
+        }
+        if(answer != null && answer.size() == 1) {
+            return answer.get(0);
+        }
+        return null;
     }
 }

@@ -35,5 +35,6 @@
         <mapping class="Data.Mark.LabMark"/>
         <mapping class="Data.Mark.TestMark"/>
         <mapping class="Data.Test.Test"/>
+        <mapping class="Data.User"/>
     </session-factory>
 </hibernate-configuration>

@@ -4,6 +4,13 @@ CREATE DATABASE trtpo_system DEFAULT CHARACTER SET 'utf8';
 
 USE trtpo_system;
 
+CREATE TABLE users(
+id_user INTEGER AUTO_INCREMENT,
+username VARCHAR(100),
+password VARCHAR(100),
+PRIMARY KEY(id_user)
+);
+
 CREATE TABLE lecturers(
 id_lecturer INTEGER AUTO_INCREMENT,
 full_name VARCHAR(100) NOT NULL,

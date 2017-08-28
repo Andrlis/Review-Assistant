@@ -2,10 +2,18 @@ package Data;
 
 import Resources.MD5Hash;
 
-public class User {
+import javax.persistence.*;
 
-    private Long id;
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
+    @Column(name = "id_user")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "username", length = 100)
     private String username;
+    @Column(name = "password", length = 100)
     private String password;
 
     public User(){
@@ -36,5 +44,13 @@ public class User {
 
     public void setMD5Password(String md5Password){
         this.password = MD5Hash.getHash(md5Password);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
