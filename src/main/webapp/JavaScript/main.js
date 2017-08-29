@@ -1,7 +1,7 @@
 $(document).ready(function () {
     changeGroupNumberTitle();
 
-    loadTable();
+    loadTables();
 
     //
     $("#subgroup-tabs").tabs({
@@ -16,15 +16,14 @@ $(document).ready(function () {
 
 
     $("#hor-buttonset").buttonset();
+
     $("#presence-button").click(function () {
-        //ShowStudentInformationWind(550, 500, "Julia Runova", "vk.com", "vk.com");
         ShowClassesTable();
     });
+
     $("#marks-button").click(function () {
-        //HideStudentInformationWind();
         ShowMarksTable();
     });
-
 
     //Event for ENTER key
     $(window).keydown(function(event){
@@ -44,75 +43,48 @@ $(document).ready(function () {
 
     $("#group-combo-box").change(function () {
         changeGroupNumberTitle();
-        loadTable();
+        loadTables();
     });
 
     $("#button-enter").click(function () {
        ShowCreateMarkFieldWind(30, 30);
     });
-
-/*
-    $(".present").click(function (event) {
-        //event = event || window.event;
-        //var element = event.target||event.srcElement;
-        $(this).html("н");
-        //$(this).attr("class", "absent");
-        $(this).removeClass("present");
-        $(this).addClass("absent");
-    });
-
-    $(".absent").click(function (event) {
-        //event = event || window.event;
-        //var element = event.target||event.srcElement;
-        $(this).html("");
-        $(this).removeClass("absent");
-        $(this).addClass("present");
-    });*/
-
-   // $("#information-part").hide();
-    //(".stud-name").hide();
 });
 
+function tableNotFound(xhr, divId) {
+    var msg = "Sorry! There's an error: ";
+    $(divId).html( msg + xhr.status + " " + xhr.statusText );
 
-function loadTable() {
+}
+
+function loadTables() {
     var sel = document.getElementById("group-combo-box");
     var group = sel.options[sel.selectedIndex].text;
-    /*$("#tab-content").load("../tables/table-" + group + ".html", function () {
-        setEventsToTable();
 
+
+    $("#subgroup-1").load("../tables/table-" + group + "-1.html", function( response, status, xhr ) {
+        //setEventsToTable();
+        if ( status == "error" )
+            tableNotFound(xhr, "#subgroup-1");
     });
 
-    $("#subgroup-2").load("../tables/table-" + group + "-2.html", function () {
-        setEventsToTable();
-    });
-
-    $("#subgroup-1").load("../tables/table-" + group + "-1.html", function () {
-        setEventsToTable();
-    });
-    */
-    $.get("../tables/table-" + group + "-2.html", function (data) {
-        $("#subgroup-2").html(data);
-       // setEventsToTable();
-    });
-
-
-    $.get("../tables/table-" + group + "-1.html", function (data) {
-        $("#subgroup-1").html(data);
+    $("#subgroup-2").load("../tables/table-" + group + "-2.html", function (response, status, xhr) {
+        if ( status == "error" )
+            tableNotFound(xhr, "#subgroup-2");
         setEventsToTable();
     });
-
-
-    //setEventsToTable();
     ShowMarksTable();
 }
 
 function setEventsToTable() {
     ShowMarksTable();
 
+    //Event for click at button
     $("button.add-col-button").click(function () {
         ShowCreateMarkFieldWind();
     });
 
+    //Event for click at cell with presence
     $(".presence-cell.data-cell").click(function () {
         //alert(this.className);
 
@@ -145,7 +117,10 @@ function setEventsToTable() {
             $(".edit").parent().html(val);
         });
     });
+    
+    $(".stud-name.data-cell").click(function (event) {
 
+    });
 }
 
 function changeGroupNumberTitle() {
@@ -200,6 +175,8 @@ function CheckLabOrTestMarkEvent() {
         $("#date-of-lab-mw").css("display", "block");
     else $("#date-of-lab-mw").css("display", "none");
 }
+
+
 
 function ShowMarksTable() {
     $(".bonus-mark").show();
