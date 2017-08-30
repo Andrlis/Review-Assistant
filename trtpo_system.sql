@@ -8,6 +8,7 @@ CREATE TABLE users(
 id_user INTEGER AUTO_INCREMENT,
 username VARCHAR(100),
 password VARCHAR(100),
+id_lecturer INTEGER,
 PRIMARY KEY(id_user)
 );
 

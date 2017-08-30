@@ -16,7 +16,8 @@ public class User {
     private String username;
     @Column(name = "password", length = 100)
     private String password;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_lecturer")
     private Lecturer lecturer;
 
     public User(){
@@ -24,9 +25,10 @@ public class User {
         this.password = null;
     }
 
-    public User(String username, String password){
+    public User(String username, String password, Lecturer lecturer){
         this.username = username;
         this.password = password;
+        this.lecturer = lecturer;
     }
 
     public void setUsername(String username){
@@ -55,5 +57,13 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
     }
 }
