@@ -1,5 +1,6 @@
 package Data;
 
+import Data.Lecturer.Lecturer;
 import Resources.MD5Hash;
 
 import javax.persistence.*;
@@ -15,6 +16,8 @@ public class User {
     private String username;
     @Column(name = "password", length = 100)
     private String password;
+    @OneToOne()
+    private Lecturer lecturer;
 
     public User(){
         this.username = null;

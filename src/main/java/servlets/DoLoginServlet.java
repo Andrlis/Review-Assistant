@@ -1,6 +1,7 @@
 package servlets;
 
 import Data.User;
+import Resources.HibernateShell;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ public class DoLoginServlet extends HttpServlet {
         boolean hasError = false;
         String errorMessage= null;
 
-        //TODO get user from database.
+        user = HibernateShell.getUserByUserName(userName);
 
         if(user == null || !password.equals(user.getPassword())){
             hasError = true;
