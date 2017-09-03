@@ -28,8 +28,7 @@ public class ScheduleChecker {
             timetable = BsuirParser.parseTimetable(BsuirRequests.getTimetable(group.getNumberOfGroup()));
             currentDaySchedule = timetable.getCurrentDaySchedule();
 
-            for (Subject lesson : currentDaySchedule.getCurrentDayLessons(BsuirParser.parseCurrentWeek(
-                    BsuirRequests.getCurrentWeek()))) {
+            for (Subject lesson : currentDaySchedule.getCurrentDayLessons(BsuirRequests.getCurrentWeek())) {
                 if (lesson.getLessonName().equals("ТРиТПО") && lesson.getLessonType().equals("ЛР")) {
                     SubGroup subGroup = group.getSubGroup(lesson.getSubGroup());
                     UniversityClass universityClass = new UniversityClass();

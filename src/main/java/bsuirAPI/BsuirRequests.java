@@ -37,6 +37,7 @@ public class BsuirRequests {
         URL url = new URL(String.format("https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=%s", groupName));
 
         URLConnection connection = url.openConnection();
+        connection.setRequestProperty("Accept", "application/xml");
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         return in.readLine();

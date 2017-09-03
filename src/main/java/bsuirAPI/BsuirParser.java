@@ -91,19 +91,4 @@ public class BsuirParser {
         }
         return timetable;
     }
-
-    public static String parseCurrentWeek(String xmlCurrentWeek) throws Exception {
-        String currentWeek = null;
-
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new InputSource(new ByteArrayInputStream(xmlCurrentWeek.getBytes("utf-8"))));
-
-        doc.getDocumentElement().normalize();
-        NodeList week = doc.getElementsByTagName("Integer");
-
-        currentWeek = week.item(0).getTextContent();
-
-        return currentWeek;
-    }
 }
