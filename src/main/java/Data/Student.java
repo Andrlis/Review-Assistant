@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "students")
-@SecondaryTable(name = "bonuses", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_student")) //foreignKey = @ForeignKey(name = "id_student", foreignKeyDefinition = "id_student"))
+@SecondaryTable(name = "bonuses", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_student"))
 @FilterDef(name = "coefficientFilter")
 public class Student implements Serializable {
     @Id

@@ -176,4 +176,18 @@ public class HibernateShell {
         }
         return null;
     }
+
+    public static Group getGroupByGroupNumber(String number) {
+        final Session session = getSession();
+        List<Group> answer = null;
+        try {
+            answer = session.createQuery("from Group group where group.numberOfGroup ='" + number + "'" ).list();
+        } finally {
+            session.close();
+        }
+        if(answer != null && answer.size() == 1) {
+            return answer.get(0);
+        }
+        return null;
+    }
 }
