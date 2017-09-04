@@ -8,7 +8,10 @@ import Data.Mark.LabMark;
 import Data.Student;
 import Data.Test.TestKeeper;
 import Resources.HibernateShell;
+import bsuirAPI.BsuirParser;
+import bsuirAPI.BsuirRequests;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Test {
     private /*static*/ void main(String[] args) {
-        GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+        //GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
 
 
         //saveOrUpdate
@@ -65,8 +68,5 @@ public class Test {
 
         //LecturerKeeper lecturerKeeper = HibernateShell.getLecturerKeeper();
 
-
-
-        return;
     }
 }

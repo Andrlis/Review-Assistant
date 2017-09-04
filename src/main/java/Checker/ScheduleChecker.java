@@ -25,7 +25,7 @@ public class ScheduleChecker {
 
         for (Group group : groups.getGroupList()) {
 
-            timetable = BsuirParser.parseTimetable(BsuirRequests.getTimetable(group.getScheduleApiGroupNumber()));
+            timetable = BsuirParser.parseTimetable(BsuirRequests.getTimetable(group.getNumberOfGroup()));
             currentDaySchedule = timetable.getCurrentDaySchedule();
 
             for (Subject lesson : currentDaySchedule.getCurrentDayLessons(BsuirRequests.getCurrentWeek())) {

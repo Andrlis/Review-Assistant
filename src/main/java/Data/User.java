@@ -23,6 +23,7 @@ public class User {
     public User(){
         this.username = null;
         this.password = null;
+        this.lecturer = null;
     }
 
     public User(String username, String password, Lecturer lecturer){
