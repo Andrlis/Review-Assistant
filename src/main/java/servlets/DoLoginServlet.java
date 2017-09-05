@@ -23,7 +23,7 @@ public class DoLoginServlet extends HttpServlet {
         boolean hasError = false;
         String errorMessage= null;
 
-        user = HibernateShell.getUserByUserName(userName);
+            user = HibernateShell.getUserByUserName(userName);
 
         if(user == null || !password.equals(user.getPassword())){
             hasError = true;
