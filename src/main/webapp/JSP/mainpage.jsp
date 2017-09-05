@@ -18,13 +18,15 @@
 
 
     <script src="../JavaScript/main.js" ></script>
-    <link rel="stylesheet" href="../CSS/mainStyle.css" media="screen">
+    <link rel="stylesheet" href="../CSS/mainStyle2.css" media="screen">
+    <%--<link rel="stylesheet" href="../CSS/mainStyle.css" media="screen">--%>
 
     <title>Система контроля успеваемости</title>
 </head>
 <body>
 <div class="parent">
 
+    <div id="frame">
     <%-- Верхние кнопки. --%>
     <div>
         <div id="choose-group">
@@ -65,6 +67,7 @@
             <div id="subgroup-2">Kek</div>
 
         </div>
+    </div>
     </div>
 
         <%-- Информация о студенте. --%>

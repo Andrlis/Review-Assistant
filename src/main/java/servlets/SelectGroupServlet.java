@@ -21,7 +21,7 @@ public class SelectGroupServlet extends HttpServlet {
 
         Group group = HibernateShell.getGroupByGroupNumber(groupName);
         TableGenerator tableGenerator = new TableGenerator();
-        
+
         for (SubGroup subGroup: group.getSubGroupList()) {
             tableGenerator.createMarksTable(subGroup);
         }

@@ -1,0 +1,184 @@
+.parent {
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.li {
+    height: 100%;
+    margin: 0 0 0 0;
+    border: silver;
+}
+
+.ui-widget-header {
+    background: white;
+    border: 1px solid black;
+    /*color: green;*/
+    font-weight: bold;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    /*border: double brown;*/
+    background: gainsboro;
+}
+
+.ul {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+#subgroup-tabs{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+#subgroup-1 {
+
+}
+
+#hor-buttonset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    float: left;
+    margin-top: 5%;
+    margin-left: 0;
+    margin-right: 0;
+    width: 10%;
+    min-width: 135px;
+}
+
+#subgroup-tabs{
+    width: 87%
+}
+
+.button{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+h2{
+    margin: 0 0 0 0;
+    text-align: center;
+    letter-spacing: 1px
+}
+
+#choose-group{
+    float: left;
+}
+
+#button-enter{
+    float: right;
+    text-align: center;
+    border-width: 5px;
+    border-style: solid;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border-style: solid;
+    cursor: pointer;
+    height: 35px;
+    width: 7%;
+    /*font: normal 20px;*/
+}
+
+#table-title{
+    text-align: center;
+}
+
+#information-part{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.modal-wind{
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 100;
+    border: double blueviolet;
+    display: none;
+    opacity: 1;
+    background: moccasin;
+    padding: 6px 10px;
+    border-radius: 20%;
+}
+
+#mark-type-number{
+    width: 80%;
+}
+
+#mark-type-combo-box{
+    width: 90%;
+}
+
+.modal-wind-content {
+    padding: 1px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.table-ui {
+    width: 100%;
+}
+
+.cell-ui {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.button-cell-div {
+    border: none;
+}
+
+.header-cell {
+    padding: 7px;
+    background: silver;
+}
+
+.present {
+    background: rgb(194, 255, 10);
+}
+
+.absent {
+    background: rgb(255, 218, 6);
+}
+
+#edit {
+    border-color: white;
+    border: none;
+}
+
+#frame{
+    border: solid 1px;
+    padding: 20px;
+    margin: 30px;
+    border-radius: 8px;
+}
+
+select
+{
+    padding: 5px;
+    margin: 0 0 10px 0;
+    width: 100%;
+    height: 10%;
+    border: 1px solid #ccc;
+    border-radius:1px;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+}
+
+#table-title{
+    padding: 5px;
+    margin: 0 0 10px 0;
+}
