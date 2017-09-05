@@ -46,9 +46,9 @@ $(document).ready(function () {
         loadTables();
     });
 
-    $("#button-enter").click(function () {
-       ShowCreateMarkFieldWind(30, 30);
-    });
+    // $("#button-enter").click(function () {
+    //    ShowCreateMarkFieldWind(30, 30);
+    // });
 });
 
 function tableNotFound(xhr, divId) {

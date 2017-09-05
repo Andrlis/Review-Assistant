@@ -37,7 +37,7 @@
                 </div>
                 <div id="action_buttons">
                     <button id="button-enter">Войти</button>
-                    <a href="">Регистрация</a>
+                    <%--<a href="">Регистрация</a>--%>
                 </div>
             </fieldset>
         </form>

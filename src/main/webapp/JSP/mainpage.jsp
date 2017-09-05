@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
@@ -23,26 +24,32 @@
 </head>
 <body>
 <div class="parent">
+
+    <%-- Верхние кнопки. --%>
     <div>
         <div id="choose-group">
             <strong><label for="group-combo-box">Группа: </label></strong>
-            <select id="group-combo-box">
+            <form name="form1" action="/selectgroup" method="GET">
+            <select id="group-combo-box" name="selectGroup" onchange="document.form1.submit();">
                 <option value="1">550501</option>
                 <option value="2">550502</option>
                 <option value="3">550503</option>
                 <option value="4">550504</option>
             </select>
+            </form>
         </div>
         <div>
-            <button id="button-enter">Войти</button>
+            <form action="/loginpage" method="GET">
+                <button id="button-enter">Войти</button>
+            </form>
         </div>
     </div>
 
+        <%-- Таблица. --%>
     <div id="table-title" class="container">
         <h2>Группа <span id="group-number"></span></h2>
         <h2>Подгруппа <span id="subgroup-number">1</span></h2>
     </div>
-
     <div id="information-part">
         <div id="hor-buttonset">
             <button id="marks-button" class="button">Оценки</button>
@@ -60,6 +67,7 @@
         </div>
     </div>
 
+        <%-- Информация о студенте. --%>
     <div id="stud-inf-wind" class="modal-wind">
         <form>
             <div class="modal-wind-content">
@@ -76,6 +84,7 @@
         </form>
     </div>
 
+        <%-- Добавление оценки. --%>
     <div id="create-mark-field-wind" class="modal-wind">
         <form>
             <div class="modal-wind-content">
@@ -99,6 +108,8 @@
             </div>
         </form>
     </div>
+
 </div>
+
 </body>
 </html>
