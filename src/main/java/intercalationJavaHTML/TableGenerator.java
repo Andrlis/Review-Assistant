@@ -10,22 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data.Lab.IssuedLab;
-import Data.Lab.Lab;
-import Data.Lab.LabsKeeper;
 import Data.Mark.LabMark;
 import Data.Mark.TestMark;
 import Data.Student;
 import Data.UniversityClass;
 import Resources.HibernateShell;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import Data.Group.GroupsKeeper;
 import Data.Group.SubGroup;
-import org.omg.CORBA.Request;
 
 
 /**
@@ -41,13 +34,13 @@ public class TableGenerator {
 
     public TableGenerator(){}
 
-    private void addMarkCell(MarkTable markTable, String attrClass, String data) {
-        markTable.addCell(MarkTable.dataCell + " " + MarkTable.editableCell + " " +
+    private void addMarkCell(Table table, String attrClass, String data) {
+        table.addCell(Table.dataCell + " " + Table.editableCell + " " +
                 attrClass, data);
     }
 
-    private void addPresenceCell(MarkTable markTable, String attrClass, String data) {
-        markTable.addCell(MarkTable.dataCell + " " + MarkTable.presenceTypeOfContent + " " +
+    private void addPresenceCell(Table table, String attrClass, String data) {
+        table.addCell(Table.dataCell + " " + Table.presenceTypeOfContent + " " +
                 attrClass, data);
     }
 
@@ -65,19 +58,19 @@ public class TableGenerator {
         try {
 
             String tableId = "table-" + subGroup.getGroup().getNumberOfGroup() + "-" + subGroup.getSubGroupNumber();
-            MarkTable markTable = new MarkTable(tableId);
-            this.setHeaderToMarkTable(markTable, subGroup);
+            Table table = new Table(tableId);
+            this.setHeaderToTable(table, subGroup);
 
             List<Student> studentList = subGroup.getStudentsList();
             for (Student student: studentList)
-                this.addStudentToTable(markTable, student);
+                this.addStudentToTable(table, student);
 
             // Pretty print the document to System.out
             //file.
             FileOutputStream fileOutputStream = this.getFileOutputStream(tableId);
             OutputFormat format = OutputFormat.createPrettyPrint();
             XMLWriter writer = new XMLWriter( fileOutputStream, format );
-            writer.write(markTable.getDocument());
+            writer.write(table.getDocument());
             fileOutputStream.close();
             writer.close();
 
@@ -88,13 +81,13 @@ public class TableGenerator {
         }
     }
 
-    private void addStudentToTable(MarkTable markTable, Student student) {
-        markTable.addRow();
+    private void addStudentToTable(Table table, Student student) {
+        table.addRow();
 
-        markTable.addCell(MarkTable.studNameTypeOfContent + " " +
-                MarkTable.dataCell, student.getFulName());
+        table.addCell(Table.studNameTypeOfContent + " " +
+                Table.dataCell, student.getFulName());
 
-        for(int i = 1; i <= markTable.getAmountColOfLabs(); i++) {
+        for(int i = 1; i <= table.getAmountColOfLabs(); i++) {
             LabMark labMark = student.getLabMark(HibernateShell.getLabsKeeper().getLab(i));
             Integer markInt = labMark.getMark();
 
@@ -102,31 +95,31 @@ public class TableGenerator {
             if (markInt != -1)
                 markString = markInt.toString();
 
-            this.addMarkCell(markTable, MarkTable.labMarkTypeOfContent, markString);
+            this.addMarkCell(table, Table.labMarkTypeOfContent, markString);
         }
 
-        for(int i = 1; i <= markTable.getAmountColOfTests(); i++) {
+        for(int i = 1; i <= table.getAmountColOfTests(); i++) {
             TestMark testMark = student.getTestMark(i);
             Integer markInt = testMark.getMark();
             String markString = "";
             if (markInt != -1)
                 markString = markInt.toString();
 
-            this.addMarkCell(markTable, MarkTable.testMarkTypeOfContent, markString);
+            this.addMarkCell(table, Table.testMarkTypeOfContent, markString);
         }
 
         String bonusMarkToString = "";
         Integer bonusMark = student.getBonusMark();
         if (bonusMark != null)
             bonusMarkToString = bonusMark.toString();
-        this.addMarkCell(markTable, MarkTable.bonusMarkTypeOfContent, bonusMarkToString);
+        this.addMarkCell(table, Table.bonusMarkTypeOfContent, bonusMarkToString);
 
         List<UniversityClass> missedClassesList = student.getMissedUniversityClassesList();
-        for (int i = 0; i < markTable.getAmountColOfClass(); i++) {
+        for (int i = 0; i < table.getAmountColOfClass(); i++) {
             if (missedClassesList == null || !missedClassesList.contains(student.getSubGroup().getUniversityClassesList().get(i)))
-                this.addPresenceCell(markTable, MarkTable.presentClass, "");
+                this.addPresenceCell(table, Table.presentClass, "");
             else
-                this.addPresenceCell(markTable, MarkTable.absentClass, "н");
+                this.addPresenceCell(table, Table.absentClass, "н");
         }
     }
 
@@ -134,35 +127,35 @@ public class TableGenerator {
     @returns structure of the header, which contains numbers of lab, test and bonus
      */
 
-    private ArrayList<ArrayList<Integer>> setHeaderToMarkTable(MarkTable markTable, SubGroup subGroup) {
+    private ArrayList<ArrayList<Integer>> setHeaderToTable(Table table, SubGroup subGroup) {
         ArrayList<ArrayList<Integer>> structure = new ArrayList<ArrayList<Integer>>();
-        List<IssuedLab> issuedLabList = subGroup.getIssuedLabsList();
-        markTable.setAmountColOfLabs(subGroup.getIssuedLabsList().size());
-        markTable.setAmountColOfTests(subGroup.getGroup().getAmountOfTest());
-        markTable.setAmountColOfClass(subGroup.getUniversityClassesList().size());
 
-        markTable.addRow();
+        table.setAmountColOfLabs(subGroup.getIssuedLabsList().size());
+        table.setAmountColOfTests(subGroup.getGroup().getAmountOfTest());
+        table.setAmountColOfClass(subGroup.getUniversityClassesList().size());
 
-        markTable.addCell(MarkTable.studNameTypeOfContent + " " + MarkTable.headerCell, "Студент");
+        table.addRow();
+
+        table.addCell(Table.studNameTypeOfContent + " " + Table.headerCell, "Студент");
        // structure.add(TableGenerator.lab, new ArrayList<Integer>());
-        for (int i = 1; i <= markTable.getAmountColOfLabs(); i++) {
-            markTable.addCell(MarkTable.labMarkTypeOfContent + " " + MarkTable.headerCell, "Лабораторная " + i);
+        for (int i = 1; i <= table.getAmountColOfLabs(); i++) {
+            table.addCell(Table.labMarkTypeOfContent + " " + Table.headerCell, "Лабораторная " + i);
           //  structure.get(TableGenerator.lab).add(issuedLab.getLabDescription().getNumberOfLab());
         }
 
         //structure.add(TableGenerator.test, new ArrayList<Integer>());
-        for (int i = 1; i <= markTable.getAmountColOfTests(); i++) {
-            markTable.addCell(MarkTable.testMarkTypeOfContent  + " " + MarkTable.headerCell, "Тест " + i);
+        for (int i = 1; i <= table.getAmountColOfTests(); i++) {
+            table.addCell(Table.testMarkTypeOfContent  + " " + Table.headerCell, "Тест " + i);
             //structure.get(TableGenerator.test).add(i);
         }
 
-        markTable.addCell(MarkTable.bonusMarkTypeOfContent  + " " + MarkTable.headerCell, "Бонус");
-        markTable.addButton();
+        table.addCell(Table.bonusMarkTypeOfContent  + " " + Table.headerCell, "Бонус");
+        table.addButton();
 
 
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT);
-        for (int i = 0; i < markTable.getAmountColOfClass(); i++)
-            markTable.addCell(MarkTable.presenceTypeOfContent + " " + MarkTable.headerCell, dateFormat.format(subGroup.getUniversityClassesList().get(i).getDate()));
+        for (int i = 0; i < table.getAmountColOfClass(); i++)
+            table.addCell(Table.presenceTypeOfContent + " " + Table.headerCell, dateFormat.format(subGroup.getUniversityClassesList().get(i).getDate()));
 
 
         return structure;
