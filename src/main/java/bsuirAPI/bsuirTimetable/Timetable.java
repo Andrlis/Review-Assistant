@@ -33,10 +33,12 @@ public class Timetable {
      * Return timetable for current day of week.
      * @return
      */
-    public DayTimetable getCurrentDaySchedule(){
+    public ArrayList<Subject> getCurrentDaySchedule(String currentWeek){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new java.util.Date());
+
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-        return days.get((day == 1) ? 6 : day-2);
+        return days.get((day == 1) ? 6 : day-2)
+                .getCurrentDayLessons(currentWeek);
     }
 }
