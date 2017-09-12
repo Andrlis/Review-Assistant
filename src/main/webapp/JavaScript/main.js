@@ -1,20 +1,19 @@
+
+//function will be called when page is loaded
 $(document).ready(function () {
     changeGroupNumberTitle();
 
     loadTables();
 
-    //
+    //jQuery tabs
     $("#subgroup-tabs").tabs({
         select: function(event, ui) {
             $("#subgroup-number").html(ui.index + 1);
             //loadTable();
         }
-
     });
 
-    // ShowMarksTable();
-
-
+    //jQuery buttonset
     $("#hor-buttonset").buttonset();
 
     $("#presence-button").click(function () {
@@ -37,30 +36,28 @@ $(document).ready(function () {
         HideCreateMarkFieldWind();
     });
 
+    //event for combo-box at modal window, where user chooses type of new column
     $("#mark-type-combo-box").change(function () {
        CheckLabOrTestMarkEvent();
     });
 
+    //event for combo-box at main page, whare user chooses number of group to view
     $("#group-combo-box").change(function () {
         changeGroupNumberTitle();
         loadTables();
     });
-
-    // $("#button-enter").click(function () {
-    //    ShowCreateMarkFieldWind(30, 30);
-    // });
 });
 
+//reaction if document with table isn't found at table webapp/folders
 function tableNotFound(xhr, divId) {
     var msg = "Sorry! There's an error: ";
     $(divId).html( msg + xhr.status + " " + xhr.statusText );
-
 }
 
+//it loads table to divs at tabs of subgroups
 function loadTables() {
     var sel = document.getElementById("group-combo-box");
     var group = sel.options[sel.selectedIndex].text;
-
 
     $("#subgroup-1").load("../tables/table-" + group + "-1.html", function( response, status, xhr ) {
         //setEventsToTable();
@@ -75,7 +72,7 @@ function loadTables() {
     });
     ShowMarksTable();
 }
-
+//events for table with marks or presence
 function setEventsToTable() {
     ShowMarksTable();
 
@@ -101,11 +98,13 @@ function setEventsToTable() {
     $(".editable").click(function (e) {
         //alert(this.className);
 
-        e = e||window.event;
+        e = e || window.event;
         var t = e.target || e.srcElement;
         var elm_name = t.tagName.toLowerCase();
-        if(elm_name == 'input')	{return false;}
-       // alert(elm_name);
+        if (elm_name == 'input') {
+            return false;
+        }
+        // alert(elm_name);
 
         var val = $(this).html();
         var code = '<input type="text" class="edit" value="' + val + '"/>';
@@ -117,9 +116,12 @@ function setEventsToTable() {
             $(".edit").parent().html(val);
         });
     });
-    
-    $(".stud-name.data-cell").click(function (event) {
-
+    ////event function for click at cell whith student name
+    $("td.stud-name.data-cell").click(function () {
+        clickAtCellWithStudName(event);
+    });
+    $("#stud-inf-wind").mouseleave(function () {
+       HideStudentInformationWind();
     });
 }
 
@@ -147,8 +149,8 @@ function ShowStudentInformationWind(xCoord, yCoord, studFullName, eMailLink, git
     if (gitHubRepoLink == undefined || gitHubRepoLink == "") {
         $("#mw-gitHub-ln").html("<i>No information</i>");
     } else {
-        $("#mw-gitHub-ln").html(gitHubRepoLink);
-        $("#mw-gitHub-ln").attr("href", gitHubRepoLink);
+        $("#mw-gitHub-ln").html(gitHubRepoLink)
+            .attr("href", gitHubRepoLink);
     }
 
     document.getElementById("stud-inf-wind").style.left = xCoord + "px";
@@ -167,7 +169,7 @@ function ShowCreateMarkFieldWind(xCoord, yCoord) {
 }
 
 function HideCreateMarkFieldWind() {
-    $("#create-mark-field-wind").hide();
+    $("#create-mark-field-wind").css("display", "none");
 }
 
 function CheckLabOrTestMarkEvent() {
@@ -192,4 +194,16 @@ function ShowClassesTable() {
     $(".test-mark").hide();
     $(".lab-mark").hide();
     $(".button-cell-div").hide();
+}
+
+//event function for click at cell whith student name
+function clickAtCellWithStudName(event) {
+    var elem =  jQuery((event.target || event.srcElement).parentNode);
+    ShowStudentInformationWind(
+        event.clientX,
+        event.clientY,
+        elem.children(".stud-name").html(),
+        elem.children(".stud-eMail-ln").html(),
+        elem.children(".stud-gitHub-ln").html()
+    );
 }
