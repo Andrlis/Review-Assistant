@@ -19,16 +19,13 @@ import bsuirAPI.bsuirTimetable.Timetable;
 public class ScheduleChecker {
 
     public static void groupScheduleCheck() throws Exception {
-        DayTimetable currentDaySchedule;
         Timetable timetable;
         GroupsKeeper groups = HibernateShell.getGroupKeeper();
 
         for (Group group : groups.getGroupList()) {
-
             timetable = BsuirParser.parseTimetable(BsuirRequests.getTimetable(group.getNumberOfGroup()));
-            currentDaySchedule = timetable.getCurrentDaySchedule();
 
-            for (Subject lesson : currentDaySchedule.getCurrentDayLessons(BsuirRequests.getCurrentWeek())) {
+            for (Subject lesson : timetable.getCurrentDaySchedule(BsuirRequests.getCurrentWeek())) {
                 if (lesson.getLessonName().equals("ТРиТПО") && lesson.getLessonType().equals("ЛР")) {
                     SubGroup subGroup = group.getSubGroup(lesson.getSubGroup());
                     UniversityClass universityClass = new UniversityClass();
