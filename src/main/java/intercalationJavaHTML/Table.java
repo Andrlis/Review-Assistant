@@ -29,6 +29,10 @@ public abstract class Table {
         standInit();
     }
 
+    public void setId(String tableId) {
+        document.getRootElement().addAttribute("id", tableId);
+    }
+
     public Table(String idTable) {
         standInit();
         document.getRootElement().addAttribute("id", idTable);

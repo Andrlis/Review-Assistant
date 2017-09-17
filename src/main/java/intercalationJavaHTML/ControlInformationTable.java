@@ -42,6 +42,7 @@ public class ControlInformationTable extends Table {
         super(idTable);
     }
 
+    public ControlInformationTable(){}
 
     public int getAmountColOfClass() {
         return amountColOfClass;

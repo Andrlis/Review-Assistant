@@ -1,4 +1,4 @@
-package servlets;
+/*package servlets;
 
 import Data.Group.Group;
 import Data.Group.SubGroup;
@@ -28,4 +28,4 @@ public class SelectGroupServlet extends HttpServlet {
             }
         }
     }
-}
+}*/
