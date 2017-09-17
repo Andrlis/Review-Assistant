@@ -1,6 +1,7 @@
 package Data.Test;
 
 import Data.Mark.TestMark;
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "tests")
 public class Test {
+    private static final Logger logger = Logger.getLogger(Test.class);
     @Id
     @Column(name = "id_test")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,6 +74,7 @@ public class Test {
     }
 
     public void addTestMark(TestMark testMark) {
+        logger.info("Add test mark(" + testMark.getStudent().getFulName() + ", " + testMark.getMark() + ") from test mark list(" + testNumber + ")");
         this.testMarkList.add(testMark);
     }
 }

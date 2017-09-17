@@ -1,5 +1,6 @@
 package Data.Group;
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "groups")
 public class Group {
+    private static final Logger logger = Logger.getLogger(Group.class);
     @Id
     @Column(name = "id_group")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,11 +90,13 @@ public class Group {
     }
 
     public void addSubGroup(SubGroup subGroup) {
+        logger.info("Add subgroup(number " + subGroup.getSubGroupNumber() +") from group(" + this.getNumberOfGroup() + ").");
         if (!this.subGroupList.contains(subGroup))
             this.subGroupList.add(subGroup);
     }
 
     public void addTest() {
+        logger.info("Add test fron group(" + this.getNumberOfGroup() + ").");
         this.amountOfTest++;
     }
 }

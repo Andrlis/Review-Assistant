@@ -4,6 +4,7 @@ import Data.Lab.IssuedLab;
 import Data.Lecturer.Lecturer;
 import Data.Student;
 import Data.UniversityClass;
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id_group_subgroup", referencedColumnName = "id_group_subgroup"))
 @Proxy(lazy = false)
 public class SubGroup {
+    private static final Logger logger = Logger.getLogger(SubGroup.class);
     @Id
     @Column(name = "id_group_subgroup")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -106,14 +108,17 @@ public class SubGroup {
     }
 
     public void addStudent(Student student) {
+        logger.info("Add student(" + student.getFulName() + ") from subgroup(" + group.getNumberOfGroup() + ", " + subGroupNumber + ").");
         this.studentsList.add(student);
     }
 
     public void addIssuedLab(IssuedLab issuedLab) {
+        logger.info("Add issued lab(" + issuedLab.getLabDescription().getNumberOfLab() + ") from subgroup(" + group.getNumberOfGroup() + ", " + subGroupNumber +").");
         this.issuedLabsList.add(issuedLab);
     }
 
     public void addUniversityClass(UniversityClass universityClass) {
+        logger.info("Add university class(" + universityClass.getDate() + ") from subgroup(" + group.getNumberOfGroup() + ", " + subGroupNumber +").");
         this.universityClassesList.add(universityClass);
     }
 

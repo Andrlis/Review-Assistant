@@ -1,5 +1,7 @@
 package bsuirAPI;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +13,7 @@ import java.text.SimpleDateFormat;
  * Created by Andrey on 13.07.2017.
  */
 public class BsuirRequests {
-
+    private static final Logger logger = Logger.getLogger(BsuirRequests.class);
     /**
      * Return xml-list of groups.
      *
@@ -20,6 +22,9 @@ public class BsuirRequests {
     public static String getGroups() throws IOException {
         URL url = new URL("https://www.bsuir.by/schedule/rest/studentGroup");
         URLConnection connection = url.openConnection();
+
+        logger.info("Send request about group(\"https://www.bsuir.by/schedule/rest/studentGroup\").");
+
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         return in.readLine();
@@ -38,6 +43,9 @@ public class BsuirRequests {
 
         URLConnection connection = url.openConnection();
         connection.setRequestProperty("Accept", "application/xml");
+
+        logger.info("Send request about timetable(\"https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=" + groupName + "\").");
+
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         return in.readLine();
@@ -55,6 +63,9 @@ public class BsuirRequests {
 //                new SimpleDateFormat("dd.MM.yyyy").format(System.currentTimeMillis())));     //something strange. It shows previous day. Date change at 1.00
         URL url = new URL("https://students.bsuir.by/api/v1/portal/schedule/week");
         URLConnection connection = url.openConnection();
+
+        logger.info("Send request for receipt of current week(\"https://students.bsuir.by/api/v1/portal/schedule/week\").");
+
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
         return in.readLine();

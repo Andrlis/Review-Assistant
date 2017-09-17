@@ -195,6 +195,10 @@ public class Student implements Serializable {
     }
 
     public String getGitURL(){
+        if(this.gitUserName == null || this.gitRepoName == null)
+            return "";
+        if(this.gitUserName.equals("") || this.gitRepoName.equals(""))
+            return "";
         return String.format("https://github.com/%s/%s", this.gitUserName, this.gitRepoName);
     }
 
