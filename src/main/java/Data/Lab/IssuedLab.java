@@ -3,6 +3,7 @@ package Data.Lab;
 import Data.Mark.LabMark;
 import Data.Student;
 import Data.UniversityClass;
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.LazyCollection;
@@ -21,6 +22,7 @@ import java.util.List;
 @Entity
 @Table(name = "issued_labs")
 public class IssuedLab implements Serializable {
+    private static final Logger logger = Logger.getLogger(IssuedLab.class);
     @Id
     @Column(name = "id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,6 +124,7 @@ public class IssuedLab implements Serializable {
     }
 
     public void deleteStudentFromControlList(Student student) {
+        logger.info("Delete student(" + student.getFulName() + ") from student confrol list issued lab(" + labDescription.getNumberOfLab() + ")");
         this.studentControlList.remove(student);
     }
 }

@@ -13,12 +13,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Andrey on 14.07.2017.
  * Parse BSUIR server`s responses.
  */
 public class BsuirParser {
+    private static final Logger logger = Logger.getLogger(BsuirParser.class);
 
     /**
      * Parse xml-file with groups.
@@ -28,6 +30,7 @@ public class BsuirParser {
      * @throws Exception
      */
     public static ArrayList<Group> parseGroups(String groups) throws Exception {
+        logger.info("Start parse group.");
         ArrayList<Group> groupList = new ArrayList<Group>();
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -46,6 +49,7 @@ public class BsuirParser {
                 groupList.add(group);
             }
         }
+        logger.info("End parse group.");
         return groupList;
     }
 
@@ -56,6 +60,7 @@ public class BsuirParser {
      * @throws Exception
      */
     public static Timetable parseTimetable(String xmlTimetable) throws Exception {
+        logger.info("Start parse timetable.");
         Timetable timetable = new Timetable();
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -89,6 +94,7 @@ public class BsuirParser {
             }
             timetable.setDay(dayTimetable);
         }
+        logger.info("End parse timetable.");
         return timetable;
     }
 }
