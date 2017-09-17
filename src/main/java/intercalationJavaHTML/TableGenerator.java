@@ -34,18 +34,18 @@ public class TableGenerator {
 
     public TableGenerator(){}
 
-    private void addMarkCell(Table table, String attrClass, String data) {
-        table.addCell(Table.dataCell + " " + Table.editableCell + " " +
+    private void addMarkCell(ControlInformationTable table, String attrClass, String data) {
+        table.addCell(ControlInformationTable.dataCell + " " + ControlInformationTable.editableCell + " " +
                 attrClass, data);
     }
 
-    private void addPresenceCell(Table table, String attrClass, String data) {
-        table.addCell(Table.dataCell + " " + Table.presenceTypeOfContent + " " +
+    private void addPresenceCell(ControlInformationTable table, String attrClass, String data) {
+        table.addCell(ControlInformationTable.dataCell + " " + ControlInformationTable.presenceTypeOfContent + " " +
                 attrClass, data);
     }
 
     private FileOutputStream getFileOutputStream(String fileName) throws IOException {
-        File file = new File("src\\main\\webapp\\tables\\" + fileName + ".html");
+        File file = new File("src\\main\\webapp\\tables\\marks_and_classes\\" + fileName + ".html");
 
         if (!file.exists())
             file.createNewFile();
@@ -57,8 +57,10 @@ public class TableGenerator {
 
         try {
 
+            if (subGroup == null)
+                return;
             String tableId = "table-" + subGroup.getGroup().getNumberOfGroup() + "-" + subGroup.getSubGroupNumber();
-            Table table = new Table(tableId);
+            ControlInformationTable table = new ControlInformationTable(tableId);
             this.setHeaderToTable(table, subGroup);
 
             List<Student> studentList = subGroup.getStudentsList();
@@ -81,11 +83,18 @@ public class TableGenerator {
         }
     }
 
-    private void addStudentToTable(Table table, Student student) {
+    /*private String getContentOfUsersCell(Student student) {
+        String str = new String(
+                "<div class=\"stud-name\">"+ student.getFulName() + "</div>\n" +
+                "<div class=\"stud-eMail-ln\">" + student.geteMail() + "</div>\n" +
+                "<div class=\"stud-gitHub-ln\">" + student.getGitURL() + "</div>");
+        return str;
+    }*/
+
+    private void addStudentToTable(ControlInformationTable table, Student student) {
         table.addRow();
 
-        table.addCell(Table.studNameTypeOfContent + " " +
-                Table.dataCell, student.getFulName());
+        table.addStudentInformationCell(student.getFulName(), student.geteMail(), student.getGitRepoName());
 
         for(int i = 1; i <= table.getAmountColOfLabs(); i++) {
             LabMark labMark = student.getLabMark(HibernateShell.getLabsKeeper().getLab(i));
@@ -95,7 +104,7 @@ public class TableGenerator {
             if (markInt != -1)
                 markString = markInt.toString();
 
-            this.addMarkCell(table, Table.labMarkTypeOfContent, markString);
+            this.addMarkCell(table, ControlInformationTable.labMarkTypeOfContent, markString);
         }
 
         for(int i = 1; i <= table.getAmountColOfTests(); i++) {
@@ -105,21 +114,21 @@ public class TableGenerator {
             if (markInt != -1)
                 markString = markInt.toString();
 
-            this.addMarkCell(table, Table.testMarkTypeOfContent, markString);
+            this.addMarkCell(table, ControlInformationTable.testMarkTypeOfContent, markString);
         }
 
         String bonusMarkToString = "";
         Integer bonusMark = student.getBonusMark();
         if (bonusMark != null)
             bonusMarkToString = bonusMark.toString();
-        this.addMarkCell(table, Table.bonusMarkTypeOfContent, bonusMarkToString);
+        this.addMarkCell(table, ControlInformationTable.bonusMarkTypeOfContent, bonusMarkToString);
 
         List<UniversityClass> missedClassesList = student.getMissedUniversityClassesList();
         for (int i = 0; i < table.getAmountColOfClass(); i++) {
             if (missedClassesList == null || !missedClassesList.contains(student.getSubGroup().getUniversityClassesList().get(i)))
-                this.addPresenceCell(table, Table.presentClass, "");
+                this.addPresenceCell(table, ControlInformationTable.presentClass, "");
             else
-                this.addPresenceCell(table, Table.absentClass, "н");
+                this.addPresenceCell(table, ControlInformationTable.absentClass, "н");
         }
     }
 
@@ -127,7 +136,7 @@ public class TableGenerator {
     @returns structure of the header, which contains numbers of lab, test and bonus
      */
 
-    private ArrayList<ArrayList<Integer>> setHeaderToTable(Table table, SubGroup subGroup) {
+    private ArrayList<ArrayList<Integer>> setHeaderToTable(ControlInformationTable table, SubGroup subGroup) {
         ArrayList<ArrayList<Integer>> structure = new ArrayList<ArrayList<Integer>>();
 
         table.setAmountColOfLabs(subGroup.getIssuedLabsList().size());
@@ -136,26 +145,26 @@ public class TableGenerator {
 
         table.addRow();
 
-        table.addCell(Table.studNameTypeOfContent + " " + Table.headerCell, "Студент");
+        table.addCell(ControlInformationTable.studNameTypeOfContent + " " + ControlInformationTable.headerCell, "Студент");
        // structure.add(TableGenerator.lab, new ArrayList<Integer>());
         for (int i = 1; i <= table.getAmountColOfLabs(); i++) {
-            table.addCell(Table.labMarkTypeOfContent + " " + Table.headerCell, "Лабораторная " + i);
+            table.addCell(ControlInformationTable.labMarkTypeOfContent + " " + ControlInformationTable.headerCell, "Лабораторная " + i);
           //  structure.get(TableGenerator.lab).add(issuedLab.getLabDescription().getNumberOfLab());
         }
 
         //structure.add(TableGenerator.test, new ArrayList<Integer>());
         for (int i = 1; i <= table.getAmountColOfTests(); i++) {
-            table.addCell(Table.testMarkTypeOfContent  + " " + Table.headerCell, "Тест " + i);
+            table.addCell(ControlInformationTable.testMarkTypeOfContent  + " " + ControlInformationTable.headerCell, "Тест " + i);
             //structure.get(TableGenerator.test).add(i);
         }
 
-        table.addCell(Table.bonusMarkTypeOfContent  + " " + Table.headerCell, "Бонус");
+        table.addCell(ControlInformationTable.bonusMarkTypeOfContent  + " " + ControlInformationTable.headerCell, "Бонус");
         table.addButton();
 
 
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT);
         for (int i = 0; i < table.getAmountColOfClass(); i++)
-            table.addCell(Table.presenceTypeOfContent + " " + Table.headerCell, dateFormat.format(subGroup.getUniversityClassesList().get(i).getDate()));
+            table.addCell(ControlInformationTable.presenceTypeOfContent + " " + ControlInformationTable.headerCell, dateFormat.format(subGroup.getUniversityClassesList().get(i).getDate()));
 
 
         return structure;

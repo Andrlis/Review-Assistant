@@ -59,13 +59,13 @@ function loadTables() {
     var sel = document.getElementById("group-combo-box");
     var group = sel.options[sel.selectedIndex].text;
 
-    $("#subgroup-1").load("../tables/table-" + group + "-1.html", function( response, status, xhr ) {
+    $("#subgroup-1").load("../tables/marks_and_classes/table-" + group + "-1.html", function( response, status, xhr ) {
         //setEventsToTable();
         if ( status == "error" )
             tableNotFound(xhr, "#subgroup-1");
     });
 
-    $("#subgroup-2").load("../tables/table-" + group + "-2.html", function (response, status, xhr) {
+    $("#subgroup-2").load("../tables/marks_and_classes/table-" + group + "-2.html", function (response, status, xhr) {
         if ( status == "error" )
             tableNotFound(xhr, "#subgroup-2");
         setEventsToTable();
@@ -117,7 +117,7 @@ function setEventsToTable() {
         });
     });
     ////event function for click at cell whith student name
-    $("td.stud-name.data-cell").click(function () {
+    $("td.cell-ui.stud-name.data-cell").click(function () {
         clickAtCellWithStudName(event);
     });
     $("#stud-inf-wind").mouseleave(function () {
@@ -140,21 +140,23 @@ function ShowStudentInformationWind(xCoord, yCoord, studFullName, eMailLink, git
     }
 
     if (eMailLink == undefined || eMailLink == "") {
-        $("#mw-eMail-ln").html("<i>No information</i>");
+        $("#mw-eMail-ln").html("<i>No information</i>")
+            .removeAttr("href");
     } else {
         $("#mw-eMail-ln").html(eMailLink);
         $("#mw-eMail-ln").attr("href", "mailto:" + eMailLink);
     }
 
     if (gitHubRepoLink == undefined || gitHubRepoLink == "") {
-        $("#mw-gitHub-ln").html("<i>No information</i>");
+        $("#mw-gitHub-ln").html("<i>No information</i>")
+            .removeAttr("href");
     } else {
         $("#mw-gitHub-ln").html(gitHubRepoLink)
             .attr("href", gitHubRepoLink);
     }
 
     document.getElementById("stud-inf-wind").style.left = xCoord + "px";
-    document.getElementById("stud-inf-wind").style.top = yCoord + "px";
+    document.getElementById("stud-inf-wind").style.top = yCoord - 70 + "px";
     $("#stud-inf-wind").show();
 }
 
