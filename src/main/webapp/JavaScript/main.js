@@ -72,6 +72,7 @@ function loadTables() {
     });
     ShowMarksTable();
 }
+
 //events for table with marks or presence
 function setEventsToTable() {
     ShowMarksTable();
@@ -121,7 +122,7 @@ function setEventsToTable() {
         clickAtCellWithStudName(event);
     });
     $("#stud-inf-wind").mouseleave(function () {
-       HideStudentInformationWind();
+        HideStudentInformationWind();
     });
 }
 
@@ -179,8 +180,6 @@ function CheckLabOrTestMarkEvent() {
         $("#date-of-lab-mw").css("display", "block");
     else $("#date-of-lab-mw").css("display", "none");
 }
-
-
 
 function ShowMarksTable() {
     $(".bonus-mark").show();

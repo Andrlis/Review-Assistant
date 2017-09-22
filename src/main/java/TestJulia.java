@@ -1,0 +1,30 @@
+import Data.Group.Group;
+import Resources.HibernateShell;
+import intercalationJavaHTML.ControlInformationTableGenerator;
+import intercalationJavaHTML.StudentListTable;
+import intercalationJavaHTML.StudentListTableGenerator;
+
+public class TestJulia {
+
+    public static void main(String ... arg){
+
+        /*ControlInformationTableGenerator tableGenerator = new ControlInformationTableGenerator();
+        Group group = HibernateShell.getGroupKeeper().getGroupList().get(0);
+        tableGenerator.createTable(
+                HibernateShell
+                .getGroupKeeper()
+                .getGroupList()
+                .get(0)
+                .getSubGroup("1"));
+        return;*/
+        StudentListTableGenerator tableGenerator = new StudentListTableGenerator();
+        tableGenerator.createTable(
+                HibernateShell
+                        .getGroupKeeper()
+                        .getGroupList()
+                        .get(0)
+                        .getSubGroup("1"));
+        return;
+
+    }
+}
