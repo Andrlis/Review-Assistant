@@ -1,7 +1,7 @@
 package gitAPI;
 
-import Data.Lab.Lab;
-import Data.Student;
+import data.Lab.Lab;
+import data.Student;
 import gitAPI.GitInfoClasses.GitCommitInfo.GitCommitHistory;
 import org.apache.log4j.Logger;
 

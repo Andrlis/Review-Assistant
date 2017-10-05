@@ -31,14 +31,15 @@
     <div>
         <div id="choose-group">
             <strong><label for="group-combo-box">Группа: </label></strong>
-            <form name="form1" action="/selectgroup" method="GET">
+            <%--<form name="form1">--%>
+                <%--// <form name="form1" action="/selectgroup" method="GET">--%>
             <select id="group-combo-box" name="selectGroup" onchange="document.form1.submit();">
                 <option value="1">550501</option>
                 <option value="2">550502</option>
                 <option value="3">550503</option>
                 <option value="4">550504</option>
             </select>
-            </form>
+            <%--</form>--%>
         </div>
         <div>
             <form action="/loginpage" method="GET">

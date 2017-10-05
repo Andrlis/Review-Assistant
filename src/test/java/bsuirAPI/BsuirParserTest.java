@@ -1,6 +1,6 @@
 package bsuirAPI;
 
-import Data.Group.Group;
+import data.Group.Group;
 import bsuirAPI.bsuirTimetable.DayTimetable;
 import bsuirAPI.bsuirTimetable.Subject;
 import bsuirAPI.bsuirTimetable.Timetable;
@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class BsuirParserTest extends TestCase {
 

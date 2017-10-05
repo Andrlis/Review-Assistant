@@ -1,19 +1,3 @@
-
-import Data.Group.Group;
-import Data.Group.GroupsKeeper;
-import Data.Group.SubGroup;
-import Data.Lab.LabsKeeper;
-import Data.Lecturer.LecturerKeeper;
-import Data.Mark.LabMark;
-import Data.Student;
-import Data.Test.TestKeeper;
-import Resources.HibernateShell;
-import bsuirAPI.BsuirParser;
-import bsuirAPI.BsuirRequests;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Created by kesso on 22.08.17.
  */
@@ -59,7 +43,7 @@ public class Test {
         LabMark labMark = student.getLabMarkList().get(0);*/
 
 
-        //Data.Test.Test test = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getTestMarkList().get(0).getTest();
+        //data.Test.Test test = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getTestMarkList().get(0).getTest();
 
 
         //HibernateShell.delete(groupsKeeper.getGroupList().get(0));

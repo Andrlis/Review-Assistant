@@ -1,6 +1,6 @@
 package servlets;
 
-import Data.User;
+import data.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

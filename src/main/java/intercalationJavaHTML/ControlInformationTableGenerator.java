@@ -3,22 +3,16 @@ package intercalationJavaHTML;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import Data.Lab.IssuedLab;
-import Data.Mark.LabMark;
-import Data.Mark.TestMark;
-import Data.Student;
-import Data.UniversityClass;
-import Resources.HibernateShell;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
+import data.Mark.LabMark;
+import data.Mark.TestMark;
+import data.Student;
+import data.UniversityClass;
+import resources.HibernateShell;
 
-import Data.Group.SubGroup;
+import data.Group.SubGroup;
 
 
 /**
