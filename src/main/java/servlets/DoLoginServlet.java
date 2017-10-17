@@ -1,8 +1,8 @@
 package servlets;
 
-import Data.User;
-import Resources.HibernateShell;
-import Resources.MD5Hash;
+import data.User;
+import resources.HibernateShell;
+import resources.MD5Hash;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

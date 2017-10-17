@@ -1,7 +1,4 @@
-import Data.Group.Group;
-import Resources.HibernateShell;
-import intercalationJavaHTML.ControlInformationTableGenerator;
-import intercalationJavaHTML.StudentListTable;
+import resources.HibernateShell;
 import intercalationJavaHTML.StudentListTableGenerator;
 
 public class TestJulia {

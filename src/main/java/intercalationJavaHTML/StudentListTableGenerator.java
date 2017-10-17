@@ -1,16 +1,11 @@
 package intercalationJavaHTML;
 
-import Data.Group.SubGroup;
-import Data.Student;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
+import data.Group.SubGroup;
+import data.Student;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.util.List;
 
 public class StudentListTableGenerator extends TableGenerator {
     @Override

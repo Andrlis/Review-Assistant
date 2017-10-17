@@ -1,10 +1,8 @@
 package timerTasks;
 
-import Checker.ScheduleChecker;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import java.util.Date;
 
 /**
  * Task for checking groups` schedule.

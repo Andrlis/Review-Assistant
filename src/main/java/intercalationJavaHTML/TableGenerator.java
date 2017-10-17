@@ -1,20 +1,13 @@
 package intercalationJavaHTML;
 
-import Data.Group.SubGroup;
-import Data.Mark.LabMark;
-import Data.Mark.TestMark;
-import Data.Student;
-import Data.UniversityClass;
-import Resources.HibernateShell;
+import data.Group.SubGroup;
+import data.Student;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 abstract public class TableGenerator {
