@@ -1,8 +1,10 @@
 package timerTasks;
 
+import checker.Checker;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import resources.HibernateShell;
 
 /**
  * Task for checking students` repositories.
@@ -13,6 +15,6 @@ public class RepositoryCheckerTask implements Job {
     }
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        //checker.checkForCommitsInGroups();
+        //Checker.checkForCommitsInGroups(HibernateShell.getGroupKeeper());             //Раскомментировать при запуске
     }
 }

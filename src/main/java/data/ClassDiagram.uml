@@ -2,24 +2,10 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement />
-  <nodes>
-    <node x="422.5" y="199.5">Data.Lecturer.LecturerKeeper</node>
-    <node x="0.0" y="76.0">Data.Lab.LabsKeeper</node>
-    <node x="151.0" y="152.0">Data.Mark.TestMark</node>
-    <node x="130.0" y="304.0">Data.Test.Test</node>
-    <node x="181.0" y="0.0">Data.Group.GroupsKeeper</node>
-    <node x="144.0" y="228.0">Data.Student</node>
-    <node x="0.0" y="304.0">Data.Group.Group</node>
-    <node x="161.0" y="76.0">Data.Group.SubGroup</node>
-    <node x="362.5" y="136.5">Data.Lecturer.Lecturer</node>
-    <node x="0.0" y="228.0">Data.Mark.LabMark</node>
-    <node x="249.0" y="304.0">Data.Lab.Lab</node>
-    <node x="0.0" y="152.0">Data.Lab.IssuedLab</node>
-    <node x="0.0" y="0.0">Data.UniversityClass</node>
-  </nodes>
+  <nodes />
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="1.0" x="286.0" y="193.0" />
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="365.4722222222221" y="1489.9087301587301" />
   <SelectedNodes />
   <Categories />
   <SCOPE>All</SCOPE>

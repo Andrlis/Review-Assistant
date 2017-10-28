@@ -26,11 +26,19 @@ public class GitParser {
         return repo;
     }
 
+    /**
+     * Парсинг истории коммитов.
+     * @param json
+     * @return
+     * @throws IOException
+     */
     public ArrayList<GitCommitHistory> readCommitHistory(String json) throws IOException {
         logger.info("Start read commit history.");
-        Type type = new TypeToken<ArrayList<GitCommitHistory>>() {
-        }.getType();
+
+        Type type = new TypeToken<ArrayList<GitCommitHistory>>() {}.getType();
+
         ArrayList<GitCommitHistory> commitList = gson.fromJson(json, type);
+
         logger.info("End read commit history.");
         return commitList;
     }

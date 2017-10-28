@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * University class
+ * Информация о занятии у подгруппы.
  */
 @Entity
 @Table(name = "classes")

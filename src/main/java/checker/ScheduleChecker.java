@@ -25,12 +25,17 @@ public class ScheduleChecker {
         GroupsKeeper groups = HibernateShell.getGroupKeeper();
 
         for (Group group : groups.getGroupList()) {
+
             logger.info("Current group number : " + group.getNumberOfGroup() + ".");
+
             timetable = BsuirParser.parseTimetable(BsuirRequests.getTimetable(group.getNumberOfGroup()));
 
             for (Subject lesson : timetable.getCurrentDaySchedule(BsuirRequests.getCurrentWeek())) {
+
                 if (lesson.getLessonName().equals("ТРиТПО") && lesson.getLessonType().equals("ЛР")) {
+
                     logger.info("Current lesson for subgroup number " + lesson.getSubGroup() + ".");
+
                     SubGroup subGroup = group.getSubGroup(lesson.getSubGroup());
                     UniversityClass universityClass = new UniversityClass();
 

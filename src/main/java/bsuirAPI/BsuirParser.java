@@ -42,6 +42,7 @@ public class BsuirParser {
         for (int temp = 0; temp < nodeList.getLength(); temp++) {
             Node node = nodeList.item(temp);
             Group group = new Group();
+
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
                 group.setScheduleApiGroupNumber(element.getElementsByTagName("id").item(0).getTextContent());
@@ -49,6 +50,7 @@ public class BsuirParser {
                 groupList.add(group);
             }
         }
+
         logger.info("End parse group.");
         return groupList;
     }
@@ -75,25 +77,34 @@ public class BsuirParser {
 
             DayTimetable dayTimetable = new DayTimetable();
             for (int lesson_id = 0; lesson_id < scheduleModelNodes.getLength(); lesson_id++) {
+
                 if (scheduleModelNodes.item(lesson_id).getNodeName() == "schedule") {
+
                     Element xmlSubject = (Element) scheduleModelNodes.item(lesson_id);
                     Subject subject = new Subject();
                     subject.setLessonName(xmlSubject.getElementsByTagName("subject").item(0).getTextContent());
                     subject.setLessonType(xmlSubject.getElementsByTagName("lessonType").item(0).getTextContent());
                     subject.setTime(xmlSubject.getElementsByTagName("lessonTime").item(0).getTextContent());
+
                     if(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent()!= null)
                         subject.setClassroom(xmlSubject.getElementsByTagName("auditory").item(0).getTextContent());       //для Физкультуры нет аудитории. Null pointer Exception
+
                     subject.setSubGroup(xmlSubject.getElementsByTagName("numSubgroup").item(0).getTextContent());
+
                     for (int week_id = 0; week_id < xmlSubject.getElementsByTagName("weekNumber").getLength(); week_id++) {
                         subject.setWeek(xmlSubject.getElementsByTagName("weekNumber").item(week_id).getTextContent());
                     }
+
                     dayTimetable.setLesson(subject);
+
                 } else if (scheduleModelNodes.item(lesson_id).getNodeName() == "weekDay") {
                     dayTimetable.setDay(scheduleModelNodes.item(lesson_id).getTextContent());
                 }
             }
+
             timetable.setDay(dayTimetable);
         }
+
         logger.info("End parse timetable.");
         return timetable;
     }

@@ -16,8 +16,11 @@ import java.util.TimeZone;
  * Created by kesso on 14.08.17.
  */
 public class GitShell {
+
     private static final Logger logger = Logger.getLogger(GitShell.class);
+
     /**
+     * Проверка коммита на ключевое слово.
      * @param message - сообщене для проверка
      * @return GirCommitHistory cоответствующий коммиту с заданным сообщением
      */
