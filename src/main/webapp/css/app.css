@@ -1,0 +1,132 @@
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial;
+}
+
+.navbar a {
+    float: left;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/*
+
+ */
+.menu-icon {
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+#log-btn {
+    margin-left:auto;
+    margin-right:0;
+    float: right;
+}
+
+.container-ver {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-hor {
+    display: flex;
+    flex-direction: row;
+}
+
+#table-title{
+    text-align: center;
+    font-size: 26px;
+}
+
+.subgroup-btn {
+    height: 20px;
+    width: 20px;
+}
+
+/*
+
+
+
+ */
+
+
+.table-ui {
+    width: 100%;
+}
+
+.cell-ui {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.button-cell-div {
+    border: none;
+}
+
+.header-cell {
+    padding: 7px;
+    background: silver;
+}
+
+.present {
+    background: rgb(194, 255, 10);
+}
+
+.absent {
+    background: rgb(255, 218, 6);
+}
+
+#edit {
+    border-color: white;
+    border: none;
+}
