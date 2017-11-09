@@ -1,4 +1,4 @@
-package data.Group;
+package data.group;
 
 import java.util.List;
 

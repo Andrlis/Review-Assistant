@@ -1,6 +1,6 @@
 package intercalationJavaHTML;
 
-import data.Group.SubGroup;
+import data.group.SubGroup;
 import data.Student;
 
 import java.io.File;

@@ -1,6 +1,6 @@
 package data;
 
-import data.Lecturer.Lecturer;
+import data.lecturer.Lecturer;
 import resources.MD5Hash;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
-package data.Group;
+package data.group;
 
-import data.Lab.IssuedLab;
-import data.Lecturer.Lecturer;
+import data.lab.IssuedLab;
+import data.lecturer.Lecturer;
 import data.Student;
 import data.UniversityClass;
 import org.apache.log4j.Logger;

@@ -26,15 +26,15 @@
         <property name="hibernate.id.new_generator_mappings">false</property>
 
         <mapping class="data.UniversityClass"/>
-        <mapping class="data.Lecturer.Lecturer"/>
+        <mapping class="data.lecturer.Lecturer"/>
         <mapping class="data.Student"/>
-        <mapping class="data.Group.Group"/>
-        <mapping class="data.Group.SubGroup"/>
-        <mapping class="data.Lab.Lab"/>
-        <mapping class="data.Lab.IssuedLab"/>
-        <mapping class="data.Mark.LabMark"/>
-        <mapping class="data.Mark.TestMark"/>
-        <mapping class="data.Test.Test"/>
+        <mapping class="data.group.Group"/>
+        <mapping class="data.group.SubGroup"/>
+        <mapping class="data.lab.Lab"/>
+        <mapping class="data.lab.IssuedLab"/>
+        <mapping class="data.mark.LabMark"/>
+        <mapping class="data.mark.TestMark"/>
+        <mapping class="data.test.Test"/>
         <mapping class="data.User"/>
     </session-factory>
 </hibernate-configuration>

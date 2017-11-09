@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.List;
 
-import data.Mark.LabMark;
-import data.Mark.TestMark;
+import data.mark.LabMark;
+import data.mark.TestMark;
 import data.Student;
 import data.UniversityClass;
 import resources.HibernateShell;
 
-import data.Group.SubGroup;
+import data.group.SubGroup;
 
 
 /**

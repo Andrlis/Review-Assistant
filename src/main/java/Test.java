@@ -7,7 +7,7 @@ public class Test {
 
 
         //saveOrUpdate
-        /*Group group = new Group();
+        /*group group = new group();
         group.setNumberOfGroup("550503");
         group.setScheduleApiGroupNumber("550503");
         group.setAmountOfTest(0);
@@ -43,7 +43,7 @@ public class Test {
         LabMark labMark = student.getLabMarkList().get(0);*/
 
 
-        //data.Test.Test test = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getTestMarkList().get(0).getTest();
+        //data.test.test test = groupsKeeper.getGroupList().get(0).getSubGroupList().get(0).getStudentsList().get(0).getTestMarkList().get(0).getTest();
 
 
         //HibernateShell.delete(groupsKeeper.getGroupList().get(0));

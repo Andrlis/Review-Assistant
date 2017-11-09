@@ -1,10 +1,10 @@
 package resources;
 
-import data.Group.Group;
-import data.Group.GroupsKeeper;
-import data.Lab.LabsKeeper;
-import data.Lecturer.LecturerKeeper;
-import data.Test.TestKeeper;
+import data.group.Group;
+import data.group.GroupsKeeper;
+import data.lab.LabsKeeper;
+import data.lecturer.LecturerKeeper;
+import data.test.TestKeeper;
 import data.UniversityClass;
 import data.User;
 import org.apache.log4j.Logger;
@@ -211,10 +211,10 @@ public class HibernateShell {
             session.close();
         }
         if(answer != null && answer.size() == 1) {
-            logger.info("Group found. End get group by groupnumber.");
+            logger.info("group found. End get group by groupnumber.");
             return answer.get(0);
         }
-        logger.info("Group not found. End get group by groupnumber.");
+        logger.info("group not found. End get group by groupnumber.");
         return null;
     }
 }

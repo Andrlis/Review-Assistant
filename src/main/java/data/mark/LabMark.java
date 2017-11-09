@@ -1,6 +1,6 @@
-package data.Mark;
+package data.mark;
 
-import data.Lab.IssuedLab;
+import data.lab.IssuedLab;
 import data.Student;
 
 import javax.persistence.*;

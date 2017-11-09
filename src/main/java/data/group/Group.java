@@ -1,4 +1,4 @@
-package data.Group;
+package data.group;
 
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.LazyCollection;

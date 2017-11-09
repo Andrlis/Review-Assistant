@@ -1,6 +1,6 @@
-package data.Lab;
+package data.lab;
 
-import data.Mark.LabMark;
+import data.mark.LabMark;
 import data.Student;
 import data.UniversityClass;
 import org.apache.log4j.Logger;

@@ -1,6 +1,6 @@
-package data.Test;
+package data.test;
 
-import data.Mark.TestMark;
+import data.mark.TestMark;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;

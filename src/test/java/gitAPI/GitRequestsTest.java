@@ -18,18 +18,18 @@ public class GitRequestsTest extends TestCase {
 
     @Test
     public void testGetRepoInfo() throws Exception {
-        System.out.println("Test GitRequests.getRepoInfo()");
+        System.out.println("test GitRequests.getRepoInfo()");
         response = requests.getRepoInfo("Andrlis", "TRTPOControlSystem");
         assertNotNull(response);
         assertFalse(response.contains("Not Found"));
         assertTrue(response.contains("Andrlis"));
         assertTrue(response.contains("TRTPOControlSystem"));
-        System.out.println("Test success.");
+        System.out.println("test success.");
     }
 
     @Test
     public void testGetCommitList() throws Exception {
-        System.out.println("Test GitRequests.getCommitList()");
+        System.out.println("test GitRequests.getCommitList()");
         response = requests.getCommitList("Andrlis", "TRTPOControlSystem");
         assertNotNull(response);
         assertFalse(response.contains("Not Found"));
@@ -37,7 +37,7 @@ public class GitRequestsTest extends TestCase {
         assertTrue(response.contains("TRTPOControlSystem"));
         assertTrue(response.contains("sha"));
         assertTrue(response.contains("commit"));
-        System.out.println("Test success.");
+        System.out.println("test success.");
     }
 
 }

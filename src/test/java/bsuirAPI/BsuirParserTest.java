@@ -1,6 +1,6 @@
 package bsuirAPI;
 
-import data.Group.Group;
+import data.group.Group;
 import bsuirAPI.bsuirTimetable.DayTimetable;
 import bsuirAPI.bsuirTimetable.Subject;
 import bsuirAPI.bsuirTimetable.Timetable;
@@ -21,12 +21,12 @@ public class BsuirParserTest extends TestCase {
         group.setScheduleApiGroupNumber("21366");
         group.setNumberOfGroup("550502");
 
-        System.out.println("Test BsuirParser.parseGroups()");
+        System.out.println("test BsuirParser.parseGroups()");
         ArrayList<Group>groupList = BsuirParser.parseGroups(xmlToParase);
         assertNotNull(groupList);
         assertEquals(group.getNumberOfGroup(), groupList.get(0).getNumberOfGroup());
         assertEquals(group.getScheduleApiGroupNumber(),groupList.get(0).getScheduleApiGroupNumber());
-        System.out.println("Test success.");
+        System.out.println("test success.");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class BsuirParserTest extends TestCase {
         dayTimetable.getLessons().add(new Subject("ОerpС", "18:45-22:00", "211-3", "ЛК", "0",  new ArrayList<String>(Arrays.asList("1", "3"))));
         assertTimetable.getDays().add(dayTimetable);
 
-        System.out.println("Test BsuirParser.parseTimetable()");
+        System.out.println("test BsuirParser.parseTimetable()");
         Timetable timetable = BsuirParser.parseTimetable(xmlToParase);
         assertNotNull(timetable);
         assertEquals(assertTimetable.getDays().get(0).getLessons().get(0).getLessonName(), timetable.getDays().get(0).getLessons().get(0).getLessonName());
@@ -51,6 +51,6 @@ public class BsuirParserTest extends TestCase {
         assertEquals(assertTimetable.getDays().get(0).getLessons().get(0).getTime(),timetable.getDays().get(0).getLessons().get(0).getTime());
         assertEquals(assertTimetable.getDays().get(0).getLessons().get(0).getSubGroup(),timetable.getDays().get(0).getLessons().get(0).getSubGroup());
         assertEquals(assertTimetable.getDays().get(0).getLessons().get(0).getWeeks(),timetable.getDays().get(0).getLessons().get(0).getWeeks());
-        System.out.println("Test success.");
+        System.out.println("test success.");
     }
 }
