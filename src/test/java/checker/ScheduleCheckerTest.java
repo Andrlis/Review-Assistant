@@ -1,7 +1,7 @@
 package checker;
 
-import data.Group.Group;
-import data.Group.GroupsKeeper;
+import data.group.Group;
+import data.group.GroupsKeeper;
 import resources.HibernateShell;
 import bsuirAPI.BsuirRequests;
 import org.hibernate.SessionFactory;
@@ -69,7 +69,7 @@ public class ScheduleCheckerTest {
 
     @Test
     public void testGroupScheduleCheck() throws Exception {
-        System.out.println("Test ScheduleChecker.groupScheduleCheck");
+        System.out.println("test ScheduleChecker.groupScheduleCheck");
         SessionFactory mockSessionFactory = Mockito.mock(org.hibernate.SessionFactory.class);
         Configuration mockConfig = Mockito.mock(Configuration.class);
         Mockito.when(mockConfig.buildSessionFactory()).thenReturn(mockSessionFactory);
@@ -80,6 +80,6 @@ public class ScheduleCheckerTest {
         expect(BsuirRequests.getCurrentWeek()).andReturn("1");
         PowerMockito.verifyStatic(VerificationModeFactory.times(1));
         ScheduleChecker.groupScheduleCheck();
-        System.out.println("Test success.");
+        System.out.println("test success.");
     }
 }

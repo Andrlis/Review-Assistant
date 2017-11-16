@@ -1,8 +1,8 @@
 package checker;
 
-import data.Group.Group;
-import data.Group.GroupsKeeper;
-import data.Group.SubGroup;
+import data.group.Group;
+import data.group.GroupsKeeper;
+import data.group.SubGroup;
 import data.UniversityClass;
 import resources.HibernateShell;
 import resources.TimeLogic;

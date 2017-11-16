@@ -1,4 +1,4 @@
-package data.Lecturer;
+package data.lecturer;
 
 import java.util.List;
 

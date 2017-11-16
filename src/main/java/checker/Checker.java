@@ -1,11 +1,11 @@
 package checker;
 
 
-import data.Group.Group;
-import data.Group.GroupsKeeper;
-import data.Group.SubGroup;
-import data.Lab.IssuedLab;
-import data.Mark.LabMark;
+import data.group.Group;
+import data.group.GroupsKeeper;
+import data.group.SubGroup;
+import data.lab.IssuedLab;
+import data.mark.LabMark;
 import data.Student;
 import exceptions.CheckException;
 import exceptions.GitException;

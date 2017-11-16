@@ -1,9 +1,9 @@
 package data;
 
-import data.Group.SubGroup;
-import data.Lab.Lab;
-import data.Mark.LabMark;
-import data.Mark.TestMark;
+import data.group.SubGroup;
+import data.lab.Lab;
+import data.mark.LabMark;
+import data.mark.TestMark;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;

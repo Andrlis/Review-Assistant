@@ -1,6 +1,6 @@
 package data;
 
-import data.Group.SubGroup;
+import data.group.SubGroup;
 
 import javax.persistence.*;
 import java.util.Date;

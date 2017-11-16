@@ -6,7 +6,7 @@ public class TestJulia {
     public static void main(String ... arg){
 
         /*ControlInformationTableGenerator tableGenerator = new ControlInformationTableGenerator();
-        Group group = HibernateShell.getGroupKeeper().getGroupList().get(0);
+        group group = HibernateShell.getGroupKeeper().getGroupList().get(0);
         tableGenerator.createTable(
                 HibernateShell
                 .getGroupKeeper()

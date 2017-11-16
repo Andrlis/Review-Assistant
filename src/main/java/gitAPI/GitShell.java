@@ -1,6 +1,6 @@
 package gitAPI;
 
-import data.Lab.Lab;
+import data.lab.Lab;
 import data.Student;
 import exceptions.GitException;
 import gitAPI.GitInfoClasses.GitCommitInfo.GitCommitHistory;

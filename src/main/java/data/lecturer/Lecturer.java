@@ -1,6 +1,6 @@
-package data.Lecturer;
+package data.lecturer;
 
-import data.Group.SubGroup;
+import data.group.SubGroup;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

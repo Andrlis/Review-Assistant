@@ -1,4 +1,4 @@
-package data.Lab;
+package data.lab;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;

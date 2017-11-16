@@ -1,7 +1,7 @@
-package data.Mark;
+package data.mark;
 
 import data.Student;
-import data.Test.Test;
+import data.test.Test;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
