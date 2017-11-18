@@ -30,13 +30,6 @@ public class TestMark {
     public TestMark() {
     }
 
-    public TestMark(Integer id, Test test, Integer mark, Student student) {
-        this.id = id;
-        this.test = test;
-        this.mark = mark;
-        this.student = student;
-    }
-
     public Integer getId() {
         return id;
     }

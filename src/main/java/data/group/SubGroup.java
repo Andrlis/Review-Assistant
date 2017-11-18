@@ -58,16 +58,6 @@ public class SubGroup {
         this.issuedLabsList = new ArrayList<IssuedLab>();
     }
 
-    public SubGroup(Integer id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList, Group group, Lecturer lecturer) {
-        this.id = id;
-        this.subGroupNumber = subGroupNumber;
-        this.studentsList = studentsList;
-        this.universityClassesList = universityClassesList;
-        this.issuedLabsList = issuedLabsList;
-        this.group = group;
-        this.lecturer = lecturer;
-    }
-
     public Integer getId() {
         return id;
     }

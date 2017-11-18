@@ -8,7 +8,7 @@ public class GitCommitUser {
     private String email;
     private String date;
 
-    GitCommitUser() {
+    public GitCommitUser() {
         name = null;
         email = null;
         date = null;

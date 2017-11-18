@@ -33,14 +33,6 @@ public class Group {
         this.subGroupList = new ArrayList<SubGroup>();
     }
 
-    public Group(Integer id, String numberOfGroup, String scheduleApiGroupNumber, List<SubGroup> subGroupList, Integer amountOfTest) {
-        this.id = id;
-        this.numberOfGroup = numberOfGroup;
-        this.scheduleApiGroupNumber = scheduleApiGroupNumber;
-        this.subGroupList = subGroupList;
-        this.amountOfTest = amountOfTest;
-    }
-
     public Integer getId() {
         return id;
     }
