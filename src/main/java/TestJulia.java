@@ -1,3 +1,4 @@
+import data.group.SubGroup;
 import resources.HibernateShell;
 import intercalationJavaHTML.StudentListTableGenerator;
 
@@ -15,12 +16,18 @@ public class TestJulia {
                 .getSubGroup("1"));
         return;*/
         StudentListTableGenerator tableGenerator = new StudentListTableGenerator();
-        tableGenerator.createTable(
+        /*tableGenerator.createTable(
                 HibernateShell
                         .getGroupKeeper()
                         .getGroupList()
                         .get(0)
-                        .getSubGroup("1"));
+                        .getSubGroup("1"));*/
+        SubGroup sg = HibernateShell
+                .getGroupKeeper()
+                .getGroupList()
+                .get(0)
+                .getSubGroup("1");
+        System.out.println(sg.toString());
         return;
 
     }

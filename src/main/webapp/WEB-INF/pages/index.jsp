@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <script src="../JavaScript/main.js" ></script>
     <link rel="stylesheet" href="css/app.css" media="screen">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Title</title>
 </head>
 <body>
 
@@ -19,39 +21,22 @@
             <a href="#">Редактирование</a>
         </div>
     </div>
-    <div class="dropdown">
-        <button class="dropbtn">
-            550501
-        </button>
-        <div class="dropdown-content">
-            <a href="#">Подгруппа 1</a>
-            <a href="#">Подгруппа 2</a>
+    <c:forEach items="${groups}" var="group">
+        <div class="dropdown">
+            <button class="dropbtn">
+                ${group.numberOfGroup}
+            </button>
+            <div class="dropdown-content">
+                <c:forEach begin="1" end="${group.subGroupList.size}" var="num">
+                    <a href="#">Подгруппа ${num}</a>
+                </c:forEach>
+            </div>
         </div>
-    </div>
+    </c:forEach>
 
     <div class="dropdown">
         <button class="dropbtn">
             550502
-        </button>
-        <div class="dropdown-content">
-            <a href="#">Подгруппа 1</a>
-            <a href="#">Подгруппа 2</a>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <button class="dropbtn">
-            550503
-        </button>
-        <div class="dropdown-content">
-            <a href="#">Подгруппа 1</a>
-            <a href="#">Подгруппа 2</a>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <button class="dropbtn">
-            550504
         </button>
         <div class="dropdown-content">
             <a href="#">Подгруппа 1</a>
@@ -116,6 +101,7 @@
         </tr>
     </table>
 </div>
+
 
 </body>
 </html>
