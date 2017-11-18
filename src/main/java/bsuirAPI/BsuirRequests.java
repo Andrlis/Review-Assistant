@@ -21,7 +21,7 @@ public class BsuirRequests {
      * @return String
      */
     public static String getGroups() throws IOException {
-        URL url = new URL("https://www.bsuir.by/schedule/rest/studentGroup");
+        URL url = new URL("https://students.bsuir.by/api/v1/groups");
         URLConnection connection = url.openConnection();
 
         logger.info("Send request about group(\"https://www.bsuir.by/schedule/rest/studentGroup\").");

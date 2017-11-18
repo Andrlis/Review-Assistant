@@ -29,7 +29,7 @@ public class BsuirRequestsTest extends TestCase {
     @Test
     public void testGetTimetable() throws Exception {
         System.out.println("test BsuirRequests.getTimetable()");
-        response = BsuirRequests.getTimetable("21366");
+        response = BsuirRequests.getTimetable("550502");
         assertNotNull(response);
         assertTrue(response.contains("scheduleXmlModels"));
         System.out.println("test success.");
