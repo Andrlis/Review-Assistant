@@ -24,7 +24,7 @@ public class Welcome extends HttpServlet {
                 .getSubGroup("1");
         request.setAttribute("groups", HibernateShell.getGroupKeeper().getGroupList());
         request
-                .getRequestDispatcher("WEB-INF/pages/Welcome.jsp")
+                .getRequestDispatcher("WEB-INF/pages/index.jsp")
                 .forward(request, response);
     }
 
