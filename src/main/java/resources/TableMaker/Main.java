@@ -16,6 +16,7 @@ import resources.HibernateShell;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -102,6 +103,7 @@ public class Main {
 
         System.out.println("END");
 
+        ArrayList<Map<String, Object>> a = new ArrayList<Map<String, Object>>();
 
 
 
