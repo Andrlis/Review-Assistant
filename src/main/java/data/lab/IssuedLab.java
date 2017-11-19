@@ -54,18 +54,6 @@ public class IssuedLab implements Serializable {
         this.studentControlList = new ArrayList<Student>();
     }
 
-    public IssuedLab(Integer id, Lab labDescription, UniversityClass universityClassOfIssue,
-                     Double coefficientOfCurrentDeadline, UniversityClass currentDeadline,
-                     Date dateOfLastRepoCheck, List<Student> studentControlList, List<LabMark> labMarkList) {
-        this.id = id;
-        this.labDescription = labDescription;
-        this.universityClassOfIssue = universityClassOfIssue;
-        this.coefficientOfCurrentDeadline = coefficientOfCurrentDeadline;
-        this.currentDeadline = currentDeadline;
-        this.dateOfLastRepoCheck = dateOfLastRepoCheck;
-        this.studentControlList = studentControlList;
-    }
-
     public Integer getId() {
         return id;
     }

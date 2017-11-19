@@ -30,14 +30,6 @@ public class LabMark {
     public LabMark() {
     }
 
-    public LabMark(Integer id, Double coefficient, Integer mark, IssuedLab issuedLab, Student student) {
-        this.id = id;
-        this.coefficient = coefficient;
-        this.mark = mark;
-        this.issuedLab = issuedLab;
-        this.student = student;
-    }
-
     public Double getCoefficient() {
         return coefficient;
     }
