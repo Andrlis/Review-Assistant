@@ -4,6 +4,7 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.lab.LabsKeeper;
 import data.lecturer.LecturerKeeper;
+import data.mark.LabMark;
 import data.test.TestKeeper;
 import data.UniversityClass;
 import data.User;
@@ -216,5 +217,26 @@ public class HibernateShell {
         }
         logger.info("group not found. End get group by groupnumber.");
         return null;
+    }
+
+    public static void saveLabMark(Integer id, Integer mark, Double coeff){
+        logger.info("Start save lab mark.");
+        final Session session = getSession();
+        LabMark labMark = null;
+        try {
+            session.enableFilter("coefficientFilter");
+
+            labMark = (LabMark) session.get(LabMark.class, id);
+            labMark.setMark(mark);
+            labMark.setCoefficient(coeff);
+
+            session.getTransaction().begin();
+            session.update(labMark);
+            session.getTransaction().commit();
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+        logger.info("End get group keeper.");
     }
 }
