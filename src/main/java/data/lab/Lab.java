@@ -28,13 +28,6 @@ public class Lab {
     public Lab() {
     }
 
-    public Lab(Integer id, Integer numberOfLab, String keyWord, List<IssuedLab> issuedLabList) {
-        this.id = id;
-        this.numberOfLab = numberOfLab;
-        this.keyWord = keyWord;
-        this.issuedLabList = issuedLabList;
-    }
-
     @Override
     public boolean equals(Object obj){
         if (this == obj)

@@ -38,11 +38,12 @@ public class SubGroup {
     @JoinColumn(name = "id_group_subgroup")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> universityClassesList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "id_group_subgroup")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabsList;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group")
     private Group group;
     @ManyToOne()
@@ -55,16 +56,6 @@ public class SubGroup {
         this.studentsList = new ArrayList<Student>();
         this.universityClassesList = new ArrayList<UniversityClass>();
         this.issuedLabsList = new ArrayList<IssuedLab>();
-    }
-
-    public SubGroup(Integer id, String subGroupNumber, List<Student> studentsList, List<UniversityClass> universityClassesList, List<IssuedLab> issuedLabsList, Group group, Lecturer lecturer) {
-        this.id = id;
-        this.subGroupNumber = subGroupNumber;
-        this.studentsList = studentsList;
-        this.universityClassesList = universityClassesList;
-        this.issuedLabsList = issuedLabsList;
-        this.group = group;
-        this.lecturer = lecturer;
     }
 
     public Integer getId() {

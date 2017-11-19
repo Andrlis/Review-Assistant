@@ -20,7 +20,7 @@ public class Lecturer {
     private Integer id;
     @Column(name = "full_name", length = 100)
     private String fullName;
-    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lecturer", cascade = CascadeType.MERGE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<SubGroup> subGroupList;
 

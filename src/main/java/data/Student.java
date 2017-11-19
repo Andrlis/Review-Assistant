@@ -61,19 +61,6 @@ public class Student implements Serializable {
         this.testMarkList = new ArrayList<TestMark>();
     }
 
-    public Student(Integer id, String fulName, String gitRepoName, String gitUserName, String eMail, List<LabMark> labMarkList, List<TestMark> testMarkList, Integer bonusMark, List<UniversityClass> missedUniversityClassesList, SubGroup subGroup) {
-        this.id = id;
-        this.fulName = fulName;
-        this.gitRepoName = gitRepoName;
-        this.gitUserName = gitUserName;
-        this.eMail = eMail;
-        this.labMarkList = labMarkList;
-        this.testMarkList = testMarkList;
-        this.bonusMark = bonusMark;
-        this.missedUniversityClassesList = missedUniversityClassesList;
-        this.subGroup = subGroup;
-    }
-
     public Integer getId() {
         return id;
     }
