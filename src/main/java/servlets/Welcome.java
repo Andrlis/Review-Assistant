@@ -17,14 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class Welcome extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        SubGroup sg = HibernateShell
-                .getGroupKeeper()
-                .getGroupList()
-                .get(0)
-                .getSubGroup("1");
         request.setAttribute("groups", HibernateShell.getGroupKeeper().getGroupList());
         request
-                .getRequestDispatcher("WEB-INF/pages/Welcome.jsp")
+                .getRequestDispatcher("WEB-INF/pages/index.jsp")
                 .forward(request, response);
     }
 

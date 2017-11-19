@@ -1,6 +1,22 @@
 $(document).ready(function () {
     setEventsToTable();
     ShowMarksTable();
+    $(".ch-tab-type").click(function () {
+        var val = $(this).attr("value");
+        var cont = $(this).html();
+        $("#info-type").html(cont);
+        $("#info-type").attr("value", val);
+    });
+    $(".ch-tab-gr").click(function () {
+        var val = $(this).attr("value");
+        $("#subgroup-number").html(val);
+        $("#subgroup-number").attr("value", val);
+        var group = $(this).parent().parent().first().attr("value");
+        $("#group-number").html(group);
+        $("#group-number").attr("value", group);
+
+
+    });
 });
 
 //events for table with marks or presence
