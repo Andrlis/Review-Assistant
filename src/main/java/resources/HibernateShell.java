@@ -5,6 +5,7 @@ import data.group.GroupsKeeper;
 import data.lab.LabsKeeper;
 import data.lecturer.LecturerKeeper;
 import data.mark.LabMark;
+import data.mark.TestMark;
 import data.test.TestKeeper;
 import data.UniversityClass;
 import data.User;
@@ -219,7 +220,8 @@ public class HibernateShell {
         return null;
     }
 
-    public static void saveLabMark(Integer id, Integer mark, Double coeff){
+
+    public static void updateLabMark(Integer id, Integer mark){
         logger.info("Start save lab mark.");
         final Session session = getSession();
         LabMark labMark = null;
@@ -228,6 +230,25 @@ public class HibernateShell {
 
             labMark = (LabMark) session.get(LabMark.class, id);
             labMark.setMark(mark);
+
+            session.getTransaction().begin();
+            session.update(labMark);
+            session.getTransaction().commit();
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+        logger.info("End get group keeper.");
+    }
+
+    public static void updateLabCoeff(Integer id, Double coeff){
+        logger.info("Start save lab mark.");
+        final Session session = getSession();
+        LabMark labMark = null;
+        try {
+            session.enableFilter("coefficientFilter");
+
+            labMark = (LabMark) session.get(LabMark.class, id);
             labMark.setCoefficient(coeff);
 
             session.getTransaction().begin();
@@ -239,4 +260,25 @@ public class HibernateShell {
         }
         logger.info("End get group keeper.");
     }
+
+    public static void updatTestMark(Integer id, Integer mark){
+        logger.info("Start save lab mark.");
+        final Session session = getSession();
+        TestMark testMark = null;
+        try {
+            session.enableFilter("coefficientFilter");
+
+            testMark = (TestMark) session.get(TestMark.class, id);
+            testMark.setMark(mark);
+
+            session.getTransaction().begin();
+            session.update(testMark);
+            session.getTransaction().commit();
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+        logger.info("End get group keeper.");
+    }
 }
+
