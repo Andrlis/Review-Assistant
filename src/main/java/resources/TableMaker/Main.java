@@ -171,6 +171,5 @@ public class Main {
 
         System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup));
 
-
     }
 }

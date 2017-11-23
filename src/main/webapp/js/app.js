@@ -6,18 +6,57 @@ $(document).ready(function () {
         var cont = $(this).html();
         $("#info-type").html(cont);
         $("#info-type").attr("value", val);
+        loadTable();
     });
     $(".ch-tab-gr").click(function () {
         var val = $(this).attr("value");
         $("#subgroup-number").html(val);
         $("#subgroup-number").attr("value", val);
-        var group = $(this).parent().parent().first().attr("value");
+        var group = $(this).parent().parent().children().first().attr("value");
         $("#group-number").html(group);
         $("#group-number").attr("value", group);
-
-
+        loadTable();
     });
+    loadTable();
 });
+
+//ajax to load table
+function formTable(data) {
+    var table = $("<table></table>");
+    var tableClass = data['table-class'];
+    var header = data['header'];
+    var args = data['args'];
+    var headerRow = $('<tr class="header"></tr>');
+    header.forEach(function (column) {
+        headerRow.append("<td>" + column + "</td>");
+    });
+    table.append(headerRow);
+    args.forEach(function (data) {
+        var row = $('<tr></tr>');
+        //var ref = $('<a href="userForm?id=${user.user}">$</a>');
+        // row.append("<td><a href=\"userForm?id=" + user["user"] + "\">" + user["user"] + "</a></td>");
+        header.forEach(function (column) {
+            row.append("<td>" + data[column]['value'] + "</td>");
+        });
+        table.append(row);
+    });
+    $('#table-container').append(table);
+}
+
+function loadTable() {
+    var group = $("#group-number").attr("value");
+    var subgroup = $("#subgroup-number").attr("value");
+    var type = $("#info-type").attr("value");
+    $.ajax({
+        url: "GetTableServlet?group=" + group +
+        "&subgroup=" + subgroup +
+        "&type=" + type,
+        dataType: "json",
+        success: function(data){
+            formTable(data);
+        }
+    });
+}
 
 //events for table with marks or presence
 function setEventsToTable() {
