@@ -36,19 +36,19 @@
         </div>
     </c:forEach>
     <div id="log-btn" >
-        <button class="navbar-button">Log in</button>
+       <!--<button class="navbar-button">Log in</button>-->
         <button class="navbar-button">Log out</button>
     </div>
 </div>
 
 <div id="table-title" class="container-ver">
-    <div>Группа <span id="group-number" value="${groups[0].numberOfGroup}">${groups[0].numberOfGroup}</span></div><br>
+    <div>Группа <span id="group-number" value="${groups[0].numberOfGroup}">${groups[0].numberOfGroup}</span></div>
     <div>Подгруппа
         <span id="subgroup-number" value="${groups[0].subGroupList[0].subGroupNumber}">
             ${groups[0].subGroupList[0].subGroupNumber}
         </span>
-    </div><br>
-    <span id="info-type" value="m">Оценки</span><br>
+    </div>
+    <span id="info-type" value="m">Оценки</span>
 </div>
 
 <div id="table-container">
