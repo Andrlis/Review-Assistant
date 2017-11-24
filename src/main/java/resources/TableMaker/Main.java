@@ -123,19 +123,19 @@ public class Main {
         LabMark l1 = new LabMark();
         l1.setId(1);
         //l1.setCoefficient(new Double(0.1));
-        l1.setMark(new Integer(2));
+        l1.setMark(new Integer(-1));
         l1.setIssuedLab(il1);
 
         LabMark l2 = new LabMark();
         l2.setId(2);
-        l2.setCoefficient(new Double(0.5));
+        l2.setCoefficient(new Double(-1));
         //l2.setMark(new Integer(10));
         l2.setIssuedLab(il2);
 
         LabMark l3 = new LabMark();
         l3.setId(3);
-        l3.setCoefficient(new Double(1));
-        l3.setMark(new Integer(5));
+        l3.setCoefficient(new Double(-1));
+        l3.setMark(new Integer(-1));
         l3.setIssuedLab(il3);
 
 
@@ -165,8 +165,13 @@ public class Main {
         students.add(student);
         students.add(student);
 
+
+
         SubGroup subGroup = new SubGroup();
         subGroup.setStudentsList(students);
+
+
+        subGroup.setStudentsList(new ArrayList<Student>());
 
 
         System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup));

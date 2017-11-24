@@ -14,7 +14,7 @@ public class TestMarkConverter implements JsonSerializer<TestMark> {
         JsonObject testObject = new JsonObject();
 
         testObject.addProperty("cell-class", "test-class");
-        testObject.addProperty("value", (src.getMark() != null) ? src.getMark().toString() : "");
+        testObject.addProperty("value", (src.getMark() != null) ? (src.getMark() != -1) ? src.getMark().toString() : "" : "");
         testObject.addProperty("type", "test");
         testObject.addProperty("id", src.getId().toString());
 

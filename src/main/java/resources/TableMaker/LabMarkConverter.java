@@ -15,7 +15,7 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
         JsonObject labObject = new JsonObject();
 
         labObject.addProperty("cell-class", getCoeff(src.getCoefficient()));
-        labObject.addProperty("value", (src.getMark() != null) ? src.getMark().toString() : "");
+        labObject.addProperty("value", (src.getMark() != null) ? (src.getMark() != -1) ? src.getMark().toString() : "" : "");
         labObject.addProperty("type", "lab");
         labObject.addProperty("id", src.getId().toString());
 

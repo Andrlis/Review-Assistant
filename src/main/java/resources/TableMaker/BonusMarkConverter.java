@@ -14,7 +14,7 @@ public class BonusMarkConverter implements JsonSerializer<BonusMark> {
         JsonObject object = new JsonObject();
         object.addProperty("cell-class", "bonus-class");
 
-         object.addProperty("value", (src.getMark() != null) ? src.getMark().toString() : "");
+         object.addProperty("value", (src.getMark() != null) ? (src.getMark() != -1) ? src.getMark().toString() : "" : "");
 
         object.addProperty("type", "bonus");
         object.addProperty("id", src.getId().toString());

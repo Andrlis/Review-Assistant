@@ -11,11 +11,9 @@ import java.util.*;
 
 public class JsonMaker {
     public static String getJsonSubGroupMarks(SubGroup subGroup){
-        if(subGroup == null)
-            return null;
 
         ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
-        for(Student currentStudent: subGroup.getStudentsList()) {
+        for(Student currentStudent: (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
             studentArray.add(getStudentMap(currentStudent));
         }
 
@@ -25,7 +23,7 @@ public class JsonMaker {
         if(!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
         }else {
-            map.put("header", "");
+            map.put("header", new ArrayList<Object>());
         }
 
         map.put("args", studentArray);
