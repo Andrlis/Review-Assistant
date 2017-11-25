@@ -36,11 +36,23 @@ function formTable(data) {
         //var ref = $('<a href="userForm?id=${user.user}">$</a>');
         // row.append("<td><a href=\"userForm?id=" + user["user"] + "\">" + user["user"] + "</a></td>");
         header.forEach(function (column) {
-            row.append("<td>" + data[column]['value'] + "</td>");
+            var cell = $("<td></td>");
+            cell.attr("data-id", data[column]['id']);
+            cell.attr("data-type", data[column]['type']);
+            cell.attr("class", data[column]['cell-classss']);
+            cell.append(data[column]['value']);
+            row.append(cell);
+            //row.append("<td>" + data[column]['value'] + "</td>");
         });
         table.append(row);
     });
     $('#table-container').append(table);
+    $("td").click(function (event) {
+        var type = $(this).attr("data-type");
+        var id = $(this).attr("data-id");
+        var student_id = $(this).parent().children().first().attr("data-id");
+
+    });
 }
 
 function loadTable() {
