@@ -21,14 +21,17 @@ public class BsuirRequests {
      * @return String
      */
     public static String getGroups() throws IOException {
-        URL url = new URL("https://students.bsuir.by/api/v1/groups");
+        String response = null;
+
+        URL url = new URL(String.format("https://students.bsuir.by/api/v1/groups"));
         URLConnection connection = url.openConnection();
 
         logger.info("Send request about group(\"https://www.bsuir.by/schedule/rest/studentGroup\").");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-        return in.readLine();
+        response = in.readLine(); ;
+        return response;
     }
 
     /**
@@ -40,6 +43,8 @@ public class BsuirRequests {
      */
     public static String getTimetable(String groupName) throws IOException {
 
+        String response;
+
         URL url = new URL(String.format("https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=%s", groupName));
 
         URLConnection connection = url.openConnection();
@@ -49,7 +54,9 @@ public class BsuirRequests {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-        return in.readLine();
+        response = in.readLine();
+
+        return response;
     }
 
 
