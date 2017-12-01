@@ -7,6 +7,8 @@ import data.Group.SubGroup;
 import data.Lab.IssuedLab;
 import data.Mark.LabMark;
 import data.Student;
+import exceptions.CheckException;
+import exceptions.GitException;
 import resources.HibernateShell;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
@@ -21,6 +23,7 @@ public class Checker {
     private static final Logger logger = Logger.getLogger(Checker.class);
 
     /**
+     * Check issued labs in all groups.
      * @param groupsKeeper
      */
     static public void checkForCommitsInGroups(GroupsKeeper groupsKeeper) {
@@ -36,43 +39,64 @@ public class Checker {
 
                 //loop by issued lab for subgroup
                 for (IssuedLab currentIssuedLab : currentSubGroup.getIssuedLabsList()) {
-                    logger.info("Check lab number " + currentIssuedLab.getLabDescription().getNumberOfLab());
-                    Date newDateOfLastRepoCheck = new Date();
-
-                    //loop by students who did not pass the lab
-                    for (Student currentStudent : currentIssuedLab.getStudentControlList()) {
-                        LabMark labMark = currentStudent.getLabMark(currentIssuedLab.getLabDescription());
-
-                        Date commitDate = GitShell.getDateOfTheCommit(currentStudent, currentIssuedLab.getLabDescription());
-                        if (commitDate == null) {
-                            logger.info("Student " + currentStudent.getFulName() + " did not commit a lab.");
-                            continue;
-                        }
-
-                        if (commitDate.getTime() < currentIssuedLab.getDateOfLastRepoCheck().getTime()) {               //Дата коммита раньше даты последней проверки. Фальсификация сдачи
-                            logger.info("Student " + currentStudent.getFulName() + " cheated.");
-
-                            labMark.setCoefficient(new Double(-2));
-                            HibernateShell.update(labMark);
-                        } else {
-                            if (commitDate.getTime() < currentIssuedLab.getCurrentDeadline().getDate().getTime()) {
-                                logger.info("Student " + currentStudent.getFulName() + " commit a lab.");
-
-                                currentIssuedLab.deleteStudentFromControlList(currentStudent);
-                                labMark.setCoefficient(currentIssuedLab.getCoefficientOfCurrentDeadline());
-
-                                HibernateShell.update(labMark);
-                            }
-                        }
+                    try {
+                        Checker.checkIssuedLab(currentIssuedLab);
+                    }catch (CheckException e){
+                        logger.error(e.getMessage());
                     }
-
-                    //save new date of last lab checking
-                    logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
-                    currentIssuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
-                    HibernateShell.update(currentIssuedLab);
                 }
             }
         }
-        logger.info("Ebd check for commits is group.");
+        logger.info("End check for commits is group.");
+    }
+
+    static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
+        LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
+
+        Date commitDate;
+
+        try {
+            commitDate = GitShell.getDateOfTheCommit(student, issuedLab.getLabDescription());
+        }catch (GitException e){
+            throw new CheckException(e);
+        }
+
+        if (commitDate == null) {
+            logger.info("Student " + student.getFulName() + " did not commit a lab.");
+        }
+        else {
+            if (commitDate.before(issuedLab.getDateOfLastRepoCheck())) {               //Дата коммита раньше даты последней проверки. Фальсификация сдачи
+                logger.info("Student " + student.getFulName() + " cheated.");
+
+                labMark.setCoefficient(new Double(-2));
+                HibernateShell.update(labMark);
+            } else if (commitDate.before(issuedLab.getCurrentDeadline().getDate())){
+                logger.info("Student " + student.getFulName() + " commit a lab.");
+
+                issuedLab.deleteStudentFromControlList(student);
+                labMark.setCoefficient(issuedLab.getCoefficientOfCurrentDeadline());
+
+                HibernateShell.update(labMark);
+            }
+        }
+    }
+
+    static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException{
+        logger.info("Check lab number " + issuedLab.getLabDescription().getNumberOfLab());
+        Date newDateOfLastRepoCheck = new Date();
+
+        //loop by students who did not pass the lab
+        for (Student currentStudent : issuedLab.getStudentControlList()) {
+            try {
+                Checker.checkStudent(currentStudent, issuedLab);
+            }catch(CheckException e){
+                throw new CheckException(e);
+            }
+        }
+
+        //save new date of last lab checking
+        logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
+        issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
+        HibernateShell.update(issuedLab);
     }
 }

@@ -2,6 +2,7 @@ package gitAPI;
 
 import data.Lab.Lab;
 import data.Student;
+import exceptions.GitException;
 import gitAPI.GitInfoClasses.GitCommitInfo.GitCommitHistory;
 import org.apache.log4j.Logger;
 
@@ -24,23 +25,26 @@ public class GitShell {
      * @param message - сообщене для проверка
      * @return GirCommitHistory cоответствующий коммиту с заданным сообщением
      */
-    static private GitCommitHistory messageCheck(String gitUserName, String gitRepoName, String message) {
+    static private GitCommitHistory messageCheck(String gitUserName, String gitRepoName, String message) throws GitException {
         logger.info("Start message check.");
         GitRequests git = new GitRequests();
         GitParser parser = new GitParser();
 
-        ArrayList<GitCommitHistory> commitHistories = null;
-
         try {
-            commitHistories = parser.readCommitHistory(git.getCommitList(gitUserName, gitRepoName));
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
+            ArrayList<GitCommitHistory> commitHistories = null;
 
-        for (GitCommitHistory selected : commitHistories) {
-            if (selected.getCommit().getMessage().equals(message))
-                logger.info("End message check.");
-                return selected;
+            commitHistories = parser.readCommitHistory(git.getCommitList(gitUserName, gitRepoName));
+
+            for (GitCommitHistory selected : commitHistories) {
+                if (selected.getCommit().getMessage().equals(message)) {
+                    logger.info("End message check. Messages are equals.");
+                    return selected;
+                }
+            }
+        }catch(NullPointerException e){
+            throw new GitException(e);
+        } catch (IOException e) {
+            throw new GitException(e);
         }
 
         logger.info("End message check.");
@@ -51,22 +55,26 @@ public class GitShell {
      * @param lab
      * @return - дату и время коммита
      */
-    static public Date getDateOfTheCommit(Student student, Lab lab) {
+    static public Date getDateOfTheCommit(Student student, Lab lab) throws GitException {
         logger.info("Start get date of the commit.");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("GTM"));
 
         GitCommitHistory answer = null;
 
-        answer = GitShell.messageCheck(student.getGitUserName(), student.getGitRepoName(),
-                lab.getKeyWord());
+        try {
+            answer = GitShell.messageCheck(student.getGitUserName(), student.getGitRepoName(),
+                    lab.getKeyWord());
+        }catch (GitException e){
+            throw new GitException(e);
+        }
 
         if (answer != null) {
             Date commitDate = null;
             try {
                 commitDate = format.parse(answer.getCommit().getCommitter().getDate().replace("T", ""));
             } catch (ParseException e) {
-                logger.error(e.getMessage());
+                throw new GitException(e);
             }
             logger.info("End get date of the commit.");
             return commitDate;
