@@ -189,6 +189,7 @@ public class Student implements Serializable {
         return String.format("https://github.com/%s/%s", this.gitUserName, this.gitRepoName);
     }
 
+
     public void setInfoFromURL(String url){
         String[] parseURL = url.split("/");
         this.gitUserName = parseURL[parseURL.length-2];

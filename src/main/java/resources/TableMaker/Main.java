@@ -1,6 +1,9 @@
 package resources.TableMaker;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import data.Student;
+import data.UniversityClass;
 import data.group.SubGroup;
 import data.lab.IssuedLab;
 import data.lab.Lab;
@@ -9,6 +12,7 @@ import data.mark.TestMark;
 import data.test.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -103,6 +107,8 @@ public class Main {
         Student student = new Student();
         student.setFulName("Pavel Kesso");
         student.setId(1);
+        student.seteMail("123");
+
         //student.setBonusMark(3);
 
         Lab lab1 = new Lab();
@@ -171,10 +177,42 @@ public class Main {
         subGroup.setStudentsList(students);
 
 
-        subGroup.setStudentsList(new ArrayList<Student>());
+        //subGroup.setStudentsList(new ArrayList<Student>());
 
 
-        System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup));
+
+
+        //System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup));
+
+
+        GsonBuilder builder = new GsonBuilder();
+
+        builder.registerTypeAdapter(Student.class, new StudentRedactConverter());
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        System.out.print(gson.toJson(students));
+
+//
+//
+//        UniversityClass universityClass = new UniversityClass();
+//        universityClass.setDate(new Date());
+//        UniversityClass universityClass1 = new UniversityClass();
+//        universityClass1.setDate(new Date());
+//
+//
+//        ArrayList<UniversityClass> arrayList = new ArrayList<UniversityClass>();
+//        arrayList.add(universityClass);
+//        arrayList.add(universityClass1);
+//
+//
+//        GsonBuilder builder = new GsonBuilder();
+//
+//        builder.registerTypeAdapter(UniversityClass.class, new UniversityClassConverter());
+//        builder.setPrettyPrinting();
+//        Gson gson = builder.create();
+//
+//        System.out.print(gson.toJson(arrayList));
 
     }
 }
