@@ -1,5 +1,6 @@
 package resources;
 
+import data.Student;
 import data.group.Group;
 import data.group.GroupsKeeper;
 import data.lab.LabsKeeper;
@@ -222,7 +223,7 @@ public class HibernateShell {
 
 
     public static void updateLabMark(Integer id, Integer mark){
-        logger.info("Start save lab mark.");
+        logger.info("Start update lab mark.");
         final Session session = getSession();
         LabMark labMark = null;
         try {
@@ -238,11 +239,11 @@ public class HibernateShell {
             logger.info("Close session.");
             session.close();
         }
-        logger.info("End get group keeper.");
+        logger.info("End update lab mark.");
     }
 
     public static void updateLabCoeff(Integer id, Double coeff){
-        logger.info("Start save lab mark.");
+        logger.info("Start update lab coeff.");
         final Session session = getSession();
         LabMark labMark = null;
         try {
@@ -258,11 +259,11 @@ public class HibernateShell {
             logger.info("Close session.");
             session.close();
         }
-        logger.info("End get group keeper.");
+        logger.info("End update lab coeff.");
     }
 
-    public static void updatTestMark(Integer id, Integer mark){
-        logger.info("Start save lab mark.");
+    public static void updateTestMark(Integer id, Integer mark){
+        logger.info("Start update test mark.");
         final Session session = getSession();
         TestMark testMark = null;
         try {
@@ -278,7 +279,27 @@ public class HibernateShell {
             logger.info("Close session.");
             session.close();
         }
-        logger.info("End get group keeper.");
+        logger.info("End update test mark.");
+    }
+
+    public static void updateBonusMark(Integer id, Integer mark){
+		logger.info("Start update bonus mark.");
+		final Session session = getSession();
+		Student student = null;
+		try {
+			session.enableFilter("coefficientFilter");
+
+			student = (Student) session.get(Student.class, id);
+			student.setBonusMark(mark);
+
+			session.getTransaction().begin();
+			session.update(student);
+			session.getTransaction().commit();
+		} finally {
+			logger.info("Close session.");
+			session.close();
+		}
+		logger.info("End update bonus mark");
     }
 }
 
