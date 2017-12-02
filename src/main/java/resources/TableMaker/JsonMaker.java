@@ -21,7 +21,7 @@ public class JsonMaker {
         map.put("table-class", "table-ui");
 
         if(!studentArray.isEmpty()) {
-            map.put("header", Key.getKeyList(studentArray.get(0).keySet()));
+            map.put("header", studentArray.get(0).keySet());
         }else {
             map.put("header", new ArrayList<Object>());
         }
@@ -46,13 +46,13 @@ public class JsonMaker {
         map.put("student", student);
 
         for(LabMark labMark : student.getLabMarkList()) {
-            String labNum = new String("lab" + labMark.getIssuedLab().getLabDescription().getNumberOfLab());
+            String labNum = "lab" + labMark.getIssuedLab().getLabDescription().getNumberOfLab();
 
             map.put(labNum, labMark);
         }
 
         for(TestMark testMark : student.getTestMarkList()) {
-            String testNum = new String("test" + testMark.getTest().getTestNumber());
+            String testNum = "test" + testMark.getTest().getTestNumber();
 
             map.put(testNum, testMark);
         }
