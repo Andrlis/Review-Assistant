@@ -29,15 +29,18 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
         return labObject;
     }
 
-    static private String getCoeff(Double coeff) {
+    static public String getCoeff(Double coeff) {
         if(coeff == null) {
             return "nocoeff";
         }
 
+        if(coeff == 0) {
+            return "coeff-00";
+        }
         if(coeff == 1) {
-            return "coeff10";
+            return "coeff-10";
         }
 
-        return "coeff" + (int)(coeff*10);
+        return "coeff-0" + (int)(coeff*10);
     }
 }
