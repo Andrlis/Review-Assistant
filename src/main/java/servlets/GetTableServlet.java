@@ -25,7 +25,7 @@ public class GetTableServlet  extends HttpServlet {
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             switch (tableType.getBytes()[0]) {
                 case 'm':
-                    String str = JsonMaker.getJsonSubGroupMarks(subGroup);
+                    String str = JsonMaker.getJsonSubGroupMarks(subGroup, true); //Пашка добавил труе
                     resp.getWriter().append(str);
                     break;
                 case 'p':
