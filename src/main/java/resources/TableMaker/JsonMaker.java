@@ -10,7 +10,7 @@ import data.mark.TestMark;
 import java.util.*;
 
 public class JsonMaker {
-    public static String getJsonSubGroupMarks(SubGroup subGroup){
+    public static String getJsonSubGroupMarks(SubGroup subGroup, boolean editable){
 
         ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
         for(Student currentStudent: (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
@@ -18,10 +18,10 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "mark-class");
+        map.put("table-class", "table-ui");
 
         if(!studentArray.isEmpty()) {
-            map.put("header", studentArray.get(0).keySet());
+            map.put("header", Key.getKeyList(studentArray.get(0).keySet()));
         }else {
             map.put("header", new ArrayList<Object>());
         }
@@ -31,9 +31,10 @@ public class JsonMaker {
 
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Student.class, new StudentConverter());
-        builder.registerTypeAdapter(LabMark.class, new LabMarkConverter());
-        builder.registerTypeAdapter(TestMark.class, new TestMarkConverter());
-        builder.registerTypeAdapter(BonusMark.class, new BonusMarkConverter());
+        builder.registerTypeAdapter(LabMark.class, new LabMarkConverter(editable));
+        builder.registerTypeAdapter(TestMark.class, new TestMarkConverter(editable));
+        builder.registerTypeAdapter(BonusMark.class, new BonusMarkConverter(editable));
+        builder.registerTypeAdapter(Key.class, new KeyConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 

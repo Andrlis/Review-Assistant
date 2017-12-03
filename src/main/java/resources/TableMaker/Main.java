@@ -182,16 +182,16 @@ public class Main {
 
 
 
-        //System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup));
+        System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup, true));
 
 
-        GsonBuilder builder = new GsonBuilder();
-
-        builder.registerTypeAdapter(Student.class, new StudentRedactConverter());
-        builder.setPrettyPrinting();
-        Gson gson = builder.create();
-
-        System.out.print(gson.toJson(students));
+//        GsonBuilder builder = new GsonBuilder();
+//
+//        builder.registerTypeAdapter(Student.class, new StudentRedactConverter());
+//        builder.setPrettyPrinting();
+//        Gson gson = builder.create();
+//
+//        System.out.print(gson.toJson(students));
 
 //
 //
