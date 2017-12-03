@@ -21,8 +21,15 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
 
         JsonObject labObject = new JsonObject();
 
-        labObject.addProperty("cell-class", "cell-ui" + ( editable ? " editable " : " " ) + getCoeff(src.getCoefficient()));
-        labObject.addProperty("value", (src.getMark() != null) ? (src.getMark() != -1) ? src.getMark().toString() : "" : "");
+        labObject.addProperty(
+                "cell-class",
+                "cell-ui" + ( editable ? " editable " : " " ) +
+                        getCoeff(src.getCoefficient())
+        );
+        labObject.addProperty(
+                "value",
+                (src.getMark() != null) ? (src.getMark() != -1) ? src.getMark().toString() : "" : ""
+        );
         labObject.addProperty("type", "lab");
         labObject.addProperty("id", src.getId().toString());
 
@@ -30,17 +37,15 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
     }
 
     static public String getCoeff(Double coeff) {
-        if(coeff == null) {
-            return "nocoeff";
+        if(coeff == -1 || coeff == null) {
+            return "";
         }
-
         if(coeff == 0) {
-            return "coeff-00";
+            return "coef-00";
         }
         if(coeff == 1) {
-            return "coeff-10";
+            return "coef-10";
         }
-
-        return "coeff-0" + (int)(coeff*10);
+        return "coef-0" + Double.toString(coeff).substring(2, 3);
     }
 }

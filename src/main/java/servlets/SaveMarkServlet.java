@@ -19,14 +19,20 @@ public class SaveMarkServlet extends HttpServlet {
         String id = (String) req.getParameter("id");
         String type = (String) req.getParameter("type");
         String value = (String) req.getParameter("value");
+        if (id == null || type == null || value == null) {
+            req
+                    .getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
+                    .forward(req, resp);
+        }
+        if (value.equals(""))
+            value="-1";
         if (type.equals("lab")) {
             HibernateShell.updateLabMark(Integer.parseInt(id), Integer.parseInt(value));
         } else if (type.equals("test")) {
-            HibernateShell.updatTestMark(Integer.parseInt(id), Integer.parseInt(value));
+            HibernateShell.updateTestMark(Integer.parseInt(id), Integer.parseInt(value));
         } else if (type.equals("bonus")) {
-            //HibernateShell.
+            HibernateShell.updateBonusMark(Integer.parseInt(id), Integer.parseInt(value));
         }
-
     }
 
     @Override

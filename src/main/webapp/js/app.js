@@ -75,6 +75,7 @@ function loadTable() {
     });
 }
 
+
 //events for table with marks or presence
 function setEventsToTable() {
 
@@ -119,6 +120,9 @@ function setEventsToTable() {
             var parent = $(".edit").parent();
             var data_id = parent.attr("data-id");
             var data_type = parent.attr("data-type");
+            //////Нужна другая проверка!!!!!
+            if (isNaN(val))
+                val="";
             parent.html(val);
             $.ajax({
                 url: "SaveMarkServlet?id=" + data_id +
