@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/GetTableServlet")
-public class GetTableServlet  extends HttpServlet {
+public class GetTableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String groupNumber = (String) req.getParameter("group");

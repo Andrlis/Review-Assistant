@@ -1,6 +1,7 @@
 $(document).ready(function () {
     setEventsToTable();
     //ShowMarksTable();
+
     $(".ch-tab-type").click(function () {
         var val = $(this).attr("value");
         var cont = $(this).html();
@@ -22,10 +23,11 @@ $(document).ready(function () {
     //loadTable();
 });
 
-//ajax to load table
+
 function formTable(data) {
     var table = $("<table></table>");
     var tableClass = data['table-class'];
+    table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
     var headerRow = $('<tr class="header"></tr>');
@@ -41,7 +43,7 @@ function formTable(data) {
             var cell = $("<td></td>");
             cell.attr("data-id", data[column]['id']);
             cell.attr("data-type", data[column]['type']);
-            cell.attr("class", data[column]['cell-classss']);
+            cell.attr("class", data[column]['cell-class']);
             cell.append(data[column]['value']);
             row.append(cell);
             //row.append("<td>" + data[column]['value'] + "</td>");
@@ -49,6 +51,7 @@ function formTable(data) {
         table.append(row);
     });
     $('#table-container').html(table);
+    setEventsToTable();
     $("td").click(function (event) {
         var type = $(this).attr("data-type");
         var id = $(this).attr("data-id");
@@ -74,7 +77,7 @@ function loadTable() {
 
 //events for table with marks or presence
 function setEventsToTable() {
-    ShowMarksTable();
+
 
     //Event for click at button
     $("button.add-col-button").click(function () {
@@ -117,6 +120,11 @@ function setEventsToTable() {
             var data_id = parent.attr("data-id");
             var data_type = parent.attr("data-type");
             parent.html(val);
+            $.ajax({
+                url: "SaveMarkServlet?id=" + data_id +
+                "&type=" + data_type +
+                "&value=" + val
+            });
         });
     });
     ////event function for click at cell whith student name
@@ -126,12 +134,4 @@ function setEventsToTable() {
     $("#stud-inf-wind").mouseleave(function () {
         HideStudentInformationWind();
     });
-}
-
-function ShowMarksTable() {
-    $(".bonus-mark").show();
-    $(".test-mark").show();
-    $(".lab-mark").show();
-    $(".button-cell-div").show();
-    $(".presence-cell").hide();
 }
