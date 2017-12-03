@@ -1,6 +1,6 @@
 $(document).ready(function () {
     setEventsToTable();
-    ShowMarksTable();
+    //ShowMarksTable();
     $(".ch-tab-type").click(function () {
         var val = $(this).attr("value");
         var cont = $(this).html();
@@ -17,7 +17,9 @@ $(document).ready(function () {
         $("#group-number").attr("value", group);
         loadTable();
     });
-    loadTable();
+
+    ////////Верни строку!!!!!!!!!!!!
+    //loadTable();
 });
 
 //ajax to load table
@@ -46,7 +48,7 @@ function formTable(data) {
         });
         table.append(row);
     });
-    $('#table-container').append(table);
+    $('#table-container').html(table);
     $("td").click(function (event) {
         var type = $(this).attr("data-type");
         var id = $(this).attr("data-id");
@@ -111,7 +113,10 @@ function setEventsToTable() {
 
         $(".edit").blur(function () {
             var val = $(".edit").val();
-            $(".edit").parent().html(val);
+            var parent = $(".edit").parent();
+            var data_id = parent.attr("data-id");
+            var data_type = parent.attr("data-type");
+            parent.html(val);
         });
     });
     ////event function for click at cell whith student name

@@ -109,16 +109,6 @@
  */
 
 
-.table-ui {
-    width: 100%;
-}
-
-.cell-ui {
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-}
-
 .button-cell-div {
     border: none;
 }
@@ -139,6 +129,39 @@
 #edit {
     border-color: white;
     border: none;
+}
+
+.table-ui {
+    width: 100%;
+}
+
+.cell-ui {
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+.header-cell {
+    padding: 7px;
+    background: silver;
+}
+
+.coef-10 {
+    background: rgb(117, 225, 120);
+}
+.coef-08 {
+    background: rgb(219, 250, 84);
+}
+.coef-06 {
+    background: rgb(246, 250, 123);
+}
+.coef-04 {
+    background: rgb(250, 244, 0);
+}
+.coef-02 {
+    background: rgb(250, 200, 99);
+}
+.coef-00 {
+    background: rgb(250, 119, 102);
 }
 
 /*
