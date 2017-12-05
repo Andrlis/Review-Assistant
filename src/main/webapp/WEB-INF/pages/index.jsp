@@ -55,6 +55,22 @@
 
 </div>
 
+<div class="popup">
+    <button  onclick="showPopupForm()">Добавить</button>
+    <form class="popup-form container-ver" id="popup-form">
+        <select name="new-column-type" id="new-column-type">
+            <option value="lab">Лабораторная работа <span id="new-lab-number"></span></option>
+            <option value="test">Контрольная работа <span id="new-test-number"></span></option>
+        </select>
+        <select name="new-lab-date" id="new-lab-date">
+            <option>Дата1</option>
+            <option>Дата2</option>
+        </select>
+        <input type="button" value="Добавить" onclick="addLabOrTestButton()">
+        <input type="button" value="Отменить" onclick="cancelPopupForm()">
+    </form>
+</div>
+
 
 </body>
 </html>

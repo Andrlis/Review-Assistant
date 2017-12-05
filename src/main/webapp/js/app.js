@@ -20,7 +20,7 @@ $(document).ready(function () {
     });
 
     ////////Верни строку!!!!!!!!!!!!
-    //loadTable();
+    loadTable();
 });
 
 
@@ -120,7 +120,7 @@ function setEventsToTable() {
             var parent = $(".edit").parent();
             var data_id = parent.attr("data-id");
             var data_type = parent.attr("data-type");
-            //////Нужна другая проверка!!!!!
+            //////Нужна другая проверка в!!!!!
             if (isNaN(val))
                 val="";
             parent.html(val);
@@ -138,4 +138,48 @@ function setEventsToTable() {
     $("#stud-inf-wind").mouseleave(function () {
         HideStudentInformationWind();
     });
+}
+
+/*
+    function for showing popup form: after pressing button "Добавить"
+ */
+
+function showPopupForm()
+{
+    $("#popup-form").addClass("show");
+}
+
+function cancelPopupForm()
+{
+    $("#popup-form").removeClass("show");
+}
+
+function errorAddLabOrTestButton()
+{
+
+}
+
+function succesAddLabOrTestButton()
+{
+
+}
+
+function addLabOrTestButton()
+{
+    var group = $("#group-number").attr("value");
+    var subgroup = $("#subgroup-number").attr("value");
+    var type = $("#new-column-type").val();
+    var date = $("#new-lab-date").val();
+
+    $.ajax({
+        url: "AddLabOrTestServlet?group=" + group +
+        "&subgroup=" + subgroup +
+        "&type=" + type +
+        "&date=" + date,
+        dataType: "json",
+        success: function(data){
+            succesAddLabOrTestButton();
+        }
+    });
+    cancelPopupForm();
 }
