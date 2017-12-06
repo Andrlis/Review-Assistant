@@ -22,6 +22,13 @@ public class AddLabOrTestServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+       /*String newColumnType = (String) req.getParameter("new-column-type");
+        String newLabDate = (String) req.getParameter("new-lab-date");*/
+        String groupNumber = (String) req.getParameter("group");
+        String subGroupNumber = (String) req.getParameter("subgroup");
+        String type = (String) req.getParameter("type");
+        String date = (String) req.getParameter("date");
+        String comment = (String) req.getParameter("comment");
+        ///Выдать лабу!!!
     }
 }

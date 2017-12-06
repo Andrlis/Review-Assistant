@@ -2,6 +2,15 @@ $(document).ready(function () {
     setEventsToTable();
     //ShowMarksTable();
 
+    $("#new-column-type").change()
+    {
+        var type = $("#new-column-type").val();
+        if (type==="test")
+            $("#new-lab-date").hide();
+        else
+            $("#new-lab-date").show();
+    }
+
     $(".ch-tab-type").click(function () {
         var val = $(this).attr("value");
         var cont = $(this).html();
@@ -144,9 +153,32 @@ function setEventsToTable() {
     function for showing popup form: after pressing button "Добавить"
  */
 
+function formAndShowPopupForm(dates)
+{
+    $("#new-lab-date").html("");
+    dates.forEach(function (date) {
+        var select = $("<option></option>");
+        select.attr("value", date);
+        select.html(date);
+        $("#new-lab-date").append(select);
+    });
+
+    $("#popup-form").addClass("show");
+}
+
 function showPopupForm()
 {
-    $("#popup-form").addClass("show");
+    var group = $("#group-number").attr("value");
+    var subgroup = $("#subgroup-number").attr("value");
+    $.ajax({
+        url: "/GetClassesDate?" +
+        "group=" + group +
+        "&subgroup=" + subgroup,
+        dataType: "json",
+        success: function(data){
+            formAndShowPopupForm(data);
+        }
+    });
 }
 
 function cancelPopupForm()
@@ -170,8 +202,21 @@ function addLabOrTestButton()
     var subgroup = $("#subgroup-number").attr("value");
     var type = $("#new-column-type").val();
     var date = $("#new-lab-date").val();
+    var comment = $("#comment-text-area").val();
 
-    $.ajax({
+    $.post(
+        "AddLabOrTestServlet",
+        {
+            group:'"' + group + '"',
+            subgroup:'"' + subgroup + '"',
+            type:'"' + type + '"',
+            date:'"' + date + '"',
+            comment:'"' + comment + '"'
+        },
+        succesAddLabOrTestButton
+    );
+
+    /*$.ajax({
         url: "AddLabOrTestServlet?group=" + group +
         "&subgroup=" + subgroup +
         "&type=" + type +
@@ -180,6 +225,6 @@ function addLabOrTestButton()
         success: function(data){
             succesAddLabOrTestButton();
         }
-    });
+    });*/
     cancelPopupForm();
 }

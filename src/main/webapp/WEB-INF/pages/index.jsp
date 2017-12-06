@@ -63,9 +63,9 @@
             <option value="test">Контрольная работа <span id="new-test-number"></span></option>
         </select>
         <select name="new-lab-date" id="new-lab-date">
-            <option>Дата1</option>
-            <option>Дата2</option>
+
         </select>
+        <textarea id="comment-text-area" cols="30" rows="5" ></textarea>
         <input type="button" value="Добавить" onclick="addLabOrTestButton()">
         <input type="button" value="Отменить" onclick="cancelPopupForm()">
     </form>
