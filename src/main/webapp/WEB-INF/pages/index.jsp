@@ -69,6 +69,7 @@
         <input type="button" value="Добавить" onclick="addLabOrTestButton()">
         <input type="button" value="Отменить" onclick="cancelPopupForm()">
     </form>
+
 </div>
 
 

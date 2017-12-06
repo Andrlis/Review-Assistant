@@ -9,6 +9,7 @@ $(document).ready(function () {
             $("#new-lab-date").hide();
         else
             $("#new-lab-date").show();
+        
     }
 
     $(".ch-tab-type").click(function () {
