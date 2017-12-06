@@ -13,6 +13,7 @@ public class UniversityClassConverter implements JsonSerializer<UniversityClass>
 	public JsonElement serialize(UniversityClass src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject object = new JsonObject();
 
+		object.addProperty("cell-class", "class-class");
 		object.addProperty("value", src.getDate().toString());
 		
 		return object;

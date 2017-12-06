@@ -1,4 +1,4 @@
-package resources.TableMaker;
+package resources.TableMaker.Data;
 
 import java.util.ArrayList;
 import java.util.Set;
