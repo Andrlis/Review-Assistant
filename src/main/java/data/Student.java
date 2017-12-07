@@ -9,6 +9,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -189,6 +190,12 @@ public class Student implements Serializable {
         return String.format("https://github.com/%s/%s", this.gitUserName, this.gitRepoName);
     }
 
+    public void setGitURL(@NotNull String url) {
+        if(url.split("/").length != 5)
+            return;
+        this.gitRepoName = url.split("/")[4];
+        this.gitUserName = url.split("/")[3];
+    }
 
     public void setInfoFromURL(String url){
         String[] parseURL = url.split("/");

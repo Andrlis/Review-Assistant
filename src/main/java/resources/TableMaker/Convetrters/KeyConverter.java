@@ -1,9 +1,10 @@
-package resources.TableMaker;
+package resources.TableMaker.Convetrters;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import resources.TableMaker.Data.Key;
 
 import java.lang.reflect.Type;
 

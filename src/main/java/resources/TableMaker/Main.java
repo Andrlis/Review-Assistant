@@ -58,6 +58,9 @@ public class Main {
         universityClassesStudent1.add(universityClass1);
         universityClassesStudent1.add(universityClass4);
         student1.setMissedUniversityClassesList(universityClassesStudent1);
+        student1.seteMail("123");
+        student1.setGitRepoName("repo");
+        student1.setGitUserName("user");
 
         Student student2 = new Student();
         student2.setId(2);
@@ -66,8 +69,10 @@ public class Main {
         ArrayList<UniversityClass> universityClassesStudent2 = new ArrayList<UniversityClass>();
         universityClassesStudent2.add(universityClass2);
         universityClassesStudent2.add(universityClass3);
-        student1.setMissedUniversityClassesList(universityClassesStudent2);
-
+        student2.setMissedUniversityClassesList(universityClassesStudent2);
+        student2.seteMail("1234");
+        student2.setGitRepoName("repo2");
+        student2.setGitUserName("user2");
 
         Student student3 = new Student();
         student3.setId(3);
@@ -75,7 +80,10 @@ public class Main {
         student3.setSubGroup(subGroup);
         ArrayList<UniversityClass> universityClassesStudent3 = new ArrayList<UniversityClass>();
         universityClassesStudent3.add(universityClass1);
-        student1.setMissedUniversityClassesList(universityClassesStudent3);
+        student3.setMissedUniversityClassesList(universityClassesStudent3);
+        student3.seteMail("12345");
+        student3.setGitRepoName("repo3");
+        student3.setGitUserName("user3");
 
         ArrayList<Student> students = new ArrayList<Student>();
         students.add(student1);
@@ -84,7 +92,7 @@ public class Main {
 
         subGroup.setStudentsList(students);
 
-        System.out.println(JsonMaker.getJsonSubGroupVisits(subGroup,true));
+        System.out.println(JsonMaker.getJsonSubGroupStudentRedact(subGroup));
 
     }
 }
