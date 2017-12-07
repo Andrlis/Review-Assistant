@@ -127,6 +127,10 @@ public class HibernateShell {
         return answer;
     }
 
+    public static Long getNumberOfNextTest() {
+        return getNumberOfTests() + 1;
+    }
+
     public static Long getNumberOfLab() {
         logger.info("Start get number of labs.");
         final Session session = getSession();
@@ -139,6 +143,10 @@ public class HibernateShell {
         }
         logger.info("End get number of labs.");
         return answer;
+    }
+
+    public static Long getNumberOfNextLab() {
+        return getNumberOfLab() + 1;
     }
 
     public static void update(Object object) {
