@@ -8,13 +8,22 @@ import data.UniversityClass;
 
 import java.lang.reflect.Type;
 
-public class UniversityClassConverter implements JsonSerializer<UniversityClass>{
+public class UniversityClassConverter implements JsonSerializer<Class>{
+
+    private boolean editable;
+
+	public UniversityClassConverter(boolean editable) {
+	    this.editable = editable;
+    }
 	@Override
-	public JsonElement serialize(UniversityClass src, Type typeOfSrc, JsonSerializationContext context) {
+	public JsonElement serialize(Class src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject object = new JsonObject();
 
-		object.addProperty("cell-class", "class-class");
-		object.addProperty("value", src.getDate().toString());
+		object.addProperty("cell-class", "cell-ui" + ( editable ? " editable" : "" ) + ( src.isVisitable() ? " visited" : " missed" ));
+		object.addProperty("value", src.isVisitable() ? "" : "н");
+
+        object.addProperty("type", "class");
+        object.addProperty("id", src.getId().toString());
 		
 		return object;
 	}

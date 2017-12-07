@@ -11,208 +11,80 @@ import data.mark.LabMark;
 import data.mark.TestMark;
 import data.test.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
-//        Group group;
-//        Lecturer lecturer;
-//        SubGroup subGroup1;
-//        UniversityClass universityClass;
-//        IssuedLab issuedLab;
-//        Lab lab;
-//        Student student;
-//        TestMark testMark;
-//        LabMark labMark;
-//        data.test.Test test;
-//
-//
-//        group = new Group();
-//        lecturer = new Lecturer();
-//        subGroup1 = new SubGroup();
-//        universityClass = new UniversityClass();
-//        issuedLab = new IssuedLab();
-//        lab = new Lab();
-//        student = new Student();
-//        testMark = new TestMark();
-//        labMark = new LabMark();
-//        test = new data.test.Test();
-//
-//        lecturer.setFullName("Иванов Иван Иваноыич");
-//        lecturer.setSubGroupList(Arrays.asList(subGroup1));
-//
-//        group.setNumberOfGroup("550503");
-//        group.setScheduleApiGroupNumber("550503");
-//        group.setAmountOfTest(0);
-//        group.getSubGroupList().add(subGroup1);
-//
-//        subGroup1.setLecturer(lecturer);
-//        subGroup1.setGroup(group);
-//        subGroup1.setUniversityClassesList(Arrays.asList(universityClass));
-//        subGroup1.setSubGroupNumber("1");
-//        subGroup1.setStudentsList(Arrays.asList(student));
-//        subGroup1.setIssuedLabsList(Arrays.asList(issuedLab));
-//
-//        universityClass.setDate(new Date());
-//        universityClass.setSubGroup(subGroup1);
-//
-//        issuedLab.setCoefficientOfCurrentDeadline(0.8);
-//        issuedLab.setCurrentDeadline(universityClass);
-//        issuedLab.setDateOfLastRepoCheck(new Date());
-//        issuedLab.setLabDescription(lab);
-//        issuedLab.setStudentControlList(Arrays.asList(student));
-//        issuedLab.setUniversityClassOfIssue(universityClass);
-//
-//        lab.setKeyWord("lab");
-//        lab.setNumberOfLab(1);
-//
-//        student.seteMail("student@gmail.com");
-//        student.setFulName("Петров Петр Петрович");
-//        student.setGitRepoName("studentRepo");
-//        student.setGitUserName("student");
-//        student.setBonusMark(9);
-//        student.setLabMarkList(Arrays.asList(labMark));
-//        student.setMissedUniversityClassesList(Arrays.asList(universityClass));
-//        student.setSubGroup(subGroup1);
-//        student.setTestMarkList(Arrays.asList(testMark));
-//
-//        labMark.setCoefficient(0.2);
-//        labMark.setIssuedLab(issuedLab);
-//        labMark.setMark(9);
-//        labMark.setStudent(student);
-//
-//        testMark.setMark(8);
-//        testMark.setStudent(student);
-//        testMark.setTest(test);
-//
-//        test.setTestDate(new Date());
-//        test.setTestNumber(7);
-//        test.setTestMarkList(Arrays.asList(testMark));
-//
-//
-//
-//        HibernateShell.save(group);
-//
-//        HibernateShell.updateLabMark(labMark.getId(), 9);
-//
-//        System.out.println("END");
-//
-//        ArrayList<Map<String, Object>> a = new ArrayList<Map<String, Object>>();
+        SimpleDateFormat dataFormat = new SimpleDateFormat("dd.MM.yy HH:mm");
+        SubGroup subGroup = new SubGroup();
+
+        UniversityClass universityClass1 = new UniversityClass();
+        universityClass1.setDate(dataFormat.parse("01.01.17 11:40"));
+        universityClass1.setId(1);
+        universityClass1.setSubGroup(subGroup);
+
+        UniversityClass universityClass2 = new UniversityClass();
+        universityClass2.setDate(dataFormat.parse("01.01.17 13:25"));
+        universityClass2.setId(1);
+        universityClass2.setSubGroup(subGroup);
+
+        UniversityClass universityClass3 = new UniversityClass();
+        universityClass3.setDate(dataFormat.parse("02.01.17 08:00"));
+        universityClass3.setId(1);
+        universityClass3.setSubGroup(subGroup);
+
+        UniversityClass universityClass4 = new UniversityClass();
+        universityClass4.setDate(dataFormat.parse("03.01.17 13:25"));
+        universityClass4.setId(1);
+        universityClass4.setSubGroup(subGroup);
+
+        ArrayList<UniversityClass> universityClasses = new ArrayList<UniversityClass>();
+        universityClasses.add(universityClass1);
+        universityClasses.add(universityClass2);
+        universityClasses.add(universityClass3);
+        universityClasses.add(universityClass4);
+
+        subGroup.setUniversityClassesList(universityClasses);
+
+        Student student1 = new Student();
+        student1.setId(1);
+        student1.setFulName("Julia");
+        student1.setSubGroup(subGroup);
+        ArrayList<UniversityClass> universityClassesStudent1 = new ArrayList<UniversityClass>();
+        universityClassesStudent1.add(universityClass1);
+        universityClassesStudent1.add(universityClass4);
+        student1.setMissedUniversityClassesList(universityClassesStudent1);
+
+        Student student2 = new Student();
+        student2.setId(2);
+        student2.setFulName("Julia2");
+        student2.setSubGroup(subGroup);
+        ArrayList<UniversityClass> universityClassesStudent2 = new ArrayList<UniversityClass>();
+        universityClassesStudent2.add(universityClass2);
+        universityClassesStudent2.add(universityClass3);
+        student1.setMissedUniversityClassesList(universityClassesStudent2);
 
 
-
-
-        Student student = new Student();
-        student.setFulName("Pavel Kesso");
-        student.setId(1);
-        student.seteMail("123");
-
-        //student.setBonusMark(3);
-
-        Lab lab1 = new Lab();
-        lab1.setNumberOfLab(new Integer(1));
-        Lab lab2 = new Lab();
-        lab2.setNumberOfLab(new Integer(2));
-        Lab lab3 = new Lab();
-        lab3.setNumberOfLab(new Integer(3));
-
-        IssuedLab il1 = new IssuedLab();
-        il1.setLabDescription(lab1);
-        IssuedLab il2 = new IssuedLab();
-        il2.setLabDescription(lab2);
-        IssuedLab il3 = new IssuedLab();
-        il3.setLabDescription(lab3);
-
-
-        LabMark l1 = new LabMark();
-        l1.setId(1);
-        //l1.setCoefficient(new Double(0.1));
-        l1.setMark(new Integer(-1));
-        l1.setIssuedLab(il1);
-
-        LabMark l2 = new LabMark();
-        l2.setId(2);
-        l2.setCoefficient(new Double(-1));
-        //l2.setMark(new Integer(10));
-        l2.setIssuedLab(il2);
-
-        LabMark l3 = new LabMark();
-        l3.setId(3);
-        l3.setCoefficient(new Double(-1));
-        l3.setMark(new Integer(-1));
-        l3.setIssuedLab(il3);
-
-
-        ArrayList<LabMark> labMarks = new ArrayList<LabMark>();
-        labMarks.add(l1);
-        labMarks.add(l2);
-        labMarks.add(l3);
-
-        Test test = new Test();
-        test.setTestNumber(7);
-
-        TestMark testMark = new TestMark();
-        testMark.setId(1);
-        testMark.setMark(8);
-        testMark.setStudent(student);
-        testMark.setTest(test);
-
-        ArrayList<TestMark> testMarks = new ArrayList<TestMark>();
-        testMarks.add(testMark);
-        student.setTestMarkList(testMarks);
-
-
-        student.setLabMarkList(labMarks);
+        Student student3 = new Student();
+        student3.setId(3);
+        student3.setFulName("Toje Julia");
+        student3.setSubGroup(subGroup);
+        ArrayList<UniversityClass> universityClassesStudent3 = new ArrayList<UniversityClass>();
+        universityClassesStudent3.add(universityClass1);
+        student1.setMissedUniversityClassesList(universityClassesStudent3);
 
         ArrayList<Student> students = new ArrayList<Student>();
-        students.add(student);
-        students.add(student);
-        students.add(student);
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
 
-
-
-        SubGroup subGroup = new SubGroup();
         subGroup.setStudentsList(students);
 
-
-        //subGroup.setStudentsList(new ArrayList<Student>());
-
-
-
-
-        System.out.println(JsonMaker.getJsonSubGroupMarks(subGroup, true));
-
-
-//        GsonBuilder builder = new GsonBuilder();
-//
-//        builder.registerTypeAdapter(Student.class, new StudentRedactConverter());
-//        builder.setPrettyPrinting();
-//        Gson gson = builder.create();
-//
-//        System.out.print(gson.toJson(students));
-
-//
-//
-//        UniversityClass universityClass = new UniversityClass();
-//        universityClass.setDate(new Date());
-//        UniversityClass universityClass1 = new UniversityClass();
-//        universityClass1.setDate(new Date());
-//
-//
-//        ArrayList<UniversityClass> arrayList = new ArrayList<UniversityClass>();
-//        arrayList.add(universityClass);
-//        arrayList.add(universityClass1);
-//
-//
-//        GsonBuilder builder = new GsonBuilder();
-//
-//        builder.registerTypeAdapter(UniversityClass.class, new UniversityClassConverter());
-//        builder.setPrettyPrinting();
-//        Gson gson = builder.create();
-//
-//        System.out.print(gson.toJson(arrayList));
+        System.out.println(JsonMaker.getJsonSubGroupVisits(subGroup,true));
 
     }
 }

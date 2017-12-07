@@ -3,6 +3,7 @@ package data;
 import data.group.SubGroup;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -58,5 +59,10 @@ public class UniversityClass {
 
     public void setSubGroup(SubGroup subGroup) {
         this.subGroup = subGroup;
+    }
+
+    public String getDataTime() {
+        SimpleDateFormat dataFormat = new SimpleDateFormat("dd.MM.yy HH:mm");
+        return dataFormat.format(this.date);
     }
 }
