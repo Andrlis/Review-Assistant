@@ -8,6 +8,7 @@ import data.group.SubGroup;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import resources.TableMaker.Convetrters.*;
+import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
 import resources.TableMaker.Data.Class;
 import resources.TableMaker.Data.Key;
@@ -75,6 +76,9 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
+    /*
+    Надо добавить класс info-cell-editable в каждую ячейку этой таблицы
+     */
     public static String getJsonSubGroupStudentRedact(SubGroup subGroup) {
         ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
 
@@ -139,8 +143,8 @@ public class JsonMaker {
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", student);
 
-        map.put("eMail", new Template("class-ui", student.geteMail()));
-        map.put("gitURL", new Template("class-ui", student.getGitURL()));
+        map.put("eMail", new Template("cell-ui", student.geteMail())); //класс и значение для емаила
+        map.put("gitURL", new Template("cell-ui", student.getGitURL())); //класс и значение для юрл
 
         return map;
     }

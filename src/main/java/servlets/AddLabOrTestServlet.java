@@ -30,5 +30,6 @@ public class AddLabOrTestServlet extends HttpServlet {
         String date = (String) req.getParameter("date");
         String comment = (String) req.getParameter("comment");
         ///Выдать лабу!!!
+        //Как выдать лабу???
     }
 }

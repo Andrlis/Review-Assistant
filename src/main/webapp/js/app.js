@@ -2,21 +2,24 @@ $(document).ready(function () {
     setEventsToTable();
     //ShowMarksTable();
 
-    $("#new-column-type").change()
-    {
-        var type = $("#new-column-type").val();
-        if (type==="test")
-            $("#new-lab-date").hide();
-        else
-            $("#new-lab-date").show();
-        
-    }
-
     $(".ch-tab-type").click(function () {
         var val = $(this).attr("value");
         var cont = $(this).html();
         $("#info-type").html(cont);
         $("#info-type").attr("value", val);
+        if (val === 'm')
+        {
+            $("#popup-add-column").show();
+            $("#popup-edit-student").hide();
+        } else if (val === 'e')
+        {
+            $("#popup-edit-student").show();
+            $("#popup-add-column").hide();
+        } else
+        {
+            $("#popup-edit-student").hide();
+            $("#popup-add-column").hide();
+        }
         loadTable();
     });
     $(".ch-tab-gr").click(function () {
@@ -29,10 +32,20 @@ $(document).ready(function () {
         loadTable();
     });
 
-    ////////Верни строку!!!!!!!!!!!!
     loadTable();
+    $("#popup-add-column").show();
+    $("#popup-edit-student").hide();
 });
 
+//Function onchange for select new-column-type
+function changeNewColumnType()
+{
+    var type = $("#new-column-type").val();
+    if (type==="test")
+        $("#new-lab-date").hide();
+    else
+        $("#new-lab-date").show();
+}
 
 function formTable(data) {
     var table = $("<table></table>");
@@ -47,8 +60,6 @@ function formTable(data) {
     table.append(headerRow);
     args.forEach(function (data) {
         var row = $('<tr></tr>');
-        //var ref = $('<a href="userForm?id=${user.user}">$</a>');
-        // row.append("<td><a href=\"userForm?id=" + user["user"] + "\">" + user["user"] + "</a></td>");
         header.forEach(function (column) {
             var cell = $("<td></td>");
             cell.attr("data-id", data[column]['id']);
@@ -62,12 +73,6 @@ function formTable(data) {
     });
     $('#table-container').html(table);
     setEventsToTable();
-    $("td").click(function (event) {
-        var type = $(this).attr("data-type");
-        var id = $(this).attr("data-id");
-        var student_id = $(this).parent().children().first().attr("data-id");
-
-    });
 }
 
 function loadTable() {
@@ -96,20 +101,37 @@ function setEventsToTable() {
     });
 
     //Event for click at cell with presence
-    $(".presence-cell.data-cell").click(function () {
-        //alert(this.className);
+    $(".presence-cell.editable").click(function () {
+        var group = $("#group-number").attr("value");
+        var subgroup = $("#subgroup-number").attr("value");
+        var studentId = "";
+        var classId = "";
 
-        if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if precent
+        if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if student is absent
             $(this).css("background", "rgb(255, 218, 6)");
             $(this).html("н");
-        } else {                                                         //if absent
+            $.ajax({
+                url: "NoteStudentAbsence?" +
+                "group=" + group +
+                "&subgroup=" + subgroup +
+                "&classId=" + classId +
+                "&studentId=" + studentId
+            });
+        } else {                                                         //if - precent
             $(this).css("background", "rgb(194, 255, 10)");
             $(this).html("");
+            $.ajax({
+                url: "NoteStudentPresence?" +
+                "group=" + group +
+                "&subgroup=" + subgroup +
+                "&classId=" + classId +
+                "&studentId=" + studentId
+            });
         }
     });
 
     //event for edit conent of cell with marks
-    $(".editable").click(function (e) {
+    $(".mark-cell.editable").click(function (e) {
         //alert(this.className);
 
         e = e || window.event;
@@ -148,13 +170,27 @@ function setEventsToTable() {
     $("#stud-inf-wind").mouseleave(function () {
         HideStudentInformationWind();
     });
+
+    ////////////Редактируй. Нерабочий кусок кода. Для склика поя чейке таблице редактирования
+    $(".info-cell-editable").click(function () {
+        var row = $(this).parent();
+        var children = row.children();
+        var student = {};
+        var nameAndSurname = children[0].html().split(" ");
+        student['surname'] = nameAndSurname[0];
+        student['name'] = nameAndSurname[1];
+        student['id'] = "";
+        student['eMail'] = children[1].html();
+        student['git'] = children[2].html();
+        formAndShowPopupFormEditStudent(student);
+    });
 }
 
 /*
-    function for showing popup form: after pressing button "Добавить"
+    functions for showing popup-add-column form: after pressing button "Добавить"
  */
 
-function formAndShowPopupForm(dates)
+function formAndShowPopupFormAddColumn(dates)
 {
     $("#new-lab-date").html("");
     dates.forEach(function (date) {
@@ -164,10 +200,10 @@ function formAndShowPopupForm(dates)
         $("#new-lab-date").append(select);
     });
 
-    $("#popup-form").addClass("show");
+    $("#popup-form-add-column").addClass("show");
 }
 
-function showPopupForm()
+function showPopupFormAddColumn()
 {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
@@ -177,14 +213,14 @@ function showPopupForm()
         "&subgroup=" + subgroup,
         dataType: "json",
         success: function(data){
-            formAndShowPopupForm(data);
+            formAndShowPopupFormAddColumn(data);
         }
     });
 }
 
-function cancelPopupForm()
+function cancelPopupFormAddColumn()
 {
-    $("#popup-form").removeClass("show");
+    $("#popup-form-add-column").removeClass("show");
 }
 
 function errorAddLabOrTestButton()
@@ -229,3 +265,39 @@ function addLabOrTestButton()
     });*/
     cancelPopupForm();
 }
+
+/*
+    function for showing popup-edit-student form: after pressing button "Добавить студента"
+ */
+
+function formAndShowPopupFormEditStudent(student)
+{
+    $("#student-id").attr("value", student['id']);
+    $("#student-name").attr("value", student['name']);
+    $("#student-surname").attr("value", student['surname']);
+    $("#student-eMail").attr("value", student['eMail']);
+    $("#student-git").attr("value", student['git']);
+    $("#popup-form-edit-student").addClass("show");
+}
+
+function showEmptyPopupFormEditStudent()
+{
+    var student = {};
+    student['id'] = "";
+    student['name'] = "";
+    student['surname'] = "";
+    student['eMail'] = "";
+    student['git'] = "";
+    formAndShowPopupFormEditStudent(student);
+}
+
+function showPopupFormEditStudent()
+{
+
+}
+
+function cancelPopupFormEditStudent()
+{
+    $("#popup-form-edit-student").removeClass("show");
+}
+

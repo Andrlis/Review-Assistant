@@ -18,7 +18,7 @@ public class BonusMarkConverter implements JsonSerializer<BonusMark> {
     @Override
     public JsonElement serialize(BonusMark src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject object = new JsonObject();
-        object.addProperty("cell-class", "cell-ui" + ( editable ? " editable" : "" ));
+        object.addProperty("cell-class", "cell-ui mark-cell" + ( editable ? " editable" : "" ));
 
          object.addProperty("value", (src.getMark() != null) ? (src.getMark() != -1) ? src.getMark().toString() : "" : "");
 

@@ -108,6 +108,13 @@
     table
  */
 
+.missed {
+    background-color: rgb(255, 218, 6);
+}
+
+.visited {
+    background-color: rgb(194, 255, 10);
+}
 
 .button-cell-div {
     border: none;

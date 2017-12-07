@@ -55,10 +55,11 @@
 
 </div>
 
-<div class="popup">
-    <button  onclick="showPopupForm()">Добавить</button>
-    <form class="popup-form container-ver" id="popup-form">
-        <select name="new-column-type" id="new-column-type">
+<!-- popup form for adding column with lab or test-->
+<div class="popup" id="popup-add-column">
+    <button  onclick="showPopupFormAddColumn()">Добавить</button>
+    <form class="popup-form container-ver" id="popup-form-add-column">
+        <select name="new-column-type" id="new-column-type" onchange="changeNewColumnType()">
             <option value="lab">Лабораторная работа <span id="new-lab-number"></span></option>
             <option value="test">Контрольная работа <span id="new-test-number"></span></option>
         </select>
@@ -67,9 +68,26 @@
         </select>
         <textarea id="comment-text-area" cols="30" rows="5" ></textarea>
         <input type="button" value="Добавить" onclick="addLabOrTestButton()">
-        <input type="button" value="Отменить" onclick="cancelPopupForm()">
+        <input type="button" value="Отменить" onclick="cancelPopupFormAddColumn()">
     </form>
+</div>
 
+<!-- popup form for adding or edditing student-->
+<div class="popup" id="popup-edit-student">
+    <button  onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>
+    <form class="popup-form container-ver" id="popup-form-edit-student">
+        <input id="student-id" hidden>
+        <label for="student-surname">Фамилия</label>
+        <input type="text" id="student-surname">
+        <label for="student-name">Имя</label>
+        <input type="text" id="student-name">
+        <label for="student-eMail">Почта</label>
+        <input type="text" id="student-eMail">
+        <label for="student-git">Репозиторий</label>
+        <input type="text" id="student-git">
+        <input type="button" value="Сохранить" onclick="">
+        <input type="button" value="Отменить" onclick="cancelPopupFormEditStudent()">
+    </form>
 </div>
 
 

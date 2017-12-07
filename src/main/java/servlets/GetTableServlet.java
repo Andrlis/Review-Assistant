@@ -21,16 +21,18 @@ public class GetTableServlet extends HttpServlet {
         String tableType = (String) req.getParameter("type");
 
         try {
+            String table = "";
             Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             switch (tableType.getBytes()[0]) {
                 case 'm':
-                    String str = JsonMaker.getJsonSubGroupMarks(subGroup, true); //Пашка добавил труе
-                    resp.getWriter().append(str);
+                    table = JsonMaker.getJsonSubGroupMarks(subGroup, true); //Пашка добавил труе
                     break;
                 case 'p':
+                    table = JsonMaker.getJsonSubGroupVisits(subGroup, true);
                     break;
                 case 'e':
+                    table = JsonMaker.getJsonSubGroupStudentRedact(subGroup);
                     break;
                 default:
                     req
@@ -38,6 +40,7 @@ public class GetTableServlet extends HttpServlet {
                             .forward(req, resp);
                     break;
             }
+            resp.getWriter().append(table);
         } catch (NullPointerException e) {
             req
                     .getRequestDispatcher("WEB-INF/pages/NotFound.jsp")

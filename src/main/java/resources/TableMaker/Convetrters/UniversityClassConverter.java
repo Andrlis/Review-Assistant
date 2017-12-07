@@ -19,7 +19,7 @@ public class UniversityClassConverter implements JsonSerializer<Class>{
 	public JsonElement serialize(Class src, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject object = new JsonObject();
 
-		object.addProperty("cell-class", "cell-ui" + ( editable ? " editable" : "" ) + ( src.isVisitable() ? " visited" : " missed" ));
+		object.addProperty("cell-class", "cell-ui presence-cell" + ( editable ? " editable" : "" ) + ( src.isVisitable() ? " visited" : " missed" ));
 		object.addProperty("value", src.isVisitable() ? "" : "н");
 
         object.addProperty("type", "class");
