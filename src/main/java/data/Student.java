@@ -149,11 +149,11 @@ public class Student implements Serializable {
         }
     }
 
-    private void addLabMark(LabMark labMark) {
+    public void addLabMark(LabMark labMark) {
         this.labMarkList.add(labMark);
     }
 
-    private void addTestMark(TestMark testMark) {
+    public void addTestMark(TestMark testMark) {
         this.testMarkList.add(testMark);
     }
 

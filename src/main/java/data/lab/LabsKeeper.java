@@ -30,4 +30,13 @@ public class LabsKeeper {
         }
         return null;
     }
+
+    public Lab getLabByNumber(Integer number) {
+        for(Lab currentLab : labList) {
+            if(currentLab.getNumberOfLab().equals(number))
+                return currentLab;
+        }
+
+        return null;
+    }
 }

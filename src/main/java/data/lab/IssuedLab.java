@@ -1,5 +1,6 @@
 package data.lab;
 
+import data.group.SubGroup;
 import data.mark.LabMark;
 import data.Student;
 import data.UniversityClass;
@@ -49,6 +50,10 @@ public class IssuedLab implements Serializable {
     @FilterJoinTable(name = "coefficientFilter", condition = "coefficient <= -1")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
+    @ManyToOne()
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE})
+    @JoinColumn(name = "id_group_subgroup")
+    private SubGroup subGroup;
 
     public IssuedLab() {
         this.studentControlList = new ArrayList<Student>();
@@ -114,5 +119,13 @@ public class IssuedLab implements Serializable {
     public void deleteStudentFromControlList(Student student) {
         logger.info("Delete student(" + student.getFulName() + ") from student confrol list issued lab(" + labDescription.getNumberOfLab() + ")");
         this.studentControlList.remove(student);
+    }
+
+    public SubGroup getSubGroup() {
+        return subGroup;
+    }
+
+    public void setSubGroup(SubGroup subGroup) {
+        this.subGroup = subGroup;
     }
 }
