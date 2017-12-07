@@ -3,6 +3,9 @@ package resources;
 import data.Student;
 import data.group.Group;
 import data.group.GroupsKeeper;
+import data.group.SubGroup;
+import data.lab.IssuedLab;
+import data.lab.Lab;
 import data.lab.LabsKeeper;
 import data.lecturer.LecturerKeeper;
 import data.mark.LabMark;
@@ -17,11 +20,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
-
-/**
- * Created by kesso on 22.08.17.
- */
 
 @Transactional
 public class HibernateShell {
@@ -127,8 +127,8 @@ public class HibernateShell {
         return answer;
     }
 
-    public static Long getNumberOfNextTest() {
-        return getNumberOfTests() + 1;
+    public static Integer getNumberOfNextTest() {
+        return (int)(getNumberOfTests() + 1);
     }
 
     public static Long getNumberOfLab() {
@@ -145,8 +145,8 @@ public class HibernateShell {
         return answer;
     }
 
-    public static Long getNumberOfNextLab() {
-        return getNumberOfLab() + 1;
+    public static Integer getNumberOfNextLab() {
+        return (int)(getNumberOfLab() + 1);
     }
 
     public static void update(Object object) {
@@ -308,6 +308,47 @@ public class HibernateShell {
 			session.close();
 		}
 		logger.info("End update bonus mark");
+    }
+
+    public static void addedLab(String keyWord){
+        Lab lab = new Lab();
+        lab.setKeyWord(keyWord);
+        lab.setNumberOfLab(getNumberOfNextLab());
+
+        save(lab);
+    }
+
+    public static void addedNewLab(SubGroup subGroup, UniversityClass universityClassOfIssue, Integer labNumber){
+        Lab lab = getLabsKeeper().getLabByNumber(labNumber);
+
+        IssuedLab issuedLab = new IssuedLab();
+
+        issuedLab.setLabDescription(lab);
+        issuedLab.setUniversityClassOfIssue(universityClassOfIssue);
+        issuedLab.setCoefficientOfCurrentDeadline(1.0);
+        //TODO getNextLab
+        issuedLab.setCurrentDeadline(universityClassOfIssue);
+        issuedLab.setDateOfLastRepoCheck(new Date());
+        issuedLab.setStudentControlList(subGroup.getStudentsList());
+        issuedLab.setSubGroup(subGroup);
+
+        save(issuedLab);
+
+        subGroup.addIssuedLab(issuedLab);
+
+        for(Student student : subGroup.getStudentsList()) {
+            LabMark labMark = new LabMark();
+            labMark.setIssuedLab(issuedLab);
+            labMark.setCoefficient(1.0);
+            labMark.setMark(-1);
+            labMark.setStudent(student);
+
+            save(labMark);
+
+            student.addLabMark(labMark);
+        }
+
+
     }
 }
 
