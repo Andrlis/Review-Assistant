@@ -173,16 +173,7 @@ function setEventsToTable() {
 
     ////////////Редактируй. Нерабочий кусок кода. Для склика поя чейке таблице редактирования
     $(".info-cell-editable").click(function () {
-        var row = $(this).parent();
-        var children = row.children();
-        var student = {};
-        var nameAndSurname = children[0].html().split(" ");
-        student['surname'] = nameAndSurname[0];
-        student['name'] = nameAndSurname[1];
-        student['id'] = "";
-        student['eMail'] = children[1].html();
-        student['git'] = children[2].html();
-        formAndShowPopupFormEditStudent(student);
+        showPopupFormEditStudent();
     });
 }
 
@@ -288,16 +279,86 @@ function showEmptyPopupFormEditStudent()
     student['surname'] = "";
     student['eMail'] = "";
     student['git'] = "";
+    $("#delete-student-button").hide();
     formAndShowPopupFormEditStudent(student);
 }
 
 function showPopupFormEditStudent()
 {
-
+    var row = $(this).parent();
+    var children = row.children();
+    var student = {};
+    var nameAndSurname = children.first().html().split(" ");
+    student['surname'] = nameAndSurname[0];
+    student['name'] = nameAndSurname[1];
+    student['id'] = "";
+    student['eMail'] = children.first().next().html();
+    student['git'] = children.first().next().next().html();
+    $("#delete-student-button").show();
+    formAndShowPopupFormEditStudent(student);
 }
 
 function cancelPopupFormEditStudent()
 {
     $("#popup-form-edit-student").removeClass("show");
+    setEventsToTable();
+}
+
+function errorDeleteStudent()
+{
+
+}
+
+
+function successDeleteStudent()
+{
+
+}
+
+function deleteStudentButtonClick()
+{
+    var studentId = $("#student-id").html();
+    $.ajax({
+        url: "DeleteStudent?" +
+        "studentId=" + studentId,
+        success: function(data){
+            successDeleteStudent();
+        }
+    });
+}
+
+function successSaveStudent()
+{
+
+}
+
+function errorSaveStudent()
+{
+
+}
+
+function saveStudentButtonClick()
+{
+    var group = $("#group-number").attr("value");
+    var subgroup = $("#subgroup-number").attr("value");
+    var studentName = $("#student-name").html();
+    var studentSurname = $("#student-surname").html();
+    var studentId = $("#student-id").html();
+    var studentGit = $("#student-git").html();
+    var studentEmail = $("#student-eMail").html();
+
+    $.post(
+        "SaveStudent",
+        {
+            group:'"' + group + '"',
+            subgroup:'"' + subgroup + '"',
+            name:'"' + studentName + '"',
+            surname:'"' + studentSurname + '"',
+            studentId:'"' + studentId + '"',
+            git:'"' + studentGit +'"',
+            email:'"' + studentEmail + '"'
+        },
+        successSaveStudent
+    );
 }
 

@@ -85,7 +85,8 @@
         <input type="text" id="student-eMail">
         <label for="student-git">Репозиторий</label>
         <input type="text" id="student-git">
-        <input type="button" value="Сохранить" onclick="">
+        <input type="button" value="Сохранить" onclick="saveStudentButtonClick()">
+        <input type="button" value="Удалить" id="delete-student-button" onclick="deleteStudentButtonClick()">
         <input type="button" value="Отменить" onclick="cancelPopupFormEditStudent()">
     </form>
 </div>
