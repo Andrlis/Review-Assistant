@@ -318,8 +318,8 @@ public class HibernateShell {
         save(lab);
     }
 
-    public static void addedNewLab(SubGroup subGroup, UniversityClass universityClassOfIssue, Integer labNumber){
-        Lab lab = getLabsKeeper().getLabByNumber(labNumber);
+    public static void addedNewLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
+        Lab lab = getLabsKeeper().getLabByNumber(subGroup.getIssuedLabsList().size() + 1);
 
         IssuedLab issuedLab = new IssuedLab();
 
@@ -339,7 +339,7 @@ public class HibernateShell {
         for(Student student : subGroup.getStudentsList()) {
             LabMark labMark = new LabMark();
             labMark.setIssuedLab(issuedLab);
-            labMark.setCoefficient(1.0);
+            labMark.setCoefficient(-1.0);
             labMark.setMark(-1);
             labMark.setStudent(student);
 

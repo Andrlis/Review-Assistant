@@ -98,7 +98,7 @@ public class JsonMaker {
         map.put("args", studentArray);
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Student.class, new StudentConverter());
+        builder.registerTypeAdapter(Student.class, new StudentConverter(true));
         builder.registerTypeAdapter(Template.class, new TemplateConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
