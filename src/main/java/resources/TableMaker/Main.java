@@ -106,7 +106,7 @@ public class Main {
 
         GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
         SubGroup subGroup = groupsKeeper.getGroupList().get(0).getSubGroup("1");
-        HibernateShell.addedNewLab(subGroup, subGroup.getUniversityClassesList().get(0),1);
+        HibernateShell.addedNewLab(subGroup, subGroup.getUniversityClassesList().get(0));
 
         
     }

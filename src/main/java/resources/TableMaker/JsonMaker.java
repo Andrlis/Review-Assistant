@@ -98,7 +98,7 @@ public class JsonMaker {
         map.put("args", studentArray);
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Student.class, new StudentConverter());
+        builder.registerTypeAdapter(Student.class, new StudentConverter(true));
         builder.registerTypeAdapter(Template.class, new TemplateConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
@@ -143,8 +143,8 @@ public class JsonMaker {
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", student);
 
-        map.put("eMail", new Template("cell-ui", student.geteMail())); //класс и значение для емаила
-        map.put("gitURL", new Template("cell-ui", student.getGitURL())); //класс и значение для юрл
+        map.put("eMail", new Template("cell-ui info-cell-editable", student.geteMail())); //класс и значение для емаила
+        map.put("gitURL", new Template("cell-ui info-cell-editable", student.getGitURL())); //класс и значение для юрл
 
         return map;
     }
