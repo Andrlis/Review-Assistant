@@ -28,6 +28,8 @@ public class LabMark {
     private Student student;
 
     public LabMark() {
+        coefficient = -1.0;
+        mark = -1;
     }
 
     public Double getCoefficient() {

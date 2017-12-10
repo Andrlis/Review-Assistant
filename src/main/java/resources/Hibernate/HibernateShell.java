@@ -340,8 +340,6 @@ public class HibernateShell {
         for(Student student : subGroup.getStudentsList()) {
             LabMark labMark = new LabMark();
             labMark.setIssuedLab(issuedLab);
-            labMark.setCoefficient(-1.0);
-            labMark.setMark(-1);
             labMark.setStudent(student);
 
             save(labMark);
@@ -365,7 +363,7 @@ public class HibernateShell {
         return student;
     }
 
-    public static void createQuery(String query) {
+    public static void SQLQuery(String query) {
         final Session session = getSession();
         try {
             session.getTransaction().begin();
