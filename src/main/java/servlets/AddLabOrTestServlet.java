@@ -1,6 +1,8 @@
 package servlets;
 
 import resources.Hibernate.HibernateShell;
+import resources.Hibernate.LabsHibernateShell;
+import resources.Hibernate.TestHibernateShell;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,11 @@ public class AddLabOrTestServlet extends HttpServlet {
         String date = (String) req.getParameter("date");
         String comment = (String) req.getParameter("comment");
 
-        //Надо выдать лабу
-        
+        if (type.equals("lab")) {
+            LabsHibernateShell.issueLab(groupNumber, subGroupNumber, date, comment);
+        } else {
+            TestHibernateShell.addNextTest(groupNumber, comment);
+        }
+
     }
 }

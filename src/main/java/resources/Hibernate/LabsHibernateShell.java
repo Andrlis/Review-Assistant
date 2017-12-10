@@ -6,7 +6,7 @@ import data.group.SubGroup;
 
 public class LabsHibernateShell {
 
-    public static boolean issueLab(String groupNumber, String subGroupNumber, String date){
+    public static boolean issueLab(String groupNumber, String subGroupNumber, String date, String comment){
         Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
         if(group == null)
             return false;
