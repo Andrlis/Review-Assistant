@@ -196,7 +196,7 @@
     padding: 8px 0;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
+    bottom: -90%;
     left: 50%;
     margin-left: -80px;
 }
@@ -216,4 +216,10 @@
 /* Toggle this class - hide and show the popup */
 .popup .show {
     visibility: visible;
+}
+
+/*Disable  class*/
+
+.disabled {
+    pointer-events: none;
 }

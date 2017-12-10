@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div class="navbar">
+<div class="navbar" id="navbar">
     <div class="dropdown">
         <button class="dropbtn">
             <img class="menu-icon" src="picture/hamburger-icon.png" alt="menu">
