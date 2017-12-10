@@ -319,7 +319,7 @@ public class HibernateShell {
         save(lab);
     }
 
-    public static void addIssueLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
+    public static void issueLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
         Lab lab = getLabsKeeper().getLabByNumber(subGroup.getIssuedLabsList().size() + 1);
 
         IssuedLab issuedLab = new IssuedLab();
