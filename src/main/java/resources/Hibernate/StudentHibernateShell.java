@@ -26,7 +26,7 @@ public class StudentHibernateShell {
         HibernateShell.SQLQuery("INSERT INTO absentees (id_class, id_student) VALUES ("+ classId + ", " + stringId + ");");
     }
 
-    static public boolean saveStudent(String groupNumber, String subGroupNumber, String name, String eMail, String gitURL) {
+    static public boolean insertStudent(String groupNumber, String subGroupNumber, String name, String eMail, String gitURL) {
         Student student = new Student();
         student.setFulName(name);
         student.seteMail(eMail);
@@ -61,6 +61,21 @@ public class StudentHibernateShell {
         student.setSubGroup(subGroup);
 
         HibernateShell.save(student);
+        return true;
+    }
+
+    static public boolean updateStudent(String id, String name, String eMail, String gitURL) {
+        Student student = HibernateShell.getStudentById(id);
+
+        if(student == null)
+            return false;
+
+        student.setFulName(name);
+        student.seteMail(eMail);
+        student.setGitURL(gitURL);
+
+        HibernateShell.update(student);
+
         return true;
     }
 }
