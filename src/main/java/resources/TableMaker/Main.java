@@ -1,9 +1,11 @@
 package resources.TableMaker;
 
+import data.Student;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.lab.LabsKeeper;
 import resources.Hibernate.HibernateShell;
+import resources.Hibernate.StudentHibernateShell;
 
 import java.text.ParseException;
 
@@ -87,14 +89,14 @@ public class Main {
 
 
         // Added new lab
-        HibernateShell.addedLab("lab1");
-        LabsKeeper labsKeeper = HibernateShell.getLabsKeeper();
 
 
 
         GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
-        SubGroup subGroup = groupsKeeper.getGroupList().get(0).getSubGroup("1");
-        HibernateShell.addedNewLab(subGroup, subGroup.getUniversityClassesList().get(0));
+
+        Student student = groupsKeeper.getGroupList().get(0).getSubGroup("1").getStudentsList().get(0);
+
+        StudentHibernateShell.deleteStudent(student.getId().toString());
 
         
     }

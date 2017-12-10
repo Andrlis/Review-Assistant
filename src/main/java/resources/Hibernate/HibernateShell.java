@@ -350,5 +350,18 @@ public class HibernateShell {
 
 
     }
+
+    public static Student getStudentById(String id) {
+        final Session session = getSession();
+        Student student = null;
+        try {
+            student = (Student)session.createQuery("from Student student WHERE student.id = " + id).list().get(0);
+
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+        return student;
+    }
 }
 
