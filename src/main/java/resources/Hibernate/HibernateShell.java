@@ -10,6 +10,7 @@ import data.lab.LabsKeeper;
 import data.lecturer.LecturerKeeper;
 import data.mark.LabMark;
 import data.mark.TestMark;
+import data.test.Test;
 import data.test.TestKeeper;
 import data.UniversityClass;
 import data.User;
@@ -321,7 +322,6 @@ public class HibernateShell {
 
     public static void issueLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
         Lab lab = getLabsKeeper().getLabByNumber(subGroup.getIssuedLabsList().size() + 1);
-
         IssuedLab issuedLab = new IssuedLab();
 
         issuedLab.setLabDescription(lab);
@@ -376,6 +376,47 @@ public class HibernateShell {
         finally {
                 logger.info("Close session.");
                 session.close();
+        }
+    }
+
+    public static List<Integer> getStudentsId(){
+        final Session session = getSession();
+        List<Integer> answer = null;
+        try {
+            answer = session.createQuery("select id from Student").list();
+        }
+        catch (javax.persistence.TransactionRequiredException ex) {
+            System.out.println(ex);
+        }
+        finally {
+            logger.info("Close session.");
+            session.close();
+        }
+
+        return answer;
+    }
+
+    public static void addTest(){
+        Test test = new Test();
+        test.setTestDate(new Date());
+        test.setTestNumber(getNumberOfNextTest());
+
+        save(test);
+    }
+
+    public static void addTestMark(Integer studentId, Integer testNumber) {
+        final Session session = getSession();
+        try {
+            session.getTransaction().begin();
+            session.createSQLQuery("INSERT INTO tests_result(id_student, id_test, mark) VALUES (" + studentId + ", " + testNumber + ", -1);").executeUpdate();
+            session.getTransaction().commit();
+        }
+        catch (javax.persistence.TransactionRequiredException ex) {
+            System.out.println(ex);
+        }
+        finally {
+            logger.info("Close session.");
+            session.close();
         }
     }
 }

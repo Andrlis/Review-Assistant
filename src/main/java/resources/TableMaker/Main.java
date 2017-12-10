@@ -6,8 +6,10 @@ import data.group.SubGroup;
 import data.lab.LabsKeeper;
 import resources.Hibernate.HibernateShell;
 import resources.Hibernate.StudentHibernateShell;
+import resources.Hibernate.TestHibernateShell;
 
 import java.text.ParseException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
@@ -92,10 +94,14 @@ public class Main {
 
 
 
-       GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+//       GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
 //
 //        Student student = groupsKeeper.getGroupList().get(0).getSubGroup("1").getStudentsList().get(0);
+//
+//        System.out.println(JsonMaker.getJsonSubGroupClasses(groupsKeeper.getGroupList().get(0).getSubGroup("1")));
 
-        System.out.println(JsonMaker.getJsonSubGroupClasses(groupsKeeper.getGroupList().get(0).getSubGroup("1")));
+
+        TestHibernateShell.addNextTest("1", "1");
+
     }
 }

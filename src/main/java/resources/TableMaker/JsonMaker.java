@@ -27,7 +27,7 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "table-ui");
+        map.put("table-class", "table");
 
         if(!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
@@ -58,7 +58,7 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "table-ui");
+        map.put("table-class", "table");
 
         if(!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
@@ -88,7 +88,7 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "table-ui");
+        map.put("table-class", "table");
 
         if(!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());

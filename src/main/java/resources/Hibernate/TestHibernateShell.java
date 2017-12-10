@@ -1,9 +1,17 @@
 package resources.Hibernate;
 
+import java.util.List;
+
 public class TestHibernateShell {
 
-    public static boolean addNextTest(String group, String comment) {
+    public static void addNextTest(String group, String comment) {
+        List<Integer> ids = HibernateShell.getStudentsId();
 
-        return true;
+        HibernateShell.addTest();
+        Long testNumber = HibernateShell.getNumberOfTests();
+        for(Integer id : ids) {
+            HibernateShell.addTestMark(id,testNumber.intValue());
+        }
+
     }
 }

@@ -29,4 +29,16 @@ public class LabsHibernateShell {
     public static void addLab(String keyWorld){
         HibernateShell.addLab(keyWorld);
     }
+
+    public static int getNumberIssuedLab(String groupNumber, String subGroupNumber) {
+        Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
+        if(group == null)
+            return -1;
+
+        SubGroup subGroup = group.getSubGroup(subGroupNumber);
+        if(subGroup == null)
+            return -1;
+
+        return subGroup.getIssuedLabsList().size();
+    }
 }
