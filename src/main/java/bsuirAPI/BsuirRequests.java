@@ -30,7 +30,7 @@ public class BsuirRequests {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-        response = in.readLine(); ;
+        response = in.readLine();
         return response;
     }
 
@@ -48,7 +48,7 @@ public class BsuirRequests {
         URL url = new URL(String.format("https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=%s", groupName));
 
         URLConnection connection = url.openConnection();
-        connection.setRequestProperty("Accept", "application/xml");
+        connection.setRequestProperty("Accept", "application/xml;charset=UTF-8");
 
         logger.info("Send request about timetable(\"https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=" + groupName + "\").");
 
