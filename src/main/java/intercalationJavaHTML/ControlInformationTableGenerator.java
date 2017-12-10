@@ -10,7 +10,7 @@ import data.mark.LabMark;
 import data.mark.TestMark;
 import data.Student;
 import data.UniversityClass;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 
 import data.group.SubGroup;
 

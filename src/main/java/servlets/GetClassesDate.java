@@ -2,8 +2,7 @@ package servlets;
 
 import data.group.Group;
 import data.group.SubGroup;
-import resources.HibernateShell;
-import resources.TableMaker.JsonMaker;
+import resources.Hibernate.HibernateShell;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

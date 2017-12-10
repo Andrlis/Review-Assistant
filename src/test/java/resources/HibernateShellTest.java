@@ -12,6 +12,7 @@ import data.Student;
 import data.UniversityClass;
 import org.junit.Before;
 import org.junit.Test;
+import resources.Hibernate.HibernateShell;
 
 import java.util.Arrays;
 import java.util.Date;

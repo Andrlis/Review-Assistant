@@ -1,5 +1,5 @@
 import data.group.SubGroup;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 import intercalationJavaHTML.StudentListTableGenerator;
 
 public class TestJulia {

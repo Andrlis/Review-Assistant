@@ -1,23 +1,11 @@
 package resources.TableMaker;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import data.Student;
-import data.UniversityClass;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
-import data.lab.IssuedLab;
-import data.lab.Lab;
 import data.lab.LabsKeeper;
-import data.mark.LabMark;
-import data.mark.TestMark;
-import data.test.Test;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws ParseException {

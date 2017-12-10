@@ -1,7 +1,6 @@
 package servlets;
 
-import data.group.SubGroup;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

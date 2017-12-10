@@ -1,4 +1,4 @@
-package resources;
+package resources.Hibernate;
 
 import data.Student;
 import data.group.Group;
