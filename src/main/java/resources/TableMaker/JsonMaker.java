@@ -7,6 +7,7 @@ import data.UniversityClass;
 import data.group.SubGroup;
 import data.mark.LabMark;
 import data.mark.TestMark;
+import resources.Hibernate.HibernateShell;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
@@ -104,6 +105,26 @@ public class JsonMaker {
         Gson gson = builder.create();
 
         return gson.toJson(map);
+    }
+
+    public static String getJsonSubGroupClasses(SubGroup subGroup){
+        Map<String,Object> classesMap = new LinkedHashMap<String, Object>();
+
+        classesMap.put("lab-number", HibernateShell.getNumberOfNextLab().toString());
+        classesMap.put("test-number", HibernateShell.getNumberOfNextTest().toString());
+
+        ArrayList<String> classes = new ArrayList<String>();
+        for(UniversityClass universityClass : (subGroup == null) ? new ArrayList<UniversityClass>() : subGroup.getUniversityClassesList()) {
+            classes.add(universityClass.getDataTime());
+        }
+
+        classesMap.put("dates", classes);
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        return gson.toJson(classesMap);
     }
 
     private static Map<String, Object> getStudentMarkMap(Student student){

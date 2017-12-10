@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.criteria.CriteriaDelete;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -362,6 +363,22 @@ public class HibernateShell {
             session.close();
         }
         return student;
+    }
+
+    public static void createQuery(String query) {
+        final Session session = getSession();
+        try {
+            session.getTransaction().begin();
+            session.createSQLQuery(query).executeUpdate();
+            session.getTransaction().commit();
+        }
+        catch (javax.persistence.TransactionRequiredException ex) {
+            System.out.println(ex);
+        }
+        finally {
+                logger.info("Close session.");
+                session.close();
+        }
     }
 }
 

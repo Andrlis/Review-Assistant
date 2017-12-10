@@ -92,12 +92,10 @@ public class Main {
 
 
 
-        GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+       GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+//
+//        Student student = groupsKeeper.getGroupList().get(0).getSubGroup("1").getStudentsList().get(0);
 
-        Student student = groupsKeeper.getGroupList().get(0).getSubGroup("1").getStudentsList().get(0);
-
-        StudentHibernateShell.deleteStudent(student.getId().toString());
-
-        
+        System.out.println(JsonMaker.getJsonSubGroupClasses(groupsKeeper.getGroupList().get(0).getSubGroup("1")));
     }
 }
