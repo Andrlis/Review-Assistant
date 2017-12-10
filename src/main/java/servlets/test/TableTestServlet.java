@@ -1,6 +1,6 @@
 package servlets.test;
 
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

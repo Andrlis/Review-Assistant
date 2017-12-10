@@ -1,7 +1,7 @@
 package servlets;
 
 import data.User;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 import resources.MD5Hash;
 
 import javax.servlet.RequestDispatcher;

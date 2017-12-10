@@ -2,7 +2,7 @@ package checker;
 
 import data.group.Group;
 import data.group.GroupsKeeper;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 import bsuirAPI.BsuirRequests;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

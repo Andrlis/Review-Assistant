@@ -4,7 +4,7 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 import resources.TimeLogic;
 import bsuirAPI.BsuirParser;
 import bsuirAPI.BsuirRequests;

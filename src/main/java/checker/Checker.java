@@ -9,7 +9,7 @@ import data.mark.LabMark;
 import data.Student;
 import exceptions.CheckException;
 import exceptions.GitException;
-import resources.HibernateShell;
+import resources.Hibernate.HibernateShell;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
 
