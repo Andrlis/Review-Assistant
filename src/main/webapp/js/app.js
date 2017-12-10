@@ -172,8 +172,8 @@ function setEventsToTable() {
     });
 
     ////////////Редактируй. Нерабочий кусок кода. Для склика поя чейке таблице редактирования
-    $(".info-cell-editable").click(function () {
-        showPopupFormEditStudent();
+    $(".cell-ui.info-cell-editable").click(function (event) {
+        showPopupFormEditStudent(event);
     });
 }
 
@@ -192,6 +192,7 @@ function formAndShowPopupFormAddColumn(dates)
     });
 
     $("#popup-form-add-column").addClass("show");
+    disablePageEvents();
 }
 
 function showPopupFormAddColumn()
@@ -212,6 +213,7 @@ function showPopupFormAddColumn()
 function cancelPopupFormAddColumn()
 {
     $("#popup-form-add-column").removeClass("show");
+    enablePageEvents();
 }
 
 function errorAddLabOrTestButton()
@@ -243,7 +245,8 @@ function addLabOrTestButton()
         },
         succesAddLabOrTestButton
     );
-
+    enablePageEvents();
+    loadTable();
     /*$.ajax({
         url: "AddLabOrTestServlet?group=" + group +
         "&subgroup=" + subgroup +
@@ -254,7 +257,22 @@ function addLabOrTestButton()
             succesAddLabOrTestButton();
         }
     });*/
-    cancelPopupForm();
+}
+
+/*Functions for disable and enable page*/
+
+function disablePageEvents()
+{
+    $("#navbar").addClass("disabled");
+    $("#table-container").addClass("disabled");
+    $("#table-title").addClass("disabled");
+}
+
+function enablePageEvents()
+{
+    $("#navbar").removeClass("disabled");
+    $("#table-container").removeClass("disabled");
+    $("#table-title").removeClass("disabled");
 }
 
 /*
@@ -269,6 +287,7 @@ function formAndShowPopupFormEditStudent(student)
     $("#student-eMail").attr("value", student['eMail']);
     $("#student-git").attr("value", student['git']);
     $("#popup-form-edit-student").addClass("show");
+    disablePageEvents();
 }
 
 function showEmptyPopupFormEditStudent()
@@ -281,11 +300,12 @@ function showEmptyPopupFormEditStudent()
     student['git'] = "";
     $("#delete-student-button").hide();
     formAndShowPopupFormEditStudent(student);
+
 }
 
-function showPopupFormEditStudent()
+function showPopupFormEditStudent(event)
 {
-    var row = $(this).parent();
+    var row = $(event.target).parent();
     var children = row.children();
     var student = {};
     var nameAndSurname = children.first().html().split(" ");
@@ -302,6 +322,7 @@ function cancelPopupFormEditStudent()
 {
     $("#popup-form-edit-student").removeClass("show");
     setEventsToTable();
+    enablePageEvents();
 }
 
 function errorDeleteStudent()
@@ -322,9 +343,11 @@ function deleteStudentButtonClick()
         url: "DeleteStudent?" +
         "studentId=" + studentId,
         success: function(data){
-            successDeleteStudent();
+            successDeleteStudent(); 
         }
     });
+    enablePageEvents();
+    loadTable();
 }
 
 function successSaveStudent()
@@ -360,5 +383,7 @@ function saveStudentButtonClick()
         },
         successSaveStudent
     );
+    enablePageEvents();
+    loadTable();
 }
 
