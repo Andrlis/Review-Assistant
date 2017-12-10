@@ -1,5 +1,7 @@
 package servlets;
 
+import resources.Hibernate.StudentHibernateShell;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +13,9 @@ import java.io.IOException;
 public class NoteStudentPresence extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String groupNumber = (String) req.getParameter("group");
-        String subGroupNumber = (String) req.getParameter("subgroup");
         String studentId = (String) req.getParameter("studentId");
         String classId = (String) req.getParameter("classId");
+        StudentHibernateShell.noteStudentPresence(studentId, classId);
     }
 
     @Override

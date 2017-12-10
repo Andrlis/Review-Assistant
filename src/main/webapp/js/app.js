@@ -102,8 +102,6 @@ function setEventsToTable() {
 
     //Event for click at cell with presence
     $(".presence-cell.editable").click(function () {
-        var group = $("#group-number").attr("value");
-        var subgroup = $("#subgroup-number").attr("value");
         var studentId = "";
         var classId = "";
 
@@ -112,8 +110,6 @@ function setEventsToTable() {
             $(this).html("н");
             $.ajax({
                 url: "NoteStudentAbsence?" +
-                "group=" + group +
-                "&subgroup=" + subgroup +
                 "&classId=" + classId +
                 "&studentId=" + studentId
             });
@@ -122,8 +118,6 @@ function setEventsToTable() {
             $(this).html("");
             $.ajax({
                 url: "NoteStudentPresence?" +
-                "group=" + group +
-                "&subgroup=" + subgroup +
                 "&classId=" + classId +
                 "&studentId=" + studentId
             });
@@ -181,10 +175,22 @@ function setEventsToTable() {
     functions for showing popup-add-column form: after pressing button "Добавить"
  */
 
-function formAndShowPopupFormAddColumn(dates)
+function formAndShowPopupFormAddColumn(data)
 {
+    $("#new-column-type").html("");
+
+    var labOption = $("<option></option>");
+    labOption.attr("value", "lab");
+    labOption.html("Лабораторная работа " + data['lab-number']);
+    $("#new-column-type").append(labOption);
+
+    var testOption = $("<option></option>");
+    testOption.attr("value", "test");
+    testOption.html("Контрольная работа " + data['test-number']);
+    $("#new-column-type").append(testOption);
+
     $("#new-lab-date").html("");
-    dates.forEach(function (date) {
+    data['dates'].forEach(function (date) {
         var select = $("<option></option>");
         select.attr("value", date);
         select.html(date);
@@ -200,7 +206,7 @@ function showPopupFormAddColumn()
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     $.ajax({
-        url: "/GetClassesDate?" +
+        url: "/GetClassesDatesLabAndTestNumber?" +
         "group=" + group +
         "&subgroup=" + subgroup,
         dataType: "json",

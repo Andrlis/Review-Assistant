@@ -92,12 +92,10 @@ public class Main {
 
 
 
-//       GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
+       GroupsKeeper groupsKeeper = HibernateShell.getGroupKeeper();
 //
 //        Student student = groupsKeeper.getGroupList().get(0).getSubGroup("1").getStudentsList().get(0);
 
-//        System.out.println(JsonMaker.getJsonSubGroupClasses(groupsKeeper.getGroupList().get(0).getSubGroup("1")));
-        //StudentHibernateShell.NoteStudentAbsent("2","2");
-        StudentHibernateShell.saveStudent("550502", "1", "Pavel Kesso", "email@mail.com", "https://github.com/KessoPavel/IPD_Lab5_DeviceManager");
+        System.out.println(JsonMaker.getJsonSubGroupClasses(groupsKeeper.getGroupList().get(0).getSubGroup("1")));
     }
 }

@@ -1,5 +1,7 @@
 package servlets;
 
+import data.Student;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,6 @@ import java.io.IOException;
 public class SaveStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        Student student = new Student();
     }
 }

@@ -311,7 +311,7 @@ public class HibernateShell {
 		logger.info("End update bonus mark");
     }
 
-    public static void addedLab(String keyWord){
+    public static void addLab(String keyWord){
         Lab lab = new Lab();
         lab.setKeyWord(keyWord);
         lab.setNumberOfLab(getNumberOfNextLab());
@@ -319,7 +319,7 @@ public class HibernateShell {
         save(lab);
     }
 
-    public static void addedNewLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
+    public static void issueLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
         Lab lab = getLabsKeeper().getLabByNumber(subGroup.getIssuedLabsList().size() + 1);
 
         IssuedLab issuedLab = new IssuedLab();

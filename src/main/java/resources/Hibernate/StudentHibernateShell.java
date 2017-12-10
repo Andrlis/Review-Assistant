@@ -18,11 +18,11 @@ public class StudentHibernateShell {
         HibernateShell.delete(student);
     }
 
-    static public void  NoteStudentPresence(String studentId, String classId){
+    static public void noteStudentPresence(String studentId, String classId){
         HibernateShell.SQLQuery("DELETE FROM absentees WHERE id_class = " + classId + " and id_student = " + studentId);
     }
 
-    static public void NoteStudentAbsent(String stringId, String classId){
+    static public void noteStudentAbsent(String stringId, String classId){
         HibernateShell.SQLQuery("INSERT INTO absentees (id_class, id_student) VALUES ("+ classId + ", " + stringId + ");");
     }
 
