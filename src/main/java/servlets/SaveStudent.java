@@ -1,6 +1,7 @@
 package servlets;
 
 import data.Student;
+import resources.Hibernate.StudentHibernateShell;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,18 @@ import java.io.IOException;
 public class SaveStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Student student = new Student();
+        String groupNumber = (String) req.getParameter("group");
+        String subGroupNumber = (String) req.getParameter("subgroup");
+        String studentName = (String) req.getParameter("name");
+        studentName += " " + (String) req.getParameter("surname");
+        String studentId = (String) req.getParameter("studentId");
+        String gitRepo = (String) req.getParameter("git");
+        String eMail = (String) req.getParameter("email");
+
+        if (studentId.equals("")) {
+            StudentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
+        } else {
+            StudentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
+        }
     }
 }

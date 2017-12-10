@@ -317,6 +317,7 @@ function showPopupFormEditStudent(event)
     var nameAndSurname = children.first().html().split(" ");
     student['surname'] = nameAndSurname[0];
     student['name'] = nameAndSurname[1];
+    /////??????????????????????????????
     student['id'] = "";
     student['eMail'] = children.first().next().html();
     student['git'] = children.first().next().next().html();
