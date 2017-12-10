@@ -102,8 +102,8 @@ function setEventsToTable() {
 
     //Event for click at cell with presence
     $(".presence-cell.editable").click(function () {
-        var studentId = "";
-        var classId = "";
+        var studentId = $(this).parent().children().first().attr("data-id");
+        var classId = $(this).attr("data-id");
 
         if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if student is absent
             $(this).css("background", "rgb(255, 218, 6)");
@@ -229,7 +229,7 @@ function errorAddLabOrTestButton()
 
 function succesAddLabOrTestButton()
 {
-
+    loadTable();
 }
 
 function addLabOrTestButton()
@@ -243,16 +243,16 @@ function addLabOrTestButton()
     $.post(
         "AddLabOrTestServlet",
         {
-            group:'"' + group + '"',
-            subgroup:'"' + subgroup + '"',
-            type:'"' + type + '"',
-            date:'"' + date + '"',
-            comment:'"' + comment + '"'
+            group: group,
+            subgroup: subgroup,
+            type: type,
+            date: date,
+            comment: comment
         },
         succesAddLabOrTestButton
     );
-    enablePageEvents();
-    loadTable();
+    cancelPopupFormAddColumn();
+
     /*$.ajax({
         url: "AddLabOrTestServlet?group=" + group +
         "&subgroup=" + subgroup +
@@ -288,10 +288,10 @@ function enablePageEvents()
 function formAndShowPopupFormEditStudent(student)
 {
     $("#student-id").attr("value", student['id']);
-    $("#student-name").attr("value", student['name']);
-    $("#student-surname").attr("value", student['surname']);
-    $("#student-eMail").attr("value", student['eMail']);
-    $("#student-git").attr("value", student['git']);
+    $("#student-name").val(student['name']);
+    $("#student-surname").val(student['surname']);
+    $("#student-eMail").val(student['eMail']);
+    $("#student-git").val(student['git']);
     $("#popup-form-edit-student").addClass("show");
     disablePageEvents();
 }
@@ -318,7 +318,7 @@ function showPopupFormEditStudent(event)
     student['surname'] = nameAndSurname[0];
     student['name'] = nameAndSurname[1];
     /////??????????????????????????????
-    student['id'] = "";
+    student['id'] = children.first().attr("data-id");
     student['eMail'] = children.first().next().html();
     student['git'] = children.first().next().next().html();
     $("#delete-student-button").show();
@@ -340,7 +340,8 @@ function errorDeleteStudent()
 
 function successDeleteStudent()
 {
-
+    loadTable();
+    cancelPopupFormEditStudent();
 }
 
 function deleteStudentButtonClick()
@@ -350,16 +351,14 @@ function deleteStudentButtonClick()
         url: "DeleteStudent?" +
         "studentId=" + studentId,
         success: function(data){
-            successDeleteStudent(); 
+            successDeleteStudent();
         }
     });
-    enablePageEvents();
-    loadTable();
 }
 
 function successSaveStudent()
 {
-
+    loadTable();
 }
 
 function errorSaveStudent()
@@ -371,26 +370,27 @@ function saveStudentButtonClick()
 {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
-    var studentName = $("#student-name").html();
-    var studentSurname = $("#student-surname").html();
-    var studentId = $("#student-id").html();
-    var studentGit = $("#student-git").html();
-    var studentEmail = $("#student-eMail").html();
+    var studentName = $("#student-name").val();
+    var studentSurname = $("#student-surname").val();
+    var studentId = $("#student-id").attr("value");
+    var studentGit = $("#student-git").val();
+    var studentEmail = $("#student-eMail").val();
 
     $.post(
         "SaveStudent",
         {
-            group:'"' + group + '"',
-            subgroup:'"' + subgroup + '"',
-            name:'"' + studentName + '"',
-            surname:'"' + studentSurname + '"',
-            studentId:'"' + studentId + '"',
-            git:'"' + studentGit +'"',
-            email:'"' + studentEmail + '"'
+            group: group,
+            subgroup: subgroup,
+            name: studentName,
+            surname: studentSurname,
+            studentId: studentId,
+            git: studentGit,
+            email: studentEmail
         },
         successSaveStudent
     );
-    enablePageEvents();
-    loadTable();
+    cancelPopupFormEditStudent();
+
 }
+
 

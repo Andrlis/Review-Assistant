@@ -1,5 +1,7 @@
 package servlets;
 
+import resources.Hibernate.HibernateShell;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +31,8 @@ public class AddLabOrTestServlet extends HttpServlet {
         String type = (String) req.getParameter("type");
         String date = (String) req.getParameter("date");
         String comment = (String) req.getParameter("comment");
-        ///Выдать лабу!!!
-        //Как выдать лабу???
+
+        //Надо выдать лабу
+        
     }
 }

@@ -17,8 +17,8 @@ public class SaveStudent extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
-        String studentName = (String) req.getParameter("name");
-        studentName += " " + (String) req.getParameter("surname");
+        String studentName = (String) req.getParameter("surname");
+        studentName += " " + (String) req.getParameter("name");
         String studentId = (String) req.getParameter("studentId");
         String gitRepo = (String) req.getParameter("git");
         String eMail = (String) req.getParameter("email");

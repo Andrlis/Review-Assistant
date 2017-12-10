@@ -19,7 +19,7 @@ public class GetTableServlet extends HttpServlet {
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         String tableType = (String) req.getParameter("type");
-
+        resp.setCharacterEncoding("UTF-8");
         try {
             String table = "";
             Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
