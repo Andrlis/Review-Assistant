@@ -28,6 +28,7 @@ public class TestMark {
     private Student student;
 
     public TestMark() {
+        mark = -1;
     }
 
     public Integer getId() {

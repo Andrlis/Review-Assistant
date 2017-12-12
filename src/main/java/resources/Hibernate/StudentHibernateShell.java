@@ -31,6 +31,7 @@ public class StudentHibernateShell {
         student.setFulName(name);
         student.seteMail(eMail);
         student.setGitURL(gitURL);
+        student.setBonusMark(-1);
 
         Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
         if(group == null)

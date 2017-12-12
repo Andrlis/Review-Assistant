@@ -8,6 +8,7 @@ import data.group.SubGroup;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import resources.Hibernate.HibernateShell;
+import resources.Hibernate.LabsHibernateShell;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
@@ -27,10 +28,10 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "table");
+        map.put("table-class", "table table-hover");
 
         if(!studentArray.isEmpty()) {
-            map.put("header", studentArray.get(0).keySet());
+            map.put("header", sortHeader(studentArray.get(0).keySet()));
         }else {
             map.put("header", new ArrayList<Object>());
         }
@@ -58,7 +59,7 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "table");
+        map.put("table-class", "table table-hover");
 
         if(!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
@@ -88,7 +89,7 @@ public class JsonMaker {
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("table-class", "table");
+        map.put("table-class", "table table-hover");
 
         if(!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
@@ -110,7 +111,7 @@ public class JsonMaker {
     public static String getJsonSubGroupClasses(SubGroup subGroup){
         Map<String,Object> classesMap = new LinkedHashMap<String, Object>();
 
-        classesMap.put("lab-number", HibernateShell.getNumberOfNextLab().toString());
+        classesMap.put("lab-number", LabsHibernateShell.getNumberIssuedLab(subGroup) + 1);
         classesMap.put("test-number", HibernateShell.getNumberOfNextTest().toString());
 
         ArrayList<String> classes = new ArrayList<String>();
@@ -168,5 +169,31 @@ public class JsonMaker {
         map.put("gitURL", new Template("cell-ui info-cell-editable", student.getGitURL())); //класс и значение для юрл
 
         return map;
+    }
+
+    private static ArrayList<String> sortHeader(Set<String> set) {
+        ArrayList<String> strings = new ArrayList<String>();
+
+        strings.add("student");
+
+        for(int i = 1; ; i++){
+            if(set.contains("lab" + i)){
+                strings.add("lab" + i);
+            }
+            else
+                break;
+        }
+
+        for(int i = 1; ; i++){
+            if(set.contains("test" + i)){
+                strings.add("test" + i);
+            }
+            else
+                break;
+        }
+
+        strings.add("bonus");
+
+        return strings;
     }
 }

@@ -15,6 +15,8 @@ public class LabsHibernateShell {
         if(subGroup == null)
             return false;
 
+        if(HibernateShell.getNumberOfNextLab() == subGroup.getIssuedLabsList().size() + 1)
+            addLab("lab" + HibernateShell.getNumberOfNextLab());
 
         for (UniversityClass universityClass : subGroup.getUniversityClassesList()) {
             if(universityClass.getDataTime().equals(date)){
@@ -36,6 +38,13 @@ public class LabsHibernateShell {
             return -1;
 
         SubGroup subGroup = group.getSubGroup(subGroupNumber);
+        if(subGroup == null)
+            return -1;
+
+        return subGroup.getIssuedLabsList().size();
+    }
+
+    public static int getNumberIssuedLab(SubGroup subGroup) {
         if(subGroup == null)
             return -1;
 
