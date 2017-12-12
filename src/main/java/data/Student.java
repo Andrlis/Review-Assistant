@@ -191,8 +191,11 @@ public class Student implements Serializable {
     }
 
     public void setGitURL(@NotNull String url) {
-        if(url.split("/").length != 5)
+        if(url.split("/").length != 5){
+            this.gitRepoName = "";
+            this.gitUserName = "";
             return;
+        }
         this.gitRepoName = url.split("/")[4];
         this.gitUserName = url.split("/")[3];
     }

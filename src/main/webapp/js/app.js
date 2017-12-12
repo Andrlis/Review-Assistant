@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    setEventsToTable();
+    //setEventsToTable();
     //ShowMarksTable();
 
     $(".ch-tab-type").click(function () {
@@ -32,15 +32,32 @@ $(document).ready(function () {
         loadTable();
     });
 
+    $("#lab-radio-button").click(function() {
+        $("#new-lab-date").show();
+    });
+
+    $("#test-radio-button").click(function() {
+        $("#new-lab-date").hide();
+    });
+
     loadTable();
     $("#popup-add-column").show();
     $("#popup-edit-student").hide();
+
+    /*$("#choose-column-type").click(function() {
+        changeNewColumnType();
+    });*/
+
+
+
 });
+
+
 
 //Function onchange for select new-column-type
 function changeNewColumnType()
 {
-    var type = $("#new-column-type").val();
+    var type = $("#choose-column-type input:radio:checked").val();
     if (type==="test")
         $("#new-lab-date").hide();
     else
@@ -183,7 +200,10 @@ function formAndShowPopupFormAddColumn(data)
 {
     $("#new-column-type").html("");
 
-    var labOption = $("<option></option>");
+    $("#new-lab-number").html(data['lab-number']);
+    $("#new-test-number").html(data['test-number']);
+
+   /* var labOption = $("<option></option>");
     labOption.attr("value", "lab");
     labOption.html("Лабораторная работа " + data['lab-number']);
     $("#new-column-type").append(labOption);
@@ -191,7 +211,7 @@ function formAndShowPopupFormAddColumn(data)
     var testOption = $("<option></option>");
     testOption.attr("value", "test");
     testOption.html("Контрольная работа " + data['test-number']);
-    $("#new-column-type").append(testOption);
+    $("#new-column-type").append(testOption);*/
 
     $("#new-lab-date").html("");
     data['dates'].forEach(function (date) {
@@ -201,8 +221,8 @@ function formAndShowPopupFormAddColumn(data)
         $("#new-lab-date").append(select);
     });
 
-    $("#popup-form-add-column").addClass("show");
-    disablePageEvents();
+    $("#addLabTest").modal('show');
+    //disablePageEvents();
 }
 
 function showPopupFormAddColumn()
@@ -234,13 +254,14 @@ function errorAddLabOrTestButton()
 function succesAddLabOrTestButton()
 {
     loadTable();
+    setEventsToTable();
 }
 
 function addLabOrTestButton()
 {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
-    var type = $("#new-column-type").val();
+    var type = $('#choose-column-type input:radio:checked').val();
     var date = $("#new-lab-date").val();
     var comment = $("#comment-text-area").val();
 
@@ -255,7 +276,7 @@ function addLabOrTestButton()
         },
         succesAddLabOrTestButton
     );
-    cancelPopupFormAddColumn();
+    //cancelPopupFormAddColumn();
 
     /*$.ajax({
         url: "AddLabOrTestServlet?group=" + group +
@@ -296,8 +317,8 @@ function formAndShowPopupFormEditStudent(student)
     $("#student-surname").val(student['surname']);
     $("#student-eMail").val(student['eMail']);
     $("#student-git").val(student['git']);
-    $("#popup-form-edit-student").addClass("show");
-    disablePageEvents();
+    $("#popup-form-edit-student").modal('show');
+    //disablePageEvents();
 }
 
 function showEmptyPopupFormEditStudent()
@@ -331,8 +352,8 @@ function showPopupFormEditStudent(event)
 
 function cancelPopupFormEditStudent()
 {
-    $("#popup-form-edit-student").removeClass("show");
-    setEventsToTable();
+    //$("#popup-form-edit-student").removeClass("show");
+
     enablePageEvents();
 }
 
@@ -345,12 +366,13 @@ function errorDeleteStudent()
 function successDeleteStudent()
 {
     loadTable();
-    cancelPopupFormEditStudent();
+    setEventsToTable();
+   // cancelPopupFormEditStudent();
 }
 
 function deleteStudentButtonClick()
 {
-    var studentId = $("#student-id").html();
+    var studentId = $("#student-id").attr("value");
     $.ajax({
         url: "DeleteStudent?" +
         "studentId=" + studentId,
@@ -358,11 +380,13 @@ function deleteStudentButtonClick()
             successDeleteStudent();
         }
     });
+    //cancelPopupFormEditStudent();
 }
 
 function successSaveStudent()
 {
     loadTable();
+    setEventsToTable();
 }
 
 function errorSaveStudent()
@@ -393,8 +417,7 @@ function saveStudentButtonClick()
         },
         successSaveStudent
     );
-    cancelPopupFormEditStudent();
-
+    //cancelPopupFormEditStudent();
 }
 
 

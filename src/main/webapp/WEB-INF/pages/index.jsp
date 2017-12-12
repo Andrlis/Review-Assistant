@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/app.js"></script>
+    <!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
     <link rel='stylesheet' href="bootstrap/css/bootstrap.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/app.css" media="screen">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -63,7 +64,7 @@
 
 </div>
 
-<!-- popup form for adding column with lab or test-->
+<!-- popup form for adding column with lab or test
 <div class="popup" id="popup-add-column">
     <button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>
     <form class="popup-form container-ver" id="popup-form-add-column">
@@ -78,40 +79,44 @@
         <input type="button" value="Добавить" onclick="addLabOrTestButton()">
         <input type="button" value="Отменить" onclick="cancelPopupFormAddColumn()">
     </form>
-</div>
+</div>-->
 
-<!-- Modal -->
-<div id="addLabTest" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<!-- popup form for adding column with lab or test-->
+<div class="popup" id="popup-add-column">
+    <!--<button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>-->
+    <button onclick="showPopupFormAddColumn()">Добавить</button>
 
-        <!-- Modal content-->
-        <div class="modal-content center-modal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Добавить лабораторную/контрольную</h4>
-            </div>
-            <div class="btn-group model-button" data-toggle="buttons">
-                <label class="btn btn-primary active btn-lg">
-                    <input type="radio" name="options" id="option1" autocomplete="off" value="lab" checked>Лабораторная работа  <span id="new-lab-number"></span>
-                </label>
-                <label class="btn btn-primary btn-lg">
-                    <input type="radio" name="options" id="option2" autocomplete="off" value="test"> Контрольная работа <span id="new-test-number"></span>
-                </label>
-            </div>
-            <div>
-                <select name="new-lab-date" id="new-lab-date">
+    <div id="addLabTest" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Добавить</button>
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Добавить лабораторную/контрольную</h4>
+                </div>
+                <div class="btn-group model-button" data-toggle="buttons" id="choose-column-type">
+                    <label class="btn btn-primary active btn-lg" id="lab-radio-button">
+                        <input type="radio" name="options" id="lab-radio-button" autocomplete="off" value="lab" checked>Лабораторная работа  <span id="new-lab-number"></span>
+                    </label>
+                    <label class="btn btn-primary btn-lg" id="test-radio-button">
+                        <input type="radio" name="options" autocomplete="off" value="test"> Контрольная работа <span id="new-test-number"></span>
+                    </label>
+                </div>
+                <div>
+                    <select name="new-lab-date" id="new-lab-date">
+
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addLabOrTestButton()">Добавить</button>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 
-<!-- popup form for adding or edditing student-->
+<!-- popup form for adding or edditing student
 <div class="popup" id="popup-edit-student">
     <button data-toggle="modal" data-target="#addStudent" onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>
     <form class="popup-form container-ver" id="popup-form-edit-student">
@@ -128,39 +133,46 @@
         <input type="button" value="Удалить" id="delete-student-button" onclick="deleteStudentButtonClick()">
         <input type="button" value="Отменить" onclick="cancelPopupFormEditStudent()">
     </form>
-</div>
+</div>-->
 
-<!-- Modal -->
-<div id="addStudent" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<!-- popup form for adding or edditing student-->
+<div class="popup" id="popup-edit-student">
+    <!--button data-toggle="modal" data-target="#addStudent" onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>-->
+    <button onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>
 
-        <!-- Modal content-->
-        <div class="modal-content center-modal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Добавить нового студента</h4>
-                <div class="form-group">
-                    <label for="inputdefault">Фамилия</label>
-                    <input class="form-control" id="inputdefault" type="text">
+    <div id="popup-form-edit-student" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Добавить нового студента</h4>
+                    <input id="student-id" hidden>
+                    <div class="form-group">
+                        <label for="student-surname">Фамилия</label>
+                        <input class="form-control" id="student-surname" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-name">Имя</label>
+                        <input class="form-control" id="student-name" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-eMail">eMail</label>
+                        <input class="form-control" id="student-eMail" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="student-git">git URL</label>
+                        <input class="form-control" id="student-git" type="text">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputdefault">Имя</label>
-                    <input class="form-control" id="inputdefault" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="inputdefault">eMail</label>
-                    <input class="form-control" id="inputdefault" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="inputdefault">git URL</label>
-                    <input class="form-control" id="inputdefault" type="text">
+                <div class="modal-footer">
+                    <button id="delete-student-button" type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteStudentButtonClick()">Удалить</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">Добавить</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Добавить</button>
-            </div>
+
         </div>
-
     </div>
 </div>
 

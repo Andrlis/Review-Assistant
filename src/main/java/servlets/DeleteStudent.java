@@ -14,7 +14,7 @@ import java.io.IOException;
 public class DeleteStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String studentId = (String) req.getParameter("sudentId");
+        String studentId = (String) req.getParameter("studentId");
         StudentHibernateShell.deleteStudent(studentId);
     }
 
