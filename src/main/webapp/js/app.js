@@ -53,11 +53,14 @@ function formTable(data) {
     table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
-    var headerRow = $('<tr class="header"></tr>');
+    var tHead = $('<thead></thead>');
+    var headerRow = $('<tr></tr>');
     header.forEach(function (column) {
-        headerRow.append("<td>" + column + "</td>");
+        headerRow.append("<th nowrap>" + column + "</th>");
     });
-    table.append(headerRow);
+    tHead.append(headerRow);
+    table.append(tHead);
+    table.append('<tbody>');
     args.forEach(function (data) {
         var row = $('<tr></tr>');
         header.forEach(function (column) {
@@ -71,6 +74,7 @@ function formTable(data) {
         });
         table.append(row);
     });
+    table.append('</tbody>');
     $('#table-container').html(table);
     setEventsToTable();
 }
