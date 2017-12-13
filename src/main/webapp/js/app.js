@@ -70,7 +70,7 @@ function formTable(data) {
     table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
-    var tHead = $('<thead></thead>');
+    var tHead = $('<thead class="table-header"></thead>');
     var headerRow = $('<tr></tr>');
     header.forEach(function (column) {
         headerRow.append("<th nowrap>" + column + "</th>");

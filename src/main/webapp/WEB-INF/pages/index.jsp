@@ -14,14 +14,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Title</title>
 </head>
-<body>
+<body class="body-class">
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse menu-bar-class">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-                        class="glyphicon glyphicon-menu-hamburger"></span></a>
+            <li class="dropdown" style="height: 50px;">
+                <a class="dropdown-toggle"  data-toggle="dropdown" href="#"><span
+                        class="glyphicon glyphicon-menu-hamburger menu-bar-button-class"></span></a>
                 <ul class="dropdown-menu">
                     <li><button class="btn btn-linkk ch-tab-type" value="m">Оценки</button></li>
                     <li><button class="btn btn-linkk ch-tab-type" value="p">Посещения</button></li>
@@ -31,8 +31,9 @@
 
             <c:forEach items="${groups}" var="group">
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" value="${group.numberOfGroup}"><c:out
-                        value="${group.numberOfGroup}"/>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" value="${group.numberOfGroup}">
+                    <span class=" menu-bar-button-class"><c:out
+                            value="${group.numberOfGroup}"/></span>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <c:forEach var="subgroup" items="${group.subGroupList}" varStatus="num">
@@ -45,7 +46,7 @@
             </c:forEach>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span class=" menu-bar-button-class"> Login</span></a></li>
         </ul>
     </div>
 </nav>
@@ -60,8 +61,10 @@
     <div class="text-center h3"><span id="info-type" value="m">Оценки</span></div>
 </div>
 
-<div id="table-container">
+<div style="text-align: center;">
+<div id="table-container" style="display: inline-table;">
 
+</div>
 </div>
 
 <!-- popup form for adding column with lab or test
