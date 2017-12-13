@@ -5,9 +5,9 @@ import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by Andrey on 13.07.2017.
@@ -48,15 +48,40 @@ public class BsuirRequests {
         URL url = new URL(String.format("https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=%s", groupName));
 
         URLConnection connection = url.openConnection();
-        connection.setRequestProperty("Accept", "application/xml;charset=UTF-8");
+        connection.setRequestProperty("Accept", "application/xml");
 
         logger.info("Send request about timetable(\"https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=" + groupName + "\").");
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
 
         response = in.readLine();
 
         return response;
+        //return in.readLine();
+    }
+
+    public static String getTimetableJson(String groupName) throws IOException {
+
+        StringBuffer response = new StringBuffer();
+        String inputLine;
+
+        URL url = new URL(String.format("https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=%s", groupName));
+
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        urlConnection.setRequestProperty("Content-Type","application/json; charset=utf-8");
+
+        logger.info("Send request about timetable(\"https://students.bsuir.by/api/v1/studentGroup/schedule?studentGroup=" + groupName + "\").");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+
+        in.close();
+
+        return response.toString();
     }
 
 
