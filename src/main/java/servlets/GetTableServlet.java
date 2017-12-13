@@ -40,6 +40,7 @@ public class GetTableServlet extends HttpServlet {
                             .forward(req, resp);
                     break;
             }
+            resp.setCharacterEncoding("UTF-8");
             resp.getWriter().append(table);
         } catch (NullPointerException e) {
             req
