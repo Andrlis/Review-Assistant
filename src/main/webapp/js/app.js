@@ -26,7 +26,7 @@ $(document).ready(function () {
         var val = $(this).attr("value");
         $("#subgroup-number").html(val);
         $("#subgroup-number").attr("value", val);
-        var group = $(this).parent().parent().children().first().attr("value");
+        var group = $(this).parent().parent().parent().children().first().attr("value");
         $("#group-number").html(group);
         $("#group-number").attr("value", group);
         loadTable();
@@ -47,10 +47,12 @@ $(document).ready(function () {
     /*$("#choose-column-type").click(function() {
         changeNewColumnType();
     });*/
-
-
-
 });
+
+function isUserLoggedIn() {
+    var authFlag = $("#logout").first().length;
+    return authFlag == 1;
+}
 
 /*functions for forming tables*/
 function getSimpleCell(data) {
@@ -130,35 +132,34 @@ function formPresenceTable(data) {
 
 function formMarkTable(data) {
     var table = getSimpleTable(data);
-    var th = $('<th style="vertical-align: middle;"></th>');
-    var button = $('<button class="btn-linkkk"><span class="glyphicon glyphicon-plus"></span></button>');
-    var img = $('<img>', {src: "/picture/add2.png", alt: "Добавить"});
-    //button.append(img);
-    th.append(button);
-    //button.append("Добавить");
-    button.attr("onclick", "showPopupFormAddColumn()");
+    if (isUserLoggedIn()) {
+        var th = $('<th style="vertical-align: middle;"></th>');
+        var button = $('<button class="btn-linkkk"><span class="glyphicon glyphicon-plus"></span></button>');
+        th.append(button);
+        button.attr("onclick", "showPopupFormAddColumn()");
+        table.children().first().children().first().append(th);
+    }
 
-    table.children().first().children().first().append(th);
     $('#table-container').html(table);
     setEventsToTable();
 }
 
 function formEditTable(data) {
     var table = getSimpleTable(data);
-    var row = $('<tr></tr>');
-    var cell = $('<tb>  </tb>');
-    var tb = $('<tb></tb>');
-    var button = $('<button class="btn-linkkkk"><span class="glyphicon glyphicon-user"</button>');
-    var img = $('<img>', {src: "/picture/add3.png", alt: "Добавить"});
-    //img.attr("src", "/picture/add4.png");
-    //img.attr("alt", "Добавить");
-    //button.append(img);
-    //button.append("Добавить студента");
-    button.attr("onclick", "showEmptyPopupFormEditStudent()");
-    cell.append(button);
-    row.append(cell);
-    row.append(tb);
-    table.children().first().next().append(row);
+
+    /*Check if user logged in. And put button if he did it*/
+    if (isUserLoggedIn()) {
+        var row = $('<tr></tr>');
+        var cell = $('<tb>  </tb>');
+        var tb = $('<tb></tb>');
+        var button = $('<button class="btn-linkkkk"><span class="glyphicon glyphicon-user"</button>');
+        button.attr("onclick", "showEmptyPopupFormEditStudent()");
+        cell.append(button);
+        row.append(cell);
+        row.append(tb);
+        table.children().first().next().append(row);
+    }
+
     $('#table-container').html(table);
     setEventsToTable();
 }
@@ -528,7 +529,8 @@ function saveStudentButtonClick()
         },
         successSaveStudent
     );
-    //cancelPopupFormEditStudent();
 }
+
+
 
 

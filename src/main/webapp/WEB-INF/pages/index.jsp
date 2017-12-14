@@ -46,8 +46,11 @@
             </li>
             </c:forEach>
         </ul>
+        <!--<ul class="nav navbar-nav navbar-right">
+                <li id="login"><a href="/GoLoginServlet"><span class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span class=" menu-bar-button-class">Войти</span></a></li>
+        </ul>-->
         <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span class=" menu-bar-button-class"> Login</span></a></li>
+            <li id="logout"><a href="/LogoutServlet"><span class=" menu-bar-button-class">Выйти</span></a></li>
         </ul>
     </div>
 </nav>
