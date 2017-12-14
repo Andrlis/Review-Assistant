@@ -84,7 +84,7 @@ function getSimpleRow(data, header, number) {
 }
 
 function getHeaderRow(headerArray) {
-    var headerRow = $('<tr></tr>');
+    var headerRow = $('<tr style="font-weight: bold;"></tr>');
     headerRow.append(getCell("№"));
     headerArray.forEach(function (column) {
         headerRow.append(getHeaderCell(column));
@@ -130,29 +130,33 @@ function formPresenceTable(data) {
 
 function formMarkTable(data) {
     var table = getSimpleTable(data);
-    var button = $('<button></button>');
+    var th = $('<th style="vertical-align: middle;"></th>');
+    var button = $('<button class="btn-linkkk"><span class="glyphicon glyphicon-plus"></span></button>');
     var img = $('<img>', {src: "/picture/add2.png", alt: "Добавить"});
-    button.append(img);
+    //button.append(img);
+    th.append(button);
     //button.append("Добавить");
     button.attr("onclick", "showPopupFormAddColumn()");
-    table.children().first().children().first().append(button);
+    table.children().first().children().first().append(th);
     $('#table-container').html(table);
     setEventsToTable();
 }
 
 function formEditTable(data) {
     var table = getSimpleTable(data);
-    var row = $('<row></row>');
-    var cell = $('<cell></cell>');
-    var button = $('<button></button>');
+    var row = $('<tr></tr>');
+    var cell = $('<tb>  </tb>');
+    var tb = $('<tb></tb>');
+    var button = $('<button class=""btn-linkkk"><span class="glyphicon glyphicon-user"</button>');
     var img = $('<img>', {src: "/picture/add3.png", alt: "Добавить"});
     //img.attr("src", "/picture/add4.png");
     //img.attr("alt", "Добавить");
-    button.append(img);
+    //button.append(img);
     //button.append("Добавить студента");
     button.attr("onclick", "showEmptyPopupFormEditStudent()");
     cell.append(button);
     row.append(cell);
+    row.append(tb);
     table.children().first().next().append(row);
     $('#table-container').html(table);
     setEventsToTable();

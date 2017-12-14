@@ -100,15 +100,15 @@
                     <h4 class="modal-title">Добавить лабораторную/контрольную</h4>
                 </div>
                 <div class="btn-group model-button" data-toggle="buttons" id="choose-column-type">
-                    <label class="btn btn-primary active btn-lg" id="lab-radio-button">
+                    <label class="btn btn-success active btn-lg" id="lab-radio-button">
                         <input type="radio" name="options" id="lab-radio-button" autocomplete="off" value="lab" checked>Лабораторная работа  <span id="new-lab-number"></span>
                     </label>
-                    <label class="btn btn-primary btn-lg" id="test-radio-button">
+                    <label class="btn btn-success btn-lg" id="test-radio-button">
                         <input type="radio" name="options" autocomplete="off" value="test"> Контрольная работа <span id="new-test-number"></span>
                     </label>
                 </div>
                 <div>
-                    <select name="new-lab-date" id="new-lab-date">
+                    <select class="select-style" name="new-lab-date" id="new-lab-date">
 
                     </select>
                 </div>

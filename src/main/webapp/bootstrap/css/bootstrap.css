@@ -4648,6 +4648,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #008000;
     color: #ffffff;
+    height: 50px;
 }
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
@@ -6779,7 +6780,7 @@ button.close {
     font-weight: bold;
     border-radius: 0;
     line-height: 0;
-
+    border: 0px;
 }
 
 .btn-linkkk:hover {
@@ -6861,4 +6862,28 @@ tr > :last-child > div {
 
 .table-header {
     background-color: #7cc369;
+}
+
+.select-style {
+  font-size: 25px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  width: auto;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #fafafa url("img/icon-select.png") no-repeat 90% 50%;
+}
+
+.select-style select {
+  padding: 5px 8px;
+  width: 130%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.select-style select:focus {
+  outline: none;
 }
