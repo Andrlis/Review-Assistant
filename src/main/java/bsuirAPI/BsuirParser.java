@@ -1,8 +1,11 @@
 package bsuirAPI;
 
+import bsuirAPI.bsuirScheduleJson.*;
 import bsuirAPI.bsuirTimetable.DayTimetable;
 import bsuirAPI.bsuirTimetable.Subject;
 import bsuirAPI.bsuirTimetable.Timetable;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -107,5 +110,18 @@ public class BsuirParser {
 
         logger.info("End parse timetable.");
         return timetable;
+    }
+
+    public static ScheduleKeeper parseTimetableFromJson(String json) throws Exception {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Schedule.class, new ScheduleDeserializer())
+                .registerTypeAdapter(Lesson.class, new LessonDeserializer())
+                .registerTypeAdapter(ScheduleKeeper.class, new ScheduleKeeperDeserializer())
+                .create();
+
+        ScheduleKeeper scheduleKeeper = gson.fromJson(json, ScheduleKeeper.class);
+
+        logger.info("End read commit history.");
+        return scheduleKeeper;
     }
 }
