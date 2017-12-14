@@ -8,6 +8,7 @@ import data.group.SubGroup;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateShellQueryException;
 import resources.Hibernate.LabsHibernateShell;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
@@ -108,7 +109,7 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
-    public static String getJsonSubGroupClasses(SubGroup subGroup){
+    public static String getJsonSubGroupClasses(SubGroup subGroup) throws HibernateShellQueryException {
         Map<String,Object> classesMap = new LinkedHashMap<String, Object>();
 
         classesMap.put("lab-number", LabsHibernateShell.getNumberIssuedLab(subGroup) + 1);

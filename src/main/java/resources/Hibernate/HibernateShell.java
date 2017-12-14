@@ -47,7 +47,7 @@ public class HibernateShell {
         return ourSessionFactory.openSession();
     }
 
-    public static GroupsKeeper getGroupKeeper(){
+    public static GroupsKeeper getGroupKeeper() throws HibernateShellQueryException {
         logger.info("Start get group keeper.");
         final Session session = getSession();
         GroupsKeeper groupsKeeper = new GroupsKeeper();
@@ -56,6 +56,8 @@ public class HibernateShell {
 
             groupsKeeper.setGroupList(session.createQuery("from Group").list());
 
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -64,7 +66,7 @@ public class HibernateShell {
         return groupsKeeper;
     }
 
-    public static LabsKeeper getLabsKeeper() {
+    public static LabsKeeper getLabsKeeper() throws HibernateShellQueryException  {
         logger.info("Start get labs keeper.");
         final Session session = getSession();
         LabsKeeper labsKeeper = new LabsKeeper();
@@ -73,6 +75,8 @@ public class HibernateShell {
 
             labsKeeper.setLabList(session.createQuery("from Lab").list());
 
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -81,7 +85,7 @@ public class HibernateShell {
         return labsKeeper;
     }
 
-    public static LecturerKeeper getLecturerKeeper() {
+    public static LecturerKeeper getLecturerKeeper() throws HibernateShellQueryException {
         logger.info("Start get lectuturer keeper.");
         final Session session = getSession();
         LecturerKeeper lecturerKeeper = new LecturerKeeper();
@@ -90,6 +94,8 @@ public class HibernateShell {
 
             lecturerKeeper.setLecturerList(session.createQuery("from Lecturer").list());
 
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -98,7 +104,7 @@ public class HibernateShell {
         return lecturerKeeper;
     }
 
-    public static TestKeeper getTestKeeper() {
+    public static TestKeeper getTestKeeper() throws HibernateShellQueryException {
         logger.info("Start get test keeper.");
         final Session session = getSession();
         TestKeeper testKeeper = new TestKeeper();
@@ -107,6 +113,8 @@ public class HibernateShell {
 
             testKeeper.setTestList(session.createQuery("from Test").list());
 
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -115,12 +123,14 @@ public class HibernateShell {
         return testKeeper;
     }
 
-    public static Long getNumberOfTests() {
+    public static Long getNumberOfTests() throws HibernateShellQueryException {
         logger.info("Start get number of tests.");
         final Session session = getSession();
         Long answer = null;
         try {
             answer = (Long) session.createQuery("SELECT COUNT(*) FROM Test").uniqueResult();
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -129,16 +139,18 @@ public class HibernateShell {
         return answer;
     }
 
-    public static Integer getNumberOfNextTest() {
+    public static Integer getNumberOfNextTest() throws HibernateShellQueryException {
         return (int)(getNumberOfTests() + 1);
     }
 
-    public static Long getNumberOfLab() {
+    public static Long getNumberOfLab() throws HibernateShellQueryException {
         logger.info("Start get number of labs.");
         final Session session = getSession();
         Long answer = null;
         try {
             answer = (Long) session.createQuery("SELECT COUNT(*) FROM Lab").uniqueResult();
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -147,7 +159,7 @@ public class HibernateShell {
         return answer;
     }
 
-    public static Integer getNumberOfNextLab() {
+    public static Integer getNumberOfNextLab() throws HibernateShellQueryException {
         return (int)(getNumberOfLab() + 1);
     }
 
@@ -213,12 +225,14 @@ public class HibernateShell {
         return null;
     }
 
-    public static Group getGroupByGroupNumber(String number) {
+    public static Group getGroupByGroupNumber(String number) throws HibernateShellQueryException {
         logger.info("Start get group by groupnumber(" + number + ").");
         final Session session = getSession();
         List<Group> answer = null;
         try {
-            answer = session.createQuery("from Group group where group.numberOfGroup ='" + number + "'" ).list();
+            answer = session.createQuery("from Group group where group.numberOfGroup ='" + number + "'").list();
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -312,7 +326,7 @@ public class HibernateShell {
 		logger.info("End update bonus mark");
     }
 
-    public static void addLab(String keyWord){
+    public static void addLab(String keyWord) throws HibernateShellQueryException {
         Lab lab = new Lab();
         lab.setKeyWord(keyWord);
         lab.setNumberOfLab(getNumberOfNextLab());
@@ -320,7 +334,9 @@ public class HibernateShell {
         save(lab);
     }
 
-    public static void issueLab(SubGroup subGroup, UniversityClass universityClassOfIssue){
+    public static void issueLab(SubGroup subGroup,
+                                UniversityClass universityClassOfIssue
+                                ) throws HibernateShellQueryException {
         Lab lab = getLabsKeeper().getLabByNumber(subGroup.getIssuedLabsList().size() + 1);
         IssuedLab issuedLab = new IssuedLab();
 
@@ -350,12 +366,14 @@ public class HibernateShell {
 
     }
 
-    public static Student getStudentById(String id) {
+    public static Student getStudentById(String id) throws HibernateShellQueryException {
         final Session session = getSession();
         Student student = null;
         try {
             student = (Student)session.createQuery("from Student student WHERE student.id = " + id).list().get(0);
 
+        } catch(Exception e) {
+            throw new HibernateShellQueryException(e);
         } finally {
             logger.info("Close session.");
             session.close();
@@ -363,7 +381,7 @@ public class HibernateShell {
         return student;
     }
 
-    public static void SQLQuery(String query) {
+    public static void SQLQuery(String query) throws HibernateShellQueryException {
         final Session session = getSession();
         try {
             session.getTransaction().begin();
@@ -371,7 +389,7 @@ public class HibernateShell {
             session.getTransaction().commit();
         }
         catch (javax.persistence.TransactionRequiredException ex) {
-            System.out.println(ex);
+            throw new HibernateShellQueryException(ex);
         }
         finally {
                 logger.info("Close session.");
@@ -396,7 +414,7 @@ public class HibernateShell {
         return answer;
     }
 
-    public static void addTest(){
+    public static void addTest()  throws HibernateShellQueryException {
         Test test = new Test();
         test.setTestDate(new Date());
         test.setTestNumber(getNumberOfNextTest());
@@ -404,7 +422,7 @@ public class HibernateShell {
         save(test);
     }
 
-    public static void addTestMark(Integer studentId, Integer testNumber) {
+    public static void addTestMark(Integer studentId, Integer testNumber) throws HibernateShellException {
         final Session session = getSession();
         try {
             session.getTransaction().begin();
@@ -412,7 +430,7 @@ public class HibernateShell {
             session.getTransaction().commit();
         }
         catch (javax.persistence.TransactionRequiredException ex) {
-            System.out.println(ex);
+            throw new HibernateShellException(ex);
         }
         finally {
             logger.info("Close session.");

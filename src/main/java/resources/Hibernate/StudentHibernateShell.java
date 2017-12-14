@@ -13,20 +13,22 @@ import java.util.List;
 
 public class StudentHibernateShell {
 
-    static public void deleteStudent(String id){
+    static public void deleteStudent(String id) throws HibernateShellQueryException {
         Student student = HibernateShell.getStudentById(id);
         HibernateShell.delete(student);
     }
 
-    static public void noteStudentPresence(String studentId, String classId){
+    static public void noteStudentPresence(String studentId,
+                                           String classId) throws HibernateShellQueryException {
         HibernateShell.SQLQuery("DELETE FROM absentees WHERE id_class = " + classId + " and id_student = " + studentId);
     }
 
-    static public void noteStudentAbsent(String stringId, String classId){
+    static public void noteStudentAbsent(String stringId,
+                                         String classId) throws HibernateShellQueryException {
         HibernateShell.SQLQuery("INSERT INTO absentees (id_class, id_student) VALUES ("+ classId + ", " + stringId + ");");
     }
 
-    static public boolean insertStudent(String groupNumber, String subGroupNumber, String name, String eMail, String gitURL) {
+    static public boolean insertStudent(String groupNumber, String subGroupNumber, String name, String eMail, String gitURL) throws HibernateShellQueryException {
         Student student = new Student();
         student.setFulName(name);
         student.seteMail(eMail);
@@ -65,7 +67,7 @@ public class StudentHibernateShell {
         return true;
     }
 
-    static public boolean updateStudent(String id, String name, String eMail, String gitURL) {
+    static public boolean updateStudent(String id, String name, String eMail, String gitURL) throws HibernateShellQueryException {
         Student student = HibernateShell.getStudentById(id);
 
         if(student == null)

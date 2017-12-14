@@ -14,10 +14,14 @@ import java.io.IOException;
 public class TableTestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("groups", HibernateShell.getGroupKeeper().getGroupList());
-        request
-                .getRequestDispatcher("WEB-INF/pages/test/table_test.jsp")
-                .forward(request, response);
+        try {
+            request.setAttribute("groups", HibernateShell.getGroupKeeper().getGroupList());
+            request
+                    .getRequestDispatcher("WEB-INF/pages/test/table_test.jsp")
+                    .forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

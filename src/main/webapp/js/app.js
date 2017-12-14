@@ -63,7 +63,7 @@ function getSimpleCell(data) {
 }
 
 function getCell(textData) {
-    var cell = $("<td></td>");
+    var cell = $("<td nowrap></td>");
     cell.append(textData);
     return cell;
 }
@@ -101,7 +101,7 @@ function getTableHeader(headerArray) {
 function getTableBody(dataArray, headerArray) {
     var body = $('<tbody></tbody>');
     dataArray.sort(function(a, b) {
-        return a[headerArray[0]]['value'] < b[headerArray[0]]['value'];
+        return a[headerArray[0]]['value'] > b[headerArray[0]]['value'];
     });
     var numberOfRow = 0;
     dataArray.forEach(function (data) {
@@ -122,8 +122,38 @@ function getSimpleTable(data) {
     return table;
 }
 
-function formTable(data) {
+function formPresenceTable(data) {
     var table = getSimpleTable(data);
+    $('#table-container').html(table);
+    setEventsToTable();
+}
+
+function formMarkTable(data) {
+    var table = getSimpleTable(data);
+    var button = $('<button></button>');
+    var img = $('<img>', {src: "/picture/add2.png", alt: "Добавить"});
+    button.append(img);
+    //button.append("Добавить");
+    button.attr("onclick", "showPopupFormAddColumn()");
+    table.children().first().children().first().append(button);
+    $('#table-container').html(table);
+    setEventsToTable();
+}
+
+function formEditTable(data) {
+    var table = getSimpleTable(data);
+    var row = $('<row></row>');
+    var cell = $('<cell></cell>');
+    var button = $('<button></button>');
+    var img = $('<img>', {src: "/picture/add3.png", alt: "Добавить"});
+    //img.attr("src", "/picture/add4.png");
+    //img.attr("alt", "Добавить");
+    button.append(img);
+    //button.append("Добавить студента");
+    button.attr("onclick", "showEmptyPopupFormEditStudent()");
+    cell.append(button);
+    row.append(cell);
+    table.children().first().next().append(row);
     $('#table-container').html(table);
     setEventsToTable();
 }
@@ -166,13 +196,21 @@ function loadTable() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var type = $("#info-type").attr("value");
+    var successFunction;
+    if (type === "m") {
+        successFunction = formMarkTable;
+    } else if (type === "e") {
+        successFunction = formEditTable;
+    } else {
+        successFunction = formPresenceTable;
+    }
     $.ajax({
         url: "GetTableServlet?group=" + group +
         "&subgroup=" + subgroup +
         "&type=" + type,
         dataType: "json",
         success: function(data){
-            formTable(data);
+            successFunction(data);
         }
     });
 }
@@ -189,7 +227,7 @@ function setEventsToTable() {
 
     //Event for click at cell with presence
     $(".presence-cell.editable").click(function () {
-        var studentId = $(this).parent().children().first().attr("data-id");
+        var studentId = $(this).parent().children().first().next().attr("data-id");
         var classId = $(this).attr("data-id");
 
         if ($(this).css("background-color") == "rgb(194, 255, 10)") {   //if student is absent

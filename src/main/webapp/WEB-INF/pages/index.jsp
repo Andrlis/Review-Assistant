@@ -10,6 +10,7 @@
     <link rel='stylesheet' href="bootstrap/css/bootstrap.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/app.css" media="screen">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Title</title>
@@ -87,7 +88,7 @@
 <!-- popup form for adding column with lab or test-->
 <div class="popup" id="popup-add-column">
     <!--<button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>-->
-    <button onclick="showPopupFormAddColumn()">Добавить</button>
+    <!--<button onclick="showPopupFormAddColumn()">Добавить</button>-->
 
     <div id="addLabTest" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -141,7 +142,7 @@
 <!-- popup form for adding or edditing student-->
 <div class="popup" id="popup-edit-student">
     <!--button data-toggle="modal" data-target="#addStudent" onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>-->
-    <button onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>
+    <!--<button onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>-->
 
     <div id="popup-form-edit-student" class="modal fade" role="dialog">
         <div class="modal-dialog">

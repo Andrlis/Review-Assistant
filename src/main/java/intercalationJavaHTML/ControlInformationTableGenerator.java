@@ -13,6 +13,7 @@ import data.UniversityClass;
 import resources.Hibernate.HibernateShell;
 
 import data.group.SubGroup;
+import resources.Hibernate.HibernateShellQueryException;
 
 
 /**
@@ -61,7 +62,7 @@ public class ControlInformationTableGenerator extends TableGenerator{
     }
 
     @Override
-    protected void addStudentToTable(Table tab, Student student) {
+    protected void addStudentToTable(Table tab, Student student) throws HibernateShellQueryException {
         ControlInformationTable table = (ControlInformationTable) tab;
         table.addRow();
         table.addStudentInformationCell(student.getFulName(), student.geteMail(), student.getGitURL());

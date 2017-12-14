@@ -6,7 +6,11 @@ import data.group.SubGroup;
 
 public class LabsHibernateShell {
 
-    public static boolean issueLab(String groupNumber, String subGroupNumber, String date, String comment){
+    public static boolean issueLab(String groupNumber,
+                                   String subGroupNumber,
+                                   String date,
+                                   String comment)
+            throws HibernateShellQueryException {
         Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
         if(group == null)
             return false;
@@ -28,11 +32,11 @@ public class LabsHibernateShell {
         return false;
     }
 
-    public static void addLab(String keyWorld){
+    public static void addLab(String keyWorld) throws HibernateShellQueryException {
         HibernateShell.addLab(keyWorld);
     }
 
-    public static int getNumberIssuedLab(String groupNumber, String subGroupNumber) {
+    public static int getNumberIssuedLab(String groupNumber, String subGroupNumber) throws HibernateShellQueryException {
         Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
         if(group == null)
             return -1;

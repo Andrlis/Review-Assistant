@@ -15,7 +15,12 @@ public class NoteStudentPresence extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String studentId = (String) req.getParameter("studentId");
         String classId = (String) req.getParameter("classId");
-        StudentHibernateShell.noteStudentPresence(studentId, classId);
+        try {
+            StudentHibernateShell.noteStudentPresence(studentId, classId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

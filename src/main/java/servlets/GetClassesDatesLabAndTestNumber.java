@@ -3,6 +3,7 @@ package servlets;
 import data.group.Group;
 import data.group.SubGroup;
 import resources.Hibernate.HibernateShell;
+import resources.Hibernate.StudentHibernateShell;
 import resources.TableMaker.JsonMaker;
 
 import javax.servlet.ServletException;
@@ -18,11 +19,14 @@ public class GetClassesDatesLabAndTestNumber extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
-
-        Group    group    = HibernateShell.getGroupByGroupNumber(groupNumber);
-        SubGroup subGroup = group.getSubGroup(subGroupNumber);
-        String str = JsonMaker.getJsonSubGroupClasses(subGroup);
-        resp.getWriter().append(str);
+        try {
+            Group    group    = HibernateShell.getGroupByGroupNumber(groupNumber);
+            SubGroup subGroup = group.getSubGroup(subGroupNumber);
+            String str = JsonMaker.getJsonSubGroupClasses(subGroup);
+            resp.getWriter().append(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //resp.getWriter().append("[\"12.02.17 12:40\", \"13.02.17 12:40\", \"14.02.17 12:40\"]");
     }
 

@@ -40,9 +40,9 @@ public class GetTableServlet extends HttpServlet {
                             .forward(req, resp);
                     break;
             }
-            resp.setCharacterEncoding("UTF-8");
+
             resp.getWriter().append(table);
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             req
                     .getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
                     .forward(req, resp);

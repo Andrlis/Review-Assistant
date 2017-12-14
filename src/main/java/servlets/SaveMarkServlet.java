@@ -21,14 +21,18 @@ public class SaveMarkServlet extends HttpServlet {
                     .getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
                     .forward(req, resp);
         }
-        if (value.equals(""))
-            value="-1";
-        if (type.equals("lab")) {
-            HibernateShell.updateLabMark(Integer.parseInt(id), Integer.parseInt(value));
-        } else if (type.equals("test")) {
-            HibernateShell.updateTestMark(Integer.parseInt(id), Integer.parseInt(value));
-        } else if (type.equals("bonus")) {
-            HibernateShell.updateBonusMark(Integer.parseInt(id), Integer.parseInt(value));
+        try {
+            if (value.equals(""))
+                value="-1";
+            if (type.equals("lab")) {
+                HibernateShell.updateLabMark(Integer.parseInt(id), Integer.parseInt(value));
+            } else if (type.equals("test")) {
+                HibernateShell.updateTestMark(Integer.parseInt(id), Integer.parseInt(value));
+            } else if (type.equals("bonus")) {
+                HibernateShell.updateBonusMark(Integer.parseInt(id), Integer.parseInt(value));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

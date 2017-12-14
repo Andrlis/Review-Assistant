@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TestHibernateShell {
 
-    public static void addNextTest(String group, String comment) {
+    public static void addNextTest(String group, String comment) throws HibernateShellQueryException, HibernateShellException {
         List<Integer> ids = HibernateShell.getStudentsId();
 
         HibernateShell.addTest();

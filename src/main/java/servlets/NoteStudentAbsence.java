@@ -15,8 +15,13 @@ public class NoteStudentAbsence extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String studentId = (String) req.getParameter("studentId");
         String classId = (String) req.getParameter("classId");
-        StudentHibernateShell.noteStudentAbsent(studentId, classId);
+        try {
+            StudentHibernateShell.noteStudentAbsent(studentId, classId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

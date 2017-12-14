@@ -1,6 +1,7 @@
 package servlets;
 
 import data.Student;
+import resources.Hibernate.HibernateShellQueryException;
 import resources.Hibernate.StudentHibernateShell;
 
 import javax.servlet.ServletException;
@@ -23,10 +24,20 @@ public class SaveStudent extends HttpServlet {
         String gitRepo = (String) req.getParameter("git");
         String eMail = (String) req.getParameter("email");
 
-        if (studentId.equals("")) {
-            StudentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
-        } else {
-            StudentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
+
+        try {
+            if (studentId.equals("")) {
+                StudentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
+            } else {
+                try {
+                    StudentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
+                } catch (HibernateShellQueryException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

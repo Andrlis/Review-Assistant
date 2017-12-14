@@ -101,7 +101,7 @@ public class Main {
 //        System.out.println(JsonMaker.getJsonSubGroupClasses(groupsKeeper.getGroupList().get(0).getSubGroup("1")));
 
 
-        TestHibernateShell.addNextTest("1", "1");
+        //TestHibernateShell.addNextTest("1", "1");
 
     }
 }
