@@ -37,7 +37,7 @@ public class GitRequests {
 
         in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-        response = in.readLine();                                                                  //Read response.
+        response = in.readLine();
         logger.info("End get repo info.");
         return response;
     }
