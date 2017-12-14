@@ -52,25 +52,91 @@ $(document).ready(function () {
 
 });
 
-
-
-//Function onchange for select new-column-type
-function changeNewColumnType()
-{
-    var type = $("#choose-column-type input:radio:checked").val();
-    if (type==="test")
-        $("#new-lab-date").hide();
-    else
-        $("#new-lab-date").show();
+/*functions for forming tables*/
+function getSimpleCell(data) {
+    var cell = $("<td></td>");
+    cell.attr("data-id", data['id']);
+    cell.attr("data-type", data['type']);
+    cell.attr("class", data['cell-class']);
+    cell.append(data['value']);
+    return cell;
 }
 
+function getCell(textData) {
+    var cell = $("<td></td>");
+    cell.append(textData);
+    return cell;
+}
+
+function getHeaderCell(name) {
+    var cell = $('<th nowrap></th>');
+    cell.append(name);
+    return cell;
+}
+
+function getSimpleRow(data, header, number) {
+    var row = $('<tr></tr>');
+    row.append(getCell(number));
+    header.forEach(function (column) {
+        row.append(getSimpleCell(data[column]));
+    });
+    return row;
+}
+
+function getHeaderRow(headerArray) {
+    var headerRow = $('<tr></tr>');
+    headerRow.append(getCell("№"));
+    headerArray.forEach(function (column) {
+        headerRow.append(getHeaderCell(column));
+    });
+    return headerRow;
+}
+
+function getTableHeader(headerArray) {
+    var header = $('<thead class="table-header"></thead>');
+    header.append(getHeaderRow(headerArray));
+    return header;
+}
+
+function getTableBody(dataArray, headerArray) {
+    var body = $('<tbody></tbody>');
+    dataArray.sort(function(a, b) {
+        return a[headerArray[0]]['value'] < b[headerArray[0]]['value'];
+    });
+    var numberOfRow = 0;
+    dataArray.forEach(function (data) {
+        numberOfRow ++;
+        body.append(getSimpleRow(data, headerArray, numberOfRow));
+    });
+    return body;
+}
+
+function getSimpleTable(data) {
+    var table = $("<table></table>");
+    var tableClass = data['table-class'];
+    table.attr("class", tableClass);
+    var header = data['header'];
+    var args = data['args'];
+    table.append(getTableHeader(header));
+    table.append(getTableBody(args, header));
+    return table;
+}
+
+function formTable(data) {
+    var table = getSimpleTable(data);
+    $('#table-container').html(table);
+    setEventsToTable();
+}
+
+
+/*
 function formTable(data) {
     var table = $("<table></table>");
     var tableClass = data['table-class'];
     table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
-    var tHead = $('<thead></thead>');
+    var tHead = $('<thead class="table-header"></thead>');
     var headerRow = $('<tr></tr>');
     header.forEach(function (column) {
         headerRow.append("<th nowrap>" + column + "</th>");
@@ -94,7 +160,7 @@ function formTable(data) {
     table.append('</tbody>');
     $('#table-container').html(table);
     setEventsToTable();
-}
+}*/
 
 function loadTable() {
     var group = $("#group-number").attr("value");
@@ -339,13 +405,13 @@ function showPopupFormEditStudent(event)
     var row = $(event.target).parent();
     var children = row.children();
     var student = {};
-    var nameAndSurname = children.first().html().split(" ");
+    var nameAndSurname = children.first().next().html().split(" ");
     student['surname'] = nameAndSurname[0];
     student['name'] = nameAndSurname[1];
     /////??????????????????????????????
-    student['id'] = children.first().attr("data-id");
-    student['eMail'] = children.first().next().html();
-    student['git'] = children.first().next().next().html();
+    student['id'] = children.first().next().attr("data-id");
+    student['eMail'] = children.first().next().next().html();
+    student['git'] = children.first().next().next().next().html();
     $("#delete-student-button").show();
     formAndShowPopupFormEditStudent(student);
 }
