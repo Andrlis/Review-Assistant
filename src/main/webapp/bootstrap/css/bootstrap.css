@@ -6787,6 +6787,17 @@ button.close {
     color: white;
 }
 
+
+.btn-linkkkk {
+  border-style: dashed;
+  background-color: white;
+  border-color: white
+}
+
+.btn-linkkkk:hover {
+  color: green;
+}
+
 table {
     width: 100%;
     line-height: 1.5em;

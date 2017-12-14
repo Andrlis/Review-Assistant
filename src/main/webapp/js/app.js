@@ -147,7 +147,7 @@ function formEditTable(data) {
     var row = $('<tr></tr>');
     var cell = $('<tb>  </tb>');
     var tb = $('<tb></tb>');
-    var button = $('<button class=""btn-linkkk"><span class="glyphicon glyphicon-user"</button>');
+    var button = $('<button class="btn-linkkkk"><span class="glyphicon glyphicon-user"</button>');
     var img = $('<img>', {src: "/picture/add3.png", alt: "Добавить"});
     //img.attr("src", "/picture/add4.png");
     //img.attr("alt", "Добавить");
