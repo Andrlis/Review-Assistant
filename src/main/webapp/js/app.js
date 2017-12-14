@@ -137,6 +137,7 @@ function formMarkTable(data) {
     th.append(button);
     //button.append("Добавить");
     button.attr("onclick", "showPopupFormAddColumn()");
+
     table.children().first().children().first().append(th);
     $('#table-container').html(table);
     setEventsToTable();
@@ -197,6 +198,8 @@ function formTable(data) {
 }*/
 
 function loadTable() {
+    var loader = $('<div></div>', {class: "loader"});
+    $("#table-container").html(loader);
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var type = $("#info-type").attr("value");

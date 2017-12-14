@@ -6869,6 +6869,7 @@ tr > :last-child > div {
 
 .table-class {
     background-color: white;
+    white-space: nowrap;
 }
 
 .table-header {
@@ -6897,4 +6898,18 @@ tr > :last-child > div {
 
 .select-style select:focus {
   outline: none;
+}
+
+.loader {
+  border: 9px solid #8dc17f; /* Light grey */
+  border-top: 9px solid green; /* Blue */
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 1.488s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
