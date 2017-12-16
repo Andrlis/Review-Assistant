@@ -86,7 +86,7 @@ public class JsonMaker {
         ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
 
         for(Student currentStudent :  (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
-            studentArray.add(getStudentRedactMap(currentStudent));
+            studentArray.add(getStudentRedactMap(currentStudent, editable));
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
@@ -101,7 +101,7 @@ public class JsonMaker {
         map.put("args", studentArray);
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Student.class, new StudentConverter(true));
+        builder.registerTypeAdapter(Student.class, new StudentConverter(editable));
         builder.registerTypeAdapter(Template.class, new TemplateConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
@@ -162,12 +162,12 @@ public class JsonMaker {
         return map;
     }
 
-    private static Map<String, Object> getStudentRedactMap(Student student) {
+    private static Map<String, Object> getStudentRedactMap(Student student, boolean editable) {
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", student);
 
-        map.put("eMail", new Template("cell-ui info-cell-editable", student.geteMail())); //класс и значение для емаила
-        map.put("gitURL", new Template("cell-ui info-cell-editable", student.getGitURL())); //класс и значение для юрл
+        map.put("eMail", new Template("cell-ui" + (editable ? " info-cell-editable" : ""), student.geteMail())); //класс и значение для емаила
+        map.put("gitURL", new Template("cell-ui"+ (editable ? " info-cell-editable" : ""), student.getGitURL())); //класс и значение для юрл
 
         return map;
     }
