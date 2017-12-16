@@ -31,7 +31,8 @@ public class DoLoginServlet extends HttpServlet {
             errorMessage = "Введите необходимые данные.";
         }
         user = HibernateShell.getUserByUserName(userName);
-        if(user == null || !MD5Hash.getHash(password).equals(user.getPassword())){
+        if(user == null || !password.equals(user.getPassword()))//!MD5Hash.getHash(password).equals(user.getPassword())){
+        {
             hasError = true;
             errorMessage = "Неверный логин или пароль";
         }

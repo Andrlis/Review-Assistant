@@ -1,5 +1,6 @@
 package servlets;
 
+import data.User;
 import data.group.Group;
 import data.group.SubGroup;
 import resources.Hibernate.HibernateShell;
@@ -20,19 +21,21 @@ public class GetTableServlet extends HttpServlet {
         String subGroupNumber = (String) req.getParameter("subgroup");
         String tableType = (String) req.getParameter("type");
         resp.setCharacterEncoding("UTF-8");
+        User user = (User)req.getSession().getAttribute("user");
+        boolean editable = user == null ? false : true;
         try {
             String table = "";
             Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             switch (tableType.getBytes()[0]) {
                 case 'm':
-                    table = JsonMaker.getJsonSubGroupMarks(subGroup, true); //Пашка добавил труе
+                    table = JsonMaker.getJsonSubGroupMarks(subGroup, editable); //Пашка добавил труе
                     break;
                 case 'p':
-                    table = JsonMaker.getJsonSubGroupVisits(subGroup, true);
+                    table = JsonMaker.getJsonSubGroupVisits(subGroup, editable);
                     break;
                 case 'e':
-                    table = JsonMaker.getJsonSubGroupStudentRedact(subGroup);
+                    table = JsonMaker.getJsonSubGroupStudentRedact(subGroup, editable);
                     break;
                 default:
                     req

@@ -25,6 +25,9 @@
             <label for="password">Пароль</label>
             <input id="password" name="password" type="password" placeholder="Пароль" required>
         </div>
+        <div>
+            <p>${message}</p>
+        </div>
         <button type="submit" class="btn btn-primary">Войти</button>
     </form>
     <button class="btn btn-primary" onclick="goStartPage()">На главную</button>

@@ -82,7 +82,7 @@ public class JsonMaker {
     /*
     Надо добавить класс info-cell-editable в каждую ячейку этой таблицы
      */
-    public static String getJsonSubGroupStudentRedact(SubGroup subGroup) {
+    public static String getJsonSubGroupStudentRedact(SubGroup subGroup, boolean editable) {
         ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
 
         for(Student currentStudent :  (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
