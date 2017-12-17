@@ -1,4 +1,7 @@
-
+.fixed{
+    position: fixed;
+    z-index: 100;
+}
 
 /*
     table
@@ -105,4 +108,23 @@
 
 .disabled {
     pointer-events: none;
+}
+
+
+/*for liks*/
+
+a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: #590683;
+}
+
+a:hover {
+    //text-decoration: ;
+    color: #0aba66;
+    font-weight: 600;
+}
+
+a:visited{
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: #590683;
 }

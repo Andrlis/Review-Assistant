@@ -60,7 +60,16 @@ function getSimpleCell(data) {
     cell.attr("data-id", data['id']);
     cell.attr("data-type", data['type']);
     cell.attr("class", data['cell-class']);
-    cell.append(data['value']);
+    var link = data['link'];
+    if (link == null || link == "")
+    {
+        cell.append(data['value']);
+    }
+    else {
+        var linkTag = $('<a></a>', {href : link, target : "_blank"});
+        linkTag.append(data['value']);
+        cell.append(linkTag);
+    }
     return cell;
 }
 
