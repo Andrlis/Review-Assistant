@@ -129,6 +129,19 @@ public class JsonMaker {
         return gson.toJson(classesMap);
     }
 
+    public static String getAuthorisationResult(int errorCode, String message) throws HibernateShellQueryException {
+        Map<String,Object> map = new LinkedHashMap<String, Object>();
+
+        map.put("code", Integer.toString(errorCode));
+        map.put("message", message);
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        return gson.toJson(map);
+    }
+
     private static Map<String, Object> getStudentMarkMap(Student student){
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", student);

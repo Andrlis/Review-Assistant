@@ -41,8 +41,9 @@ $(document).ready( function () {
     });
 
     loadTable();
-    $("#popup-add-column").show();
-    $("#popup-edit-student").hide();
+    /*$("#popup-add-column").show();
+    $("#popup-edit-student").hide();*/
+    $("#result-message").hide();
 
     /*$("#choose-column-type").click(function() {
         changeNewColumnType();
@@ -124,7 +125,7 @@ function getTableBody(dataArray, headerArray) {
 
 function getSimpleTable(data) {
     var table = $("<table></table>");
-    var tableClass = data['table-class'];
+    var tableClass = data['table-class'] + " table-fixed";
     table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
@@ -173,39 +174,6 @@ function formEditTable(data) {
     setEventsToTable();
 }
 
-
-/*
-function formTable(data) {
-    var table = $("<table></table>");
-    var tableClass = data['table-class'];
-    table.attr("class", tableClass);
-    var header = data['header'];
-    var args = data['args'];
-    var tHead = $('<thead class="table-header"></thead>');
-    var headerRow = $('<tr></tr>');
-    header.forEach(function (column) {
-        headerRow.append("<th nowrap>" + column + "</th>");
-    });
-    tHead.append(headerRow);
-    table.append(tHead);
-    table.append('<tbody>');
-    args.forEach(function (data) {
-        var row = $('<tr></tr>');
-        header.forEach(function (column) {
-            var cell = $("<td></td>");
-            cell.attr("data-id", data[column]['id']);
-            cell.attr("data-type", data[column]['type']);
-            cell.attr("class", data[column]['cell-class']);
-            cell.append(data[column]['value']);
-            row.append(cell);
-            //row.append("<td>" + data[column]['value'] + "</td>");
-        });
-        table.append(row);
-    });
-    table.append('</tbody>');
-    $('#table-container').html(table);
-    setEventsToTable();
-}*/
 
 function loadTable() {
     var loader = $('<div></div>', {class: "loader"});
@@ -541,9 +509,15 @@ function saveStudentButtonClick()
     );
 }
 
-function reactionToLoginServlet() {
-
-
+function successDoLoginServlet(data) {
+    var result = JSON.parse(data);
+    if (result['code'] == "0") {
+        window.location = "/Welcome";
+    }
+    else {
+        $("#result-message").val(result['message']);
+        $("#result-message").show();
+    }
 }
 
 function loginButtonClick() {
@@ -555,8 +529,15 @@ function loginButtonClick() {
         {
             username: username,
             password: password
-        }
+        },
+        successDoLoginServlet
     );
+}
+
+function hideResultMessage() {
+    var username = $("#login-email").val("");
+    var password = $("#login-password").val("");
+    $("#result-message").hide();
 }
 
 

@@ -56,7 +56,6 @@
 .coef-00 {
     background: rgb(250, 119, 102);
 }
-
 /*
     popup window for press button "Добавить"
  */
@@ -128,3 +127,6 @@ a:visited{
     text-decoration: none; /* Убирает подчеркивание для ссылок */
     color: #590683;
 }
+
+
+

@@ -61,7 +61,8 @@
     </div>
 </nav>
 
-<div id="table-title" class="container-ver">
+
+<div id="table-title" class="container-ver panel-heading">
     <div class="text-center h1">Группа <span id="group-number"
                                              value="${groups[0].numberOfGroup}">${groups[0].numberOfGroup}</span></div>
     <div class="text-center h2">Подгруппа
@@ -71,29 +72,14 @@
     <div class="text-center h3"><span id="info-type" value="m">Оценки</span></div>
 </div>
 
+
 <div style="text-align: center;">
-<div id="table-container" style="display: inline-table;">
+<div id="table-container" class="table-responsive" style="display: inline-table;">
 
 </div>
 </div>
 
-<!-- popup form for adding column with lab or test
-<div class="popup" id="popup-add-column">
-    <button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>
-    <form class="popup-form container-ver" id="popup-form-add-column">
-        <select name="new-column-type" id="new-column-type" onchange="changeNewColumnType()">
-            <option value="lab">Лабораторная работа <span id="new-lab-number"></span></option>
-            <option value="test">Контрольная работа <span id="new-test-number"></span></option>
-        </select>
-            <select name="new-lab-date" id="new-lab-date">
-
-            </select>
-        <textarea id="comment-text-area" cols="30" rows="5"></textarea>
-        <input type="button" value="Добавить" onclick="addLabOrTestButton()">
-        <input type="button" value="Отменить" onclick="cancelPopupFormAddColumn()">
-    </form>
-</div>-->
-
+<c:if test="${sessionScope.user != null}">
 <!-- popup form for adding column with lab or test-->
 <div class="popup" id="popup-add-column">
     <!--<button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>-->
@@ -110,7 +96,7 @@
                 </div>
                 <div class="btn-group model-button" data-toggle="buttons" id="choose-column-type">
                     <label class="btn btn-success active btn-lg" id="lab-radio-button">
-                        <input type="radio" name="options" id="lab-radio-button" autocomplete="off" value="lab" checked>Лабораторная работа  <span id="new-lab-number"></span>
+                        <input type="radio" name="options" autocomplete="off" value="lab" checked>Лабораторная работа  <span id="new-lab-number"></span>
                     </label>
                     <label class="btn btn-success btn-lg" id="test-radio-button">
                         <input type="radio" name="options" autocomplete="off" value="test"> Контрольная работа <span id="new-test-number"></span>
@@ -129,24 +115,7 @@
     </div>
 </div>
 
-<!-- popup form for adding or edditing student
-<div class="popup" id="popup-edit-student">
-    <button data-toggle="modal" data-target="#addStudent" onclick="showEmptyPopupFormEditStudent()">Добавить студента</button>
-    <form class="popup-form container-ver" id="popup-form-edit-student">
-        <input id="student-id" hidden>
-        <label for="student-surname">Фамилия</label>
-        <input type="text" id="student-surname">
-        <label for="student-name">Имя</label>
-        <input type="text" id="student-name">
-        <label for="student-eMail">Почта</label>
-        <input type="text" id="student-eMail">
-        <label for="student-git">Репозиторий</label>
-        <input type="text" id="student-git">
-        <input type="button" value="Сохранить" onclick="saveStudentButtonClick()">
-        <input type="button" value="Удалить" id="delete-student-button" onclick="deleteStudentButtonClick()">
-        <input type="button" value="Отменить" onclick="cancelPopupFormEditStudent()">
-    </form>
-</div>-->
+
 
 <!-- popup form for adding or edditing student-->
 <div class="popup" id="popup-edit-student">
@@ -189,7 +158,9 @@
     </div>
 </div>
 
+</c:if>
 
+<c:if test="${sessionScope.user == null}">
 
 <div class="popup">
     <div id="popup-login" class="modal fade" role="dialog">
@@ -198,7 +169,7 @@
             <!-- Modal content-->
             <div class="modal-content center-modal">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;</button>
                     <h4 class="modal-title">Пожалуйста авторизуйтесь</h4>
                     <div class="form-group">
                         <label for="login-email">Логин</label>
@@ -209,14 +180,17 @@
                         <input class="form-control" id="login-password" type="password">
                     </div>
                 </div>
+                <input id="result-message" readonly>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="loginButtonClick()" >Войти</button>
+                    <button type="button" class="btn btn-default" onclick="loginButtonClick()" >Войти</button>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+</c:if>
 
 </body>
 </html>
