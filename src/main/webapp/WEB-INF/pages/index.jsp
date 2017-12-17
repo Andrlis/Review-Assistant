@@ -47,7 +47,7 @@
             </c:forEach>
         </ul>
         <c:choose>
-            <c:when test="${sessionScope.user == null}">-->
+            <c:when test="${sessionScope.user == null}">
                 <ul class="nav navbar-nav navbar-right">
                     <li id="login"><a href="/GoLoginServlet"><span class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span class=" menu-bar-button-class">Войти</span></a></li>
                 </ul>
@@ -183,6 +183,40 @@
                     <button id="delete-student-button" type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteStudentButtonClick()">Удалить</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">Добавить</button>
                 </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#popup-login">Open Modal</button>
+
+
+<div class="popup" id="popup-login">
+    <div id="popup-login" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Пожалуйста авторизуйтесь</h4>
+                    </div>
+
+                <label for="username" class="sr-only">Логин</label>
+                <input class="form-control email-input" id="username" name="username" type="email" placeholder="Логин" autofocus required>
+
+                <label for="password" class="sr-only">Пароль</label>
+                <input class="form-control password-input" id="password" name="password" type="password" placeholder="Пароль" required>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >Войти</button>
+                </div>
+
             </div>
 
         </div>

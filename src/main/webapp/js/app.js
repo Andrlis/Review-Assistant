@@ -230,6 +230,7 @@ function setEventsToTable() {
 
     //Event for click at button
     $("button.add-col-button").click(function () {
+        
         ShowCreateMarkFieldWind();
     });
 
