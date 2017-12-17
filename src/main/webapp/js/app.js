@@ -532,6 +532,23 @@ function saveStudentButtonClick()
     );
 }
 
+function reactionToLoginServlet() {
+
+
+}
+
+function loginButtonClick() {
+    var username = $("#login-email").val();
+    var password = $("#login-password").val();
+
+    $.post(
+        "DoLoginServlet",
+        {
+            username: username,
+            password: password
+        }
+    );
+}
 
 
 

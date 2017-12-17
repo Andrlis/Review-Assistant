@@ -16,6 +16,7 @@ import java.io.IOException;
 @WebServlet("/DoLoginServlet")
 public class DoLoginServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
@@ -45,4 +46,5 @@ public class DoLoginServlet extends HttpServlet {
             request.getRequestDispatcher("/Welcome").forward(request, response);
         }
     }
+
 }
