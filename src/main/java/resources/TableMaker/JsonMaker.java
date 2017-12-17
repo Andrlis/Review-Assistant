@@ -41,7 +41,7 @@ public class JsonMaker {
 
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Student.class, new StudentConverter());
+        builder.registerTypeAdapter(Student.class, new StudentConverter(true, false));
         builder.registerTypeAdapter(LabMark.class, new LabMarkConverter(editable));
         builder.registerTypeAdapter(TestMark.class, new TestMarkConverter(editable));
         builder.registerTypeAdapter(BonusMark.class, new BonusMarkConverter(editable));
@@ -71,7 +71,7 @@ public class JsonMaker {
         map.put("args", studentArray);
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Student.class, new StudentConverter());
+        builder.registerTypeAdapter(Student.class, new StudentConverter(true, false));
         builder.registerTypeAdapter(Class.class, new UniversityClassConverter(editable));
         builder.setPrettyPrinting();
         Gson gson = builder.create();
@@ -101,7 +101,7 @@ public class JsonMaker {
         map.put("args", studentArray);
 
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Student.class, new StudentConverter(editable));
+        builder.registerTypeAdapter(Student.class, new StudentConverter(false, editable));
         builder.registerTypeAdapter(Template.class, new TemplateConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();

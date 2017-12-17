@@ -17,7 +17,7 @@
 </head>
 <body class="body-class">
 
-<nav class="navbar navbar-inverse menu-bar-class">
+<nav class="navbar navbar-inverse menu-bar-class navbar-fixed-top">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li class="dropdown" style="height: 50px;">
@@ -26,7 +26,7 @@
                 <ul class="dropdown-menu">
                     <li><button class="btn btn-linkk ch-tab-type" value="m">Оценки</button></li>
                     <li><button class="btn btn-linkk ch-tab-type" value="p">Посещения</button></li>
-                    <li><button class="btn btn-linkk ch-tab-type" value="e">Редактирование</button></li>
+                    <li><button class="btn btn-linkk ch-tab-type" value="e">Студенты</button></li>
                 </ul>
             </li>
 

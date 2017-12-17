@@ -12,12 +12,10 @@ import java.lang.reflect.Type;
 public class StudentConverter implements JsonSerializer<Student> {
 
     private boolean info_cell_editable;
+    private boolean addLink;
 
-    public StudentConverter() {
-        info_cell_editable = false;
-    }
-
-    public StudentConverter(boolean info_cell_editable) {
+    public StudentConverter( boolean addLink, boolean info_cell_editable) {
+        this.addLink = addLink;
         this.info_cell_editable = info_cell_editable;
     }
 
@@ -28,6 +26,8 @@ public class StudentConverter implements JsonSerializer<Student> {
         object.addProperty("value", src.getFulName());
         object.addProperty("type", "student");
         object.addProperty("id", src.getId().toString());
+        if (addLink)
+            object.addProperty("link", src.getGitURL());
         return object;
     }
 
