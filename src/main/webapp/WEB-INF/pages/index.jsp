@@ -74,7 +74,7 @@
 
 
 <div style="text-align: center;">
-<div id="table-container" class="table-responsive" style="display: inline-table;">
+<div id="table-container" class="table-responsive" style="height: 350;">
 
 </div>
 </div>

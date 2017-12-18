@@ -2446,6 +2446,8 @@ table th[class*="col-"] {
   background-color: #ebcccc;
 }
 .table-responsive {
+  height: 350px;
+  text-align: -webkit-center;
   overflow-x: auto;
   min-height: 0.01%;
 }
@@ -5466,6 +5468,7 @@ button.list-group-item-danger.active:focus {
   padding: 15px;
 }
 .panel-heading {
+  margin-top: 50px;
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
@@ -6868,6 +6871,7 @@ tr > :last-child > div {
 }
 
 .table-class {
+    width: 1px;
     background-color: white;
     white-space: nowrap;
 }
@@ -6913,4 +6917,3 @@ tr > :last-child > div {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
