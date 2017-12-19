@@ -72,9 +72,15 @@
     <div class="text-center h3"><span id="info-type" value="m">Оценки</span></div>
 </div>
 
+<div style="text-align: center;">
+    <div id="table-header" class="table-responsive" style="overflow-x: auto;">
+
+    </div>
+</div>
+
 
 <div style="text-align: center;">
-<div id="table-container" class="table-responsive" style="height: 350;">
+<div id="table-container" class="table-responsive" style="height: 350px;">
 
 </div>
 </div>

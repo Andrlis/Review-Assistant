@@ -2446,7 +2446,6 @@ table th[class*="col-"] {
   background-color: #ebcccc;
 }
 .table-responsive {
-  height: 350px;
   text-align: -webkit-center;
   overflow-x: auto;
   min-height: 0.01%;
@@ -6916,4 +6915,13 @@ tr > :last-child > div {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+table .td{
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    top: 20px;
 }

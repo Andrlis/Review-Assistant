@@ -104,6 +104,25 @@ function getHeaderRow(headerArray) {
     return headerRow;
 }
 
+function getTableHeaderCollapse(headerArray) {
+    var header = $('<thead class="table-header" style="visibility: collapse;"></thead>');
+    header.append(getHeaderRow(headerArray));
+    return header;
+}
+
+function getTableBodyCollapse(dataArray, headerArray) {
+    var body = $('<tbody style="visibility: collapse;"></tbody>');
+    dataArray.sort(function(a, b) {
+        return a[headerArray[0]]['value'] > b[headerArray[0]]['value'];
+    });
+    var numberOfRow = 0;
+    dataArray.forEach(function (data) {
+        numberOfRow ++;
+        body.append(getSimpleRow(data, headerArray, numberOfRow));
+    });
+    return body;
+}
+
 function getTableHeader(headerArray) {
     var header = $('<thead class="table-header"></thead>');
     header.append(getHeaderRow(headerArray));
@@ -123,24 +142,50 @@ function getTableBody(dataArray, headerArray) {
     return body;
 }
 
+function getHeader(data) {
+    var table = $("<table style=\"margin-bottom: -1;\"></table>");
+    var tableClass = data['table-class'] + " table-fixed";
+    table.attr("class", tableClass);
+    var header = data['header'];
+    var args = data['args'];
+    table.append(getTableHeader(header));
+    table.append(getTableBodyCollapse(args, header));
+    return table;
+}
+
 function getSimpleTable(data) {
     var table = $("<table></table>");
     var tableClass = data['table-class'] + " table-fixed";
     table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
-    table.append(getTableHeader(header));
+    table.append(getTableHeaderCollapse(header));
     table.append(getTableBody(args, header));
     return table;
 }
 
 function formPresenceTable(data) {
+    //test
+    var header = getHeader(data);
+    $('#table-header').html(header);
+
     var table = getSimpleTable(data);
     $('#table-container').html(table);
     setEventsToTable();
 }
 
 function formMarkTable(data) {
+    //test
+    var header = getHeader(data);
+    if (isUserLoggedIn()) {
+        var th = $('<th style="vertical-align: middle;"></th>');
+        var button = $('<button class="btn-linkkk"><span class="glyphicon glyphicon-plus"></span></button>');
+        th.append(button);
+        button.attr("onclick", "showPopupFormAddColumn()");
+        header.children().first().children().first().append(th);
+    }
+    $('#table-header').html(header);
+
     var table = getSimpleTable(data);
     if (isUserLoggedIn()) {
         var th = $('<th style="vertical-align: middle;"></th>');
@@ -155,6 +200,10 @@ function formMarkTable(data) {
 }
 
 function formEditTable(data) {
+    //test
+    var header = getHeader(data);
+    $('#table-header').html(header);
+
     var table = getSimpleTable(data);
 
     /*Check if user logged in. And put button if he did it*/
@@ -176,6 +225,7 @@ function formEditTable(data) {
 
 
 function loadTable() {
+    $("#table-header").html("");
     var loader = $('<div></div>', {class: "loader"});
     $("#table-container").html(loader);
     var group = $("#group-number").attr("value");
