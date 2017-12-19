@@ -49,7 +49,7 @@
         <c:choose>
             <c:when test="${sessionScope.user == null}">
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="login"><a data-toggle="modal" data-target="#popup-login"><span class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span class=" menu-bar-button-class"> Войти</span></a></li>
+                    <li id="login"><a data-toggle="modal" data-target="#popup-login" class="references"><span class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span class=" menu-bar-button-class"> Войти</span></a></li>
                 </ul>
             </c:when>
             <c:otherwise>

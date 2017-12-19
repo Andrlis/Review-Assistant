@@ -7,6 +7,15 @@
     table
  */
 
+td > input{
+    border: 1px solid #dadada;
+    display: block;
+    padding: -200%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .missed {
     background-color: rgb(255, 218, 6);
 }
@@ -128,5 +137,8 @@ a:visited{
     color: #590683;
 }
 
+a.references:hover {
+    cursor: pointer;
+}
 
 
