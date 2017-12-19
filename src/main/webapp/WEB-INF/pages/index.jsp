@@ -73,14 +73,14 @@
 </div>
 
 <div style="text-align: center;">
-    <div id="table-header" class="table-responsive" style="overflow-x: auto;">
+    <div id="table-header" class="table-responsive" style="overflow: unset;">
 
     </div>
 </div>
 
 
 <div style="text-align: center;">
-<div id="table-container" class="table-responsive" style="height: 350px;">
+<div id="table-container" class="table-responsive" style="height: 350px;width: max-content;margin: auto;">
 
 </div>
 </div>

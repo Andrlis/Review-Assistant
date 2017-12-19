@@ -143,12 +143,18 @@ function getTableBody(dataArray, headerArray) {
 }
 
 function getHeader(data) {
-    var table = $("<table style=\"margin-bottom: -1;\"></table>");
+    var table ;
+    if(data['args'].length >= 8)
+        table = $("<table style=\"margin-bottom: -1; margin-right: 14px;\"></table>");
+    else
+        table = $("<table style=\"margin-bottom: -1;\"></table>");
+
     var tableClass = data['table-class'] + " table-fixed";
     table.attr("class", tableClass);
     var header = data['header'];
     var args = data['args'];
     table.append(getTableHeader(header));
+
     table.append(getTableBodyCollapse(args, header));
     return table;
 }
@@ -226,8 +232,10 @@ function formEditTable(data) {
 
 function loadTable() {
     $("#table-header").html("");
+    var div = $('<div style="width: 200px"></div>');
     var loader = $('<div></div>', {class: "loader"});
-    $("#table-container").html(loader);
+    div.append(loader)
+    $("#table-container").html(div);
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var type = $("#info-type").attr("value");

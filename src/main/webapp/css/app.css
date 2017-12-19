@@ -129,7 +129,7 @@ a {
 a:hover {
     //text-decoration: ;
     color: #0aba66;
-    font-weight: 600;
+    font-weight: unset;
 }
 
 a:visited{
