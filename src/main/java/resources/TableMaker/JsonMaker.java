@@ -7,9 +7,7 @@ import data.UniversityClass;
 import data.group.SubGroup;
 import data.mark.LabMark;
 import data.mark.TestMark;
-import resources.Hibernate.HibernateShell;
-import resources.Hibernate.HibernateShellQueryException;
-import resources.Hibernate.LabsHibernateShell;
+import resources.Hibernate.*;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
@@ -79,9 +77,6 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
-    /*
-    Надо добавить класс info-cell-editable в каждую ячейку этой таблицы
-     */
     public static String getJsonSubGroupStudentRedact(SubGroup subGroup, boolean editable) {
         ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
 
@@ -110,10 +105,12 @@ public class JsonMaker {
     }
 
     public static String getJsonSubGroupClasses(SubGroup subGroup) throws HibernateShellQueryException {
+        TestHibernateShell testHibernateShell = new TestHibernateShell();
+
         Map<String,Object> classesMap = new LinkedHashMap<String, Object>();
 
-        classesMap.put("lab-number", LabsHibernateShell.getNumberIssuedLab(subGroup) + 1);
-        classesMap.put("test-number", HibernateShell.getNumberOfNextTest().toString());
+        classesMap.put("lab-number", subGroup.getIssuedLabsList().size() + 1);
+        classesMap.put("test-number", testHibernateShell.getNumberOfNextTest().toString());
 
         ArrayList<String> classes = new ArrayList<String>();
         for(UniversityClass universityClass : (subGroup == null) ? new ArrayList<UniversityClass>() : subGroup.getUniversityClassesList()) {
@@ -129,7 +126,7 @@ public class JsonMaker {
         return gson.toJson(classesMap);
     }
 
-    public static String getAuthorisationResult(int errorCode, String message) throws HibernateShellQueryException {
+    public static String getAuthorisationResult(int errorCode, String message) {
         Map<String,Object> map = new LinkedHashMap<String, Object>();
 
         map.put("code", Integer.toString(errorCode));

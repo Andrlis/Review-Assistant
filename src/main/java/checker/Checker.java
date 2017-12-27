@@ -9,6 +9,7 @@ import data.mark.LabMark;
 import data.Student;
 import exceptions.CheckException;
 import exceptions.GitException;
+import resources.Hibernate.HibernateCore;
 import resources.Hibernate.HibernateShell;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
@@ -51,6 +52,7 @@ public class Checker {
     }
 
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
 
         Date commitDate;
@@ -69,14 +71,14 @@ public class Checker {
                 logger.info("Student " + student.getFulName() + " cheated.");
 
                 labMark.setCoefficient(new Double(-2));
-                HibernateShell.update(labMark);
+                hibernateCore.update(labMark);
             } else if (commitDate.before(issuedLab.getCurrentDeadline().getDate())){
                 logger.info("Student " + student.getFulName() + " commit a lab.");
 
                 issuedLab.deleteStudentFromControlList(student);
                 labMark.setCoefficient(issuedLab.getCoefficientOfCurrentDeadline());
 
-                HibernateShell.update(labMark);
+                hibernateCore.update(labMark);
             }
         }
     }

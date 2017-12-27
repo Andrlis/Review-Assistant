@@ -7,6 +7,8 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.lab.LabsKeeper;
 import data.lecturer.LecturerKeeper;
+import data.mark.LabMark;
+import data.mark.TestMark;
 import data.test.TestKeeper;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -25,9 +27,9 @@ public class HibernateCore {
     private static volatile HibernateCore ourInstance;
 
     public static HibernateCore getInstance() {
-        if(ourInstance == null) {
+        if (ourInstance == null) {
             synchronized (HibernateShell.class) {
-                if(ourInstance == null) {
+                if (ourInstance == null) {
                     ourInstance = new HibernateCore();
                 }
             }
@@ -58,26 +60,22 @@ public class HibernateCore {
             session.getTransaction().begin();
             session.createSQLQuery(query).executeUpdate();
             session.getTransaction().commit();
-        }
-        catch (javax.persistence.TransactionRequiredException ex) {
+        } catch (javax.persistence.TransactionRequiredException ex) {
             throw new HibernateShellQueryException(ex);
-        }
-        finally {
+        } finally {
             logger.info("Close session.");
             session.close();
         }
     }
 
-    public List<Integer> getStudentsId(){
+    public List<Integer> getStudentsId() {
         final Session session = getSession();
         List<Integer> answer = null;
         try {
             answer = session.createQuery("select id from Student").list();
-        }
-        catch (javax.persistence.TransactionRequiredException ex) {
+        } catch (javax.persistence.TransactionRequiredException ex) {
             System.out.println(ex);
-        }
-        finally {
+        } finally {
             logger.info("Close session.");
             session.close();
         }
@@ -88,7 +86,7 @@ public class HibernateCore {
         final Session session = getSession();
         Student student;
         try {
-            student = (Student)session.createQuery("from Student student WHERE student.id = " + id).list().get(0);
+            student = (Student) session.createQuery("from Student student WHERE student.id = " + id).list().get(0);
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
         } finally {
@@ -96,6 +94,39 @@ public class HibernateCore {
             session.close();
         }
         return student;
+    }
+
+    public TestMark getTestMarkById(String id) throws HibernateShellQueryException {
+        final Session session = getSession();
+        TestMark testMark = null;
+        try {
+            session.enableFilter("coefficientFilter");
+            testMark = (TestMark) session.get(TestMark.class, id);
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+
+        return testMark;
+    }
+
+    public LabMark getLabMarkById(String id) throws HibernateShellQueryException {
+        logger.info("Start update lab coeff.");
+        final Session session = getSession();
+        LabMark labMark = null;
+        try {
+            session.enableFilter("coefficientFilter");
+            labMark = (LabMark) session.get(LabMark.class, id);
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+
+        return labMark;
     }
 
     public Group getGroupByGroupNumber(String number) throws HibernateShellQueryException {
@@ -123,7 +154,7 @@ public class HibernateCore {
         final Session session = getSession();
         List answer;
         try {
-            answer = session.createQuery("from User user where user.username ='" + username + "'"  ).list();
+            answer = session.createQuery("from User user where user.username ='" + username + "'").list();
         } finally {
             logger.info("Close session.");
             session.close();
@@ -243,7 +274,7 @@ public class HibernateCore {
         return lecturerKeeper;
     }
 
-    public LabsKeeper getLabsKeeper() throws HibernateShellQueryException  {
+    public LabsKeeper getLabsKeeper() throws HibernateShellQueryException {
         logger.info("Start get labs keeper.");
         final Session session = getSession();
         LabsKeeper labsKeeper = new LabsKeeper();

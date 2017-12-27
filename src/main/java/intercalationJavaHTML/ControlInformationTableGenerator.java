@@ -10,6 +10,7 @@ import data.mark.LabMark;
 import data.mark.TestMark;
 import data.Student;
 import data.UniversityClass;
+import resources.Hibernate.HibernateCore;
 import resources.Hibernate.HibernateShell;
 
 import data.group.SubGroup;
@@ -63,12 +64,14 @@ public class ControlInformationTableGenerator extends TableGenerator{
 
     @Override
     protected void addStudentToTable(Table tab, Student student) throws HibernateShellQueryException {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
+
         ControlInformationTable table = (ControlInformationTable) tab;
         table.addRow();
         table.addStudentInformationCell(student.getFulName(), student.geteMail(), student.getGitURL());
 
         for(int i = 1; i <= table.getAmountColOfLabs(); i++) {
-            LabMark labMark = student.getLabMark(HibernateShell.getLabsKeeper().getLab(i));
+            LabMark labMark = student.getLabMark(hibernateCore.getLabsKeeper().getLab(i));
             Integer markInt = labMark.getMark();
 
             String markString = "";
