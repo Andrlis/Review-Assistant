@@ -91,4 +91,12 @@ public class Group {
         logger.info("Add test fron group(" + this.getNumberOfGroup() + ").");
         this.amountOfTest++;
     }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id=" + id +
+                ", numberOfGroup='" + numberOfGroup + '\'' +
+                '}';
+    }
 }

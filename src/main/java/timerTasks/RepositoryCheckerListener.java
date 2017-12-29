@@ -21,9 +21,15 @@ public class RepositoryCheckerListener implements ServletContextListener {
 
             // Create a Trigger that fires every 5 minutes.
             Trigger trigger = newTrigger()
-                    .withIdentity("RepositoryTrigger", "Group1")
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                            .withIntervalInSeconds(10).repeatForever()).build();            //Setup interval
+                    .withIdentity(
+                            "RepositoryTrigger", "Group1"
+                    )
+                    .withSchedule(
+                            SimpleScheduleBuilder.simpleSchedule()
+                                    .withIntervalInSeconds(10)
+                                    .repeatForever()
+                    )
+                    .build();            //Setup interval
 
             // Setup the Job and Trigger with Scheduler & schedule jobs
             scheduler = new StdSchedulerFactory().getScheduler();

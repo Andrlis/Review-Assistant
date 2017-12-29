@@ -72,4 +72,13 @@ public class Lab {
     public void setIssuedLabList(List<IssuedLab> issuedLabList) {
         this.issuedLabList = issuedLabList;
     }
+
+    @Override
+    public String toString() {
+        return "Lab{" +
+                "id=" + id +
+                ", numberOfLab=" + numberOfLab +
+                ", keyWord='" + keyWord + '\'' +
+                '}';
+    }
 }

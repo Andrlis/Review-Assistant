@@ -19,28 +19,29 @@ import java.util.Date;
  * Created by kesso on 01.08.17.
  * Проверка репозиториев.
  */
-public class Checker {
-    private static final Logger logger = Logger.getLogger(Checker.class);
+public class RepositoryChecker {
+    private static final Logger logger = Logger.getLogger(RepositoryChecker.class);
 
     /**
      * Check issued labs in all groups.
      * @param groupsKeeper
      */
     static public void checkForCommitsInGroups(GroupsKeeper groupsKeeper) {
-        logger.info("Start check for commits is group.");
+        logger.info("Start check for commits of all the groups.");
 
         //loop by group
         for (Group currentGroup : groupsKeeper.getGroupList()) {
-            logger.info("Check commits of " + currentGroup.getNumberOfGroup() + " group.");
+            logger.info("Check commits of " + currentGroup.toString());
 
             //loop by subgroup
             for (SubGroup currentSubGroup : currentGroup.getSubGroupList()) {
-                logger.info("Check commits of " + currentSubGroup.getSubGroupNumber() + " subgroup.");
+                logger.info("Check commits of " + currentSubGroup.toString());
 
                 //loop by issued lab for subgroup
                 for (IssuedLab currentIssuedLab : currentSubGroup.getIssuedLabsList()) {
                     try {
-                        Checker.checkIssuedLab(currentIssuedLab);
+                        RepositoryChecker.checkIssuedLab(currentIssuedLab);
+                        //Почему нет updateIssuedLab? Ведь список редактируется. в предыдущем методе
                     }catch (CheckException e){
                         logger.error(e.getMessage());
                     }
@@ -48,6 +49,25 @@ public class Checker {
             }
         }
         logger.info("End check for commits is group.");
+    }
+
+    static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException{
+        logger.info("Check lab number " + issuedLab.toString());
+        Date newDateOfLastRepoCheck = new Date();
+
+        //loop by students who did not pass the lab
+        for (Student currentStudent : issuedLab.getStudentControlList()) {
+            try {
+                RepositoryChecker.checkStudent(currentStudent, issuedLab);
+            }catch(CheckException e){
+                throw new CheckException(e);
+            }
+        }
+
+        //save new date of last lab checking
+        logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
+        issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
+        HibernateShell.update(issuedLab);
     }
 
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
@@ -60,43 +80,28 @@ public class Checker {
         }catch (GitException e){
             throw new CheckException(e);
         }
-
+///Ситуация если нет репозитория
+        ///Рассмотри
         if (commitDate == null) {
-            logger.info("Student " + student.getFulName() + " did not commit a lab.");
+            logger.info("Student " + student.toString() + " did not commit a lab.");
         }
         else {
             if (commitDate.before(issuedLab.getDateOfLastRepoCheck())) {               //Дата коммита раньше даты последней проверки. Фальсификация сдачи
-                logger.info("Student " + student.getFulName() + " cheated.");
+                logger.info("Student " + student.toString() + " cheated.");
 
                 labMark.setCoefficient(new Double(-2));
                 HibernateShell.update(labMark);
             } else if (commitDate.before(issuedLab.getCurrentDeadline().getDate())){
-                logger.info("Student " + student.getFulName() + " commit a lab.");
+                logger.info("Student " + student.toString() + " committed a lab.");
 
                 issuedLab.deleteStudentFromControlList(student);
                 labMark.setCoefficient(issuedLab.getCoefficientOfCurrentDeadline());
 
                 HibernateShell.update(labMark);
-            }
+            } //else надо поменять дедлайн для issuedLab
+
+
         }
     }
 
-    static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException{
-        logger.info("Check lab number " + issuedLab.getLabDescription().getNumberOfLab());
-        Date newDateOfLastRepoCheck = new Date();
-
-        //loop by students who did not pass the lab
-        for (Student currentStudent : issuedLab.getStudentControlList()) {
-            try {
-                Checker.checkStudent(currentStudent, issuedLab);
-            }catch(CheckException e){
-                throw new CheckException(e);
-            }
-        }
-
-        //save new date of last lab checking
-        logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
-        issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
-        HibernateShell.update(issuedLab);
-    }
 }

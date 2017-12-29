@@ -113,6 +113,8 @@ public class SubGroup {
         this.universityClassesList.add(universityClass);
     }
 
+
+
     public UniversityClass getNextUniversityClass(UniversityClass universityClass) {
         for (UniversityClass currentClass : universityClassesList) {
             if (currentClass.getDate().getTime() > universityClass.getDate().getTime()) {
@@ -136,6 +138,15 @@ public class SubGroup {
 
     public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
+    }
+
+    @Override
+    public String toString() {
+        return "SubGroup{" +
+                "id=" + id +
+                ", subGroupNumber='" + subGroupNumber + '\'' +
+                ", group=" + group +
+                '}';
     }
 }
 

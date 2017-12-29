@@ -128,4 +128,16 @@ public class IssuedLab implements Serializable {
     public void setSubGroup(SubGroup subGroup) {
         this.subGroup = subGroup;
     }
+
+    @Override
+    public String toString() {
+        return "IssuedLab{" +
+                "id=" + id +
+                ", labDescription=" + labDescription +
+                ", universityClassOfIssue=" + universityClassOfIssue +
+                ", coefficientOfCurrentDeadline=" + coefficientOfCurrentDeadline +
+                ", currentDeadline=" + currentDeadline +
+                ", dateOfLastRepoCheck=" + dateOfLastRepoCheck +
+                '}';
+    }
 }

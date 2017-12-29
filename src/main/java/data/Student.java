@@ -216,4 +216,14 @@ public class Student implements Serializable {
         Collections.sort(this.testMarkList, TestMark.COMPARATOR_BY_NUMBER_OF_TEST);
         return this.testMarkList;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", fulName='" + fulName + '\'' +
+                ", gitRepoName='" + gitRepoName + '\'' +
+                ", gitUserName='" + gitUserName + '\'' +
+                '}';
+    }
 }
