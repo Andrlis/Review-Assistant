@@ -17,10 +17,10 @@ public class RepositoryCheckerTask implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        try {
+        /*try {
             RepositoryChecker.checkForCommitsInGroups(HibernateShell.getGroupKeeper());             //Раскомментировать при запуске
         } catch (HibernateShellQueryException e) {
             throw new JobExecutionException(e);
-        }
+        }*/
     }
 }

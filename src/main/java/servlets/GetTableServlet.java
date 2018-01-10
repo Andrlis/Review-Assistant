@@ -29,7 +29,7 @@ public class GetTableServlet extends HttpServlet {
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             switch (tableType.getBytes()[0]) {
                 case 'm':
-                    table = JsonMaker.getJsonSubGroupMarks(subGroup, editable); //Пашка добавил труе
+                    table = JsonMaker.getJsonSubGroupMarks(subGroup, editable);
                     break;
                 case 'p':
                     table = JsonMaker.getJsonSubGroupVisits(subGroup, editable);

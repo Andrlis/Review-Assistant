@@ -26,28 +26,38 @@ public class RepositoryChecker {
      * Check issued labs in all groups.
      * @param groupsKeeper
      */
-    static public void checkForCommitsInGroups(GroupsKeeper groupsKeeper) {
+    static public void checkForCommitsInGroups(GroupsKeeper groupsKeeper) throws CheckException{
         logger.info("Start check for commits of all the groups.");
 
         //loop by group
         for (Group currentGroup : groupsKeeper.getGroupList()) {
             logger.info("Check commits of " + currentGroup.toString());
-
-            //loop by subgroup
-            for (SubGroup currentSubGroup : currentGroup.getSubGroupList()) {
-                logger.info("Check commits of " + currentSubGroup.toString());
-
-                //loop by issued lab for subgroup
-                for (IssuedLab currentIssuedLab : currentSubGroup.getIssuedLabsList()) {
-                    try {
-                        RepositoryChecker.checkIssuedLab(currentIssuedLab);
-                        //Почему нет updateIssuedLab? Ведь список редактируется. в предыдущем методе
-                    }catch (CheckException e){
-                        logger.error(e.getMessage());
-                    }
-                }
-            }
+            RepositoryChecker.checkForCommitsInGroup(currentGroup);
         }
+        logger.info("End check for commits in all the groups.");
+    }
+
+    static public void checkForCommitsInGroup(Group group) throws CheckException{
+        logger.info("Start check for commits of " + group.toString());
+                    //loop by subgroup
+            for (SubGroup currentSubGroup : group.getSubGroupList()) {
+                logger.info("Check commits of " + currentSubGroup.toString());
+                RepositoryChecker.checkForCommitsInSubgroup(currentSubGroup);
+            }
+        logger.info("End check for commits in group.");
+    }
+
+    static public void checkForCommitsInSubgroup(SubGroup subGroup) throws CheckException {
+        logger.info("Start check for commits of " + subGroup.toString());
+
+        //loop by issued lab for subgroup
+        for (IssuedLab currentIssuedLab : subGroup.getIssuedLabsList()) {
+
+            RepositoryChecker.checkIssuedLab(currentIssuedLab);
+            //Почему нет updateIssuedLab? Ведь список редактируется. в предыдущем методе
+
+        }
+
         logger.info("End check for commits is group.");
     }
 
@@ -74,6 +84,8 @@ public class RepositoryChecker {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
 
         Date commitDate;
+        if (student.getGitURL().equals(""))
+            return;
 
         try {
             commitDate = GitShell.getDateOfTheCommit(student, issuedLab.getLabDescription());
@@ -102,6 +114,17 @@ public class RepositoryChecker {
 
 
         }
+    }
+
+    /**
+     * Analize commitDate
+     *
+     * @param labMark - mark
+     * @param commitDate - date of te commit of lab
+     */
+
+    static private void updateLabMark(LabMark labMark, Date commitDate){
+
     }
 
 }
