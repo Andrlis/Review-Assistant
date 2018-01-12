@@ -61,7 +61,7 @@ public class GitShell {
         format.setTimeZone(TimeZone.getTimeZone("GTM"));
 
         GitCommitHistory answer = null;
-            
+
         try {
             answer = GitShell.messageCheck(student.getGitUserName(), student.getGitRepoName(),
                     lab.getKeyWord());
