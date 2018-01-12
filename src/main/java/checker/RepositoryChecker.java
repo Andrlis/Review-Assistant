@@ -117,8 +117,8 @@ public class RepositoryChecker {
             return true;
         } else {
 
-            if (coefficient != IssuedLab.STUDENT_CHEAT)
-                issuedLab.deleteStudentFromControlList(student);
+            //if (coefficient != IssuedLab.STUDENT_CHEAT)
+            //    issuedLab.deleteStudentFromControlList(student);
 
             labMark.setCoefficient(coefficient);
             HibernateShell.update(labMark);

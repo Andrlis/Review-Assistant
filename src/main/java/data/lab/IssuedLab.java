@@ -143,6 +143,7 @@ public class IssuedLab implements Serializable {
      *     from 1 to 0 - coef
      */
     public double getCoefficientOfCommit(Date commitDate){
+
         if (commitDate.before(this.getDateOfLastRepoCheck())) {               //Дата коммита раньше даты последней проверки. Фальсификация сдачи
 
             logger.info("Student cheated.");
