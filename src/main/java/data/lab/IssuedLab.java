@@ -9,6 +9,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import resources.Hibernate.HibernateShell;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,8 @@ import java.util.List;
 @Entity
 @Table(name = "issued_labs")
 public class IssuedLab implements Serializable {
+    public static final double CHANGE_DEADLINE = 100;
+    public static final double STUDENT_CHEAT = -2;
     private static final Logger logger = Logger.getLogger(IssuedLab.class);
     @Id
     @Column(name = "id_issued_lab")
@@ -127,6 +130,31 @@ public class IssuedLab implements Serializable {
 
     public void setSubGroup(SubGroup subGroup) {
         this.subGroup = subGroup;
+    }
+
+    /**
+     * Calculates coefficient of mark according to the date of the commit
+     *
+     *
+     * @param commitDate
+     * @return coefficient
+     *     -2 - cheated
+     *     -3 - old deadline. It should be changed
+     *     from 1 to 0 - coef
+     */
+    public double getCoefficientOfCommit(Date commitDate){
+        if (commitDate.before(this.getDateOfLastRepoCheck())) {               //Дата коммита раньше даты последней проверки. Фальсификация сдачи
+
+            logger.info("Student cheated.");
+            return STUDENT_CHEAT;
+
+        } else if (commitDate.before(this.getCurrentDeadline().getDate())){
+
+            logger.info("Student committed a lab.");
+            return this.getCoefficientOfCurrentDeadline();
+
+        }
+        return CHANGE_DEADLINE;
     }
 
     @Override

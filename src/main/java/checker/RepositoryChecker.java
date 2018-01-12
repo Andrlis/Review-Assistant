@@ -64,15 +64,19 @@ public class RepositoryChecker {
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException{
         logger.info("Check lab number " + issuedLab.toString());
         Date newDateOfLastRepoCheck = new Date();
+        boolean changeDeadlineFlag = false;
 
         //loop by students who did not pass the lab
         for (Student currentStudent : issuedLab.getStudentControlList()) {
             try {
-                RepositoryChecker.checkStudent(currentStudent, issuedLab);
+                if (RepositoryChecker.checkStudent(currentStudent, issuedLab))
+                    changeDeadlineFlag = true;
             }catch(CheckException e){
                 throw new CheckException(e);
             }
         }
+
+        //Где-то здесь надо поменять дедлайн и новый коэффициент
 
         //save new date of last lab checking
         logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
@@ -80,51 +84,45 @@ public class RepositoryChecker {
         HibernateShell.update(issuedLab);
     }
 
-    static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
+    /**
+     *
+     * @param student
+     * @param issuedLab
+     * @return true if deadline shoul be changed or false if not
+     * @throws CheckException
+     */
+
+    static private boolean checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
 
         Date commitDate;
+
+        //Check if there link to github repository
         if (student.getGitURL().equals(""))
-            return;
+            return false;
 
         try {
             commitDate = GitShell.getDateOfTheCommit(student, issuedLab.getLabDescription());
-        }catch (GitException e){
+        } catch (GitException e) {
             throw new CheckException(e);
         }
-///Ситуация если нет репозитория
-        ///Рассмотри
+
         if (commitDate == null) {
             logger.info("Student " + student.toString() + " did not commit a lab.");
         }
-        else {
-            if (commitDate.before(issuedLab.getDateOfLastRepoCheck())) {               //Дата коммита раньше даты последней проверки. Фальсификация сдачи
-                logger.info("Student " + student.toString() + " cheated.");
 
-                labMark.setCoefficient(new Double(-2));
-                HibernateShell.update(labMark);
-            } else if (commitDate.before(issuedLab.getCurrentDeadline().getDate())){
-                logger.info("Student " + student.toString() + " committed a lab.");
+        double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
 
+        if (coefficient == IssuedLab.CHANGE_DEADLINE) {
+            return true;
+        } else {
+
+            if (coefficient != IssuedLab.STUDENT_CHEAT)
                 issuedLab.deleteStudentFromControlList(student);
-                labMark.setCoefficient(issuedLab.getCoefficientOfCurrentDeadline());
 
-                HibernateShell.update(labMark);
-            } //else надо поменять дедлайн для issuedLab
-
-
+            labMark.setCoefficient(coefficient);
+            HibernateShell.update(labMark);
         }
+        return false;
     }
-
-    /**
-     * Analize commitDate
-     *
-     * @param labMark - mark
-     * @param commitDate - date of te commit of lab
-     */
-
-    static private void updateLabMark(LabMark labMark, Date commitDate){
-
-    }
-
 }

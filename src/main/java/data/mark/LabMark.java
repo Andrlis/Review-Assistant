@@ -78,4 +78,5 @@ public class LabMark {
             return labMark.getIssuedLab().getLabDescription().getNumberOfLab() - t1.getIssuedLab().getLabDescription().getNumberOfLab();
         }
     };
+
 }
