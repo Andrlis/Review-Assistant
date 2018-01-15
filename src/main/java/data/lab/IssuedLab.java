@@ -1,17 +1,16 @@
 package data.lab;
 
 import data.group.SubGroup;
-import data.mark.LabMark;
 import data.Student;
 import data.UniversityClass;
 import org.apache.log4j.Logger;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.FilterJoinTable;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import resources.Hibernate.HibernateShell;
+import org.hibernate.annotations.*;
+
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +22,9 @@ import java.util.List;
  */
 @Entity
 @Table(name = "issued_labs")
+@FilterDef(name="coefficientFilter", parameters= {
+        @ParamDef(name = "border", type = "double")
+})
 public class IssuedLab implements Serializable {
     public static final double CHANGE_DEADLINE = 100;
     public static final double STUDENT_CHEAT = -2;
@@ -50,7 +52,7 @@ public class IssuedLab implements Serializable {
     @JoinTable(name = "labs_marks",
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
-    @FilterJoinTable(name = "coefficientFilter", condition = "coefficient <= -1")
+    @FilterJoinTable(name = "coefficientFilter", condition = ":border >= coefficient")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentControlList;
     @ManyToOne()

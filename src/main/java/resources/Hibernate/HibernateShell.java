@@ -44,7 +44,9 @@ public class HibernateShell {
 
     public static Session getSession() throws HibernateException {
         logger.info("Get session.");
-        return ourSessionFactory.openSession();
+        Session session = ourSessionFactory.openSession();
+        session.enableFilter("coefficientFilter").setParameter("border", new Double(-1.0));
+        return session;
     }
 
     public static GroupsKeeper getGroupKeeper() throws HibernateShellQueryException {
@@ -52,7 +54,7 @@ public class HibernateShell {
         final Session session = getSession();
         GroupsKeeper groupsKeeper = new GroupsKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+
 
             groupsKeeper.setGroupList(session.createQuery("from Group").list());
 
@@ -71,7 +73,7 @@ public class HibernateShell {
         final Session session = getSession();
         LabsKeeper labsKeeper = new LabsKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+
 
             labsKeeper.setLabList(session.createQuery("from Lab").list());
 
@@ -90,7 +92,7 @@ public class HibernateShell {
         final Session session = getSession();
         LecturerKeeper lecturerKeeper = new LecturerKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+
 
             lecturerKeeper.setLecturerList(session.createQuery("from Lecturer").list());
 
@@ -109,7 +111,7 @@ public class HibernateShell {
         final Session session = getSession();
         TestKeeper testKeeper = new TestKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+
 
             testKeeper.setTestList(session.createQuery("from Test").list());
 
@@ -251,7 +253,7 @@ public class HibernateShell {
         final Session session = getSession();
         LabMark labMark = null;
         try {
-            session.enableFilter("coefficientFilter");
+
 
             labMark = (LabMark) session.get(LabMark.class, id);
             labMark.setMark(mark);
@@ -271,7 +273,7 @@ public class HibernateShell {
         final Session session = getSession();
         LabMark labMark = null;
         try {
-            session.enableFilter("coefficientFilter");
+
 
             labMark = (LabMark) session.get(LabMark.class, id);
             labMark.setCoefficient(coeff);
@@ -291,7 +293,7 @@ public class HibernateShell {
         final Session session = getSession();
         TestMark testMark = null;
         try {
-            session.enableFilter("coefficientFilter");
+
 
             testMark = (TestMark) session.get(TestMark.class, id);
             testMark.setMark(mark);
@@ -311,7 +313,7 @@ public class HibernateShell {
 		final Session session = getSession();
 		Student student = null;
 		try {
-			session.enableFilter("coefficientFilter");
+
 
 			student = (Student) session.get(Student.class, id);
 			student.setBonusMark(mark);
