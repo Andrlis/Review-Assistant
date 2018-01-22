@@ -22,13 +22,14 @@ public class GitShell {
 
     /**
      * Проверка коммита на ключевое слово.
+     *
      * @param message - сообщене для проверка
      * @return GirCommitHistory cоответствующий коммиту с заданным сообщением
      */
     static private GitCommitHistory checkCommit(String gitUserName, String gitRepoName, String message) throws GitException {
         logger.info("Start message check.");
-        GitRequests git = new GitRequests();
-        GitParser parser = new GitParser();
+        GitRequests git    = new GitRequests();
+        GitParser   parser = new GitParser();
 
         try {
             ArrayList<GitCommitHistory> commitHistories = null;
@@ -41,7 +42,7 @@ public class GitShell {
                     return selected;
                 }
             }
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             throw new GitException(e);
         } catch (IOException e) {
             throw new GitException(e);
@@ -52,27 +53,30 @@ public class GitShell {
     }
 
     /**
-     * @param lab
+     * @param commitDescription
+     * @param gitRepoName
+     * @param gitUserName
      * @return - дату и время коммита
      */
-    static public Date getDateOfTheCommit(Student student, Lab lab) throws GitException {
+    static public Date getDateOfTheCommit(String gitUserName, String gitRepoName, String commitDescription) throws GitException {
         logger.info("Start get date of the commit.");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("GTM"));
 
-        GitCommitHistory answer = null;
+        GitCommitHistory commitHistory = null;
 
         try {
-            answer = GitShell.checkCommit(student.getGitUserName(), student.getGitRepoName(),
-                    lab.getKeyWord());
-        }catch (GitException e){
+            commitHistory = GitShell.checkCommit(gitUserName,
+                    gitRepoName,
+                    commitDescription);
+        } catch (GitException e) {
             throw new GitException(e);
         }
 
-        if (answer != null) {
+        if (commitHistory != null) {
             Date commitDate = null;
             try {
-                commitDate = format.parse(answer.getCommit().getCommitter().getDate().replace("T", ""));
+                commitDate = format.parse(commitHistory.getCommit().getCommitter().getDate().replace("T", ""));
             } catch (ParseException e) {
                 throw new GitException(e);
             }
@@ -81,9 +85,5 @@ public class GitShell {
         }
         logger.info("End get date of the commit.");
         return null;
-    }
-
-    public static boolean doesCommitExist(String gitUserName, String gitRepoName, String commitDescription) throws GitException {
-         return GitShell.checkCommit(gitUserName, gitRepoName, commitDescription) != null;
     }
 }

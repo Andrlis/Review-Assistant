@@ -87,31 +87,28 @@ public class RepositoryChecker {
      */
 
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
-        LabMark labMark         = student.getLabMark(issuedLab.getLabDescription());
-        boolean commitExists = false;
+        LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
+        Date    commitDate;
 
         //Check if there link to github repository
         if (student.getGitURL().equals(""))
             return;
 
         try {
-            commitExists = GitShell.doesCommitExist(student.getGitUserName(),
+            commitDate = GitShell.getDateOfTheCommit(student.getGitUserName(),
                     student.getGitRepoName(),
                     issuedLab.getLabDescription().getKeyWord());
         } catch (GitException e) {
             throw new CheckException(e);
         }
 
-        if (commitExists) {
-            double coefficient = issuedLab.getCoefficientOfCurrentDeadline();
+        if (commitDate != null) {
+            double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
             labMark.setCoefficient(coefficient);
             HibernateShell.update(labMark);
             logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
         } else {
             logger.info("Student " + student + " did not commit a lab.");
-            return;
         }
-
-
     }
 }
