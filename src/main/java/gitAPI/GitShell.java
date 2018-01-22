@@ -25,7 +25,7 @@ public class GitShell {
      * @param message - сообщене для проверка
      * @return GirCommitHistory cоответствующий коммиту с заданным сообщением
      */
-    static private GitCommitHistory messageCheck(String gitUserName, String gitRepoName, String message) throws GitException {
+    static private GitCommitHistory checkCommit(String gitUserName, String gitRepoName, String message) throws GitException {
         logger.info("Start message check.");
         GitRequests git = new GitRequests();
         GitParser parser = new GitParser();
@@ -63,7 +63,7 @@ public class GitShell {
         GitCommitHistory answer = null;
 
         try {
-            answer = GitShell.messageCheck(student.getGitUserName(), student.getGitRepoName(),
+            answer = GitShell.checkCommit(student.getGitUserName(), student.getGitRepoName(),
                     lab.getKeyWord());
         }catch (GitException e){
             throw new GitException(e);
@@ -81,5 +81,9 @@ public class GitShell {
         }
         logger.info("End get date of the commit.");
         return null;
+    }
+
+    public static boolean doesCommitExist(String gitUserName, String gitRepoName, String commitDescription) throws GitException {
+         return GitShell.checkCommit(gitUserName, gitRepoName, commitDescription) != null;
     }
 }
