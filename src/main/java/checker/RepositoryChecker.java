@@ -62,7 +62,7 @@ public class RepositoryChecker {
 
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
-        Date    newDateOfLastRepoCheck = new Date();
+        Date newDateOfLastRepoCheck = new Date();
 
         //loop by students who did not pass the lab
         for (Student currentStudent : issuedLab.getStudentControlList()) {
@@ -87,28 +87,31 @@ public class RepositoryChecker {
      */
 
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
-        LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
-
-        Date commitDate;
+        LabMark labMark         = student.getLabMark(issuedLab.getLabDescription());
+        boolean commitExists = false;
 
         //Check if there link to github repository
         if (student.getGitURL().equals(""))
             return;
 
         try {
-            commitDate = GitShell.getDateOfTheCommit(student, issuedLab.getLabDescription());
+            commitExists = GitShell.doesCommitExist(student.getGitUserName(),
+                    student.getGitRepoName(),
+                    issuedLab.getLabDescription().getKeyWord());
         } catch (GitException e) {
             throw new CheckException(e);
         }
 
-        if (commitDate == null) {
-            logger.info("Student " + student.toString() + " did not commit a lab.");
+        if (commitExists) {
+            double coefficient = issuedLab.getCoefficientOfCurrentDeadline();
+            labMark.setCoefficient(coefficient);
+            HibernateShell.update(labMark);
+            logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
+        } else {
+            logger.info("Student " + student + " did not commit a lab.");
             return;
         }
 
-        double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
 
-        labMark.setCoefficient(coefficient);
-        HibernateShell.update(labMark);
     }
 }
