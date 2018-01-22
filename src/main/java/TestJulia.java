@@ -1,9 +1,7 @@
 import checker.RepositoryChecker;
 import data.group.SubGroup;
 import resources.Hibernate.HibernateShell;
-import intercalationJavaHTML.StudentListTableGenerator;
-import resources.Hibernate.HibernateShellQueryException;
-import timerTasks.RepositoryCheckerTask;
+
 
 public class TestJulia {
 
