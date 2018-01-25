@@ -1,28 +1,25 @@
 package timerTasks;
 
 import org.quartz.*;
-import static org.quartz.TriggerBuilder.newTrigger;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import org.quartz.impl.StdSchedulerFactory;
 
-/**
- * Start task which check students` repo.
- */
-public class RepositoryCheckerListener implements ServletContextListener {
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class ComplexCheckListener implements ServletContextListener {
     private Scheduler scheduler = null;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContext) {
         try {
             // Setup the Job class and the Job group
-            JobDetail job = JobBuilder.newJob(RepositoryCheckerTask.class).withIdentity(
-                    "RepositoryJob", "Group1").build();
+            JobDetail job = JobBuilder.newJob(ComplexCheckTask.class).withIdentity(
+                    "ComplexQuartzJob", "Group3").build();
 
             Trigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("RepositoryTrigger", "Group1")
+                    .withIdentity("ComplexTrigger", "Group3")
                     .startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 1-23 ? * * *"))
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 ? * * *"))
                     .forJob(job)
                     .build();
 
