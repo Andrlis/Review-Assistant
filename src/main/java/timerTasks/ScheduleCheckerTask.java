@@ -1,5 +1,6 @@
 package timerTasks;
 
+import checker.ScheduleChecker;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -14,7 +15,7 @@ public class ScheduleCheckerTask implements Job {
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
         try {
-            //ScheduleChecker.groupScheduleCheck();
+            ScheduleChecker.groupScheduleCheck();
         } catch (Exception exc) {
             exc.printStackTrace();
         }

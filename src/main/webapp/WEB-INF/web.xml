@@ -26,8 +26,11 @@
   <listener>
     <listener-class>timerTasks.RepositoryCheckerListener</listener-class>
   </listener>
+  <!--<listener>-->
+    <!--<listener-class>timerTasks.ScheduleCheckerListener</listener-class>-->
+  <!--</listener>-->
   <listener>
-    <listener-class>timerTasks.ScheduleCheckerListener</listener-class>
+    <listener-class>timerTasks.ComplexCheckListener</listener-class>
   </listener>
 
     <welcome-file-list>
