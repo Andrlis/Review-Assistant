@@ -156,7 +156,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="delete-student-button" type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteStudentButtonClick()">Удалить</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">Добавить</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">Сохранить</button>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ import data.Student;
 import data.UniversityClass;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.*;
+import resources.Hibernate.HibernateShell;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -113,8 +114,6 @@ public class SubGroup {
         this.universityClassesList.add(universityClass);
     }
 
-
-
     public UniversityClass getNextUniversityClass(UniversityClass universityClass) {
         for (UniversityClass currentClass : universityClassesList) {
             if (currentClass.getDate().getTime() > universityClass.getDate().getTime()) {
@@ -138,6 +137,13 @@ public class SubGroup {
 
     public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
+    }
+
+    public void decreaseCoefficientOfLabs() {
+        for (IssuedLab issuedLab: this.issuedLabsList) {
+            issuedLab.decreaseCoefficient();
+            HibernateShell.update(issuedLab);
+        }
     }
 
     @Override
