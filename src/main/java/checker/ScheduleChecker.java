@@ -54,19 +54,19 @@ public class ScheduleChecker {
         logger.info("End schedule check.");
     }
 
-    public static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
+    private static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
         UniversityClass universityClass = new UniversityClass();
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);
         subGroup.addUniversityClass(universityClass);
 
-        int subGroupNumber = Integer.parseInt(subGroup.getSubGroupNumber());
+        int subGroupNumber = Integer.parseInt(subGroup.getSubGroupNumber()) - 1;
         if (!hasCoefficientOfLabsBeenChanged[subGroupNumber]) {
             hasCoefficientOfLabsBeenChanged[subGroupNumber] = true;
             subGroup.decreaseCoefficientOfLabs();
         }
 
-        HibernateShell.update(universityClass);
+        HibernateShell.save(universityClass);
     }
 }

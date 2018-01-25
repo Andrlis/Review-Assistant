@@ -38,7 +38,9 @@ public class Timetable {
         calendar.setTime(new java.util.Date());
 
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-        return days.get((day == 1) ? 6 : day-2)
-                .getCurrentDayLessons(currentWeek);
+        //return days.get((day == 1) ? 6 : day-2)
+                //.getCurrentDayLessons(currentWeek);
+        return days.get(2)
+            .getCurrentDayLessons(currentWeek);
     }
 }

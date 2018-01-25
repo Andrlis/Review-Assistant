@@ -136,7 +136,11 @@ public class IssuedLab implements Serializable {
     }
 
     public void decreaseCoefficient() {
-        this.coefficientOfCurrentDeadline -= IssuedLab.decreasePart;
+        if (this.coefficientOfCurrentDeadline > 0.4)
+            this.coefficientOfCurrentDeadline -= IssuedLab.decreasePart;
+        else
+            this.coefficientOfCurrentDeadline = 0.0;
+
     }
 
     /**

@@ -12,8 +12,9 @@ public class TimeLogic {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(System.currentTimeMillis());
         String today = formatDate.format(date);
-        SimpleDateFormat formatDateAndTime = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        SimpleDateFormat formatDateAndTime = new SimpleDateFormat("yyyy-MM-ddHH:mm");
         Date answer = null;
+        time.replaceAll("-.*", "");
         try {
             answer = formatDateAndTime.parse(today + time);
         } catch (ParseException e) {
