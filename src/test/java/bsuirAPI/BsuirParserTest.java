@@ -40,7 +40,7 @@ public class BsuirParserTest extends TestCase {
         Timetable assertTimetable = new Timetable();
         DayTimetable dayTimetable = new DayTimetable();
         //dayTimetable.getLessons().add(new Subject("ОerpС", "18:45-22:00", "211-3", "ЛК", "0",  new ArrayList<String>(Arrays.asList("1", "3"))));   переписать, т.к конструктор был изменен
-        assertTimetable.getDays().add(dayTimetable);
+        assertTimetable.setDay(0, dayTimetable);
 
         System.out.println("test BsuirParser.parseTimetable()");
         Timetable timetable = BsuirParser.parseTimetable(xmlToParase);

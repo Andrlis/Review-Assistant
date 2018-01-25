@@ -105,7 +105,7 @@ public class BsuirParser {
                 }
             }
 
-            timetable.setDay(dayTimetable);
+            timetable.setDay(day_id, dayTimetable);
         }
 
         logger.info("End parse timetable.");

@@ -1,4 +1,5 @@
 import checker.RepositoryChecker;
+import checker.ScheduleChecker;
 import data.group.SubGroup;
 import resources.Hibernate.HibernateShell;
 
@@ -9,9 +10,7 @@ public class TestJulia {
 
         //RepositoryChecker repositoryChecker = new RepositoryChecker();
         try {
-            RepositoryChecker.checkForCommitsInGroup(HibernateShell
-                    .getGroupByGroupNumber("550501")
-                    );
+            ScheduleChecker.groupScheduleCheck();
         } catch (Exception e) {
             e.printStackTrace();
         }

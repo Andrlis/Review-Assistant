@@ -2,6 +2,7 @@ package bsuirAPI.bsuirTimetable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * Created by Andrey on 17.07.2017.
@@ -9,24 +10,24 @@ import java.util.Calendar;
  */
 public class Timetable {
 
-    private ArrayList<DayTimetable> days;
+    private HashMap<Integer, DayTimetable> days;
 
     public Timetable() {
-        this.days = new ArrayList<DayTimetable>();
+        this.days = new HashMap<Integer, DayTimetable>();
     }
 
-    public Timetable(ArrayList<DayTimetable> days){this.days = days;}
+    public Timetable(HashMap<Integer, DayTimetable> days) {this.days = days;}
 
-    public ArrayList<DayTimetable> getDays() {
+    public HashMap<Integer, DayTimetable> getDays() {
         return days;
     }
 
-    public void setDays(ArrayList<DayTimetable> days) {
+    public void setDays(HashMap<Integer, DayTimetable> days) {
         this.days = days;
     }
 
-    public void setDay(DayTimetable day) {
-        this.days.add(day);
+    public void setDay(Integer dayNumber, DayTimetable day) {
+        this.days.put(dayNumber, day);
     }
 
     /**
@@ -34,13 +35,18 @@ public class Timetable {
      * @return
      */
     public ArrayList<Subject> getCurrentDaySchedule(String currentWeek){
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new java.util.Date());
 
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-        //return days.get((day == 1) ? 6 : day-2)
-                //.getCurrentDayLessons(currentWeek);
-        return days.get(2)
-            .getCurrentDayLessons(currentWeek);
+        //Calendar.DAY_OF_WEEK of week counts with 1 And the first day is Sunday
+        //But we count days of week with 0 and the first day is Monday
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) == 1 ? 6 : calendar.get(Calendar.DAY_OF_WEEK) - 2;
+
+        if (days.containsKey(dayOfWeek)) {
+            return days.get(dayOfWeek)
+                    .getCurrentDayLessons(currentWeek);
+        } else
+            return new ArrayList<Subject>();
     }
 }
