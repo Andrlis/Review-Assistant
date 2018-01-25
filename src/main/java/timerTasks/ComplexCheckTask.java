@@ -16,8 +16,8 @@ public class ComplexCheckTask implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         try {
-            ScheduleChecker.groupScheduleCheck();
             RepositoryChecker.checkForCommitsInGroups(HibernateShell.getGroupKeeper());
+            ScheduleChecker.groupScheduleCheck();
         } catch (Exception e) {
             throw new JobExecutionException(e);
         }
