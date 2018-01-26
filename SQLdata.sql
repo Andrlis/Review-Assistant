@@ -33,6 +33,12 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	FROM groups_subgroups AS gr_sub
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550501'), '1');
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550501'),
+	"2018-01-11 18:45:00");
 
 INSERT INTO groups_subgroups(id_group, id_lecturer)
 VALUES ((SELECT id_group FROM groups WHERE group_number='550502'),
@@ -43,6 +49,12 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550502'),
 	'1');
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550502'),
+	"2018-01-12 18:45:00");
 
 INSERT INTO groups_subgroups(id_group, id_lecturer)
 VALUES ((SELECT id_group FROM groups WHERE group_number='550502'),
@@ -53,7 +65,12 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550502'),
 	'2');
-
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550502'),
+	"2018-01-22 18:45:00");
 
 INSERT INTO groups_subgroups(id_group, id_lecturer)
 VALUES ((SELECT id_group FROM groups WHERE group_number='550503'),
@@ -64,6 +81,12 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550503'),
 	'1');
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550503'),
+	"2018-01-13 18:45:00");
 
 INSERT INTO groups_subgroups(id_group, id_lecturer)
 VALUES ((SELECT id_group FROM groups WHERE group_number='550503'),
@@ -74,6 +97,12 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550503'),
 	'2');
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550503'),
+	"2018-01-23 18:45:00");
 
 INSERT INTO groups_subgroups(id_group, id_lecturer)
 VALUES ((SELECT id_group FROM groups WHERE group_number='550504'),
@@ -84,6 +113,12 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550504'),
 	'1');
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550504'),
+	"2018-01-14 18:45:00");
 
 INSERT INTO groups_subgroups(id_group, id_lecturer)
 VALUES ((SELECT id_group FROM groups WHERE group_number='550504'),
@@ -94,3 +129,9 @@ VALUES ((SELECT MAX(id_group_subgroup)
 	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
 	WHERE group_number='550504'),
 	'2');
+INSERT INTO classes(id_group_subgroup, class_date)
+VALUES ((SELECT MAX(id_group_subgroup)
+	FROM groups_subgroups AS gr_sub
+	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
+	WHERE group_number='550504'),
+	"2018-01-24 18:45:00");

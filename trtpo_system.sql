@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS trtpo_system;
+DROP DATABASE IF EXISTS trtpo_system;
 SET NAMES 'utf8';
 SET SESSION collation_connection = 'utf8_general_ci';
 
