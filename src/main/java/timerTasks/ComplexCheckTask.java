@@ -1,11 +1,12 @@
 package timerTasks;
 
 /*
-Check timetable and repositories at 00.00
+Check repositories and timetable at 00.00
  */
 
 import checker.RepositoryChecker;
 import checker.ScheduleChecker;
+import java.util.Calendar;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -17,9 +18,19 @@ public class ComplexCheckTask implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         try {
             RepositoryChecker.checkForCommitsInGroups(HibernateShell.getGroupKeeper());
-            ScheduleChecker.groupScheduleCheck();
+
+            if(!isSunday()) {
+                ScheduleChecker.groupScheduleCheck();
+            }
+
         } catch (Exception e) {
             throw new JobExecutionException(e);
         }
+    }
+
+    private boolean isSunday(){
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        return (day == 7);
     }
 }

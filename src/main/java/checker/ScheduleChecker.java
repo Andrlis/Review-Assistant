@@ -1,6 +1,5 @@
 package checker;
 
-import com.sun.javafx.scene.SceneHelper;
 import data.group.Group;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;

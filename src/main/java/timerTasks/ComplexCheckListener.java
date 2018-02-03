@@ -19,7 +19,7 @@ public class ComplexCheckListener implements ServletContextListener {
             Trigger trigger = TriggerBuilder.newTrigger()
                     .withIdentity("ComplexTrigger", "Group3")
                     .startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 ? * * *"))
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * ? * * *"))          //At second :00 of minute :00 of every hour
                     .forJob(job)
                     .build();
 
