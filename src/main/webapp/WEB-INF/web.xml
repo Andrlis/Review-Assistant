@@ -23,9 +23,9 @@
     <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
   </listener>
 
-  <listener>
-    <listener-class>timerTasks.RepositoryCheckerListener</listener-class>
-  </listener>
+  <!--<listener>-->
+    <!--<listener-class>timerTasks.RepositoryCheckerListener</listener-class>-->
+  <!--</listener>-->
   <!--<listener>-->
     <!--<listener-class>timerTasks.ScheduleCheckerListener</listener-class>-->
   <!--</listener>-->
