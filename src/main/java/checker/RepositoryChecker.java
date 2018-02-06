@@ -82,10 +82,9 @@ public class RepositoryChecker {
     /**
      * @param student
      * @param issuedLab
-     * @return true if deadline shoul be changed or false if not
+     * @return true if deadline should be changed or false if not
      * @throws CheckException
      */
-
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
         Date    commitDate;

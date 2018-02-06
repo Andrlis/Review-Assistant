@@ -1,5 +1,6 @@
 package timerTasks;
 
+import org.apache.log4j.Logger;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
@@ -7,6 +8,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class ComplexCheckListener implements ServletContextListener {
+    private static final Logger logger = Logger.getLogger(ComplexCheckListener.class);
     private Scheduler scheduler = null;
 
     @Override
@@ -14,10 +16,10 @@ public class ComplexCheckListener implements ServletContextListener {
         try {
             // Setup the Job class and the Job group
             JobDetail job = JobBuilder.newJob(ComplexCheckTask.class).withIdentity(
-                    "ComplexQuartzJob", "Group3").build();
+                    "ComplexQuartzJob", "Group1").build();
 
             Trigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("ComplexTrigger", "Group3")
+                    .withIdentity("ComplexTrigger", "Group1")
                     .startNow()
                     .withSchedule(CronScheduleBuilder.cronSchedule("0 0 * ? * * *"))          //At second :00 of minute :00 of every hour
                     .forJob(job)
@@ -29,7 +31,7 @@ public class ComplexCheckListener implements ServletContextListener {
             scheduler.scheduleJob(job, trigger);
         }
         catch (SchedulerException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -38,7 +40,7 @@ public class ComplexCheckListener implements ServletContextListener {
         try {
             scheduler.shutdown();
         }   catch (SchedulerException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

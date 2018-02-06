@@ -1,17 +1,15 @@
 package timerTasks;
 
 /*
-Check repositories and timetable at 00.00
+Check repositories every hour and timetable at 00.00 after checking repositories.
  */
 
 import checker.RepositoryChecker;
 import checker.ScheduleChecker;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,6 +17,7 @@ import resources.Hibernate.HibernateShell;
 
 public class ComplexCheckTask implements Job {
 
+    private static final Logger logger = Logger.getLogger(ComplexCheckTask.class);
     private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Minsk"));
 
     /*
@@ -37,20 +36,21 @@ public class ComplexCheckTask implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         try {
+            logger.info("Start scheduled task.");
             RepositoryChecker.checkForCommitsInGroups(HibernateShell.getGroupKeeper());
 
             if(isMidnight() && !isSunday() && !isHoliday()) {
+                logger.info("Check student`s timetable at midnight.");
                 ScheduleChecker.groupScheduleCheck();
             }
-
         } catch (Exception e) {
-            throw new JobExecutionException(e);
+            logger.error(e.getMessage());
         }
     }
 
     private boolean isSunday(){
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-        return (day == 7);
+        return (day == 1);
     }
 
     private boolean isHoliday(){
@@ -58,7 +58,7 @@ public class ComplexCheckTask implements Job {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         if(holidays.containsKey(month)){
-            if(holidays.get(month).contains(day))
+            if(holidays.get(month).contains(day));
                 return true;
         }
         return false;
@@ -67,8 +67,7 @@ public class ComplexCheckTask implements Job {
     private boolean isMidnight(){
         int hour = calendar.get(Calendar.HOUR);
         int minute = calendar.get(Calendar.MINUTE);
-        int second = calendar.get(Calendar.SECOND);
 
-        return (hour == 0 && minute == 0 && second == 0);
+        return (hour == 0 && minute == 0);
     }
 }
