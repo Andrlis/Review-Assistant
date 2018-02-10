@@ -18,7 +18,8 @@ import java.util.Date;
  * Created by Andrey.
  * Search "ТРиТПО" laboratory work for all groups on current day.
  */
-public class ScheduleChecker {
+public class
+ScheduleChecker {
     private static final Logger logger = Logger.getLogger(ScheduleChecker.class);
 
     public static void groupScheduleCheck() throws Exception {

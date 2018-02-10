@@ -44,7 +44,7 @@ public class ComplexCheckTask implements Job {
                 ScheduleChecker.groupScheduleCheck();
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error(e.toString());
         }
     }
 

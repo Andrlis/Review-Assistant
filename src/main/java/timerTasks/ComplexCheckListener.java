@@ -31,7 +31,7 @@ public class ComplexCheckListener implements ServletContextListener {
             scheduler.scheduleJob(job, trigger);
         }
         catch (SchedulerException e) {
-            logger.error(e.getMessage());
+            logger.error(e.toString());
         }
     }
 
@@ -40,7 +40,7 @@ public class ComplexCheckListener implements ServletContextListener {
         try {
             scheduler.shutdown();
         }   catch (SchedulerException e) {
-            logger.error(e.getMessage());
+            logger.error(e.toString());
         }
     }
 }
