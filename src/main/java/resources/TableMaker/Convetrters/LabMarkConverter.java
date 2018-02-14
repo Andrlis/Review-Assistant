@@ -37,6 +37,9 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
     }
 
     static public String getCoeff(Double coeff) {
+	    if(coeff == -2){
+	        return "cheat";
+        }
         if(coeff == -1 || coeff == null) {
             return "";
         }

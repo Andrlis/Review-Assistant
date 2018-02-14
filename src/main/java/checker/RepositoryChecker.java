@@ -102,10 +102,16 @@ public class RepositoryChecker {
         }
 
         if (commitDate != null) {
-            double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
-            labMark.setCoefficient(coefficient);
-            HibernateShell.update(labMark);
-            logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
+            if(commitDate.before(issuedLab.getDateOfLastRepoCheck())){
+                labMark.setCoefficient(-2.0);
+                HibernateShell.update(labMark);
+                logger.info("Student " + student + " cheated");
+            } else {
+                double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
+                labMark.setCoefficient(coefficient);
+                HibernateShell.update(labMark);
+                logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
+            }
         } else {
             logger.info("Student " + student + " did not commit a lab.");
         }
