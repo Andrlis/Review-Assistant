@@ -10,7 +10,6 @@ import data.mark.LabMark;
 
 import java.util.Date;
 
-import static resources.Hibernate.HibernateShell.save;
 
 public class LabsHibernateShell {
 
@@ -89,11 +88,11 @@ public class LabsHibernateShell {
         lab.setKeyWord(keyWord);
         lab.setNumberOfLab(getNumberOfNextLab());
 
-        save(lab);
+        hibernateCore.save(lab);
     }
 
     public void updateLabMark(Integer id, Integer mark) throws HibernateShellQueryException {
-        LabMark labMark = hibernateCore.getLabMarkById(id.toString());
+        LabMark labMark = hibernateCore.getLabMarkById(id);
 
         if (labMark != null) {
             labMark.setMark(mark);
@@ -103,7 +102,7 @@ public class LabsHibernateShell {
 
 
     public void updateLabCoefficient(Integer id, Double coeff) throws HibernateShellQueryException {
-        LabMark labMark = hibernateCore.getLabMarkById(id.toString());
+        LabMark labMark = hibernateCore.getLabMarkById(id);
 
         if (labMark != null) {
             labMark.setCoefficient(coeff);

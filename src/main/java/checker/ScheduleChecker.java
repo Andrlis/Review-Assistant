@@ -4,7 +4,7 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 import resources.TimeLogic;
 import bsuirAPI.BsuirParser;
 import bsuirAPI.BsuirRequests;
@@ -22,7 +22,8 @@ public class ScheduleChecker {
     public static void groupScheduleCheck() throws Exception {
         logger.info("Start schedule check.");
         Timetable timetable;
-        GroupsKeeper groups = HibernateShell.getGroupKeeper();
+        HibernateCore hibernateCore = HibernateCore.getInstance();
+        GroupsKeeper groups = hibernateCore.getGroupKeeper();
 
         for (Group group : groups.getGroupList()) {
 
@@ -43,7 +44,7 @@ public class ScheduleChecker {
                     universityClass.setSubGroup(subGroup);
                     subGroup.getUniversityClassesList().add(universityClass);
 
-                    HibernateShell.update(universityClass);
+                    hibernateCore.update(universityClass);
 
                     break;
                 }

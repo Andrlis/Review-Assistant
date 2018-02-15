@@ -13,10 +13,11 @@ import java.io.IOException;
 public class NoteStudentAbsence extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
         String studentId = (String) req.getParameter("studentId");
         String classId = (String) req.getParameter("classId");
         try {
-            StudentHibernateShell.noteStudentAbsent(studentId, classId);
+            studentHibernateShell.noteStudentAbsent(studentId, classId);
         } catch (Exception e) {
             e.printStackTrace();
         }

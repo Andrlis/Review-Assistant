@@ -1,7 +1,7 @@
 package servlets;
 
 import data.User;
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 import resources.Hibernate.HibernateShellQueryException;
 import resources.MD5Hash;
 import resources.TableMaker.JsonMaker;
@@ -20,7 +20,7 @@ public class DoLoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         response.setCharacterEncoding("UTF-8");
 
         String userName = (String) request.getParameter("username");
@@ -40,7 +40,7 @@ public class DoLoginServlet extends HttpServlet {
             code = 1;
         }
 
-        user = HibernateShell.getUserByUserName(userName);
+        user = hibernateCore.getUserByUserName(userName);
 
         if(!hasError && (user == null || !password.equals(user.getPassword())))//!MD5Hash.getHash(password).equals(user.getPassword())){
         {
@@ -51,15 +51,11 @@ public class DoLoginServlet extends HttpServlet {
 
         String result;
 
-        try {
-            result = JsonMaker.getAuthorisationResult(code, message);
-            if (!hasError) {
-                request.getSession().setAttribute("user", user);
-            }
-            response.getWriter().append(result);
-        } catch (HibernateShellQueryException e) {
-            e.printStackTrace();
+        result = JsonMaker.getAuthorisationResult(code, message);
+        if (!hasError) {
+            request.getSession().setAttribute("user", user);
         }
+        response.getWriter().append(result);
 
 
         /*if (hasError) {

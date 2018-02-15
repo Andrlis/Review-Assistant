@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="trtpo_system@localhost" uuid="611cdf7c-6646-49b0-b886-97ebaf834979">
+    <data-source source="LOCAL" name="trtpo_system@localhost" uuid="9a0b1443-e7d6-44f1-8ef4-2c2bfeda1c31">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

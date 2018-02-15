@@ -11,7 +11,6 @@ import data.mark.TestMark;
 import data.Student;
 import data.UniversityClass;
 import resources.Hibernate.HibernateCore;
-import resources.Hibernate.HibernateShell;
 
 import data.group.SubGroup;
 import resources.Hibernate.HibernateShellQueryException;

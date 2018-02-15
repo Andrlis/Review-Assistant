@@ -10,7 +10,6 @@ import data.Student;
 import exceptions.CheckException;
 import exceptions.GitException;
 import resources.Hibernate.HibernateCore;
-import resources.Hibernate.HibernateShell;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
 
@@ -86,7 +85,7 @@ public class Checker {
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException{
         logger.info("Check lab number " + issuedLab.getLabDescription().getNumberOfLab());
         Date newDateOfLastRepoCheck = new Date();
-
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         //loop by students who did not pass the lab
         for (Student currentStudent : issuedLab.getStudentControlList()) {
             try {
@@ -99,6 +98,6 @@ public class Checker {
         //save new date of last lab checking
         logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
         issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
-        HibernateShell.update(issuedLab);
+        hibernateCore.update(issuedLab);
     }
 }

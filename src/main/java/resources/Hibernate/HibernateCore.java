@@ -21,14 +21,14 @@ import java.util.List;
 
 @Transactional
 public class HibernateCore {
-    private final Logger logger = Logger.getLogger(HibernateShell.class);
+    private final Logger logger = Logger.getLogger(HibernateCore.class);
     private final SessionFactory ourSessionFactory;
 
     private static volatile HibernateCore ourInstance;
 
     public static HibernateCore getInstance() {
         if (ourInstance == null) {
-            synchronized (HibernateShell.class) {
+            synchronized (HibernateCore.class) {
                 if (ourInstance == null) {
                     ourInstance = new HibernateCore();
                 }
@@ -96,7 +96,7 @@ public class HibernateCore {
         return student;
     }
 
-    public TestMark getTestMarkById(String id) throws HibernateShellQueryException {
+    public TestMark getTestMarkById(Integer id) throws HibernateShellQueryException {
         final Session session = getSession();
         TestMark testMark = null;
         try {
@@ -112,7 +112,7 @@ public class HibernateCore {
         return testMark;
     }
 
-    public LabMark getLabMarkById(String id) throws HibernateShellQueryException {
+    public LabMark getLabMarkById(Integer id) throws HibernateShellQueryException {
         logger.info("Start update lab coeff.");
         final Session session = getSession();
         LabMark labMark = null;

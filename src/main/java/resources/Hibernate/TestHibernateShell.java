@@ -30,7 +30,7 @@ public class TestHibernateShell {
     }
 
     public void updateTestMark(Integer id, Integer mark) throws HibernateShellQueryException {
-        TestMark testMark = hibernateCore.getTestMarkById(id.toString());
+        TestMark testMark = hibernateCore.getTestMarkById(id);
 
         if (testMark != null) {
             testMark.setMark(mark);
