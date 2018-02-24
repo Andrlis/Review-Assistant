@@ -4,6 +4,7 @@ import data.group.SubGroup;
 import data.lab.Lab;
 import data.mark.LabMark;
 import data.mark.TestMark;
+import data.сomment.Comment;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -55,11 +56,17 @@ public class Student implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group_subgroup")
     private SubGroup subGroup;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_student")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Comment> commentList;
+
 
     public Student() {
         this.missedUniversityClassesList = new ArrayList<UniversityClass>();
         this.labMarkList = new ArrayList<LabMark>();
         this.testMarkList = new ArrayList<TestMark>();
+        this.commentList = new ArrayList<Comment>();
     }
 
     public Integer getId() {
@@ -215,6 +222,18 @@ public class Student implements Serializable {
     public List<TestMark> sortTestMarkList() {
         Collections.sort(this.testMarkList, TestMark.COMPARATOR_BY_NUMBER_OF_TEST);
         return this.testMarkList;
+    }
+
+    public List<Comment> getCommentList(){
+        return this.commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList){
+        this.commentList = commentList;
+    }
+
+    public void addComment(Comment comment){
+        this.commentList.add(comment);
     }
 
     @Override
