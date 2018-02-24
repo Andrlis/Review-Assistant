@@ -9,7 +9,7 @@ import data.mark.LabMark;
 import data.Student;
 import exceptions.CheckException;
 import exceptions.GitException;
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
 
@@ -63,6 +63,7 @@ public class RepositoryChecker {
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
         Date newDateOfLastRepoCheck = new Date();
+        HibernateCore hibernateCore = HibernateCore.getInstance();
 
         //loop by students who did not pass the lab
         for (Student currentStudent : issuedLab.getStudentControlList()) {
@@ -76,7 +77,7 @@ public class RepositoryChecker {
         //save new date of last lab checking
         logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
         issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
-        HibernateShell.update(issuedLab);
+        hibernateCore.update(issuedLab);
     }
 
     /**
@@ -88,7 +89,7 @@ public class RepositoryChecker {
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
         Date    commitDate;
-
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         //Check if there link to github repository
         if (student.getGitURL().equals(""))
             return;
@@ -104,12 +105,12 @@ public class RepositoryChecker {
         if (commitDate != null) {
             if(commitDate.before(issuedLab.getDateOfLastRepoCheck())){
                 labMark.setCoefficient(-2.0);
-                HibernateShell.update(labMark);
+                hibernateCore.update(labMark);
                 logger.info("Student " + student + " cheated");
             } else {
                 double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
                 labMark.setCoefficient(coefficient);
-                HibernateShell.update(labMark);
+                hibernateCore.update(labMark);
                 logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
             }
         } else {

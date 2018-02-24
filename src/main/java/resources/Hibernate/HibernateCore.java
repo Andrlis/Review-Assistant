@@ -100,7 +100,7 @@ public class HibernateCore {
         final Session session = getSession();
         TestMark testMark = null;
         try {
-            session.enableFilter("coefficientFilter");
+            //session.enableFilter("coefficientFilter");
             testMark = (TestMark) session.get(TestMark.class, id);
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
@@ -117,7 +117,7 @@ public class HibernateCore {
         final Session session = getSession();
         LabMark labMark = null;
         try {
-            session.enableFilter("coefficientFilter");
+            //session.enableFilter("coefficientFilter");
             labMark = (LabMark) session.get(LabMark.class, id);
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
@@ -245,7 +245,7 @@ public class HibernateCore {
         final Session session = getSession();
         TestKeeper testKeeper = new TestKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+            //session.enableFilter("coefficientFilter");
             testKeeper.setTestList(session.createQuery("from Test").list());
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
@@ -262,7 +262,7 @@ public class HibernateCore {
         final Session session = getSession();
         LecturerKeeper lecturerKeeper = new LecturerKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+            //session.enableFilter("coefficientFilter");
             lecturerKeeper.setLecturerList(session.createQuery("from Lecturer").list());
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
@@ -279,7 +279,7 @@ public class HibernateCore {
         final Session session = getSession();
         LabsKeeper labsKeeper = new LabsKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+            //session.enableFilter("coefficientFilter");
             labsKeeper.setLabList(session.createQuery("from Lab").list());
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
@@ -296,7 +296,7 @@ public class HibernateCore {
         final Session session = getSession();
         GroupsKeeper groupsKeeper = new GroupsKeeper();
         try {
-            session.enableFilter("coefficientFilter");
+            //session.enableFilter("coefficientFilter");
             groupsKeeper.setGroupList(session.createQuery("from Group").list());
         } catch (Exception e) {
             throw new HibernateShellQueryException(e);
