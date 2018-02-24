@@ -26,6 +26,9 @@ public class LabMark {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_student")
     private Student student;
+    @Column(name = "comment", length = 280)
+    private String comment;
+
 
     public LabMark() {
         coefficient = -1.0;
@@ -79,4 +82,11 @@ public class LabMark {
         }
     };
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

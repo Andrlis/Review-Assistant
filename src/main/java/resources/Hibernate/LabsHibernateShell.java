@@ -100,6 +100,14 @@ public class LabsHibernateShell {
         }
     }
 
+    public void updateLabComment(Integer id, String comment) throws HibernateShellQueryException {
+        LabMark labMark = hibernateCore.getLabMarkById(id);
+
+        if (labMark != null) {
+            labMark.setComment(comment);
+            hibernateCore.update(labMark);
+        }
+    }
 
     public void updateLabCoefficient(Integer id, Double coeff) throws HibernateShellQueryException {
         LabMark labMark = hibernateCore.getLabMarkById(id);

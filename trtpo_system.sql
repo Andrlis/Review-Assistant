@@ -92,6 +92,7 @@ id_student INTEGER,
 id_issued_lab INTEGER,
 coefficient DOUBLE NOT NULL,
 mark INTEGER NOT NULL,
+comment VARCHAR(280),
 PRIMARY KEY(id_lab_mark)
 );
 
