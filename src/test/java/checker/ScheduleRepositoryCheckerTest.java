@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(HibernateCore.class)
-public class ScheduleCheckerTest {
+public class ScheduleRepositoryCheckerTest {
     private GroupsKeeper groupsKeeper;
     private Group group;
     private String strXml;
