@@ -47,6 +47,7 @@ public class TestHibernateShell {
     }
 
     private void addTestMark(Integer studentId, Integer testNumber) throws HibernateShellQueryException {
-        hibernateCore.SQLQuery("INSERT INTO tests_result(id_student, id_test, mark) VALUES (" + studentId + ", " + testNumber + ", -1);");
+        hibernateCore.SQLQuery("INSERT INTO tests_result(id_student, id_test, mark)" +
+                " VALUES (" + studentId + ", " + testNumber + ", -1);");
     }
 }

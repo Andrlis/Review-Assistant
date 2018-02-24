@@ -36,5 +36,6 @@
         <mapping class="data.mark.TestMark"/>
         <mapping class="data.test.Test"/>
         <mapping class="data.User"/>
+        <mapping class="data.сomment.Comment"/>
     </session-factory>
 </hibernate-configuration>
