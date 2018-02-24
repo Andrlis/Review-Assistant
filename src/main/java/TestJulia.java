@@ -1,7 +1,6 @@
 import checker.RepositoryChecker;
 import checker.ScheduleChecker;
 import data.group.SubGroup;
-import intercalationJavaHTML.StudentListTableGenerator;
 
 public class TestJulia {
 
