@@ -4,7 +4,7 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 import resources.TimeLogic;
 import bsuirAPI.BsuirParser;
 import bsuirAPI.BsuirRequests;
@@ -25,7 +25,8 @@ ScheduleChecker {
     public static void groupScheduleCheck() throws Exception {
         logger.info("Start schedule check.");
         Timetable timetable;
-        GroupsKeeper groups = HibernateShell.getGroupKeeper();
+        HibernateCore hibernateCore = HibernateCore.getInstance();
+        GroupsKeeper groups = hibernateCore.getGroupKeeper();
 
         for (Group group : groups.getGroupList()) {
 
@@ -56,6 +57,7 @@ ScheduleChecker {
 
     private static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
         UniversityClass universityClass = new UniversityClass();
+        HibernateCore hibernateCore = HibernateCore.getInstance();
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);
@@ -67,6 +69,6 @@ ScheduleChecker {
             subGroup.decreaseCoefficientOfLabs();
         }
 
-        HibernateShell.save(universityClass);
+        hibernateCore.save(universityClass);
     }
 }

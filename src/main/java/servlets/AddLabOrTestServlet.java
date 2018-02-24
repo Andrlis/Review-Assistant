@@ -1,5 +1,6 @@
 package servlets;
 
+import data.test.Test;
 import resources.Hibernate.*;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,9 @@ public class AddLabOrTestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        /*String newColumnType = (String) req.getParameter("new-column-type");
         String newLabDate = (String) req.getParameter("new-lab-date");*/
-        String groupNumber = (String) req.getParameter("group");
+       LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
+       TestHibernateShell testHibernateShell = new TestHibernateShell();
+       String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         String type = (String) req.getParameter("type");
         String date = (String) req.getParameter("date");
@@ -34,9 +37,9 @@ public class AddLabOrTestServlet extends HttpServlet {
 
         try {
             if (type.equals("lab")) {
-                LabsHibernateShell.issueLab(groupNumber, subGroupNumber, date, comment);
+                labsHibernateShell.issueLab(groupNumber, subGroupNumber, date);
             } else {
-                TestHibernateShell.addNextTest(groupNumber, comment);
+                testHibernateShell.addNextTest();
             }
         } catch (Exception e) {
             e.printStackTrace();

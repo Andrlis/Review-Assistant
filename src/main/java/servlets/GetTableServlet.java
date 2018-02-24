@@ -3,7 +3,7 @@ package servlets;
 import data.User;
 import data.group.Group;
 import data.group.SubGroup;
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 import resources.TableMaker.JsonMaker;
 
 import javax.servlet.ServletException;
@@ -17,6 +17,7 @@ import java.io.IOException;
 public class GetTableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         String tableType = (String) req.getParameter("type");
@@ -25,7 +26,7 @@ public class GetTableServlet extends HttpServlet {
         boolean editable = user == null ? false : true;
         try {
             String table = "";
-            Group group = HibernateShell.getGroupByGroupNumber(groupNumber);
+            Group group = hibernateCore.getGroupByGroupNumber(groupNumber);
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             switch (tableType.getBytes()[0]) {
                 case 'm':

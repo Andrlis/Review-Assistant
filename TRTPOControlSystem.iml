@@ -18,7 +18,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="5258e3ad-3b00-490d-bcea-067633e6023d" />
+          <unit-entry name="hibernate.cfg.xml" value="61b1065d-3fc6-4aa7-aa59-b330b13fac67" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
@@ -42,6 +42,10 @@
     <orderEntry type="library" exported="" name="dom4j:dom4j:1.6.1" level="project" />
     <orderEntry type="library" name="Hibernate 5.2.10-5.2.10 (4)" level="project" />
     <orderEntry type="library" name="Hibernate 5.2.10-5.2.10" level="project" />
+    <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />

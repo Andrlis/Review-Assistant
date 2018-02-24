@@ -1,6 +1,6 @@
 package servlets;
 
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 public class Welcome extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         try {
-            request.setAttribute("groups", HibernateShell.getGroupKeeper().getGroupList());
+            request.setAttribute("groups", hibernateCore.getGroupKeeper().getGroupList());
             request
                     .getRequestDispatcher("WEB-INF/pages/index.jsp")
                     .forward(request, response);
