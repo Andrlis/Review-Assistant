@@ -138,3 +138,16 @@ PRIMARY KEY(id_lab_mark_comments),
 FOREIGN KEY(id_lab_mark) REFERENCES labs_marks(id_lab_mark),
 FOREIGN KEY(id_student) REFERENCES students(id_student)
 );
+
+
+/*
+ALTER TABLE labs_marks ADD comment VARCHAR(280) DEFAULT "" NOT NULL;
+
+CREATE TABLE class_comments
+(
+    id_class_comments INT PRIMARY KEY AUTO_INCREMENT,
+    id_student INT NOT NULL,
+    id_class INT NOT NULL,
+    comment VARCHAR(280) DEFAULT "" NOT NULL
+);
+ */
