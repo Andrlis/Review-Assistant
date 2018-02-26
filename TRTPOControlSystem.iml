@@ -18,7 +18,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="04f1b817-3f7a-4e28-a1b1-1a32e8a84f3b" />
+          <unit-entry name="hibernate.cfg.xml" value="d32d3ff9-1793-497b-9525-b82629cd196e" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
@@ -28,7 +28,7 @@
       <configuration />
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -82,5 +82,8 @@
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
     <orderEntry type="library" name="Maven: taglibs:standard:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.17" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.1" level="project" />
   </component>
 </module>
