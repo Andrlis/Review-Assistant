@@ -86,6 +86,11 @@
 </div>
 
 <c:if test="${sessionScope.user != null}">
+<!-- form for comments-->
+    <div id="classComment">
+
+    </div>
+
 <!-- popup form for adding column with lab or test-->
 <div class="popup" id="popup-add-column">
     <!--<button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>-->

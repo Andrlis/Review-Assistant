@@ -259,6 +259,37 @@ function loadTable() {
 }
 
 
+
+//for showing window at any position
+function showObjectAtAnyPosition(jQueryObject, xCoord, yCoord) {
+    jQueryObject.css("left", xCoord + "px");
+    jQueryObject.css("top", yCoord + "px");
+    jQueryObject.css("z-index", "100");
+    alert("before");
+    $("#classComment").html(jQueryObject);
+    alert("after");
+}
+
+//save comments from classes
+
+function saveCommentFromClass() {
+    alert("save");
+}
+
+function showCommetAtClass(comment, xCoord, yCoord) {
+    var commentWindow = $("" +
+        "<form id=\"commentForm\" action=\"saveCommentFromClass\">\n" +
+        "  <p><textarea name=\"comment\"></textarea></p>\n" +
+        "  <p><input type=\"submit\" name='Сохранить' value='" +
+        comment +
+        "'></p>\n" +
+        " </form>");
+
+    showObjectAtAnyPosition(commentWindow, xCoord, yCoord);
+    alert("lol");
+}
+
+
 //events for table with marks or presence
 function setEventsToTable() {
 
@@ -269,8 +300,33 @@ function setEventsToTable() {
         ShowCreateMarkFieldWind();
     });
 
+    //click left button at mouse
+    $(".presence-cell.editable").contextmenu(function (e) {
+
+        var studentId = $(this).parent().children().first().next().attr("data-id");
+        var classId = $(this).attr("data-id");
+        showCommetAtClass(
+            "Julia is cool",
+            event.clientX,
+            event.clientY);
+
+        //Запрос на сервер за старым комментарием
+        /*$.ajax({
+            url: "   ?" +
+            "&classId=" + classId +
+            "&studentId=" + studentId,
+            success: function(data){
+                showCommetAtClass(comment, xCoord, yCoord)
+            }
+        });*/
+
+
+        return false;
+    });
+
     //Event for click at cell with presence
     $(".presence-cell.editable").click(function () {
+
         var studentId = $(this).parent().children().first().next().attr("data-id");
         var classId = $(this).attr("data-id");
 
