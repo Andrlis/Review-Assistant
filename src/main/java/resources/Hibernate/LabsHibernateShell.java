@@ -121,4 +121,28 @@ public class LabsHibernateShell {
     public Integer getNumberOfNextLab() throws HibernateShellQueryException {
         return (int) (hibernateCore.getNumberOfLab() + 1);
     }
+
+    public void deleteLabDescription(Lab lab) {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
+        hibernateCore.delete(lab);
+    }
+
+    public void deleteIssuedLab(IssuedLab issuedLab) {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
+        hibernateCore.delete(issuedLab);
+    }
+
+    public void deleteLabDescription(Integer labNumber) {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
+        Lab lab = null;
+        try {
+            lab = hibernateCore.getLabByNumber(labNumber);
+        } catch (HibernateShellQueryException e) {
+            e.printStackTrace();
+        }
+
+        deleteLabDescription(lab);
+    }
+
+
 }

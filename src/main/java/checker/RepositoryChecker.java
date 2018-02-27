@@ -38,7 +38,7 @@ public class RepositoryChecker {
         logger.info("End check for commits in all the groups.");
     }
 
-    static public void checkForCommitsInGroup(Group group) throws CheckException {
+    private static void checkForCommitsInGroup(Group group) throws CheckException {
         logger.info("Start check for commits of " + group.toString());
         //loop by subgroup
         for (SubGroup currentSubGroup : group.getSubGroupList()) {
@@ -48,7 +48,7 @@ public class RepositoryChecker {
         logger.info("End check for commits in group.");
     }
 
-    static public void checkForCommitsInSubgroup(SubGroup subGroup) throws CheckException {
+    private static void checkForCommitsInSubgroup(SubGroup subGroup) throws CheckException {
         logger.info("Start check for commits of " + subGroup.toString());
         //loop by issued lab for subgroup
 

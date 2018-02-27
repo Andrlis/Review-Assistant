@@ -5,6 +5,7 @@ import data.UniversityClass;
 import data.User;
 import data.group.Group;
 import data.group.GroupsKeeper;
+import data.lab.Lab;
 import data.lab.LabsKeeper;
 import data.lecturer.LecturerKeeper;
 import data.mark.LabMark;
@@ -127,6 +128,24 @@ public class HibernateCore {
         }
 
         return labMark;
+    }
+
+    public Lab getLabByNumber(Integer number) throws HibernateShellQueryException {
+        logger.info("Start get lab by number(" + number + ").");
+        final Session session = getSession();
+        List answer;
+        try {
+            answer = session.createQuery("from Lab lab where lab.numberOfLab =" + number).list();
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+        if (answer != null && answer.size() == 1) {
+            return (Lab) answer.get(0);
+        }
+        return null;
     }
 
     public Group getGroupByGroupNumber(String number) throws HibernateShellQueryException {
