@@ -13,6 +13,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Include Required Prerequisites -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
     <title>Title</title>
 </head>
 <body class="body-class">
@@ -27,6 +35,9 @@
                     <li><button class="btn btn-linkk ch-tab-type" value="m">Оценки</button></li>
                     <li><button class="btn btn-linkk ch-tab-type" value="p">Посещения</button></li>
                     <li><button class="btn btn-linkk ch-tab-type" value="e">Студенты</button></li>
+                    <c:if test="${sessionScope.user != null}">
+                        <li><button class="btn btn-linkk ch-tab-type" value="s">Статистика</button></li>
+                    </c:if>
                 </ul>
             </li>
 
@@ -127,6 +138,39 @@
 </div>
 
 
+    <div class="popup"  id="popup-statistic-file-window">
+        <div id="statistic-file-window" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content center-modal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;</button>
+                        <h4 class="modal-title">Сбор статистики</h4>
+                        <div class="form-group">
+                            <label for="static-group-number">Номер группы: </label>
+                            <select class="select-style" name="static-group-number" id="static-group-number">
+                                <c:forEach items="${groups}" var="group">
+                                    <option><c:out value="${group.numberOfGroup}"/></option></span>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="statistic-period">Период: </label>
+                            <input type="text" class="form-control" id="statistic-period" name="statistic-period" placeholder="Выберите период времени" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onclick="" >Создать</button>
+                        <button type="button" class="btn btn-default" onclick="" >Все файлы</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 <!-- popup form for adding or edditing student-->
 <div class="popup" id="popup-edit-student">
@@ -200,6 +244,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 </c:if>
 

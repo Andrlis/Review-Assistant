@@ -7,7 +7,19 @@ $(document).ready( function () {
         var cont = $(this).html();
         $("#info-type").html(cont);
         $("#info-type").attr("value", val);
-        if (val === 'm')
+        if (val === 's') {
+            $("#popup-edit-student").hide();
+            $("#popup-add-column").hide();
+            $('#statistic-period').daterangepicker({
+                locale: {
+                    format: 'DD.MM.YYYY'
+                }
+            });
+            $("#popup-statistic-file-window").show();
+            $("#statistic-file-window").modal('show');
+            return;
+        }
+        else if (val === 'm')
         {
             $("#popup-add-column").show();
             $("#popup-edit-student").hide();
@@ -45,9 +57,10 @@ $(document).ready( function () {
     $("#popup-edit-student").hide();*/
     $("#result-message").hide();
 
-    /*$("#choose-column-type").click(function() {
-        changeNewColumnType();
-    });*/
+    $("#statistic-tab").click(function() {
+
+    });
+
 });
 
 function isUserLoggedIn() {
@@ -276,7 +289,7 @@ function saveCommentFromClass() {
     alert("save");
 }
 
-function showCommetAtClass(comment, xCoord, yCoord) {
+function showCommentAtClass(comment, xCoord, yCoord) {
     var commentWindow = $("" +
         "<form id=\"commentForm\" action=\"saveCommentFromClass\">\n" +
         "  <p><textarea name=\"comment\"></textarea></p>\n" +
@@ -305,7 +318,7 @@ function setEventsToTable() {
 
         var studentId = $(this).parent().children().first().next().attr("data-id");
         var classId = $(this).attr("data-id");
-        showCommetAtClass(
+        showCommentAtClass(
             "Julia is cool",
             event.clientX,
             event.clientY);
@@ -653,6 +666,8 @@ function hideResultMessage() {
     var password = $("#login-password").val("");
     $("#result-message").hide();
 }
+
+
 
 
 
