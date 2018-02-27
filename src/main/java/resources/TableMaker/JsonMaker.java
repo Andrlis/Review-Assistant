@@ -11,6 +11,7 @@ import resources.Hibernate.*;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
+import resources.TableMaker.Data.ItogMark;
 import resources.TableMaker.Data.Class;
 import resources.TableMaker.Data.Key;
 import resources.TableMaker.Data.Template;
@@ -43,6 +44,7 @@ public class JsonMaker {
         builder.registerTypeAdapter(LabMark.class, new LabMarkConverter(editable));
         builder.registerTypeAdapter(TestMark.class, new TestMarkConverter(editable));
         builder.registerTypeAdapter(BonusMark.class, new BonusMarkConverter(editable));
+        builder.registerTypeAdapter(ItogMark.class, new ItogMarkConverter());
         builder.registerTypeAdapter(Key.class, new KeyConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
@@ -156,6 +158,7 @@ public class JsonMaker {
         }
 
         map.put("bonus", new BonusMark(student));
+        map.put("itog", new ItogMark(student));
 
         return map;
     }
@@ -204,6 +207,7 @@ public class JsonMaker {
         }
 
         strings.add("bonus");
+        strings.add("itog");
 
         return strings;
     }
