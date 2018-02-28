@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Analyzer {
 
-    public List<StudentStatistic> analyzeGroup(Group group, Date startDate, Date stopDate) {
+    List<StudentStatistic> analyzeGroup(Group group, Date startDate, Date stopDate) {
 
         List<StudentStatistic> studentStatistics = new ArrayList<>();
 

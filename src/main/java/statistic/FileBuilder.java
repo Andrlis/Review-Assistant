@@ -20,11 +20,11 @@ public class FileBuilder {
         return file;
     }
 
-    public void writeStatistic(String f_path, List<StudentStatistic> statistics)
+    void writeStatistic(String f_path, List<StudentStatistic> statistics)
             throws IOException {
         Workbook book = new HSSFWorkbook();
         Sheet sheet = book.createSheet("Statistic");
-        
+
         int rowNum = 0;
 
         Row headerRow = sheet.createRow(rowNum);

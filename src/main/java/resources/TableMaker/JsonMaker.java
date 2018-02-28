@@ -15,8 +15,6 @@ import resources.TableMaker.Data .ItogMark;
 import resources.TableMaker.Data.Class;
 import resources.TableMaker.Data.Key;
 import resources.TableMaker.Data.Template;
-
-import javax.validation.constraints.NotNull;
 import java.util.*;
 
 public class JsonMaker {
