@@ -63,10 +63,17 @@ public class TestMark {
         this.student = student;
     }
 
+    public double getRealMark() {
+        if (mark > 0)
+            return mark;
+        else return 0;
+    }
+
     public static final Comparator<TestMark> COMPARATOR_BY_NUMBER_OF_TEST = new Comparator<TestMark>() {
         @Override
         public int compare(TestMark testMark, TestMark t1) {
             return testMark.getTest().getTestNumber() - t1.getTest().getTestNumber();
         }
     };
+
 }

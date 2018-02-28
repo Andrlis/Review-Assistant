@@ -5,7 +5,7 @@ import data.Student;
 
 public class ItogMark {
 
-    private float mark;
+    private float totalMark;
     private Student student;
 
     public ItogMark(Student stud){
@@ -13,14 +13,22 @@ public class ItogMark {
     }
 
     public float getMark(){
-        mark = 0;
+        totalMark = 0;
+
+        int amountOfMarks = student.getLabMarkList().size();
         for(int i = 0; i < student.getLabMarkList().size();i++ ){
-            mark += student.getLabMarkList().get(i).getMark();
+            totalMark += student.getLabMarkList().get(i).getRealMark();
         }
+
+        amountOfMarks += student.getTestMarkList().size();
         for(int i = 0; i < student.getTestMarkList().size(); i++){
-            mark+= student.getTestMarkList().get(i).getMark();
+            totalMark+= student.getTestMarkList().get(i).getRealMark();
         }
-        mark+= student.getBonusMark();
-        return mark/10;
+
+        amountOfMarks++;
+        if (student.getBonusMark() > 0)
+            totalMark += student.getBonusMark();
+
+        return totalMark/amountOfMarks;
     }
 }

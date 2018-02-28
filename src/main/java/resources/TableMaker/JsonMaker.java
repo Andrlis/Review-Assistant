@@ -11,7 +11,7 @@ import resources.Hibernate.*;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
-import resources.TableMaker.Data.ItogMark;
+import resources.TableMaker.Data .ItogMark;
 import resources.TableMaker.Data.Class;
 import resources.TableMaker.Data.Key;
 import resources.TableMaker.Data.Template;

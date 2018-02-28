@@ -35,6 +35,16 @@ public class LabMark {
         mark = -1;
     }
 
+    /**
+     *
+     * @return Mark with coefficient
+     */
+    public double getRealMark() {
+       if (coefficient > 0 && mark > 0)
+           return coefficient * mark;
+       else return 0;
+    }
+
     public Double getCoefficient() {
         return coefficient;
     }

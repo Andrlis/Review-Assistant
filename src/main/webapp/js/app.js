@@ -411,7 +411,8 @@ function setEventsToTable() {
 }
 
 function successCreateStatisticFile(data) {
-    window.location.href = data;
+    //location.href = data;
+    location.href = ".\\Review_Assistant_app_log\\log_file.txt";
 }
 
 function createStatisticFile()
@@ -429,6 +430,8 @@ function createStatisticFile()
         },
         successCreateStatisticFile
     );
+    $("#addLabTest").modal('hide');
+
 }
 
 /*
