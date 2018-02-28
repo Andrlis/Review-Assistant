@@ -5,8 +5,6 @@ import data.UniversityClass;
 import data.group.Group;
 import data.group.SubGroup;
 import data.mark.LabMark;
-import resources.Hibernate.HibernateCore;
-import resources.Hibernate.HibernateShellQueryException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,13 +12,12 @@ import java.util.List;
 
 public class Analyzer {
 
-    public List<StudentStatistic> analyzeGroup(String groupNumber, Date startDate, Date stopDate)
-            throws HibernateShellQueryException{
-        HibernateCore hibernateCore = HibernateCore.getInstance();
-        Group group = hibernateCore.getGroupByGroupNumber(groupNumber);
+    public List<StudentStatistic> analyzeGroup(Group group, Date startDate, Date stopDate) {
+
         List<StudentStatistic> studentStatistics = new ArrayList<>();
 
         for(SubGroup subGroup : group.getSubGroupList()){
+
             for(Student student: subGroup.getStudentsList()){
                 StudentStatistic statistic = new StudentStatistic();
                 statistic.studentFullName = student.getFulName();
