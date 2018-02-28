@@ -9,28 +9,23 @@ import java.util.Date;
 import java.util.List;
 
 public class StatisticCollector {
-    public void collect(String group_number, String from_date, String to_date) throws StatisticException {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    public static String createStatisticFile(String groupNumber, Date fromDate, Date toDate) throws StatisticException {
+
         HibernateCore hibernateCore = HibernateCore.getInstance();
         FileBuilder fileBuilder = new FileBuilder();
         Analyzer analyzer = new Analyzer();
+        String filePath = "D:\\" + groupNumber /*+ "_" + fromDate + "-" + toDate*/ +".xls";
 
         try {
-            Date fromDate = dateFormat.parse(from_date);
-            Date toDate = dateFormat.parse(to_date);
-
-            Group group = hibernateCore.getGroupByGroupNumber(group_number);
-
+            Group group = hibernateCore.getGroupByGroupNumber(groupNumber);
             List<StudentStatistic> statData = analyzer.analyzeGroup(group, fromDate, toDate);
-            fileBuilder.writeStatistic("C:\\Andrey\\IntellijIDEA\\TRTPOControlSystem\\StatisticFile\\" + group_number + "_statistic.xls", statData);
-
-
+            fileBuilder.writeStatistic(filePath, statData);
 
         } catch (Exception exc) {
             throw new StatisticException(exc);
         }
 
-
+        return filePath;
     }
 }

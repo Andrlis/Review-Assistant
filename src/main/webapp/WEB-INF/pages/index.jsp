@@ -148,8 +148,8 @@
                         <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;</button>
                         <h4 class="modal-title">Сбор статистики</h4>
                         <div class="form-group">
-                            <label for="static-group-number">Номер группы: </label>
-                            <select class="select-style" name="static-group-number" id="static-group-number">
+                            <label for="statistic-group-number">Номер группы: </label>
+                            <select class="select-style" name="statistic-group-number" id="statistic-group-number">
                                 <c:forEach items="${groups}" var="group">
                                     <option><c:out value="${group.numberOfGroup}"/></option></span>
                                 </c:forEach>
@@ -162,8 +162,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" onclick="" >Создать</button>
-                        <button type="button" class="btn btn-default" onclick="" >Все файлы</button>
+                        <button type="button" class="btn btn-default" onclick="createStatisticFile()">Создать</button>
+                        <button type="button" class="btn btn-default" onclick="">Все файлы</button>
                     </div>
                 </div>
 

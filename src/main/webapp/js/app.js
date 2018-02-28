@@ -3,10 +3,8 @@ $(document).ready( function () {
     //ShowMarksTable();
 
     $(".ch-tab-type").click(function () {
+
         var val = $(this).attr("value");
-        var cont = $(this).html();
-        $("#info-type").html(cont);
-        $("#info-type").attr("value", val);
         if (val === 's') {
             $("#popup-edit-student").hide();
             $("#popup-add-column").hide();
@@ -32,6 +30,9 @@ $(document).ready( function () {
             $("#popup-edit-student").hide();
             $("#popup-add-column").hide();
         }
+        var cont = $(this).html();
+        $("#info-type").html(cont);
+        $("#info-type").attr("value", val);
         loadTable();
     });
     $(".ch-tab-gr").click(function () {
@@ -409,6 +410,27 @@ function setEventsToTable() {
     });
 }
 
+function successCreateStatisticFile(data) {
+    window.location.href = data;
+}
+
+function createStatisticFile()
+{
+    var group = $("#statistic-group-number").val();
+    var dates = $("#statistic-period").val().split(' - ');
+    //var till =
+
+    $.get(
+        "CreateStatisticFile",
+        {
+            group: group,
+            from: dates[0],
+            till: dates[1],
+        },
+        successCreateStatisticFile
+    );
+}
+
 /*
     functions for showing popup-add-column form: after pressing button "Добавить"
  */
@@ -566,6 +588,8 @@ function showPopupFormEditStudent(event)
     $("#delete-student-button").show();
     formAndShowPopupFormEditStudent(student);
 }
+
+
 
 function cancelPopupFormEditStudent()
 {
