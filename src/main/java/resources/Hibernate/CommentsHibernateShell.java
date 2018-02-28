@@ -11,6 +11,10 @@ public class CommentsHibernateShell {
         hibernateCore = HibernateCore.getInstance();
     }
 
+    public void saveComment(Comment comment){
+        hibernateCore.save(comment);
+    }
+
     public void saveComment(Student student, UniversityClass universityClass, String comment){
         Comment newComment = new Comment();
         newComment.setStudent(student);
@@ -23,6 +27,14 @@ public class CommentsHibernateShell {
     public void saveComment(Integer idStudent, Integer idUniversityClass, String comment) throws HibernateShellQueryException {
         hibernateCore.SQLQuery("INSERT INTO class_comments(id_class, id_student, comment) " +
                 "VALUES(" + idStudent + ", " + idUniversityClass + ", '" + comment + "');");
-
     }
+
+    public void deleteComment(Comment comment) {
+        hibernateCore.delete(comment);
+    }
+
+    public void deleteComment(Integer id) throws HibernateShellQueryException {
+        hibernateCore.SQLQuery("DELETE FROM class_comments WHERE id_class_comments = " + id);
+    }
+
 }
