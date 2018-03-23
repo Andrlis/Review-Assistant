@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileBuilder {
-    private static final Logger logger = Logger.getLogger(FileBuilder.class);
+    //private static final Logger logger = Logger.getLogger(FileBuilder.class);
 
     private File getFile(String file_path) throws IOException {
         File file = new File(file_path);

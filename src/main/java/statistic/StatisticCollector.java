@@ -14,10 +14,10 @@ public class StatisticCollector {
         HibernateCore hibernateCore = HibernateCore.getInstance();
         FileBuilder fileBuilder = new FileBuilder();
         Analyzer analyzer = new Analyzer();
-        String filePath = "C:\\Andrey\\IntellijIDEA\\TRTPOControlSystem\\StatisticFile\\"
+        String filePath = "C:\\Andrey\\IntellijIDEA\\TRTPOControlSystem\\TestFiles\\"
                 + groupNumber + ".xls";
 
-        if(fromDate.after(toDate)){
+        if (fromDate.after(toDate)) {
             throw new StatisticException("Date interval exception.");
         }
 

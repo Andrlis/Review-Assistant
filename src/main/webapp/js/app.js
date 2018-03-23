@@ -1,4 +1,4 @@
-$(document).ready( function () {
+$(document).ready(function () {
     //setEventsToTable();
     //ShowMarksTable();
 
@@ -17,16 +17,13 @@ $(document).ready( function () {
             $("#statistic-file-window").modal('show');
             return;
         }
-        else if (val === 'm')
-        {
+        else if (val === 'm') {
             $("#popup-add-column").show();
             $("#popup-edit-student").hide();
-        } else if (val === 'e')
-        {
+        } else if (val === 'e') {
             $("#popup-edit-student").show();
             $("#popup-add-column").hide();
-        } else
-        {
+        } else {
             $("#popup-edit-student").hide();
             $("#popup-add-column").hide();
         }
@@ -45,11 +42,11 @@ $(document).ready( function () {
         loadTable();
     });
 
-    $("#lab-radio-button").click(function() {
+    $("#lab-radio-button").click(function () {
         $("#new-lab-date").show();
     });
 
-    $("#test-radio-button").click(function() {
+    $("#test-radio-button").click(function () {
         $("#new-lab-date").hide();
     });
 
@@ -58,7 +55,7 @@ $(document).ready( function () {
     $("#popup-edit-student").hide();*/
     $("#result-message").hide();
 
-    $("#statistic-tab").click(function() {
+    $("#statistic-tab").click(function () {
 
     });
 
@@ -76,12 +73,11 @@ function getSimpleCell(data) {
     cell.attr("data-type", data['type']);
     cell.attr("class", data['cell-class']);
     var link = data['link'];
-    if (link == null || link == "")
-    {
+    if (link == null || link == "") {
         cell.append(data['value']);
     }
     else {
-        var linkTag = $('<a></a>', {href : link, target : "_blank"});
+        var linkTag = $('<a></a>', {href: link, target: "_blank"});
         linkTag.append(data['value']);
         cell.append(linkTag);
     }
@@ -126,12 +122,12 @@ function getTableHeaderCollapse(headerArray) {
 
 function getTableBodyCollapse(dataArray, headerArray) {
     var body = $('<tbody style="visibility: collapse;"></tbody>');
-    dataArray.sort(function(a, b) {
+    dataArray.sort(function (a, b) {
         return a[headerArray[0]]['value'] > b[headerArray[0]]['value'];
     });
     var numberOfRow = 0;
     dataArray.forEach(function (data) {
-        numberOfRow ++;
+        numberOfRow++;
         body.append(getSimpleRow(data, headerArray, numberOfRow));
     });
     return body;
@@ -145,20 +141,20 @@ function getTableHeader(headerArray) {
 
 function getTableBody(dataArray, headerArray) {
     var body = $('<tbody></tbody>');
-    dataArray.sort(function(a, b) {
+    dataArray.sort(function (a, b) {
         return a[headerArray[0]]['value'] > b[headerArray[0]]['value'];
     });
     var numberOfRow = 0;
     dataArray.forEach(function (data) {
-        numberOfRow ++;
+        numberOfRow++;
         body.append(getSimpleRow(data, headerArray, numberOfRow));
     });
     return body;
 }
 
 function getHeader(data) {
-    var table ;
-    if(data['args'].length >= 8)
+    var table;
+    if (data['args'].length >= 8)
         table = $("<table style=\"margin-bottom: -1; margin-right: 14px;\"></table>");
     else
         table = $("<table style=\"margin-bottom: -1;\"></table>");
@@ -266,12 +262,11 @@ function loadTable() {
         "&subgroup=" + subgroup +
         "&type=" + type,
         dataType: "json",
-        success: function(data){
+        success: function (data) {
             successFunction(data);
         }
     });
 }
-
 
 
 //for showing window at any position
@@ -310,7 +305,7 @@ function setEventsToTable() {
 
     //Event for click at button
     $("button.add-col-button").click(function () {
-        
+
         ShowCreateMarkFieldWind();
     });
 
@@ -387,7 +382,7 @@ function setEventsToTable() {
             var data_type = parent.attr("data-type");
             //////Нужна другая проверка в!!!!!
             if (isNaN(val))
-                val="";
+                val = "";
             parent.html(val);
             $.ajax({
                 url: "SaveMarkServlet?id=" + data_id +
@@ -415,8 +410,7 @@ function successCreateStatisticFile(data) {
     location.href = ".\\Review_Assistant_app_log\\log_file.txt";
 }
 
-function createStatisticFile()
-{
+function createStatisticFile() {
     var group = $("#statistic-group-number").val();
     var dates = $("#statistic-period").val().split(' - ');
     //var till =
@@ -427,8 +421,9 @@ function createStatisticFile()
             group: group,
             from: dates[0],
             till: dates[1],
-        },
-        successCreateStatisticFile
+        }
+        //     ,
+        //     successCreateStatisticFile
     );
     $("#addLabTest").modal('hide');
 
@@ -438,22 +433,21 @@ function createStatisticFile()
     functions for showing popup-add-column form: after pressing button "Добавить"
  */
 
-function formAndShowPopupFormAddColumn(data)
-{
+function formAndShowPopupFormAddColumn(data) {
     $("#new-column-type").html("");
 
     $("#new-lab-number").html(data['lab-number']);
     $("#new-test-number").html(data['test-number']);
 
-   /* var labOption = $("<option></option>");
-    labOption.attr("value", "lab");
-    labOption.html("Лабораторная работа " + data['lab-number']);
-    $("#new-column-type").append(labOption);
+    /* var labOption = $("<option></option>");
+     labOption.attr("value", "lab");
+     labOption.html("Лабораторная работа " + data['lab-number']);
+     $("#new-column-type").append(labOption);
 
-    var testOption = $("<option></option>");
-    testOption.attr("value", "test");
-    testOption.html("Контрольная работа " + data['test-number']);
-    $("#new-column-type").append(testOption);*/
+     var testOption = $("<option></option>");
+     testOption.attr("value", "test");
+     testOption.html("Контрольная работа " + data['test-number']);
+     $("#new-column-type").append(testOption);*/
 
     $("#new-lab-date").html("");
     data['dates'].forEach(function (date) {
@@ -467,8 +461,7 @@ function formAndShowPopupFormAddColumn(data)
     //disablePageEvents();
 }
 
-function showPopupFormAddColumn()
-{
+function showPopupFormAddColumn() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     $.ajax({
@@ -476,31 +469,27 @@ function showPopupFormAddColumn()
         "group=" + group +
         "&subgroup=" + subgroup,
         dataType: "json",
-        success: function(data){
+        success: function (data) {
             formAndShowPopupFormAddColumn(data);
         }
     });
 }
 
-function cancelPopupFormAddColumn()
-{
+function cancelPopupFormAddColumn() {
     $("#popup-form-add-column").removeClass("show");
     enablePageEvents();
 }
 
-function errorAddLabOrTestButton()
-{
+function errorAddLabOrTestButton() {
 
 }
 
-function succesAddLabOrTestButton()
-{
+function succesAddLabOrTestButton() {
     loadTable();
     setEventsToTable();
 }
 
-function addLabOrTestButton()
-{
+function addLabOrTestButton() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var type = $('#choose-column-type input:radio:checked').val();
@@ -534,15 +523,13 @@ function addLabOrTestButton()
 
 /*Functions for disable and enable page*/
 
-function disablePageEvents()
-{
+function disablePageEvents() {
     $("#navbar").addClass("disabled");
     $("#table-container").addClass("disabled");
     $("#table-title").addClass("disabled");
 }
 
-function enablePageEvents()
-{
+function enablePageEvents() {
     $("#navbar").removeClass("disabled");
     $("#table-container").removeClass("disabled");
     $("#table-title").removeClass("disabled");
@@ -552,8 +539,7 @@ function enablePageEvents()
     function for showing popup-edit-student form: after pressing button "Добавить студента"
  */
 
-function formAndShowPopupFormEditStudent(student)
-{
+function formAndShowPopupFormEditStudent(student) {
     $("#student-id").attr("value", student['id']);
     $("#student-name").val(student['name']);
     $("#student-surname").val(student['surname']);
@@ -563,8 +549,7 @@ function formAndShowPopupFormEditStudent(student)
     //disablePageEvents();
 }
 
-function showEmptyPopupFormEditStudent()
-{
+function showEmptyPopupFormEditStudent() {
     var student = {};
     student['id'] = "";
     student['name'] = "";
@@ -576,8 +561,7 @@ function showEmptyPopupFormEditStudent()
 
 }
 
-function showPopupFormEditStudent(event)
-{
+function showPopupFormEditStudent(event) {
     var row = $(event.target).parent();
     var children = row.children();
     var student = {};
@@ -593,53 +577,45 @@ function showPopupFormEditStudent(event)
 }
 
 
-
-function cancelPopupFormEditStudent()
-{
+function cancelPopupFormEditStudent() {
     //$("#popup-form-edit-student").removeClass("show");
 
     enablePageEvents();
 }
 
-function errorDeleteStudent()
-{
+function errorDeleteStudent() {
 
 }
 
 
-function successDeleteStudent()
-{
+function successDeleteStudent() {
     loadTable();
     setEventsToTable();
-   // cancelPopupFormEditStudent();
+    // cancelPopupFormEditStudent();
 }
 
-function deleteStudentButtonClick()
-{
+function deleteStudentButtonClick() {
     var studentId = $("#student-id").attr("value");
     $.ajax({
         url: "DeleteStudent?" +
         "studentId=" + studentId,
-        success: function(data){
+        success: function (data) {
             successDeleteStudent();
         }
     });
     //cancelPopupFormEditStudent();
 }
 
-function successSaveStudent()
-{
+function successSaveStudent() {
     loadTable();
     setEventsToTable();
 }
 
-function errorSaveStudent()
-{
+function errorSaveStudent() {
 
 }
 
-function saveStudentButtonClick()
-{
+function saveStudentButtonClick() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var studentName = $("#student-name").val();
