@@ -420,7 +420,7 @@ function createStatisticFile() {
         {
             group: group,
             from: dates[0],
-            till: dates[1],
+            till: dates[1]
         }
         //     ,
         //     successCreateStatisticFile

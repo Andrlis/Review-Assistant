@@ -1,4 +1,4 @@
-package servlets.test;
+package servlets;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
