@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="external/css/daterangepicker.css"/>
 
     <title>Review-Assistant</title>
+    <link rel="icon" href="picture/git.png">
 </head>
 <body class="body-class">
 

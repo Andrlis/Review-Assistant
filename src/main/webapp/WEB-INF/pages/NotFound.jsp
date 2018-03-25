@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Review-Assistant.Not found</title>
+    <link rel="icon" href="picture/git.png">
 </head>
 <body>
 <h1>404</h1>

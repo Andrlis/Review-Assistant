@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Review-Assistant.Access denied</title>
+    <link rel="icon" href="picture/git.png">
 </head>
 <body>
 <div style="align: central">

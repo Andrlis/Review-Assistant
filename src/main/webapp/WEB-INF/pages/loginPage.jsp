@@ -17,6 +17,7 @@
         <script src="external/js/jquery.js"></script>
         <script src="external/js/bootstrap.js"></script>
         <title>Review-Assistant.Authorization</title>
+        <link rel="icon" href="picture/git.png">
     </head>
     <body>
     <form action="/DoLoginServlet" method="POST">
