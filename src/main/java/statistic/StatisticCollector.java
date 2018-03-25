@@ -16,8 +16,7 @@ public class StatisticCollector {
         Analyzer analyzer = new Analyzer();
 //        String filePath = "C:\\Andrey\\IntellijIDEA\\TRTPOControlSystem\\TestFiles\\"
 //                + groupNumber + ".xls";
-        String filePath = "E:\\IntellijIDEA\\Review-Assistant\\TestFiles\\"
-                + groupNumber + ".xls";
+        String filePath = ".\\" + groupNumber + ".xls";
 
 
         if (fromDate.after(toDate)) {

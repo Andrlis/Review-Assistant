@@ -405,28 +405,16 @@ function setEventsToTable() {
     });
 }
 
-function successCreateStatisticFile(data) {
-    //location.href = data;
-    location.href = ".\\Review_Assistant_app_log\\log_file.txt";
-}
 
 function createStatisticFile() {
     var group = $("#statistic-group-number").val();
     var dates = $("#statistic-period").val().split(' - ');
     //var till =
+    window.open('./CreateStatisticFile?' + "group=" + group +
+        "&from=" + dates[0] +
+        "&till=" + dates[1]);
 
-    $.get(
-        "CreateStatisticFile",
-        {
-            group: group,
-            from: dates[0],
-            till: dates[1]
-        }
-        //     ,
-        //     successCreateStatisticFile
-    );
-    $("#addLabTest").modal('hide');
-
+    $("#statistic-file-window").modal('hide');
 }
 
 /*
