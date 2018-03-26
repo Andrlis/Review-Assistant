@@ -271,12 +271,12 @@ function loadTable() {
 
 //for showing window at any position
 function showObjectAtAnyPosition(jQueryObject, xCoord, yCoord) {
+    jQueryObject.css("position", "absolute");
     jQueryObject.css("left", xCoord + "px");
     jQueryObject.css("top", yCoord + "px");
     jQueryObject.css("z-index", "100");
-    alert("before");
-    $("#classComment").html(jQueryObject);
-    alert("after");
+
+    $("#class-comment").html(jQueryObject);
 }
 
 //save comments from classes
@@ -287,15 +287,14 @@ function saveCommentFromClass() {
 
 function showCommentAtClass(comment, xCoord, yCoord) {
     var commentWindow = $("" +
-        "<form id=\"commentForm\" action=\"saveCommentFromClass\">\n" +
+        "<div><form id=\"commentForm\" action=\"saveCommentFromClass\">\n" +
         "  <p><textarea name=\"comment\"></textarea></p>\n" +
         "  <p><input type=\"submit\" name='Сохранить' value='" +
         comment +
         "'></p>\n" +
-        " </form>");
+        " </form></div>");
 
     showObjectAtAnyPosition(commentWindow, xCoord, yCoord);
-    alert("lol");
 }
 
 
