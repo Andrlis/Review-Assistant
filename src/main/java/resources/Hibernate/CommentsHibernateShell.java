@@ -29,6 +29,11 @@ public class CommentsHibernateShell {
                 "VALUES(" + idStudent + ", " + idUniversityClass + ", '" + comment + "');");
     }
 
+    public void saveComment(String idStudent, String idUniversityClass, String comment) throws HibernateShellQueryException {
+        hibernateCore.SQLQuery("INSERT INTO class_comments(id_class, id_student, comment) " +
+                "VALUES(" + idStudent + ", " + idUniversityClass + ", '" + comment + "');");
+    }
+
     public void deleteComment(Comment comment) {
         hibernateCore.delete(comment);
     }
