@@ -11,6 +11,7 @@ import data.lecturer.LecturerKeeper;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import data.test.TestKeeper;
+import data.сomment.Comment;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -128,6 +129,20 @@ public class HibernateCore {
         }
 
         return labMark;
+    }
+
+    public Comment getCommentById(Integer id) throws HibernateShellQueryException {
+        final Session session = getSession();
+        Comment comment = null;
+        try {
+            comment = (Comment) session.get(Comment.class, id);
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            session.close();
+        }
+
+        return comment;
     }
 
     public Lab getLabByNumber(Integer number) throws HibernateShellQueryException {

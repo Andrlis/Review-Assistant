@@ -127,6 +127,16 @@ public class LabsHibernateShell {
         }
     }
 
+    public String getLabComment(String id) throws HibernateShellQueryException {
+        LabMark labMark = hibernateCore.getLabMarkById(Integer.getInteger(id));
+
+        if(labMark != null){
+            return labMark.getComment();
+        }
+
+        return "";
+    }
+
     public Integer getNumberOfNextLab() throws HibernateShellQueryException {
         return (int) (hibernateCore.getNumberOfLab() + 1);
     }
