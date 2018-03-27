@@ -270,10 +270,10 @@ function loadTable() {
 
 
 //for showing window at any position
-function showObjectAtAnyPosition(jQueryObject, xCoord, yCoord) {
-    $("#class-comment").css("position", "absolute");
+function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
+    /*$("#class-comment").css("position", "absolute");
     $("#class-comment").css("left", xCoord + "px");
-    $("#class-comment").css("top", yCoord + "px");
+    $("#class-comment").css("top", yCoord + "px");*/
 
     $("#class-comment").html(jQueryObject);
     $("#add-comment").modal('show');
@@ -281,11 +281,20 @@ function showObjectAtAnyPosition(jQueryObject, xCoord, yCoord) {
 
 //save comments from classes
 
-function saveCommentFromClass() {
+function deleteComment() {
+
+    $("#add-comment").modal('hide');
+    alert("delete");
+}
+
+//save comments from classes
+
+function saveComment() {
+    $("#add-comment").modal('hide');
     alert("save");
 }
 
-function showCommentAtClass(comment, xCoord, yCoord) {
+function showCommentAtClass(comment){//, xCoord, yCoord) {
     var commentWindow = $("" +
         "<div class=\"popup\" id=\"popup-add-comment\">\n" +
         "    <div id=\"add-comment\" class=\"modal fade\" role=\"dialog\">\n" +
@@ -296,6 +305,9 @@ function showCommentAtClass(comment, xCoord, yCoord) {
         "                    <h4 class=\"modal-title\">Комментарий</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
+        "                    <input type=\"hidden\" comment-id=\"\">\n" +
+        "                    <input type=\"hidden\" second-comment-id=\"\">\n" +
+        "                    <input type=\"hidden\" comment-type=\"\">\n" +
         "                    <form class=\"form-horizontal\">\n" +
         "                        <textarea class=\"form-control\" rows=\"3\">" + comment + "</textarea>\n" +
         "                    </form>\n" +
@@ -313,7 +325,7 @@ function showCommentAtClass(comment, xCoord, yCoord) {
         "    </div>\n" +
         "</div>");
 
-    showObjectAtAnyPosition(commentWindow, xCoord, yCoord);
+    showFormWithComment(commentWindow);//, xCoord, yCoord);
 }
 
 
@@ -327,27 +339,61 @@ function setEventsToTable() {
         ShowCreateMarkFieldWind();
     });
 
-    //click left button at mouse
-    $(".presence-cell.editable").contextmenu(function (e) {
 
-        var studentId = $(this).parent().children().first().next().attr("data-id");
-        var classId = $(this).attr("data-id");
-        showCommentAtClass(
-            "Julia is cool",
-            event.clientX,
-            event.clientY);
+    function requestForComment(type) {
+
+        var commentId;
+        var secondCommentId;
+
+        switch(type) {
+
+            case 'lab':
+            case 'test':
+            case 'bonus':
+                commentId = $(this).attr("data-id");
+                break;
+
+            case 'class':
+                commentId = $(this).parent().children().first().next().attr("data-id");
+                secondCommentId = $(this).attr("data-id");
+                break;
+        }
+
+
 
         //Запрос на сервер за старым комментарием
-        /*$.ajax({
-            url: "   ?" +
-            "&classId=" + classId +
-            "&studentId=" + studentId,
-            success: function(data){
-                showCommetAtClass(comment, xCoord, yCoord)
-            }
-        });*/
+        $.ajax({
+            url: "GetComment" +
+            "&commentId=" + commentId +
+            "&secondCommentId=" + secondCommentId +
+            "&type=" + type,
+            success: showCommentAtClass//, xCoord, yCoord)
+        });
 
+        showCommentAtClass("Julia is cool");
+    }
 
+    //click left button at mouse
+    $(".bonus-mark-cell.editable").contextmenu(function (e) {
+        requestForComment("bonus");
+        return false;
+    });
+
+    //click left button at mouse
+    $(".test-mark-cell.editable").contextmenu(function (e) {
+        requestForComment("test");
+        return false;
+    });
+
+    //click left button at mouse
+    $(".lab-mark-cell.editable").contextmenu(function (e) {
+        requestForComment("lab");
+        return false;
+    });
+
+    //click left button at mouse
+    $(".presence-cell.editable").contextmenu(function (e) {
+        requestForComment("class");
         return false;
     });
 

@@ -5,11 +5,13 @@ import resources.Hibernate.HibernateShellQueryException;
 import resources.Hibernate.LabsHibernateShell;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/GetComment")
 public class GetComment extends HttpServlet {
 
     @Override
@@ -24,7 +26,7 @@ public class GetComment extends HttpServlet {
             switch (commentType) {
                 //mark
                 case "m":
-                    comment = labsHibernateShell.getLabComment(id);
+                    comment = labsHibernateShell.getLabMarkComment(id);
                     //class
                 case "c":
                     comment = commentsHibernateShell.getCommet(id);
