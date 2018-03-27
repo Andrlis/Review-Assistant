@@ -107,6 +107,18 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
+    public static String getJsonLabMarkComment(LabMark labmark){
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        map.put("type","mark");
+        map.put("id", labmark.getId());
+        map.put("comment",labmark.getComment());
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        return gson.toJson(map);
+    }
+
     public static String getJsonSubGroupClasses(SubGroup subGroup) throws HibernateShellQueryException {
         TestHibernateShell testHibernateShell = new TestHibernateShell();
 
