@@ -1,8 +1,6 @@
 package servlets;
 
-import resources.Hibernate.CommentsHibernateShell;
-import resources.Hibernate.HibernateShellQueryException;
-import resources.Hibernate.LabsHibernateShell;
+import resources.Hibernate.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +14,9 @@ public class GetComment extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
         LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
+        TestHibernateShell testHibernateShell = new TestHibernateShell();
+        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
+
         String commentId = (String) req.getParameter("comment-id");
         String commentType = (String) req.getParameter("type");
         String secondCommentId = (String) req.getParameter("second-comment-id");
@@ -30,10 +31,10 @@ public class GetComment extends HttpServlet {
                     comment = commentsHibernateShell.getComment(commentId, secondCommentId); //stidentId, classId
                     break;
                 case "t" : //test
-                    // testMarkId
+                    //TODO comment = testHibernateShell.getComment(commentId); // testMarkId
                     break;
                 case "b" ://bonus
-                    //studentId
+                    //TODO comment = studentHibernateShell.getComment(commentId); //studentId
                     break;
             }
         } catch (HibernateShellQueryException e) {
