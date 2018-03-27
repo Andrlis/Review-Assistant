@@ -13,11 +13,17 @@ import data.mark.TestMark;
 import data.test.TestKeeper;
 import data.сomment.Comment;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -140,6 +146,24 @@ public class HibernateCore {
             throw new HibernateShellQueryException(e);
         } finally {
             session.close();
+        }
+
+        return comment;
+    }
+
+    public Comment getComment(Integer studentId, Integer classId) {
+        final Session session = getSession();
+        Comment comment = null;
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
+        Root<Comment> root = query.from(Comment.class);
+        query.select(root).where(builder.equal(root.get("student").get("id"), studentId), builder.equal(root.get("universityClass").get("id"), classId));
+        Query<Comment> q=session.createQuery(query);
+        try {
+            comment = q.getSingleResult();
+        } catch (org.hibernate.NonUniqueResultException e){
+            comment = null;
         }
 
         return comment;

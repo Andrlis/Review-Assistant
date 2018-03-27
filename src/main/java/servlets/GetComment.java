@@ -16,18 +16,25 @@ public class GetComment extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
         LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
-        String id = (String) req.getParameter("id");
+        String commentId = (String) req.getParameter("comment-id");
         String commentType = (String) req.getParameter("type");
+        String secondCommentId = (String) req.getParameter("second-comment-id");
         String comment = "";
 
         try {
             switch (commentType) {
-                //mark
-                case "m":
-                    comment = labsHibernateShell.getLabComment(id);
-                    //class
-                case "c":
-                    comment = commentsHibernateShell.getCommet(id);
+                case "m": // mark
+                    comment = labsHibernateShell.getLabComment(commentId); //labMarkId
+                    break;
+                case "c": //class
+                    comment = commentsHibernateShell.getComment(commentId, secondCommentId); //stidentId, classId
+                    break;
+                case "t" : //test
+                    // testMarkId
+                    break;
+                case "b" ://bonus
+                    //studentId
+                    break;
             }
         } catch (HibernateShellQueryException e) {
             e.printStackTrace();

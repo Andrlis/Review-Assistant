@@ -42,7 +42,7 @@ public class CommentsHibernateShell {
         hibernateCore.SQLQuery("DELETE FROM class_comments WHERE id_class_comments = " + id);
     }
 
-    public String getCommet(String id) throws HibernateShellQueryException {
+    public String getComment(String id) throws HibernateShellQueryException {
         Comment comment = hibernateCore.getCommentById(Integer.getInteger(id));
 
         if(comment != null)
@@ -51,4 +51,12 @@ public class CommentsHibernateShell {
         return "";
     }
 
+    public String getComment(String studentId, String classId) {
+        Comment comment = hibernateCore.getComment(Integer.getInteger(studentId), Integer.getInteger(classId));
+
+        if(comment != null)
+            return comment.getComment();
+
+        return "";
+    }
 }
