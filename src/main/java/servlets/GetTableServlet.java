@@ -17,6 +17,7 @@ import java.io.IOException;
 public class GetTableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         HibernateCore hibernateCore = HibernateCore.getInstance();
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");

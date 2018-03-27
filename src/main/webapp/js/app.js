@@ -271,12 +271,12 @@ function loadTable() {
 
 //for showing window at any position
 function showObjectAtAnyPosition(jQueryObject, xCoord, yCoord) {
-    jQueryObject.css("left", xCoord + "px");
-    jQueryObject.css("top", yCoord + "px");
-    jQueryObject.css("z-index", "100");
-    alert("before");
-    $("#classComment").html(jQueryObject);
-    alert("after");
+    $("#class-comment").css("position", "absolute");
+    $("#class-comment").css("left", xCoord + "px");
+    $("#class-comment").css("top", yCoord + "px");
+
+    $("#class-comment").html(jQueryObject);
+    $("#add-comment").modal('show');
 }
 
 //save comments from classes
@@ -287,15 +287,33 @@ function saveCommentFromClass() {
 
 function showCommentAtClass(comment, xCoord, yCoord) {
     var commentWindow = $("" +
-        "<form id=\"commentForm\" action=\"saveCommentFromClass\">\n" +
-        "  <p><textarea name=\"comment\"></textarea></p>\n" +
-        "  <p><input type=\"submit\" name='Сохранить' value='" +
-        comment +
-        "'></p>\n" +
-        " </form>");
+        "<div class=\"popup\" id=\"popup-add-comment\">\n" +
+        "    <div id=\"add-comment\" class=\"modal fade\" role=\"dialog\">\n" +
+        "        <div class=\"modal-dialog\">\n" +
+        "            <div class=\"modal-content center-modal\">\n" +
+        "                <div class=\"modal-header\">\n" +
+        "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
+        "                    <h4 class=\"modal-title\">Комментарий</h4>\n" +
+        "                </div>\n" +
+        "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
+        "                    <form class=\"form-horizontal\">\n" +
+        "                        <textarea class=\"form-control\" rows=\"3\">" + comment + "</textarea>\n" +
+        "                    </form>\n" +
+        "                </div>\n" +
+        "                <div class=\"modal-footer\">\n" +
+        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+        "                            onclick=\"saveComment()\">Сохранить\n" +
+        "                    </button>\n" +
+        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+        "                            onclick=\"deleteComment()\">Удалить\n" +
+        "                    </button>\n" +
+        "                </div>\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "    </div>\n" +
+        "</div>");
 
     showObjectAtAnyPosition(commentWindow, xCoord, yCoord);
-    alert("lol");
 }
 
 

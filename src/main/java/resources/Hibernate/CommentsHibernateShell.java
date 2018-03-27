@@ -29,12 +29,26 @@ public class CommentsHibernateShell {
                 "VALUES(" + idStudent + ", " + idUniversityClass + ", '" + comment + "');");
     }
 
+    public void saveComment(String idStudent, String idUniversityClass, String comment) throws HibernateShellQueryException {
+        hibernateCore.SQLQuery("INSERT INTO class_comments(id_class, id_student, comment) " +
+                "VALUES(" + idStudent + ", " + idUniversityClass + ", '" + comment + "');");
+    }
+
     public void deleteComment(Comment comment) {
         hibernateCore.delete(comment);
     }
 
     public void deleteComment(Integer id) throws HibernateShellQueryException {
         hibernateCore.SQLQuery("DELETE FROM class_comments WHERE id_class_comments = " + id);
+    }
+
+    public String getCommet(String id) throws HibernateShellQueryException {
+        Comment comment = hibernateCore.getCommentById(Integer.getInteger(id));
+
+        if(comment != null)
+            return comment.getComment();
+
+        return "";
     }
 
 }
