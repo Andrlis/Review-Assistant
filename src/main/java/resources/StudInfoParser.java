@@ -15,6 +15,8 @@ public class StudInfoParser {
     private static final Logger logger = Logger.getLogger(StudInfoParser.class);
 
     public static ArrayList<Student> parseStudentInfo(File file) throws IOException {
+        logger.info("Start parse students` information from file:" + file.getName());
+        
         ArrayList<Student> studInfoList = new ArrayList<>();
 
         FileInputStream fileStream = new FileInputStream(file);
@@ -27,14 +29,20 @@ public class StudInfoParser {
             for (Row currentRow : dataSheet) {
                 Student student = new Student();
 
-                student.setFulName(currentRow.getCell(0).getStringCellValue());
-                student.seteMail(currentRow.getCell(1).getStringCellValue());
-                student.setGitURL(currentRow.getCell(2).getStringCellValue());
+                student.setFulName(getValidValue(currentRow.getCell(0)));
+                student.seteMail(getValidValue(currentRow.getCell(1)));
+                student.setGitURL(getValidValue(currentRow.getCell(2)));
 
                 studInfoList.add(student);
             }
         }
 
         return studInfoList;
+    }
+
+    private static String getValidValue(Cell cell) {
+        if (cell.getCellTypeEnum() != CellType.STRING)
+            return "";
+        else return cell.getStringCellValue();
     }
 }
