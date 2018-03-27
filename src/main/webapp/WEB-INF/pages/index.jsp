@@ -190,7 +190,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" onclick="createStatisticFile()">Создать</button>
-                        <button type="button" class="btn btn-default" onclick="">Все файлы</button>
+                        <button type="button" class="btn btn-default" onclick="" disabled>Все файлы</button>
                     </div>
                 </div>
 
