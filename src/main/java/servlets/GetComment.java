@@ -1,13 +1,16 @@
 package servlets;
 
 import resources.Hibernate.*;
+import resources.TableMaker.JsonMaker;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/GetComment")
 public class GetComment extends HttpServlet {
 
     @Override
@@ -17,23 +20,24 @@ public class GetComment extends HttpServlet {
         TestHibernateShell testHibernateShell = new TestHibernateShell();
         StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
 
-        String commentId = (String) req.getParameter("comment-id");
+
+        String commentId = (String) req.getParameter("commentId");
         String commentType = (String) req.getParameter("type");
-        String secondCommentId = (String) req.getParameter("second-comment-id");
+        String secondCommentId = (String) req.getParameter("secondCommentId");
         String comment = "";
 
         try {
             switch (commentType) {
-                case "m": // mark
-                    comment = labsHibernateShell.getLabComment(commentId); //labMarkId
+                case "lab": // mark
+                    comment = JsonMaker.getJsonLabMarkComment(labsHibernateShell.getLabMarkById(commentId));
                     break;
-                case "c": //class
-                    comment = commentsHibernateShell.getComment(commentId, secondCommentId); //stidentId, classId
+                case "class": //class
+                    //comment = JsonMaker.getJsonClassComment(studentHibernateShell)
                     break;
-                case "t" : //test
+                case "test" : //test
                     //TODO comment = testHibernateShell.getComment(commentId); // testMarkId
                     break;
-                case "b" ://bonus
+                case "bonus" ://bonus
                     //TODO comment = studentHibernateShell.getComment(commentId); //studentId
                     break;
             }

@@ -59,6 +59,14 @@ public class TestMark {
         return student;
     }
 
+    public String getComment() {
+        return "Temp comment for test mark";
+    }
+
+    public void setComment(String comment) throws NoSuchMethodException {
+        throw new NoSuchMethodException("Not imlemented method");
+    }
+
     public void setStudent(Student student) {
         this.student = student;
     }

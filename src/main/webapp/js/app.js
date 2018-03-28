@@ -294,7 +294,7 @@ function saveComment() {
     alert("save");
 }
 
-function showCommentAtClass(comment){//, xCoord, yCoord) {
+function showComment(comment){//, xCoord, yCoord) {
     var commentWindow = $("" +
         "<div class=\"popup\" id=\"popup-add-comment\">\n" +
         "    <div id=\"add-comment\" class=\"modal fade\" role=\"dialog\">\n" +
@@ -303,13 +303,15 @@ function showCommentAtClass(comment){//, xCoord, yCoord) {
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
         "                    <h4 class=\"modal-title\">Комментарий</h4>\n" +
+        "                    <input type=\"text\" id=\"comment-student-name\" disabled value=\"" + comment['student'] + "\">\n" +
+        "                    <input type=\"text\" id=\"comment-description\" disabled value=\"" + comment['description'] + "\">\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
-        "                    <input type=\"hidden\" comment-id=\"\">\n" +
-        "                    <input type=\"hidden\" second-comment-id=\"\">\n" +
-        "                    <input type=\"hidden\" comment-type=\"\">\n" +
+        "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +
+        "                    <input type=\"hidden\" id=\"second-comment-id\" value=\"" + comment['secondCommentId'] + "\">\n" +
+        "                    <input type=\"hidden\" id=\"comment-type\" value=\"" + comment['type'] + "\">\n" +
         "                    <form class=\"form-horizontal\">\n" +
-        "                        <textarea class=\"form-control\" rows=\"3\">" + comment + "</textarea>\n" +
+        "                        <textarea class=\"form-control\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
         "                    </form>\n" +
         "                </div>\n" +
         "                <div class=\"modal-footer\">\n" +
@@ -340,60 +342,43 @@ function setEventsToTable() {
     });
 
 
-    function requestForComment(type) {
-
-        var commentId;
-        var secondCommentId;
-
-        switch(type) {
-
-            case 'lab':
-            case 'test':
-            case 'bonus':
-                commentId = $(this).attr("data-id");
-                break;
-
-            case 'class':
-                commentId = $(this).parent().children().first().next().attr("data-id");
-                secondCommentId = $(this).attr("data-id");
-                break;
-        }
-
-
-
+    function requestForComment(type, commentId, secondCommentId) {
         //Запрос на сервер за старым комментарием
         $.ajax({
-            url: "GetComment" +
-            "&commentId=" + commentId +
+            url: "GetComment",
+            data: "commentId=" + commentId +
             "&secondCommentId=" + secondCommentId +
             "&type=" + type,
-            success: showCommentAtClass//, xCoord, yCoord)
+            dataType: "json",
+            success: showComment//, xCoord, yCoord)
         });
 
-        showCommentAtClass("Julia is cool");
+        //showCommentAtClass("Julia is cool");
     }
 
     //click left button at mouse
     $(".bonus-mark-cell.editable").contextmenu(function (e) {
-        requestForComment("bonus");
+        requestForComment("bonus", $(this).attr("data-id"), "");
         return false;
     });
 
     //click left button at mouse
     $(".test-mark-cell.editable").contextmenu(function (e) {
-        requestForComment("test");
+        requestForComment("test", $(this).attr("data-id"), "");
         return false;
     });
 
     //click left button at mouse
     $(".lab-mark-cell.editable").contextmenu(function (e) {
-        requestForComment("lab");
+        requestForComment("lab", $(this).attr("data-id"), "");
         return false;
     });
 
     //click left button at mouse
     $(".presence-cell.editable").contextmenu(function (e) {
-        requestForComment("class");
+        requestForComment("class",
+            $(this).parent().children().first().next().attr("data-id"),
+            $(this).attr("data-id"));
         return false;
     });
 

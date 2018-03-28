@@ -107,16 +107,79 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
-    public static String getJsonLabMarkComment(LabMark labmark){
+    private static String formJsonForComment (String studentName, String commentDescription,
+                                       String type, String commentId, String secondCommentId,
+                                       String comment) {
+
         Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("type","mark");
-        map.put("id", labmark.getId());
-        map.put("comment",labmark.getComment());
+        map.put("student", studentName);
+        map.put("description", commentDescription);
+        map.put("type",type);
+        map.put("commentId", commentId);
+        map.put("secondCommentId", secondCommentId);
+        map.put("comment", comment);
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         Gson gson = builder.create();
         return gson.toJson(map);
+    }
+
+    public static String getJsonTestMarkComment(TestMark testMark){
+
+        String studentName = testMark.getStudent().getFulName();
+        String descr = "Тест №" + testMark.getTest().getTestNumber();
+        String type = "test";
+        String commentId = "" + testMark.getId();
+        String secondCommentId = "";
+        String comment = testMark.getComment();
+
+        return JsonMaker.formJsonForComment(
+                studentName, descr,
+                type, commentId,
+                secondCommentId, comment);
+    }
+
+    public static String getJsonBonusMarkComment(Student student){
+        String studentName = student.getFulName();
+        String descr = "Бонус";
+        String type = "bonus";
+        String commentId = "" + student.getId();
+        String secondCommentId = "";
+        String comment = student.getCommentForBonusMark();
+
+        return JsonMaker.formJsonForComment(
+                studentName, descr,
+                type, commentId,
+                secondCommentId, comment);
+    }
+
+    public static String getJsonClassComment(Student student, UniversityClass universityClass){
+        String studentName = student.getFulName();
+        String descr = "Пара " + universityClass.getDataTime();
+        String type = "class";
+        String commentId = "" + student.getId();
+        String secondCommentId = "" + universityClass.getId();
+        String comment = student.getCommentForClass(universityClass.getId());
+
+        return JsonMaker.formJsonForComment(
+                studentName, descr,
+                type, commentId,
+                secondCommentId, comment);
+    }
+
+    public static String getJsonLabMarkComment(LabMark labMark){
+        String studentName = labMark.getStudent().getFulName();
+        String descr = "ЛР №" + labMark.getIssuedLab().getLabDescription().getNumberOfLab();
+        String type = "lab";
+        String commentId = "" + labMark.getId();
+        String secondCommentId = "";
+        String comment = labMark.getComment();
+
+        return JsonMaker.formJsonForComment(
+                studentName, descr,
+                type, commentId,
+                secondCommentId, comment);
     }
 
     public static String getJsonSubGroupClasses(SubGroup subGroup) throws HibernateShellQueryException {

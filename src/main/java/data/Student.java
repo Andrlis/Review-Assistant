@@ -109,6 +109,22 @@ public class Student implements Serializable {
         this.eMail = eMail;
     }
 
+    public String getCommentForBonusMark() {
+        return "Temp comment for bonus mark";
+    }
+
+    public void setCommentForBonusMark(String comment) throws NoSuchMethodException {
+        throw new NoSuchMethodException("Realise method");
+    }
+
+    public String getCommentForClass(Integer classId) {
+        return "Temp comment for class";
+    }
+
+    public void setCommentForClass(Integer classId, String comment) throws NoSuchMethodException {
+        throw new NoSuchMethodException("Realise method");
+    }
+
     public List<LabMark> getLabMarkList() {
         return labMarkList;
     }
