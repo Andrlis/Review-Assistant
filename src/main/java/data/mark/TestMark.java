@@ -60,10 +60,12 @@ public class TestMark {
     }
 
     public String getComment() {
+        //TODO
         return "Temp comment for test mark";
     }
 
     public void setComment(String comment) throws NoSuchMethodException {
+        //TODO
         throw new NoSuchMethodException("Not imlemented method");
     }
 

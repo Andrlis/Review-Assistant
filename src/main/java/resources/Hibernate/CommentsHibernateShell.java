@@ -34,6 +34,8 @@ public class CommentsHibernateShell {
                 "VALUES(" + idStudent + ", " + idUniversityClass + ", '" + comment + "');");
     }
 
+
+
     public void deleteComment(Comment comment) {
         hibernateCore.delete(comment);
     }
@@ -53,6 +55,15 @@ public class CommentsHibernateShell {
 
     public String getComment(String studentId, String classId) {
         Comment comment = hibernateCore.getComment(Integer.getInteger(studentId), Integer.getInteger(classId));
+
+        if(comment != null)
+            return comment.getComment();
+
+        return "";
+    }
+
+    public String getComment(Integer studentId, Integer classId) {
+        Comment comment = hibernateCore.getComment(studentId, classId);
 
         if(comment != null)
             return comment.getComment();
