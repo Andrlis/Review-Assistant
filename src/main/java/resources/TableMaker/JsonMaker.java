@@ -5,32 +5,35 @@ import com.google.gson.GsonBuilder;
 import data.Student;
 import data.UniversityClass;
 import data.group.SubGroup;
+import data.lab.IssuedLab;
+import data.lab.Lab;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import resources.Hibernate.*;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
-import resources.TableMaker.Data .ItogMark;
+import resources.TableMaker.Data.ItogMark;
 import resources.TableMaker.Data.Class;
 import resources.TableMaker.Data.Key;
 import resources.TableMaker.Data.Template;
+
 import java.util.*;
 
 public class JsonMaker {
-    public static String getJsonSubGroupMarks(SubGroup subGroup, boolean editable){
+    public static String getJsonSubGroupMarks(SubGroup subGroup, boolean editable) {
 
-        ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
-        for(Student currentStudent: (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
+        ArrayList<Map<String, Object>> studentArray = new ArrayList<Map<String, Object>>();
+        for (Student currentStudent : (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
             studentArray.add(getStudentMarkMap(currentStudent));
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("table-class", "table table-hover table-bordered table-class");
 
-        if(!studentArray.isEmpty()) {
+        if (!studentArray.isEmpty()) {
             map.put("header", sortHeader(studentArray.get(0).keySet()));
-        }else {
+        } else {
             map.put("header", new ArrayList<Object>());
         }
 
@@ -51,18 +54,18 @@ public class JsonMaker {
     }
 
     public static String getJsonSubGroupVisits(SubGroup subGroup, boolean editable) {
-        ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
+        ArrayList<Map<String, Object>> studentArray = new ArrayList<Map<String, Object>>();
 
-        for(Student currentStudent : (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
+        for (Student currentStudent : (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
             studentArray.add(getStudentVisitsMap(currentStudent, subGroup.getUniversityClassesList()));
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("table-class", "table table-hover table-bordered table-class");
 
-        if(!studentArray.isEmpty()) {
+        if (!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
-        }else {
+        } else {
             map.put("header", new ArrayList<Object>());
         }
 
@@ -78,18 +81,18 @@ public class JsonMaker {
     }
 
     public static String getJsonSubGroupStudentRedact(SubGroup subGroup, boolean editable) {
-        ArrayList<Map<String,Object>> studentArray = new ArrayList<Map<String, Object>>();
+        ArrayList<Map<String, Object>> studentArray = new ArrayList<Map<String, Object>>();
 
-        for(Student currentStudent :  (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
+        for (Student currentStudent : (subGroup == null) ? new ArrayList<Student>() : subGroup.getStudentsList()) {
             studentArray.add(getStudentRedactMap(currentStudent, editable));
         }
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("table-class", "table table-hover table-bordered table-class");
 
-        if(!studentArray.isEmpty()) {
+        if (!studentArray.isEmpty()) {
             map.put("header", studentArray.get(0).keySet());
-        }else {
+        } else {
             map.put("header", new ArrayList<Object>());
         }
 
@@ -104,22 +107,35 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
+    public static String getJsonLabMarkComment(LabMark labmark){
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        map.put("type","mark");
+        map.put("id", labmark.getId());
+        map.put("comment",labmark.getComment());
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        return gson.toJson(map);
+    }
+
     public static String getJsonSubGroupClasses(SubGroup subGroup) throws HibernateShellQueryException {
         TestHibernateShell testHibernateShell = new TestHibernateShell();
 
-        Map<String,Object> classesMap = new LinkedHashMap<String, Object>();
+        Map<String, Object> classesMap = new LinkedHashMap<String, Object>();
 
         classesMap.put("lab-number", subGroup.getIssuedLabsList().size() + 1);
         classesMap.put("test-number", testHibernateShell.getNumberOfNextTest().toString());
 
         ArrayList<String> classes = new ArrayList<String>();
-        for(UniversityClass universityClass : (subGroup == null) ? new ArrayList<UniversityClass>() : subGroup.getUniversityClassesList()) {
+        for (UniversityClass universityClass : (subGroup == null) ? new ArrayList<UniversityClass>() : subGroup.getUniversityClassesList()) {
             classes.add(universityClass.getDataTime());
         }
 
         classesMap.put("dates", classes);
 
         GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Lab.class, new LabConverter());
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 
@@ -127,7 +143,7 @@ public class JsonMaker {
     }
 
     public static String getAuthorisationResult(int errorCode, String message) {
-        Map<String,Object> map = new LinkedHashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
 
         map.put("code", Integer.toString(errorCode));
         map.put("message", message);
@@ -139,17 +155,45 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
-    private static Map<String, Object> getStudentMarkMap(Student student){
+    public static String getIssuedLabJson(IssuedLab lab) {
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        map.put("type", "IssuedLab");
+        map.put("issued-lab-data", lab);
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(IssuedLab.class, new IssuedLabConverter());
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        return gson.toJson(map);
+    }
+
+    public static String getLabJson(Lab lab) {
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        map.put("type", "Lab");
+        map.put("lab-data", lab);
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Lab.class, new LabConverter());
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+
+        return gson.toJson(map);
+    }
+
+    private static Map<String, Object> getStudentMarkMap(Student student) {
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", student);
 
-        for(LabMark labMark : student.getLabMarkList()) {
+        for (LabMark labMark : student.getLabMarkList()) {
             String labNum = "lab" + labMark.getIssuedLab().getLabDescription().getNumberOfLab();
 
             map.put(labNum, labMark);
         }
 
-        for(TestMark testMark : student.getTestMarkList()) {
+        for (TestMark testMark : student.getTestMarkList()) {
             String testNum = "test" + testMark.getTest().getTestNumber();
 
             map.put(testNum, testMark);
@@ -165,7 +209,7 @@ public class JsonMaker {
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", student);
 
-        for(UniversityClass universityClass : universityClasses){
+        for (UniversityClass universityClass : universityClasses) {
             map.put(universityClass.getDataTime(), new Class(universityClass,
                     !student.getMissedUniversityClassesList().contains(universityClass)));
         }
@@ -178,7 +222,7 @@ public class JsonMaker {
         map.put("student", student);
 
         map.put("eMail", new Template("cell-ui" + (editable ? " info-cell-editable" : ""), student.geteMail())); //класс и значение для емаила
-        map.put("gitURL", new Template("cell-ui"+ (editable ? " info-cell-editable" : ""), student.getGitURL())); //класс и значение для юрл
+        map.put("gitURL", new Template("cell-ui" + (editable ? " info-cell-editable" : ""), student.getGitURL())); //класс и значение для юрл
 
         return map;
     }
@@ -188,19 +232,17 @@ public class JsonMaker {
 
         strings.add("student");
 
-        for(int i = 1; ; i++){
-            if(set.contains("lab" + i)){
+        for (int i = 1; ; i++) {
+            if (set.contains("lab" + i)) {
                 strings.add("lab" + i);
-            }
-            else
+            } else
                 break;
         }
 
-        for(int i = 1; ; i++){
-            if(set.contains("test" + i)){
+        for (int i = 1; ; i++) {
+            if (set.contains("test" + i)) {
                 strings.add("test" + i);
-            }
-            else
+            } else
                 break;
         }
 
