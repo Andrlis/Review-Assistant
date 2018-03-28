@@ -15,6 +15,11 @@ public class SaveCommentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
         LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
         TestHibernateShell testHibernateShell = new TestHibernateShell();
@@ -22,36 +27,30 @@ public class SaveCommentServlet extends HttpServlet {
 
         String commentType = (String) req.getParameter("type");
         String comment = (String) req.getParameter("comment");
+        String commentEntityId = (String) req.getParameter("commentId");
 
         try {
             switch (commentType) {
                 //mark
-                case "m":
-                    String idLabMark = (String) req.getParameter("comment-id"); //labMarkId
-                    labsHibernateShell.updateLabComment(idLabMark, comment);
+                case "lab":
+                    labsHibernateShell.updateLabComment(commentEntityId, comment);
                     break;
                 //class
-                case "c":
-                    String idStudent = (String) req.getParameter("comment-id"); //studentId
-                    String idUniversityClass = (String) req.getParameter("second-comment-id"); //universityClassId
-                    commentsHibernateShell.saveComment(idStudent, idUniversityClass, comment);
+                case "class":
+                    String idUniversityClass = (String) req.getParameter("secondCommentId"); //universityClassId
+                    commentsHibernateShell.saveComment(commentEntityId, idUniversityClass, comment);
                     break;
-                case "t" : //test
-                    String idTestMark = (String) req.getParameter("comment-id"); //testMarkId
+                case "test" : //test
+                    //String idTestMark = (String) req.getParameter("comment-id"); //testMarkId
                     //TODO testHibernateShell.saveComment(idTestMark, comment);
                     break;
-                case "b" ://bonus
-                    String idBonus = (String) req.getParameter("comment-id"); //studentId
+                case "bonus" ://bonus
+
                     //TODO studentHibernateShell.saveComment(idBonus, comment);
                     break;
             }
         } catch (HibernateShellQueryException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
     }
 }

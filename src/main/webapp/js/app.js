@@ -279,10 +279,21 @@ function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
     $("#add-comment").modal('show');
 }
 
+
+function requestForSaveComment(commentMessage){
+    $.ajax({
+        type: "POST",
+        url: "SaveCommentServlet",
+        data: "commentId=" + $("#comment-id").val() +
+        "&secondCommentId=" + $("#second-comment-id").val() +
+        "&type=" + $("#comment-type").val() +
+        "&comment=" + commentMessage
+    });
+}
+
 //save comments from classes
-
 function deleteComment() {
-
+    requestForSaveComment("");
     $("#add-comment").modal('hide');
     alert("delete");
 }
@@ -290,6 +301,7 @@ function deleteComment() {
 //save comments from classes
 
 function saveComment() {
+    requestForSaveComment($("#comment-text").val());
     $("#add-comment").modal('hide');
     alert("save");
 }
@@ -311,7 +323,7 @@ function showComment(comment){//, xCoord, yCoord) {
         "                    <input type=\"hidden\" id=\"second-comment-id\" value=\"" + comment['secondCommentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"comment-type\" value=\"" + comment['type'] + "\">\n" +
         "                    <form class=\"form-horizontal\">\n" +
-        "                        <textarea class=\"form-control\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
+        "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
         "                    </form>\n" +
         "                </div>\n" +
         "                <div class=\"modal-footer\">\n" +
