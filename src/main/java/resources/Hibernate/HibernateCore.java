@@ -104,6 +104,20 @@ public class HibernateCore {
         return student;
     }
 
+    public Student getStudentById(Integer id) throws HibernateShellQueryException {
+        final Session session = getSession();
+        Student student;
+        try {
+            student = (Student) session.createQuery("from Student student WHERE student.id = " + id).list().get(0);
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+        return student;
+    }
+
     public TestMark getTestMarkById(Integer id) throws HibernateShellQueryException {
         final Session session = getSession();
         TestMark testMark = null;
