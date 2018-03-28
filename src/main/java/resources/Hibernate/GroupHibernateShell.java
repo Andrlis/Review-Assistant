@@ -30,4 +30,17 @@ public class GroupHibernateShell {
 
         hibernateCore.delete(subGroup);
     }
+
+
+    public Group getGroupByGroupNumber(String number){
+        Group group;
+
+        try {
+            group = hibernateCore.getGroupByGroupNumber(number);
+        } catch (HibernateShellQueryException e) {
+            return null;
+        }
+
+        return group;
+    }
 }

@@ -59,4 +59,16 @@ public class CommentsHibernateShell {
 
         return "";
     }
+
+    public Comment getCommentById(String id) {
+        Comment comment;
+
+        try {
+            comment = hibernateCore.getCommentById(Integer.getInteger(id));
+        } catch (HibernateShellQueryException e) {
+            return null;
+        }
+
+        return comment;
+    }
 }

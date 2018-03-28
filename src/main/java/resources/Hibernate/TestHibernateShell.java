@@ -50,4 +50,16 @@ public class TestHibernateShell {
         hibernateCore.SQLQuery("INSERT INTO tests_result(id_student, id_test, mark)" +
                 " VALUES (" + studentId + ", " + testNumber + ", -1);");
     }
+
+    public TestMark getTestMarkById(String id){
+        TestMark testMark;
+
+        try {
+            testMark = hibernateCore.getTestMarkById(Integer.getInteger(id));
+        } catch (HibernateShellQueryException e) {
+            return null;
+        }
+
+        return testMark;
+    }
 }

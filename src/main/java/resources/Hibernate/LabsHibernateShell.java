@@ -41,10 +41,6 @@ public class LabsHibernateShell {
         return false;
     }
 
-    public LabMark getLabMarkById(String id) throws HibernateShellQueryException {
-        return hibernateCore.getLabMarkById(Integer.parseInt(id));
-    }
-
     public int getNumberIssuedLab(String groupNumber, String subGroupNumber) throws HibernateShellQueryException {
         Group group = hibernateCore.getGroupByGroupNumber(groupNumber);
         if (group == null)
@@ -166,5 +162,15 @@ public class LabsHibernateShell {
         deleteLabDescription(lab);
     }
 
+    public LabMark getLabMarkById(String id) {
+        LabMark labMark;
 
+        try {
+            labMark = hibernateCore.getLabMarkById(Integer.getInteger(id));
+        } catch (HibernateShellQueryException e) {
+            return null;
+        }
+
+        return labMark;
+    }
 }
