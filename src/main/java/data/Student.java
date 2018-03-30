@@ -159,7 +159,6 @@ public class Student implements Serializable {
         return testMarkList;
     }
 
-
     public void setTestMarkList(List<TestMark> testMarksMap) {
         this.testMarkList = testMarksMap;
     }
@@ -235,7 +234,6 @@ public class Student implements Serializable {
         this.gitRepoName = parseURL[parseURL.length-1];
     }
 
-
     public List<LabMark> sortLabMarkList() {
         Collections.sort(this.labMarkList,LabMark.COMPARATOR_BY_NUMBER_OF_LAB);
         return this.labMarkList;
@@ -266,5 +264,17 @@ public class Student implements Serializable {
                 ", gitRepoName='" + gitRepoName + '\'' +
                 ", gitUserName='" + gitUserName + '\'' +
                 '}';
+    }
+
+    public void addMissedClass(UniversityClass universityClass) {
+        if(!this.missedUniversityClassesList.contains(universityClass)) {
+            this.missedUniversityClassesList.add(universityClass);
+        }
+    }
+
+    public void removeMissedClass(UniversityClass universityClass){
+        if(this.missedUniversityClassesList.contains(universityClass)){
+            this.missedUniversityClassesList.remove(universityClass);
+        }
     }
 }

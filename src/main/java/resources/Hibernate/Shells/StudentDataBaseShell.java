@@ -2,44 +2,24 @@ package resources.Hibernate.Shells;
 
 import data.Student;
 import data.UniversityClass;
-import resources.Hibernate.HibernateCore;
+import resources.Hibernate.HibernateShellQueryException;
 import resources.Hibernate.Interfaces.AbsencesDataBaseInterface;
+import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
-public class StudentDataBaseShell implements AbsencesDataBaseInterface<Student> {
-    private HibernateCore hibernateCore;
-
-    public StudentDataBaseShell(){
-
+public class StudentDataBaseShell extends DefaultDataBaseShell<Student> implements AbsencesDataBaseInterface<Student> {
+    public StudentDataBaseShell(DataBaseCoreInterface core){
+        super(Student.class, core);
     }
 
     @Override
     public void notePresence(Student object, UniversityClass universityClass) {
-
+        object.addMissedClass(universityClass);
+        update(object);
     }
 
     @Override
     public void noteAbsent(Student object, UniversityClass universityClass) {
-
-    }
-
-    @Override
-    public Student getById(Integer id) {
-
-        return null;
-    }
-
-    @Override
-    public Student create(Student object) {
-        return null;
-    }
-
-    @Override
-    public Student update(Student object) {
-        return null;
-    }
-
-    @Override
-    public Student delete(Student object) {
-        return null;
+        object.removeMissedClass(universityClass);
+        update(object);
     }
 }
