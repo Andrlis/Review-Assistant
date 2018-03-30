@@ -23,6 +23,7 @@ import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -150,6 +151,22 @@ public class HibernateCore {
         return universityClass;
     }
 
+    //!!!!!!!
+    public Object getById(Class object, Integer id) throws HibernateShellQueryException {
+        final Session session = getSession();
+        Object answer = null;
+        try {
+            answer = (Object) session.get(object, id);
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+
+        return answer;
+    }
+
     public LabMark getLabMarkById(Integer id) throws HibernateShellQueryException {
         logger.info("Start update lab coeff.");
         final Session session = getSession();
@@ -181,6 +198,7 @@ public class HibernateCore {
         return comment;
     }
 
+
     public Comment getComment(Integer studentId, Integer classId) {
         final Session session = getSession();
         Comment comment = null;
@@ -188,6 +206,9 @@ public class HibernateCore {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
         Root<Comment> root = query.from(Comment.class);
+
+        Expression ex = root.get("student").get("id");
+
         query.select(root).where(builder.equal(root.get("student").get("id"), studentId), builder.equal(root.get("universityClass").get("id"), classId));
         Query<Comment> q=session.createQuery(query);
         try {
