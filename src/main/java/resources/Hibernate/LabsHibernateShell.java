@@ -90,7 +90,7 @@ public class LabsHibernateShell {
         hibernateCore.save(lab);
     }
 
-    public void updateLabMark(Integer id, Integer mark) throws HibernateShellQueryException {
+    public void updateMark(Integer id, Integer mark) throws HibernateShellQueryException {
         LabMark labMark = hibernateCore.getLabMarkById(id);
 
         if (labMark != null) {
@@ -99,7 +99,7 @@ public class LabsHibernateShell {
         }
     }
 
-    public void updateLabComment(Integer id, String comment) throws HibernateShellQueryException {
+    public void updateComment(Integer id, String comment) throws HibernateShellQueryException {
         LabMark labMark = hibernateCore.getLabMarkById(id);
 
         if (labMark != null) {
@@ -108,8 +108,8 @@ public class LabsHibernateShell {
         }
     }
 
-    public void updateLabComment(String id, String comment) throws HibernateShellQueryException {
-        LabMark labMark = hibernateCore.getLabMarkById(Integer.getInteger(id));
+    public void updateComment(String id, String comment) throws HibernateShellQueryException {
+        LabMark labMark = hibernateCore.getLabMarkById(Integer.parseInt(id));
 
         if (labMark != null) {
             labMark.setComment(comment);
@@ -117,7 +117,7 @@ public class LabsHibernateShell {
         }
     }
 
-    public void updateLabCoefficient(Integer id, Double coeff) throws HibernateShellQueryException {
+    public void updateCoefficient(Integer id, Double coeff) throws HibernateShellQueryException {
         LabMark labMark = hibernateCore.getLabMarkById(id);
 
         if (labMark != null) {
@@ -127,7 +127,7 @@ public class LabsHibernateShell {
     }
 
     public String getLabMarkComment(String id) throws HibernateShellQueryException {
-        LabMark labMark = hibernateCore.getLabMarkById(Integer.getInteger(id));
+        LabMark labMark = hibernateCore.getLabMarkById(Integer.parseInt(id));
 
         if(labMark != null){
             return labMark.getComment();
@@ -166,7 +166,7 @@ public class LabsHibernateShell {
         LabMark labMark;
 
         try {
-            labMark = hibernateCore.getLabMarkById(Integer.getInteger(id));
+            labMark = hibernateCore.getLabMarkById(Integer.parseInt(id));
         } catch (HibernateShellQueryException e) {
             return null;
         }

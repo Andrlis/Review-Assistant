@@ -107,9 +107,10 @@ public class JsonMaker {
         return gson.toJson(map);
     }
 
-    private static String formJsonForComment (String studentName, String commentDescription,
-                                       String type, String commentId, String secondCommentId,
-                                       String comment) {
+    private static String formJsonForComment (
+            String studentName, String commentDescription,
+            String type, String commentId,
+            String secondCommentId, String comment) {
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("student", studentName);

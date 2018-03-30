@@ -91,7 +91,7 @@ public class StudentHibernateShell {
         Student student;
 
         try {
-            student = hibernateCore.getStudentById(Integer.getInteger(id));
+            student = hibernateCore.getStudentById(Integer.parseInt(id));
         } catch (HibernateShellQueryException e) {
             return null;
         }

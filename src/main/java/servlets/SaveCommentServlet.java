@@ -1,5 +1,6 @@
 package servlets;
 
+import data.Student;
 import resources.Hibernate.*;
 
 import javax.servlet.ServletException;
@@ -33,16 +34,17 @@ public class SaveCommentServlet extends HttpServlet {
             switch (commentType) {
                 //mark
                 case "lab":
-                    labsHibernateShell.updateLabComment(commentEntityId, comment);
+                    labsHibernateShell.updateComment(commentEntityId, comment);
                     break;
                 //class
                 case "class":
                     String idUniversityClass = (String) req.getParameter("secondCommentId"); //universityClassId
-                    commentsHibernateShell.saveComment(commentEntityId, idUniversityClass, comment);
+                    Student student = studentHibernateShell.getStudetById(commentEntityId);
+                    student.setCommentForClass(Integer.parseInt(idUniversityClass), comment);
                     break;
                 case "test" : //test
                     //String idTestMark = (String) req.getParameter("comment-id"); //testMarkId
-                    //TODO testHibernateShell.saveComment(idTestMark, comment);
+                    //testHibernateShell.saveComment(idTestMark, comment);
                     break;
                 case "bonus" ://bonus
 
@@ -50,6 +52,8 @@ public class SaveCommentServlet extends HttpServlet {
                     break;
             }
         } catch (HibernateShellQueryException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
     }

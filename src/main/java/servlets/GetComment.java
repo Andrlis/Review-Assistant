@@ -1,5 +1,6 @@
 package servlets;
 
+import data.UniversityClass;
 import resources.Hibernate.*;
 import resources.TableMaker.JsonMaker;
 
@@ -18,8 +19,10 @@ public class GetComment extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
         LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
+        UniversityClassHibernateShell universityClassHibernateShell =  new UniversityClassHibernateShell();
         TestHibernateShell testHibernateShell = new TestHibernateShell();
         StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
+
 
 
         String commentEntityId = (String) req.getParameter("commentId");
@@ -32,19 +35,23 @@ public class GetComment extends HttpServlet {
                 case "lab": // mark
                     comment = JsonMaker.getJsonLabMarkComment(labsHibernateShell.getLabMarkById(commentEntityId));
                     break;
-                /*case "class": //class
-                    comment = JsonMaker.getJsonClassComment(
+                case "class": //class
 
+                    comment = JsonMaker.getJsonClassComment(
+                            studentHibernateShell.getStudetById(commentEntityId),
+                            universityClassHibernateShell.getUniversityClassById(secondCommentId)
                     );
                     break;
                 case "test" : //test
                     comment = JsonMaker.getJsonTestMarkComment(
-
+                            testHibernateShell.getTestMarkById(commentEntityId)
                     );
                     break;
                 case "bonus" ://bonus
-                    comment = JsonMaker.getJsonBonusMarkComment();
-                    break;*/
+                    comment = JsonMaker.getJsonBonusMarkComment(
+                            studentHibernateShell.getStudetById(commentEntityId)
+                    );
+                    break;
             }
         } catch (HibernateShellQueryException e) {
             e.printStackTrace();

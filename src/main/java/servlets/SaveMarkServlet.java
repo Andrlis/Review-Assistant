@@ -2,7 +2,6 @@ package servlets;
 
 
 import resources.Hibernate.BonusHibernateShell;
-import resources.Hibernate.HibernateCore;
 import resources.Hibernate.LabsHibernateShell;
 import resources.Hibernate.TestHibernateShell;
 
@@ -32,7 +31,7 @@ public class SaveMarkServlet extends HttpServlet {
             if (value.equals(""))
                 value="-1";
             if (type.equals("lab")) {
-                labsHibernateShell.updateLabMark(Integer.parseInt(id), Integer.parseInt(value));
+                labsHibernateShell.updateMark(Integer.parseInt(id), Integer.parseInt(value));
             } else if (type.equals("test")) {
                 testHibernateShell.updateTestMark(Integer.parseInt(id), Integer.parseInt(value));
             } else if (type.equals("bonus")) {

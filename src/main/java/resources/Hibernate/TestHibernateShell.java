@@ -55,7 +55,7 @@ public class TestHibernateShell {
         TestMark testMark;
 
         try {
-            testMark = hibernateCore.getTestMarkById(Integer.getInteger(id));
+            testMark = hibernateCore.getTestMarkById(Integer.parseInt(id));
         } catch (HibernateShellQueryException e) {
             return null;
         }

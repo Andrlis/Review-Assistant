@@ -105,6 +105,7 @@ public class HibernateCore {
     }
 
     public Student getStudentById(Integer id) throws HibernateShellQueryException {
+        //TODO убрать createQuerty
         final Session session = getSession();
         Student student;
         try {
@@ -132,6 +133,21 @@ public class HibernateCore {
         }
 
         return testMark;
+    }
+
+    public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQueryException {
+        final Session session = getSession();
+        UniversityClass universityClass = null;
+        try {
+            universityClass = (UniversityClass) session.get(UniversityClass.class, id);
+        } catch (Exception e) {
+            throw new HibernateShellQueryException(e);
+        } finally {
+            logger.info("Close session.");
+            session.close();
+        }
+
+        return universityClass;
     }
 
     public LabMark getLabMarkById(Integer id) throws HibernateShellQueryException {
@@ -177,6 +193,9 @@ public class HibernateCore {
         try {
             comment = q.getSingleResult();
         } catch (org.hibernate.NonUniqueResultException e){
+            //TODO clear database
+            comment = null;
+        } catch (javax.persistence.NoResultException e){
             comment = null;
         }
 

@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
-
 public class CommentsHibernateShellTest {
 
     @Test
@@ -32,7 +30,7 @@ public class CommentsHibernateShellTest {
 
         CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
 
-        commentsHibernateShell.saveComment(comment);
+        commentsHibernateShell.updateComment(comment);
 
         commentsHibernateShell.deleteComment(comment);
 
