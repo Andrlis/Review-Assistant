@@ -1,10 +1,11 @@
 package resources.Hibernate.Interfaces;
 
 import data.сomment.Comment;
+import resources.Hibernate.HibernateShellQueryException;
 
 public interface DataBaseCoreInterface {
 
-    public Object getById(Class c, Integer id);
+    public Object getById(Class c, Integer id) throws HibernateShellQueryException;
 
     public Object create(Object object);
     public Object update(Object object);
