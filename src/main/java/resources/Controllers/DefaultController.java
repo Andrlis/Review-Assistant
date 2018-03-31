@@ -1,8 +1,9 @@
-package resources.Hibernate.Controller;
+package resources.Controllers;
 
+import resources.Hibernate.Controller.DataBaseCore;
 import resources.Hibernate.HibernateShellQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
-import resources.Hibernate.Interfaces.DefaultControllerInterface;
+import resources.Controllers.Interfaces.DefaultControllerInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,8 @@ public class DefaultController<T> implements DefaultControllerInterface<T> {
     }
 
     @Override
-    public T updateInDataBase(T object) {
-        return (T) dataBaseCore.update(object);
+    public void updateInDataBase(T object) {
+        dataBaseCore.update(object);
     }
 
     @Override

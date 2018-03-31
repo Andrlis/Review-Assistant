@@ -105,7 +105,7 @@ public class SubGroup {
     }
 
     public void addIssuedLab(IssuedLab issuedLab) {
-        logger.info("Add issued lab(" + issuedLab.getLabDescription().getNumberOfLab() + ") from subgroup(" + group.getNumberOfGroup() + ", " + subGroupNumber +").");
+        logger.info("Add issue lab(" + issuedLab.getLabDescription().getNumberOfLab() + ") from subgroup(" + group.getNumberOfGroup() + ", " + subGroupNumber +").");
         this.issuedLabsList.add(issuedLab);
     }
 

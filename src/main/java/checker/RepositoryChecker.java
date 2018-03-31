@@ -23,7 +23,7 @@ public class RepositoryChecker {
     private static final Logger logger = Logger.getLogger(RepositoryChecker.class);
 
     /**
-     * Check issued labs in all groups.
+     * Check issue labs in all groups.
      *
      * @param groupsKeeper
      */
@@ -50,7 +50,7 @@ public class RepositoryChecker {
 
     private static void checkForCommitsInSubgroup(SubGroup subGroup) throws CheckException {
         logger.info("Start check for commits of " + subGroup.toString());
-        //loop by issued lab for subgroup
+        //loop by issue lab for subgroup
 
         for (IssuedLab currentIssuedLab : subGroup.getIssuedLabsList()) {
 

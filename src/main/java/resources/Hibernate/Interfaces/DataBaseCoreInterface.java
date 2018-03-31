@@ -16,5 +16,6 @@ public interface DataBaseCoreInterface {
     public Integer getCount(Class c);
 
     public Object getByCriteria(Class c, Object ... criteria);
+    public Integer getNumberCriteria(Class c, Object ... criteria);
     public List<Object> getAll(Class c);
 }

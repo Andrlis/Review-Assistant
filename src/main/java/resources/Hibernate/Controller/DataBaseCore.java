@@ -170,6 +170,38 @@ public class DataBaseCore implements DataBaseCoreInterface {
     }
 
     @Override
+    public Integer getNumberCriteria(Class c, Object... criteria) {
+        logger.info("DataBaseCore.getByCriteria. " + c.getName());
+
+        if(criteria.length % 2 != 0){
+            //TODO throw new Exception
+            return null;
+        }
+
+        final Session session = getSession();
+
+        Integer number;
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(c);
+        Root<Object> root = query.from(c);
+
+        Predicate predicate[] = getPredicates(c, builder, root, criteria);
+
+        query.select(root).where(predicate);
+
+
+        Query<Object> q = session.createQuery(query);
+        try {
+            number = q.getResultList().size();
+        } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
+            throw e;
+        }
+
+        return number;
+    }
+
+    @Override
     public List<Object> getAll(Class c) {
         logger.info("DataBaseCore.getAll(). " + c.getName());
 

@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * class containing information about issued laboratory work and list of students
+ * class containing information about issue laboratory work and list of students
  * who did not pass the laboratory work
  */
 @Entity
@@ -123,7 +123,7 @@ public class IssuedLab implements Serializable {
     }
 
     public void deleteStudentFromControlList(Student student) {
-        logger.info("Delete student(" + student.getFulName() + ") from student confrol list issued lab(" + labDescription.getNumberOfLab() + ")");
+        logger.info("Delete student(" + student.getFulName() + ") from student confrol list issue lab(" + labDescription.getNumberOfLab() + ")");
         this.studentControlList.remove(student);
     }
 

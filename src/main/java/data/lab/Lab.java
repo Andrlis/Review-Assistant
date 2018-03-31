@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Class containing basic information about laboratory work(number of laboratory work,
- * word for checking commit), also all issued labs relevant number of lab. work
+ * word for checking commit), also all issue labs relevant number of lab. work
  */
 @Entity
 @Table(name = "labs")
