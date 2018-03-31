@@ -1,10 +1,10 @@
-DROP DATABASE IF EXISTS trtpo_system;
+DROP DATABASE IF EXISTS test1;
 SET NAMES 'utf8';
 SET SESSION collation_connection = 'utf8_general_ci';
 
-CREATE DATABASE trtpo_system DEFAULT CHARACTER SET 'utf8';
+CREATE DATABASE test1 DEFAULT CHARACTER SET 'utf8';
 
-USE trtpo_system;
+USE test1;
 
 CREATE TABLE users(
 id_user INTEGER AUTO_INCREMENT,
@@ -54,19 +54,29 @@ PRIMARY KEY(id_student),
 FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
 );
 
-CREATE TABLE absentees(
-id_absence INTEGER AUTO_INCREMENT,
-id_class INTEGER,
-id_student INTEGER,
-PRIMARY KEY(id_absence)
+CREATE TABLE classes(
+  id_class INTEGER AUTO_INCREMENT,
+  class_date DATETIME NOT NULL,
+  id_group_subgroup INTEGER,
+  PRIMARY KEY(id_class)
 );
 
-CREATE TABLE classes(
-id_class INTEGER AUTO_INCREMENT,
-class_date DATETIME NOT NULL,
-id_group_subgroup INTEGER,
-PRIMARY KEY(id_class)
+CREATE TABLE absentees(
+  id_absence INTEGER AUTO_INCREMENT,
+  id_class INTEGER,
+  id_student INTEGER,
+  PRIMARY KEY(id_absence),
+  FOREIGN KEY(id_class) REFERENCES classes(id_class),
+  FOREIGN KEY(id_student) REFERENCES students(id_student)
 );
+
+CREATE TABLE labs(
+  id_lab INTEGER AUTO_INCREMENT,
+  lab_number INTEGER NOT NULL,
+  key_word VARCHAR(20) NOT NULL,
+  PRIMARY KEY(id_lab)
+);
+
 
 CREATE TABLE issued_labs(
 id_issued_lab INTEGER AUTO_INCREMENT,
@@ -76,15 +86,12 @@ id_class_of_issue INTEGER,
 coefficient DOUBLE NOT NULL,
 id_class_deadline INTEGER,
 last_check_date_time DATETIME NOT NULL,
-PRIMARY KEY(id_issued_lab)
+PRIMARY KEY(id_issued_lab),
+FOREIGN KEY(id_lab) REFERENCES labs(id_lab),
+FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup),
+FOREIGN KEY(id_class_of_issue) REFERENCES classes(id_class)
 );
 
-CREATE TABLE labs(
-id_lab INTEGER AUTO_INCREMENT,
-lab_number INTEGER NOT NULL,
-key_word VARCHAR(20) NOT NULL,
-PRIMARY KEY(id_lab)
-);
 
 CREATE TABLE labs_marks(
 id_lab_mark INTEGER AUTO_INCREMENT,
@@ -93,7 +100,9 @@ id_issued_lab INTEGER,
 coefficient DOUBLE NOT NULL,
 mark INTEGER NOT NULL,
 comment VARCHAR(280),
-PRIMARY KEY(id_lab_mark)
+PRIMARY KEY(id_lab_mark),
+FOREIGN KEY(id_student) REFERENCES students(id_student),
+FOREIGN KEY(id_issued_lab) REFERENCES issued_labs(id_issued_lab)
 );
 
 CREATE TABLE tests(
@@ -108,15 +117,19 @@ id_test_result INTEGER AUTO_INCREMENT,
 id_student INTEGER,
 id_test INTEGER,
 mark INTEGER NOT NULL,
+comment varchar(280),
 PRIMARY KEY(id_test_result),
-FOREIGN KEY(id_test) REFERENCES tests(id_test)
+FOREIGN KEY(id_test) REFERENCES tests(id_test),
+FOREIGN KEY(id_student) REFERENCES students(id_student)
 );
 
 CREATE TABLE bonuses(
 id_bonus INTEGER AUTO_INCREMENT,
 id_student INTEGER,
 bonus INTEGER NOT NULL,
-PRIMARY KEY(id_bonus)
+comment varchar(280),
+PRIMARY KEY(id_bonus),
+FOREIGN KEY(id_student) REFERENCES students(id_student)
 );
 
 CREATE TABLE class_comments(

@@ -1,7 +1,6 @@
-package resources.Hibernate.Shells;
+package resources.Hibernate.Controller;
 
 import data.UniversityClass;
-import jdk.nashorn.internal.codegen.ObjectCreator;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,8 +12,7 @@ import resources.Hibernate.HibernateShellQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
 import javax.persistence.criteria.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 
 public class DataBaseCore implements DataBaseCoreInterface {
     private final Logger logger = Logger.getLogger(HibernateCore.class);
@@ -169,6 +167,27 @@ public class DataBaseCore implements DataBaseCoreInterface {
         }
 
         return object;
+    }
+
+    @Override
+    public List<Object> getAll(Class c) {
+        logger.info("DataBaseCore.getAll(). " + c.getName());
+
+        final Session session = getSession();
+        List<Object> answer;
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(c);
+        Root<Object> root = query.from(c);
+        Query<Object> q = session.createQuery(query);
+
+        try {
+            answer = q.getResultList();
+        } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
+            throw e;
+        }
+
+        return answer;
     }
 
     private Predicate[] getPredicates(Class c,CriteriaBuilder builder, Root<Object> root, Object... criteria) {

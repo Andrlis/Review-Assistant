@@ -2,10 +2,27 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement />
-  <nodes />
+  <nodes>
+    <node x="0.0" y="231.0">data.сomment.Comment</node>
+    <node x="126.0" y="385.0">data.test.Test</node>
+    <node x="0.0" y="308.0">data.lecturer.Lecturer</node>
+    <node x="162.0" y="231.0">data.mark.TestMark</node>
+    <node x="0.0" y="0.0">data.lecturer.LecturerKeeper</node>
+    <node x="250.0" y="385.0">data.lab.Lab</node>
+    <node x="201.0" y="0.0">data.UniversityClass</node>
+    <node x="193.0" y="77.0">data.lab.LabsKeeper</node>
+    <node x="336.0" y="154.0">data.lab.IssuedLab</node>
+    <node x="321.0" y="231.0">data.mark.LabMark</node>
+    <node x="172.0" y="154.0">data.group.SubGroup</node>
+    <node x="0.0" y="77.0">data.group.GroupsKeeper</node>
+    <node x="153.0" y="308.0">data.Student</node>
+    <node x="0.0" y="385.0">data.User</node>
+    <node x="0.0" y="154.0">data.test.TestKeeper</node>
+    <node x="303.0" y="308.0">data.group.Group</node>
+  </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="450.4999999999999" y="1502.6666666666667" />
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="450.4999999999999" y="262.33333333333326" />
   <SelectedNodes />
   <Categories />
   <SCOPE>All</SCOPE>
