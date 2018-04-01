@@ -7,22 +7,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import resources.Hibernate.HibernateCore;
-import resources.Hibernate.HibernateShellQueryException;
+import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
 import javax.persistence.criteria.*;
 import java.util.List;
 
 public class DataBaseCore implements DataBaseCoreInterface {
-    private final Logger logger = Logger.getLogger(HibernateCore.class);
+    private final Logger logger = Logger.getLogger(DataBaseCore.class);
     private final SessionFactory ourSessionFactory;
 
     private static volatile  DataBaseCore ourInstance;
 
     public static DataBaseCore getInstance() {
         if (ourInstance == null) {
-            synchronized (HibernateCore.class) {
+            synchronized (DataBaseCore.class) {
                 if (ourInstance == null) {
                     ourInstance = new DataBaseCore();
                 }
@@ -50,7 +50,7 @@ public class DataBaseCore implements DataBaseCoreInterface {
 
 
     @Override
-    public Object getById(Class c, Integer id) throws HibernateShellQueryException {
+    public Object getById(Class c, Integer id) throws DataBaseQueryException {
         logger.info("DataBaseCore.getById(). " + c.getName());
 
         final Session session = getSession();
@@ -59,7 +59,7 @@ public class DataBaseCore implements DataBaseCoreInterface {
         try {
             answer = (Object) session.get(c, id);
         } catch (Exception e) {
-            throw new HibernateShellQueryException(e);
+            throw new DataBaseQueryException(e);
         } finally {
             session.close();
         }
@@ -68,13 +68,15 @@ public class DataBaseCore implements DataBaseCoreInterface {
     }
 
     @Override
-    public Object create(Object object) {
+    public Object create(Object object) throws DataBaseQueryException  {
         logger.info("DataBaseCore.create(). " + object.getClass().getName());
 
         final Session session = getSession();
 
         try {
             session.save(object);
+        } catch (Exception e) {
+            throw new DataBaseQueryException(e);
         } finally {
             session.close();
         }
@@ -83,7 +85,7 @@ public class DataBaseCore implements DataBaseCoreInterface {
     }
 
     @Override
-    public Object update(Object object) {
+    public Object update(Object object) throws DataBaseQueryException {
         logger.info("DataBaseCore.update(). " + object.getClass().getName());
 
         final Session session = getSession();
@@ -92,6 +94,8 @@ public class DataBaseCore implements DataBaseCoreInterface {
             session.getTransaction().begin();
             session.update(object);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            throw new DataBaseQueryException(e);
         } finally {
             session.close();
         }
@@ -100,7 +104,7 @@ public class DataBaseCore implements DataBaseCoreInterface {
     }
 
     @Override
-    public void delete(Object object) {
+    public void delete(Object object) throws DataBaseQueryException {
         logger.info("DataBaseCore.delete(). " + object.getClass().getName());
 
         final Session session = getSession();
@@ -111,13 +115,15 @@ public class DataBaseCore implements DataBaseCoreInterface {
             session.delete(object);
             session.flush();
             session.getTransaction().commit();
+        } catch (Exception e) {
+            throw new DataBaseQueryException(e);
         } finally {
             session.close();
         }
     }
 
     @Override
-    public Integer getCount(Class c) {
+    public Integer getCount(Class c) throws DataBaseQueryException {
         logger.info("DataBaseCore.getCount(). " + c.getName());
 
         final Session session = getSession();
@@ -131,19 +137,18 @@ public class DataBaseCore implements DataBaseCoreInterface {
         try {
              count = q.getResultList().size();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
-            throw e;
+            throw new DataBaseQueryException(e);
         }
 
         return count;
     }
 
     @Override
-    public Object getByCriteria(Class c, Object... criteria) {
+    public Object getByCriteria(Class c, Object... criteria) throws DataBaseQueryException, DataBaseCriteriaCountException {
         logger.info("DataBaseCore.getByCriteria. " + c.getName());
 
         if(criteria.length % 2 != 0){
-            //TODO throw new Exception
-            return null;
+            throw new DataBaseCriteriaCountException("The number of parameters must be a multiple of two");
         }
 
         final Session session = getSession();
@@ -163,19 +168,18 @@ public class DataBaseCore implements DataBaseCoreInterface {
         try {
             object = q.getSingleResult();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
-            throw e;
+            throw new DataBaseQueryException(e);
         }
 
         return object;
     }
 
     @Override
-    public Integer getNumberCriteria(Class c, Object... criteria) {
+    public Integer getNumberCriteria(Class c, Object... criteria) throws DataBaseQueryException, DataBaseCriteriaCountException {
         logger.info("DataBaseCore.getByCriteria. " + c.getName());
 
         if(criteria.length % 2 != 0){
-            //TODO throw new Exception
-            return null;
+            throw new DataBaseCriteriaCountException("The number of parameters must be a multiple of two");
         }
 
         final Session session = getSession();
@@ -195,14 +199,14 @@ public class DataBaseCore implements DataBaseCoreInterface {
         try {
             number = q.getResultList().size();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
-            throw e;
+            throw new DataBaseQueryException(e);
         }
 
         return number;
     }
 
     @Override
-    public List<Object> getAll(Class c) {
+    public List<Object> getAll(Class c) throws DataBaseQueryException  {
         logger.info("DataBaseCore.getAll(). " + c.getName());
 
         final Session session = getSession();
@@ -216,7 +220,7 @@ public class DataBaseCore implements DataBaseCoreInterface {
         try {
             answer = q.getResultList();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
-            throw e;
+            throw new DataBaseQueryException(e);
         }
 
         return answer;

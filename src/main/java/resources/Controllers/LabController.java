@@ -6,6 +6,8 @@ import data.group.SubGroup;
 import data.lab.IssuedLab;
 import data.lab.Lab;
 import data.mark.LabMark;
+import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
 import java.util.Date;
@@ -19,15 +21,15 @@ public class LabController extends DefaultController<Lab>{
         super(Lab.class, core);
     }
 
-    public Integer getNextNumber() {
+    public Integer getNextNumber() throws DataBaseQueryException {
         return dataBaseCore.getCount(Lab.class) + 1;
     }
 
-    public Lab getByNumber(String number) {
+    public Lab getByNumber(String number) throws DataBaseQueryException, DataBaseCriteriaCountException {
         return (Lab) dataBaseCore.getByCriteria(Lab.class, "numberOfLab", number);
     }
 
-    public Lab addNewLab(){
+    public Lab addNewLab() throws DataBaseQueryException {
         Lab lab = new Lab();
         lab.setKeyWord("lab" + getNextNumber());
         lab.setNumberOfLab(getNextNumber());
@@ -37,7 +39,7 @@ public class LabController extends DefaultController<Lab>{
         return lab;
     }
 
-    public void issue(SubGroup subGroup, UniversityClass universityClass) {
+    public void issue(SubGroup subGroup, UniversityClass universityClass) throws DataBaseQueryException, DataBaseCriteriaCountException {
         DefaultController<IssuedLab> issuedLabController = new DefaultController<>(IssuedLab.class, dataBaseCore);
         DefaultController<LabMark> labMarkController = new DefaultController<>(LabMark.class, dataBaseCore);
 
