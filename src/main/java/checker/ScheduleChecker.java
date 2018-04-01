@@ -4,7 +4,9 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
-import resources.Hibernate.HibernateCore;
+import resources.Controllers.DefaultController;
+import resources.Controllers.GroupController;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.TimeLogic;
 import bsuirAPI.BsuirParser;
 import bsuirAPI.BsuirRequests;
@@ -25,10 +27,9 @@ ScheduleChecker {
     public static void groupScheduleCheck() throws Exception {
         logger.info("Start schedule check.");
         Timetable timetable;
-        HibernateCore hibernateCore = HibernateCore.getInstance();
-        GroupsKeeper groups = hibernateCore.getGroupKeeper();
+        GroupController groupController = new GroupController();
 
-        for (Group group : groups.getGroupList()) {
+        for (Group group : groupController.getAll()) {
 
             logger.info("Current group number : " + group.getNumberOfGroup() + ".");
 
@@ -57,7 +58,8 @@ ScheduleChecker {
 
     private static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
         UniversityClass universityClass = new UniversityClass();
-        HibernateCore hibernateCore = HibernateCore.getInstance();
+        DefaultController<UniversityClass> universityClassDefaultController =
+                new DefaultController<>(UniversityClass.class);
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);
@@ -69,6 +71,10 @@ ScheduleChecker {
             subGroup.decreaseCoefficientOfLabs();
         }
 
-        hibernateCore.save(universityClass);
+        try {
+            universityClassDefaultController.saveToDataBase(universityClass);
+        } catch (DataBaseQueryException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -9,9 +9,10 @@ import data.mark.LabMark;
 import data.Student;
 import exceptions.CheckException;
 import exceptions.GitException;
-import resources.Hibernate.HibernateCore;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
+import resources.Controllers.DefaultController;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 
 import java.util.Date;
 
@@ -62,8 +63,8 @@ public class RepositoryChecker {
 
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
+        DefaultController<IssuedLab> issuedLabDefaultController = new DefaultController<>(IssuedLab.class);
         Date newDateOfLastRepoCheck = new Date();
-        HibernateCore hibernateCore = HibernateCore.getInstance();
 
         //loop by students who did not pass the lab
         for (Student currentStudent : issuedLab.getStudentControlList()) {
@@ -77,7 +78,11 @@ public class RepositoryChecker {
         //save new date of last lab checking
         logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
         issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
-        hibernateCore.update(issuedLab);
+        try {
+            issuedLabDefaultController.updateInDataBase(issuedLab);
+        } catch (DataBaseQueryException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -88,8 +93,9 @@ public class RepositoryChecker {
      */
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
-        Date    commitDate;
-        HibernateCore hibernateCore = HibernateCore.getInstance();
+        Date commitDate;
+        DefaultController<LabMark> labMarkDefaultController = new DefaultController<>(LabMark.class);
+
         //Check if there link to github repository
         if (student.getGitURL().equals(""))
             return;
@@ -103,15 +109,19 @@ public class RepositoryChecker {
         }
 
         if (commitDate != null) {
-            if(commitDate.before(issuedLab.getDateOfLastRepoCheck())){
-                labMark.setCoefficient(-2.0);
-                hibernateCore.update(labMark);
-                logger.info("Student " + student + " cheated");
-            } else {
-                double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
-                labMark.setCoefficient(coefficient);
-                hibernateCore.update(labMark);
-                logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
+            try {
+                if (commitDate.before(issuedLab.getDateOfLastRepoCheck())) {
+                    labMark.setCoefficient(-2.0);
+                    labMarkDefaultController.updateInDataBase(labMark);
+                    logger.info("Student " + student + " cheated");
+                } else {
+                    double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
+                    labMark.setCoefficient(coefficient);
+                    labMarkDefaultController.updateInDataBase(labMark);
+                    logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
+                }
+            } catch (DataBaseQueryException e) {
+                e.printStackTrace();
             }
         } else {
             logger.info("Student " + student + " did not commit a lab.");
