@@ -2,6 +2,7 @@ package resources.Controllers;
 
 import data.User;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
+import resources.MD5Hash;
 
 public class UserController extends DefaultController<User> {
     public UserController() {
@@ -12,14 +13,24 @@ public class UserController extends DefaultController<User> {
         super(User.class, core);
     }
 
+    @Override
+    public User saveToDataBase(User object) {
+        String password = object.getPassword();
+        object.setPassword(MD5Hash.getHash(password));
+        super.saveToDataBase(object);
+        object.setPassword(password);
+        return object;
+    }
+
     public User getByUserName(String userName){
         return (User) dataBaseCore.getByCriteria(User.class, "username", userName);
     }
 
     public boolean passwordIsCorrect(String userName, String password) {
-        //TODO MD5
+        String hashingPassword = MD5Hash.getHash(password);
+
         Integer count = dataBaseCore.getNumberCriteria(User.class,
-                "username", userName, "password", password);
+                "username", userName, "password", hashingPassword);
 
         return count == 1;
     }
