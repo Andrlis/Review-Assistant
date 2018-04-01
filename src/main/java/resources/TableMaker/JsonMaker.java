@@ -9,7 +9,11 @@ import data.lab.IssuedLab;
 import data.lab.Lab;
 import data.mark.LabMark;
 import data.mark.TestMark;
+import data.сomment.Comment;
+import resources.Controllers.CommentController;
 import resources.Hibernate.*;
+import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
@@ -156,12 +160,23 @@ public class JsonMaker {
     }
 
     public static String getJsonClassComment(Student student, UniversityClass universityClass){
+        CommentController commentController = new CommentController();
+
         String studentName = student.getFulName();
         String descr = "Пара " + universityClass.getDataTime();
         String type = "class";
         String commentId = "" + student.getId();
         String secondCommentId = "" + universityClass.getId();
-        String comment = student.getCommentForClass(universityClass.getId());
+
+        Comment commentObject = null;
+        try {
+            commentObject = commentController.get(student.getId(), universityClass.getId());
+        } catch (DataBaseQueryException e) {
+            e.printStackTrace();
+        } catch (DataBaseCriteriaCountException e) {
+            e.printStackTrace();
+        }
+        String comment = commentObject.getComment();
 
         return JsonMaker.formJsonForComment(
                 studentName, descr,

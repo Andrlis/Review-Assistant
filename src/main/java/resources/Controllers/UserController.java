@@ -17,11 +17,8 @@ public class UserController extends DefaultController<User> {
 
     @Override
     public User saveToDataBase(User object) throws DataBaseQueryException {
-        String password = object.getPassword();
-        object.setPassword(MD5Hash.getHash(password));
-        super.saveToDataBase(object);
-        object.setPassword(password);
-        return object;
+        object.setMD5Password(object.getPassword());
+        return super.saveToDataBase(object);
     }
 
     public User getByUserName(String userName) throws DataBaseQueryException, DataBaseCriteriaCountException {

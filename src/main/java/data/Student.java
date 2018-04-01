@@ -8,8 +8,6 @@ import data.сomment.Comment;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import resources.Hibernate.CommentsHibernateShell;
-import resources.Hibernate.HibernateShellQueryException;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -117,18 +115,6 @@ public class Student implements Serializable {
 
     public void setCommentForBonusMark(String comment) throws NoSuchMethodException {
         throw new NoSuchMethodException("Realise method");
-    }
-
-    public String getCommentForClass(Integer classId) {
-        CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
-
-        return commentsHibernateShell.getComment(id, classId);
-    }
-
-    public void setCommentForClass(Integer classId, String comment) throws NoSuchMethodException, HibernateShellQueryException {
-        CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
-
-        commentsHibernateShell.updateComment(id, classId, comment);
     }
 
     public List<LabMark> getLabMarkList() {

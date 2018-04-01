@@ -4,6 +4,7 @@ import data.group.Group;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
+import data.lab.IssuedLab;
 import resources.Controllers.DefaultController;
 import resources.Controllers.GroupController;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
@@ -60,6 +61,8 @@ ScheduleChecker {
         UniversityClass universityClass = new UniversityClass();
         DefaultController<UniversityClass> universityClassDefaultController =
                 new DefaultController<>(UniversityClass.class);
+        DefaultController<IssuedLab> issuedLabDefaultController =
+                new DefaultController<>(IssuedLab.class);
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);
@@ -68,7 +71,16 @@ ScheduleChecker {
         int subGroupNumber = Integer.parseInt(subGroup.getSubGroupNumber()) - 1;
         if (!hasCoefficientOfLabsBeenChanged[subGroupNumber]) {
             hasCoefficientOfLabsBeenChanged[subGroupNumber] = true;
-            subGroup.decreaseCoefficientOfLabs();
+
+            for(IssuedLab issuedLab : subGroup.getIssuedLabsList()) {
+                issuedLab.decreaseCoefficient();
+
+                try {
+                    issuedLabDefaultController.updateInDataBase(issuedLab);
+                } catch (DataBaseQueryException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         try {

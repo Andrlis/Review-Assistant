@@ -5,7 +5,6 @@ import data.Student;
 import data.UniversityClass;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.*;
-import resources.Hibernate.HibernateCore;
 
 
 import javax.persistence.*;
