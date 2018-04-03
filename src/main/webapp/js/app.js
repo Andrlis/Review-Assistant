@@ -1,4 +1,4 @@
-$(document).ready(function () {
+BEAUTIFULent).ready(function () {
     //setEventsToTable();
     //ShowMarksTable();
 
@@ -314,7 +314,6 @@ function showComment(comment){//, xCoord, yCoord) {
         "            <div class=\"modal-content center-modal\">\n" +
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
-        "                    <h4 class=\"modal-title\">Комментарий</h4>\n" +
         "                    <h4 class=\"modal-title\">" + comment['student'] + " : " + comment['description'] + "</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
