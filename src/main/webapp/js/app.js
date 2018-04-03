@@ -1,4 +1,4 @@
-BEAUTIFULent).ready(function () {
+$(document).ready(function () {
     //setEventsToTable();
     //ShowMarksTable();
 
