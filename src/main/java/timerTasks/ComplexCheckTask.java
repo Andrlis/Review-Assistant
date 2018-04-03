@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import resources.Hibernate.HibernateCore;
+import resources.Controllers.GroupController;
 
 public class ComplexCheckTask implements Job {
 
@@ -37,8 +37,9 @@ public class ComplexCheckTask implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         try {
             logger.info("Start scheduled task.");
-            HibernateCore hibernateCore = HibernateCore.getInstance();
-            RepositoryChecker.checkForCommitsInGroups(hibernateCore.getGroupKeeper());
+            GroupController groupController = new GroupController();
+
+            RepositoryChecker.checkForCommitsInGroups(groupController.getAll());
 
             if(isMidnight() && !isSunday() && !isHoliday()) {
                 logger.info("Check student`s timetable at midnight.");

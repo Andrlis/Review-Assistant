@@ -1,8 +1,7 @@
 package servlets;
 
 import data.Student;
-import resources.Hibernate.HibernateShellQueryException;
-import resources.Hibernate.StudentHibernateShell;
+import resources.Controllers.DefaultController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,8 @@ import java.io.IOException;
 public class SaveStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
+        DefaultController defaultController = new DefaultController();
+
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         String studentName = (String) req.getParameter("surname");
@@ -25,16 +25,11 @@ public class SaveStudent extends HttpServlet {
         String gitRepo = (String) req.getParameter("git");
         String eMail = (String) req.getParameter("email");
 
-
         try {
             if (studentId.equals("")) {
-                studentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
+                //studentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
             } else {
-                try {
-                    studentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
-                } catch (HibernateShellQueryException e) {
-                    e.printStackTrace();
-                }
+                //studentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
             }
         } catch (Exception e) {
             e.printStackTrace();

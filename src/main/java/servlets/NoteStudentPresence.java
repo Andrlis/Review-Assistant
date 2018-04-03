@@ -1,6 +1,9 @@
 package servlets;
 
-import resources.Hibernate.StudentHibernateShell;
+import data.Student;
+import data.UniversityClass;
+import resources.Controllers.DefaultController;
+import resources.Controllers.StudentController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,15 +16,21 @@ import java.io.IOException;
 public class NoteStudentPresence extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
+        StudentController studentController = new StudentController();
+        DefaultController defaultController = new DefaultController();
+
         String studentId = (String) req.getParameter("studentId");
         String classId = (String) req.getParameter("classId");
         try {
-            studentHibernateShell.noteStudentPresence(studentId, classId);
+            Student student = (Student) studentController.getById(Student.class,
+                    Integer.parseInt(studentId));
+            UniversityClass universityClass = (UniversityClass) defaultController.getById(UniversityClass.class,
+                    Integer.parseInt(classId));
+
+            studentController.notePresence(student, universityClass);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

@@ -315,8 +315,7 @@ function showComment(comment){//, xCoord, yCoord) {
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
         "                    <h4 class=\"modal-title\">Комментарий</h4>\n" +
-        "                    <input type=\"text\" id=\"comment-student-name\" disabled value=\"" + comment['student'] + "\">\n" +
-        "                    <input type=\"text\" id=\"comment-description\" disabled value=\"" + comment['description'] + "\">\n" +
+        "                    <h4 class=\"modal-title\">" + comment['student'] + " : " + comment['description'] + "</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
         "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +

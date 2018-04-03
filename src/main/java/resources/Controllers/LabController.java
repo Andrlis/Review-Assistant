@@ -2,6 +2,7 @@ package resources.Controllers;
 
 import data.Student;
 import data.UniversityClass;
+import data.group.Group;
 import data.group.SubGroup;
 import data.lab.IssuedLab;
 import data.lab.Lab;
@@ -12,13 +13,13 @@ import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
 import java.util.Date;
 
-public class LabController extends DefaultController<Lab>{
+public class LabController extends DefaultController{
     public LabController() {
-        super(Lab.class);
+        super();
     }
 
     public LabController(DataBaseCoreInterface core) {
-        super(Lab.class, core);
+        super(core);
     }
 
     public Integer getNextNumber() throws DataBaseQueryException {
@@ -40,8 +41,7 @@ public class LabController extends DefaultController<Lab>{
     }
 
     public void issue(SubGroup subGroup, UniversityClass universityClass) throws DataBaseQueryException, DataBaseCriteriaCountException {
-        DefaultController<IssuedLab> issuedLabController = new DefaultController<>(IssuedLab.class, dataBaseCore);
-        DefaultController<LabMark> labMarkController = new DefaultController<>(LabMark.class, dataBaseCore);
+        DefaultController defaultController = new DefaultController(dataBaseCore);
 
         Lab lab;
         if (getNextNumber() == subGroup.getIssuedLabsList().size() + 1) {
@@ -63,7 +63,7 @@ public class LabController extends DefaultController<Lab>{
         issuedLab.setSubGroup(subGroup);
 
 
-        issuedLabController.saveToDataBase(issuedLab);
+        defaultController.saveToDataBase(issuedLab);
 
         subGroup.addIssuedLab(issuedLab);
 
@@ -71,7 +71,30 @@ public class LabController extends DefaultController<Lab>{
             LabMark labMark = new LabMark();
             labMark.setIssuedLab(issuedLab);
             labMark.setStudent(student);
-            labMarkController.saveToDataBase(labMark);
+            defaultController.saveToDataBase(labMark);
+        }
+
+    }
+
+    public void issue(String groupNumber, String subGroupNumber, String data) throws DataBaseQueryException, DataBaseCriteriaCountException {
+        GroupController groupController = new GroupController(dataBaseCore);
+        DefaultController defaultController = new DefaultController(dataBaseCore);
+
+        Group group = null;
+
+        group = groupController.getByNumber(groupNumber);
+
+        SubGroup subGroup = group.getSubGroup(subGroupNumber);
+
+        for(Object object : defaultController.getAll(UniversityClass.class)) {
+            UniversityClass universityClass = (UniversityClass) object;
+
+            if(universityClass.getDataTime().equals(data)){
+                if(universityClass.getSubGroup().equals(subGroup)){
+                    issue(subGroup, universityClass);
+                    return;
+                }
+            }
         }
 
     }

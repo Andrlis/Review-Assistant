@@ -1,8 +1,9 @@
 package servlets;
 
 import data.User;
-import resources.Hibernate.HibernateCore;
-import resources.Hibernate.HibernateShellQueryException;
+import resources.Controllers.UserController;
+import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.MD5Hash;
 import resources.TableMaker.JsonMaker;
 
@@ -20,7 +21,8 @@ public class  DoLoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HibernateCore hibernateCore = HibernateCore.getInstance();
+        UserController userController = new UserController();
+
         response.setCharacterEncoding("UTF-8");
 
         String userName = (String) request.getParameter("username");
@@ -40,7 +42,11 @@ public class  DoLoginServlet extends HttpServlet {
             code = 1;
         }
 
-        user = hibernateCore.getUserByUserName(userName);
+        try {
+            user = userController.getByUserName(userName);
+        } catch (DataBaseQueryException | DataBaseCriteriaCountException e) {
+            e.printStackTrace();
+        }
 
         if(!hasError && (user == null || !password.equals(user.getPassword())))//!MD5Hash.getHash(password).equals(user.getPassword())){
         {

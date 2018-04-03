@@ -8,50 +8,47 @@ import resources.Controllers.Interfaces.DefaultControllerInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultController<T> implements DefaultControllerInterface<T> {
+public class DefaultController implements DefaultControllerInterface {
     protected DataBaseCoreInterface dataBaseCore;
-    private Class<T> genericType;
 
-    public DefaultController(Class<T> type) {
+    public DefaultController() {
         dataBaseCore = DataBaseCore.getInstance();
-        genericType = type;
     }
 
-    public DefaultController(Class<T> type, DataBaseCoreInterface core){
+    public DefaultController(DataBaseCoreInterface core){
         dataBaseCore = core;
-        genericType = type;
     }
 
     @Override
-    public T saveToDataBase(T object) throws DataBaseQueryException {
-        return (T) dataBaseCore.create(object);
+    public Object saveToDataBase(Object object) throws DataBaseQueryException {
+        return dataBaseCore.create(object);
     }
 
     @Override
-    public void updateInDataBase(T object) throws DataBaseQueryException {
+    public void updateInDataBase(Object object) throws DataBaseQueryException {
         dataBaseCore.update(object);
     }
 
     @Override
-    public void removeFromDataBase(T object) throws DataBaseQueryException {
+    public void removeFromDataBase(Object object) throws DataBaseQueryException {
         dataBaseCore.delete(object);
     }
 
     @Override
-    public List<T> getAll() throws DataBaseQueryException {
+    public List<Object> getAll(Class c) throws DataBaseQueryException {
 
-        List<T> answer = new ArrayList<>();
-        List<Object> a = dataBaseCore.getAll(genericType);
+        List<Object> answer = new ArrayList<>();
+        List<Object> a = dataBaseCore.getAll(c);
 
         for(Object o : a) {
-            answer.add((T)o);
+            answer.add((Object)o);
         }
 
         return answer;
     }
 
     @Override
-    public T getById(Integer id) throws DataBaseQueryException {
-        return (T) dataBaseCore.getById(genericType, id);
+    public Object getById(Class c, Integer id) throws DataBaseQueryException {
+        return (Object) dataBaseCore.getById(c, id);
     }
 }

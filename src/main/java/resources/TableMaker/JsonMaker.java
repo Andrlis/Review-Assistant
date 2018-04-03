@@ -11,7 +11,7 @@ import data.mark.LabMark;
 import data.mark.TestMark;
 import data.сomment.Comment;
 import resources.Controllers.CommentController;
-import resources.Hibernate.*;
+import resources.Controllers.TestController;
 import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.TableMaker.Convetrters.*;
@@ -198,13 +198,13 @@ public class JsonMaker {
                 secondCommentId, comment);
     }
 
-    public static String getJsonSubGroupClasses(SubGroup subGroup) throws HibernateShellQueryException {
-        TestHibernateShell testHibernateShell = new TestHibernateShell();
+    public static String getJsonSubGroupClasses(SubGroup subGroup) throws DataBaseQueryException {
+        TestController testController = new TestController();
 
         Map<String, Object> classesMap = new LinkedHashMap<String, Object>();
 
         classesMap.put("lab-number", subGroup.getIssuedLabsList().size() + 1);
-        classesMap.put("test-number", testHibernateShell.getNumberOfNextTest().toString());
+        classesMap.put("test-number", testController.getNextNumber().toString());
 
         ArrayList<String> classes = new ArrayList<String>();
         for (UniversityClass universityClass : (subGroup == null) ? new ArrayList<UniversityClass>() : subGroup.getUniversityClassesList()) {

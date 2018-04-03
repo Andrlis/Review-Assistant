@@ -11,13 +11,13 @@ import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 import java.util.Date;
 import java.util.List;
 
-public class TestController extends DefaultController<Test> {
+public class TestController extends DefaultController {
     public TestController() {
-        super(Test.class);
+        super();
     }
 
     public TestController(DataBaseCoreInterface core) {
-        super(Test.class, core);
+        super(core);
     }
 
     public Integer getNextNumber() throws DataBaseQueryException {
@@ -40,17 +40,18 @@ public class TestController extends DefaultController<Test> {
 
     public void issue() throws DataBaseQueryException {
         StudentController studentController = new StudentController(dataBaseCore);
-        DefaultController<TestMark> testMarkDefaultController = new DefaultController<>(TestMark.class, dataBaseCore);
+        DefaultController defaultController = new DefaultController(dataBaseCore);
 
         Test test = this.addNewTest();
 
-        List<Student> students = studentController.getAll();
-        for(Student student : students) {
+        List<Object> students = studentController.getAll(Student.class);
+        for(Object object : students) {
+            Student student = (Student) object;
             TestMark testMark = new TestMark();
             testMark.setStudent(student);
             testMark.setTest(test);
 
-            testMarkDefaultController.saveToDataBase(testMark);
+            defaultController.saveToDataBase(testMark);
         }
     }
 }

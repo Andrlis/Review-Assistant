@@ -1,6 +1,6 @@
 package servlets.test;
 
-import resources.Hibernate.HibernateCore;
+import resources.Controllers.GroupController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +14,9 @@ import java.io.IOException;
 public class TableTestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HibernateCore hibernateCore = HibernateCore.getInstance();
-
+        GroupController groupController = new GroupController();
         try {
-            request.setAttribute("groups", hibernateCore.getGroupKeeper().getGroupList());
+            request.setAttribute("groups", groupController.getAll());
             request
                     .getRequestDispatcher("WEB-INF/pages/test/table_test.jsp")
                     .forward(request, response);

@@ -4,8 +4,6 @@ import data.Student;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.lab.LabsKeeper;
-import resources.Hibernate.StudentHibernateShell;
-import resources.Hibernate.TestHibernateShell;
 
 import java.text.ParseException;
 import java.util.List;

@@ -5,13 +5,13 @@ import data.UniversityClass;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
-public class StudentController extends DefaultController<Student> {
+public class StudentController extends DefaultController {
     public StudentController() {
-        super(Student.class);
+        super();
     }
 
     public StudentController(DataBaseCoreInterface core) {
-        super(Student.class, core);
+        super(core);
     }
 
     public void notePresence(Student object, UniversityClass universityClass) throws DataBaseQueryException {

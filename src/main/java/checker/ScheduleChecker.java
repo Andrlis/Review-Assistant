@@ -59,10 +59,7 @@ ScheduleChecker {
 
     private static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
         UniversityClass universityClass = new UniversityClass();
-        DefaultController<UniversityClass> universityClassDefaultController =
-                new DefaultController<>(UniversityClass.class);
-        DefaultController<IssuedLab> issuedLabDefaultController =
-                new DefaultController<>(IssuedLab.class);
+        DefaultController defaultController = new DefaultController();
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);
@@ -76,7 +73,7 @@ ScheduleChecker {
                 issuedLab.decreaseCoefficient();
 
                 try {
-                    issuedLabDefaultController.updateInDataBase(issuedLab);
+                    defaultController.updateInDataBase(issuedLab);
                 } catch (DataBaseQueryException e) {
                     e.printStackTrace();
                 }
@@ -84,7 +81,7 @@ ScheduleChecker {
         }
 
         try {
-            universityClassDefaultController.saveToDataBase(universityClass);
+            defaultController.saveToDataBase(universityClass);
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         }

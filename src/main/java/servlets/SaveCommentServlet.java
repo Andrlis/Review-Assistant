@@ -1,7 +1,12 @@
 package servlets;
 
 import data.Student;
-import resources.Hibernate.*;
+import data.mark.LabMark;
+import data.сomment.Comment;
+import resources.Controllers.CommentController;
+import resources.Controllers.DefaultController;
+import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
+import resources.Hibernate.Exceptions.DataBaseQueryException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,39 +26,38 @@ public class SaveCommentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
-        LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
-        TestHibernateShell testHibernateShell = new TestHibernateShell();
-        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
+        DefaultController defaultController = new DefaultController();
+        CommentController commentController = new CommentController();
 
         String commentType = (String) req.getParameter("type");
         String comment = (String) req.getParameter("comment");
-        String commentEntityId = (String) req.getParameter("commentId");
+        Integer commentEntityId = Integer.parseInt((String) req.getParameter("commentId"));
+        String secondCommentIdParam = ((String) req.getParameter("secondCommentId"));
+
+        Integer secondCommentId = secondCommentIdParam.equals("") ? -1 : Integer.parseInt(secondCommentIdParam);
 
         try {
             switch (commentType) {
                 //mark
                 case "lab":
-                    labsHibernateShell.updateComment(commentEntityId, comment);
+                    LabMark labMark = (LabMark) defaultController.getById(LabMark.class, commentEntityId);
+                    labMark.setComment(comment);
+                    defaultController.updateInDataBase(labMark);
                     break;
                 //class
                 case "class":
-                    String idUniversityClass = (String) req.getParameter("secondCommentId"); //universityClassId
-                    Student student = studentHibernateShell.getStudetById(commentEntityId);
-                    student.setCommentForClass(Integer.parseInt(idUniversityClass), comment);
+                    Comment classComment = commentController.get(commentEntityId, secondCommentId);
+                    classComment.setComment(comment);
+                    defaultController.updateInDataBase(classComment);
                     break;
                 case "test" : //test
-                    //String idTestMark = (String) req.getParameter("comment-id"); //testMarkId
-                    //testHibernateShell.saveComment(idTestMark, comment);
                     break;
                 case "bonus" ://bonus
-
-                    //TODO studentHibernateShell.saveComment(idBonus, comment);
                     break;
             }
-        } catch (HibernateShellQueryException e) {
+        } catch (DataBaseQueryException e) {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (DataBaseCriteriaCountException e) {
             e.printStackTrace();
         }
     }

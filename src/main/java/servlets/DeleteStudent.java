@@ -1,8 +1,6 @@
 package servlets;
 
-import resources.Hibernate.LabsHibernateShell;
-import resources.Hibernate.StudentHibernateShell;
-import resources.Hibernate.TestHibernateShell;
+import resources.Controllers.StudentController;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +13,11 @@ import java.io.IOException;
 public class DeleteStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
+        StudentController studentController = new StudentController();
+
         String studentId = (String) req.getParameter("studentId");
         try {
-            studentHibernateShell.deleteStudent(studentId);
+            studentController.removeFromDataBase(studentId);
         } catch (Exception e) {
             e.printStackTrace();
         }

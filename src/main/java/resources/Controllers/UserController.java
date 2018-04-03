@@ -6,19 +6,20 @@ import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 import resources.MD5Hash;
 
-public class UserController extends DefaultController<User> {
+public class UserController extends DefaultController {
     public UserController() {
-        super(User.class);
+        super();
     }
 
     public UserController(DataBaseCoreInterface core) {
-        super(User.class, core);
+        super(core);
     }
 
     @Override
-    public User saveToDataBase(User object) throws DataBaseQueryException {
-        object.setMD5Password(object.getPassword());
-        return super.saveToDataBase(object);
+    public Object saveToDataBase(Object object) throws DataBaseQueryException {
+        User user = (User) object;
+        user.setMD5Password(user.getPassword());
+        return super.saveToDataBase(user);
     }
 
     public User getByUserName(String userName) throws DataBaseQueryException, DataBaseCriteriaCountException {

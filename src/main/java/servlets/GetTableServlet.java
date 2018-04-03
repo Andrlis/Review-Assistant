@@ -3,7 +3,7 @@ package servlets;
 import data.User;
 import data.group.Group;
 import data.group.SubGroup;
-import resources.Hibernate.HibernateCore;
+import resources.Controllers.GroupController;
 import resources.TableMaker.JsonMaker;
 
 import javax.servlet.ServletException;
@@ -17,17 +17,17 @@ import java.io.IOException;
 public class GetTableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GroupController groupController = new GroupController();
 
-        HibernateCore hibernateCore = HibernateCore.getInstance();
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         String tableType = (String) req.getParameter("type");
         resp.setCharacterEncoding("UTF-8");
-        User user = (User)req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute("user");
         boolean editable = user == null ? false : true;
         try {
             String table = "";
-            Group group = hibernateCore.getGroupByGroupNumber(groupNumber);
+            Group group = groupController.getByNumber(groupNumber);
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             switch (tableType.getBytes()[0]) {
                 case 'm':
@@ -40,16 +40,14 @@ public class GetTableServlet extends HttpServlet {
                     table = JsonMaker.getJsonSubGroupStudentRedact(subGroup, editable);
                     break;
                 default:
-                    req
-                            .getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
+                    req.getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
                             .forward(req, resp);
                     break;
             }
 
             resp.getWriter().append(table);
         } catch (Exception e) {
-            req
-                    .getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
+            req.getRequestDispatcher("WEB-INF/pages/NotFound.jsp")
                     .forward(req, resp);
         }
 

@@ -15,6 +15,7 @@ import resources.Controllers.DefaultController;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by kesso on 01.08.17.
@@ -26,13 +27,13 @@ public class RepositoryChecker {
     /**
      * Check issue labs in all groups.
      *
-     * @param groupsKeeper
+     * @param groupList
      */
-    static public void checkForCommitsInGroups(GroupsKeeper groupsKeeper) throws CheckException {
+    static public void checkForCommitsInGroups(List<Group> groupList) throws CheckException {
         logger.info("Start check for commits of all the groups.");
 
         //loop by group
-        for (Group currentGroup : groupsKeeper.getGroupList()) {
+        for (Group currentGroup : groupList) {
             logger.info("Check commits of " + currentGroup.toString());
             RepositoryChecker.checkForCommitsInGroup(currentGroup);
         }
@@ -63,7 +64,7 @@ public class RepositoryChecker {
 
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
-        DefaultController<IssuedLab> issuedLabDefaultController = new DefaultController<>(IssuedLab.class);
+        DefaultController defaultController = new DefaultController();
         Date newDateOfLastRepoCheck = new Date();
 
         //loop by students who did not pass the lab
@@ -79,7 +80,7 @@ public class RepositoryChecker {
         logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
         issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
         try {
-            issuedLabDefaultController.updateInDataBase(issuedLab);
+            defaultController.updateInDataBase(issuedLab);
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         }
@@ -94,7 +95,7 @@ public class RepositoryChecker {
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
         Date commitDate;
-        DefaultController<LabMark> labMarkDefaultController = new DefaultController<>(LabMark.class);
+        DefaultController defaultController = new DefaultController();
 
         //Check if there link to github repository
         if (student.getGitURL().equals(""))
@@ -112,12 +113,12 @@ public class RepositoryChecker {
             try {
                 if (commitDate.before(issuedLab.getDateOfLastRepoCheck())) {
                     labMark.setCoefficient(-2.0);
-                    labMarkDefaultController.updateInDataBase(labMark);
+                    defaultController.updateInDataBase(labMark);
                     logger.info("Student " + student + " cheated");
                 } else {
                     double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
                     labMark.setCoefficient(coefficient);
-                    labMarkDefaultController.updateInDataBase(labMark);
+                    defaultController.updateInDataBase(labMark);
                     logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
                 }
             } catch (DataBaseQueryException e) {
