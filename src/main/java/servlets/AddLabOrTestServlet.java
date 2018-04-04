@@ -1,6 +1,5 @@
 package servlets;
 
-import data.test.Test;
 import resources.Controllers.LabController;
 import resources.Controllers.TestController;
 

@@ -1,20 +1,24 @@
 package resources.Controllers;
 
 import data.group.Group;
+import resources.Hibernate.Controller.DataBaseCore;
 import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.Hibernate.Interfaces.DataBaseCoreInterface;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupController extends DefaultController {
+public class GroupController {
+    private DataBaseCoreInterface dataBaseCore;
+
     public GroupController() {
-        super();
+        dataBaseCore = DataBaseCore.getInstance();
     }
 
     public GroupController(DataBaseCoreInterface core) {
-        super();
+        dataBaseCore = core;
     }
 
     public Group getByNumber(String number) {
@@ -26,7 +30,7 @@ public class GroupController extends DefaultController {
     }
 
     public List<Group> getAll() throws DataBaseQueryException {
-        List<Object> objects = this.getAll(Group.class);
+        List<Object> objects = dataBaseCore.getAll(Group.class);
         List<Group> groups = new ArrayList<>();
 
         for(Object object : objects){

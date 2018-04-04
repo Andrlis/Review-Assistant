@@ -1,6 +1,6 @@
 package servlets;
 
-import resources.Controllers.StudentController;
+import resources.Hibernate.Controller.DataBaseCore;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +13,11 @@ import java.io.IOException;
 public class DeleteStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        StudentController studentController = new StudentController();
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         String studentId = (String) req.getParameter("studentId");
         try {
-            studentController.removeFromDataBase(studentId);
+            dataBaseCore.delete(studentId);
         } catch (Exception e) {
             e.printStackTrace();
         }

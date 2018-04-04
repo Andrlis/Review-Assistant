@@ -1,7 +1,7 @@
 package servlets;
 
 import data.Student;
-import resources.Controllers.DefaultController;
+import resources.Hibernate.Controller.DataBaseCore;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class SaveStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DefaultController defaultController = new DefaultController();
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");

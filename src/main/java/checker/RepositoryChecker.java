@@ -11,7 +11,7 @@ import exceptions.CheckException;
 import exceptions.GitException;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
-import resources.Controllers.DefaultController;
+import resources.Hibernate.Controller.DataBaseCore;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 
 import java.util.Date;
@@ -64,7 +64,7 @@ public class RepositoryChecker {
 
     static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
-        DefaultController defaultController = new DefaultController();
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
         Date newDateOfLastRepoCheck = new Date();
 
         //loop by students who did not pass the lab
@@ -80,7 +80,7 @@ public class RepositoryChecker {
         logger.info("New date of last repo check : " + newDateOfLastRepoCheck.toString() + ".");
         issuedLab.setDateOfLastRepoCheck(newDateOfLastRepoCheck);
         try {
-            defaultController.updateInDataBase(issuedLab);
+            dataBaseCore.update(issuedLab);
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         }
@@ -94,8 +94,8 @@ public class RepositoryChecker {
      */
     static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
         Date commitDate;
-        DefaultController defaultController = new DefaultController();
 
         //Check if there link to github repository
         if (student.getGitURL().equals(""))
@@ -113,12 +113,12 @@ public class RepositoryChecker {
             try {
                 if (commitDate.before(issuedLab.getDateOfLastRepoCheck())) {
                     labMark.setCoefficient(-2.0);
-                    defaultController.updateInDataBase(labMark);
+                    dataBaseCore.update(labMark);
                     logger.info("Student " + student + " cheated");
                 } else {
                     double coefficient = issuedLab.getCoefficientOfCommit(commitDate);
                     labMark.setCoefficient(coefficient);
-                    defaultController.updateInDataBase(labMark);
+                    dataBaseCore.update(labMark);
                     logger.info("Student " + student + " committed a lab with coefficient " + coefficient);
                 }
             } catch (DataBaseQueryException e) {

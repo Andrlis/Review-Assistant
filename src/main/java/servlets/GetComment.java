@@ -4,8 +4,7 @@ import data.Student;
 import data.UniversityClass;
 import data.mark.LabMark;
 import data.mark.TestMark;
-import data.test.Test;
-import resources.Controllers.DefaultController;
+import resources.Hibernate.Controller.DataBaseCore;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.TableMaker.JsonMaker;
 
@@ -22,7 +21,7 @@ public class GetComment extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        DefaultController defaultController = new DefaultController();
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         String commentType = (String) req.getParameter("type");
         String comment = "";
@@ -34,27 +33,27 @@ public class GetComment extends HttpServlet {
         try {
             switch (commentType) {
                 case "lab": // mark
-                    LabMark labMark = (LabMark) defaultController.getById(LabMark.class,
+                    LabMark labMark = (LabMark) dataBaseCore.getById(LabMark.class,
                             commentEntityId);
                     comment = JsonMaker.getJsonLabMarkComment(labMark);
 
                     break;
                 case "class": //class
-                    Student student = (Student) defaultController.getById(Student.class,
+                    Student student = (Student) dataBaseCore.getById(Student.class,
                             commentEntityId);
-                    UniversityClass universityClass = (UniversityClass) defaultController.getById(UniversityClass.class,
+                    UniversityClass universityClass = (UniversityClass) dataBaseCore.getById(UniversityClass.class,
                             secondCommentId);
                     comment = JsonMaker.getJsonClassComment(
                             student, universityClass);
                     break;
                 case "test": //test
-                    TestMark testMark = (TestMark) defaultController.getById(TestMark.class,
+                    TestMark testMark = (TestMark) dataBaseCore.getById(TestMark.class,
                             commentEntityId);
                     comment = JsonMaker.getJsonTestMarkComment(testMark);
 
                     break;
                 case "bonus"://bonus
-                    Student student1 = (Student) defaultController.getById(Student.class,
+                    Student student1 = (Student) dataBaseCore.getById(Student.class,
                             commentEntityId);
                     comment = JsonMaker.getJsonBonusMarkComment(student1);
 

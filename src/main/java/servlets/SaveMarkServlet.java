@@ -4,7 +4,8 @@ package servlets;
 import data.Student;
 import data.mark.LabMark;
 import data.mark.TestMark;
-import resources.Controllers.DefaultController;
+import resources.Hibernate.Controller.DataBaseCore;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import java.io.IOException;
 public class SaveMarkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DefaultController defaultController = new DefaultController();
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         Integer id = Integer.parseInt((String) req.getParameter("id"));
         String type = (String) req.getParameter("type");
@@ -32,21 +33,21 @@ public class SaveMarkServlet extends HttpServlet {
 
             switch (type) {
                 case("lab"):
-                    LabMark labMark = (LabMark) defaultController.getById(LabMark.class, id);
+                    LabMark labMark = (LabMark) dataBaseCore.getById(LabMark.class, id);
                     labMark.setMark(mark);
-                    defaultController.updateInDataBase(labMark);
+                    dataBaseCore.update(labMark);
 
                     break;
                 case ("test"):
-                    TestMark testMark = (TestMark) defaultController.getById(TestMark.class, id);
+                    TestMark testMark = (TestMark) dataBaseCore.getById(TestMark.class, id);
                     testMark.setMark(mark);
-                    defaultController.updateInDataBase(testMark);
+                    dataBaseCore.update(testMark);
 
                     break;
                 case("bonus"):
-                    Student student = (Student) defaultController.getById(Student.class, id);
+                    Student student = (Student) dataBaseCore.getById(Student.class, id);
                     student.setBonusMark(mark);
-                    defaultController.updateInDataBase(student);
+                    dataBaseCore.update(student);
 
                     break;
             }

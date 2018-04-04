@@ -5,8 +5,8 @@ import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
 import data.lab.IssuedLab;
-import resources.Controllers.DefaultController;
 import resources.Controllers.GroupController;
+import resources.Hibernate.Controller.DataBaseCore;
 import resources.Hibernate.Exceptions.DataBaseQueryException;
 import resources.TimeLogic;
 import bsuirAPI.BsuirParser;
@@ -59,7 +59,7 @@ ScheduleChecker {
 
     private static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
         UniversityClass universityClass = new UniversityClass();
-        DefaultController defaultController = new DefaultController();
+        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);
@@ -73,7 +73,7 @@ ScheduleChecker {
                 issuedLab.decreaseCoefficient();
 
                 try {
-                    defaultController.updateInDataBase(issuedLab);
+                    dataBaseCore.update(issuedLab);
                 } catch (DataBaseQueryException e) {
                     e.printStackTrace();
                 }
@@ -81,7 +81,7 @@ ScheduleChecker {
         }
 
         try {
-            defaultController.saveToDataBase(universityClass);
+            dataBaseCore.create(universityClass);
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         }
