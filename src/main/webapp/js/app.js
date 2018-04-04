@@ -311,7 +311,7 @@ function showComment(comment){//, xCoord, yCoord) {
         "<div class=\"popup\" id=\"popup-add-comment\">\n" +
         "    <div id=\"add-comment\" class=\"modal fade\" role=\"dialog\">\n" +
         "        <div class=\"modal-dialog\">\n" +
-        "            <div class=\"modal-content center-modal\">\n" +
+        "            <div class=\"modal-content center-modal\" style=\"width: 230px;\">\n" +
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
         "                    <h4 class=\"modal-title\">" + comment['student'] + " : " + comment['description'] + "</h4>\n" +
@@ -324,7 +324,7 @@ function showComment(comment){//, xCoord, yCoord) {
         "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
         "                    </form>\n" +
         "                </div>\n" +
-        "                <div class=\"modal-footer\">\n" +
+        "                <div class=\"modal-footer\" style=\"padding-top: 5px; padding-bottom: 5px; position: center\">\n" +
         "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
         "                            onclick=\"saveComment()\">Сохранить\n" +
         "                    </button>\n" +

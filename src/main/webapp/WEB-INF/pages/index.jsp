@@ -172,6 +172,8 @@
                         <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;
                         </button>
                         <h4 class="modal-title">Сбор статистики</h4>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="statistic-group-number">Номер группы: </label>
                             <select class="select-style" name="statistic-group-number" id="statistic-group-number">
@@ -212,6 +214,8 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Добавить нового студента</h4>
+                    </div>
+                    <div class="modal-body">
                         <input id="student-id" hidden>
                         <div class="form-group">
                             <label for="student-surname">Фамилия</label>
@@ -258,6 +262,8 @@
                         <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;
                         </button>
                         <h4 class="modal-title">Пожалуйста авторизуйтесь</h4>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="login-email">Логин</label>
                             <input class="form-control" id="login-email" type="text">
