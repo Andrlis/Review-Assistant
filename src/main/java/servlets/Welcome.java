@@ -1,6 +1,6 @@
 package servlets;
 
-import resources.Controllers.GroupController;
+import logics.GroupLogic;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 public class Welcome extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        GroupController groupController = new GroupController();
+        GroupLogic groupLogic = new GroupLogic();
 
         try {
-            request.setAttribute("groups", groupController.getAll());
+            request.setAttribute("groups", groupLogic.getAll());
             request
                     .getRequestDispatcher("WEB-INF/pages/index.jsp")
                     .forward(request, response);

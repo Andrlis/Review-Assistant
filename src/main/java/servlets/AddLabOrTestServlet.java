@@ -1,7 +1,7 @@
 package servlets;
 
-import resources.Controllers.LabController;
-import resources.Controllers.TestController;
+import logics.LabLogic;
+import logics.TestLogic;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +27,8 @@ public class AddLabOrTestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        /*String newColumnType = (String) req.getParameter("new-column-type");
         String newLabDate = (String) req.getParameter("new-lab-date");*/
-        LabController labController = new LabController();
-        TestController testController = new TestController();
+        LabLogic labLogic = new LabLogic();
+        TestLogic testLogic = new TestLogic();
 
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
@@ -38,9 +38,9 @@ public class AddLabOrTestServlet extends HttpServlet {
 
         try {
             if (type.equals("lab")) {
-                labController.issue(groupNumber, subGroupNumber, date);
+                labLogic.issue(groupNumber, subGroupNumber, date);
             } else {
-                testController.addNewTest();
+                testLogic.addNewTest();
             }
         } catch (Exception e) {
             e.printStackTrace();

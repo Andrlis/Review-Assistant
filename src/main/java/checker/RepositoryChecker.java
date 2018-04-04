@@ -2,7 +2,6 @@ package checker;
 
 
 import data.group.Group;
-import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.lab.IssuedLab;
 import data.mark.LabMark;
@@ -11,8 +10,8 @@ import exceptions.CheckException;
 import exceptions.GitException;
 import gitAPI.GitShell;
 import org.apache.log4j.Logger;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
+import dao.DataBaseCore;
+import exceptions.DataBaseQueryException;
 
 import java.util.Date;
 import java.util.List;

@@ -4,8 +4,8 @@ import data.Student;
 import data.UniversityClass;
 import data.mark.LabMark;
 import data.mark.TestMark;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
+import dao.DataBaseCore;
+import exceptions.DataBaseQueryException;
 import resources.TableMaker.JsonMaker;
 
 import javax.servlet.ServletException;

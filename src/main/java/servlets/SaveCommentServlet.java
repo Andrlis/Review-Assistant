@@ -1,12 +1,11 @@
 package servlets;
 
-import data.Student;
 import data.mark.LabMark;
 import data.сomment.Comment;
-import resources.Controllers.CommentController;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
+import logics.CommentLogic;
+import dao.DataBaseCore;
+import exceptions.DataBaseCriteriaCountException;
+import exceptions.DataBaseQueryException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class SaveCommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataBaseCore dataBaseCore = DataBaseCore.getInstance();
-        CommentController commentController = new CommentController();
+        CommentLogic commentLogic = new CommentLogic();
 
         String commentType = (String) req.getParameter("type");
         String comment = (String) req.getParameter("comment");
@@ -46,7 +45,7 @@ public class SaveCommentServlet extends HttpServlet {
                     break;
                 //class
                 case "class":
-                    Comment classComment = commentController.get(commentEntityId, secondCommentId);
+                    Comment classComment = commentLogic.get(commentEntityId, secondCommentId);
                     classComment.setComment(comment);
                     dataBaseCore.update(classComment);
                     break;

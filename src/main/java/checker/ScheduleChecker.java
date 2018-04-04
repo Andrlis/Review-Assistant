@@ -1,13 +1,12 @@
 package checker;
 
 import data.group.Group;
-import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.UniversityClass;
 import data.lab.IssuedLab;
-import resources.Controllers.GroupController;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
+import logics.GroupLogic;
+import dao.DataBaseCore;
+import exceptions.DataBaseQueryException;
 import resources.TimeLogic;
 import bsuirAPI.BsuirParser;
 import bsuirAPI.BsuirRequests;
@@ -28,9 +27,9 @@ ScheduleChecker {
     public static void groupScheduleCheck() throws Exception {
         logger.info("Start schedule check.");
         Timetable timetable;
-        GroupController groupController = new GroupController();
+        GroupLogic groupLogic = new GroupLogic();
 
-        for (Group group : groupController.getAll()) {
+        for (Group group : groupLogic.getAll()) {
 
             logger.info("Current group number : " + group.getNumberOfGroup() + ".");
 

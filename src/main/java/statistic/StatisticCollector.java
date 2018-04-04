@@ -2,8 +2,7 @@ package statistic;
 
 import data.group.Group;
 import exceptions.StatisticException;
-import org.mockito.internal.matchers.GreaterOrEqual;
-import resources.Controllers.GroupController;
+import logics.GroupLogic;
 
 import java.util.Date;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 public class StatisticCollector {
 
     public static String createStatisticFile(String groupNumber, Date fromDate, Date toDate) throws StatisticException {
-        GroupController groupController = new GroupController();
+        GroupLogic groupLogic = new GroupLogic();
 
         FileBuilder fileBuilder = new FileBuilder();
         Analyzer analyzer = new Analyzer();
@@ -25,7 +24,7 @@ public class StatisticCollector {
         }
 
         try {
-            Group group = groupController.getByNumber(groupNumber);
+            Group group = groupLogic.getByNumber(groupNumber);
             List<StudentStatistic> statData = analyzer.analyzeGroup(group, fromDate, toDate);
             fileBuilder.writeStatistic(filePath, statData);
 

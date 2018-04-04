@@ -4,7 +4,7 @@ package servlets;
 import data.Student;
 import data.mark.LabMark;
 import data.mark.TestMark;
-import resources.Hibernate.Controller.DataBaseCore;
+import dao.DataBaseCore;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

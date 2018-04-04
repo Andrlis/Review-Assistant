@@ -1,6 +1,6 @@
 package servlets.test;
 
-import resources.Controllers.GroupController;
+import logics.GroupLogic;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +14,9 @@ import java.io.IOException;
 public class TableTestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        GroupController groupController = new GroupController();
+        GroupLogic groupLogic = new GroupLogic();
         try {
-            request.setAttribute("groups", groupController.getAll());
+            request.setAttribute("groups", groupLogic.getAll());
             request
                     .getRequestDispatcher("WEB-INF/pages/test/table_test.jsp")
                     .forward(request, response);

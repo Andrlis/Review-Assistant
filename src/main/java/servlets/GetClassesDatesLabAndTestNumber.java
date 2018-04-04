@@ -2,7 +2,7 @@ package servlets;
 
 import data.group.Group;
 import data.group.SubGroup;
-import resources.Controllers.GroupController;
+import logics.GroupLogic;
 import resources.TableMaker.JsonMaker;
 
 import javax.servlet.ServletException;
@@ -16,12 +16,12 @@ import java.io.IOException;
 public class GetClassesDatesLabAndTestNumber extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        GroupController groupController = new GroupController();
+        GroupLogic groupLogic = new GroupLogic();
 
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         try {
-            Group    group    = groupController.getByNumber(groupNumber);
+            Group    group    = groupLogic.getByNumber(groupNumber);
             SubGroup subGroup = group.getSubGroup(subGroupNumber);
             String str = JsonMaker.getJsonSubGroupClasses(subGroup);
             resp.getWriter().append(str);

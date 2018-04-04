@@ -1,6 +1,6 @@
 package servlets;
 
-import resources.Hibernate.Controller.DataBaseCore;
+import dao.DataBaseCore;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

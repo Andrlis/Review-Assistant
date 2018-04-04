@@ -10,10 +10,10 @@ import data.lab.Lab;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import data.сomment.Comment;
-import resources.Controllers.CommentController;
-import resources.Controllers.TestController;
-import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
+import logics.CommentLogic;
+import logics.TestLogic;
+import exceptions.DataBaseCriteriaCountException;
+import exceptions.DataBaseQueryException;
 import resources.TableMaker.Convetrters.*;
 import resources.TableMaker.Convetrters.UniversityClassConverter;
 import resources.TableMaker.Data.BonusMark;
@@ -160,7 +160,7 @@ public class JsonMaker {
     }
 
     public static String getJsonClassComment(Student student, UniversityClass universityClass){
-        CommentController commentController = new CommentController();
+        CommentLogic commentLogic = new CommentLogic();
 
         String studentName = student.getFulName();
         String descr = "Пара " + universityClass.getDataTime();
@@ -170,7 +170,7 @@ public class JsonMaker {
 
         Comment commentObject = null;
         try {
-            commentObject = commentController.get(student.getId(), universityClass.getId());
+            commentObject = commentLogic.get(student.getId(), universityClass.getId());
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         } catch (DataBaseCriteriaCountException e) {
@@ -199,12 +199,12 @@ public class JsonMaker {
     }
 
     public static String getJsonSubGroupClasses(SubGroup subGroup) throws DataBaseQueryException {
-        TestController testController = new TestController();
+        TestLogic testLogic = new TestLogic();
 
         Map<String, Object> classesMap = new LinkedHashMap<String, Object>();
 
         classesMap.put("lab-number", subGroup.getIssuedLabsList().size() + 1);
-        classesMap.put("test-number", testController.getNextNumber().toString());
+        classesMap.put("test-number", testLogic.getNextNumber().toString());
 
         ArrayList<String> classes = new ArrayList<String>();
         for (UniversityClass universityClass : (subGroup == null) ? new ArrayList<UniversityClass>() : subGroup.getUniversityClassesList()) {
