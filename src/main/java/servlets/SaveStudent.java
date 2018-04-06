@@ -1,6 +1,10 @@
 package servlets;
 
 import dao.DataBaseCore;
+import data.Student;
+import data.StudentFactory;
+import data.group.Group;
+import logics.GroupLogic;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +19,7 @@ public class SaveStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataBaseCore dataBaseCore = DataBaseCore.getInstance();
+        GroupLogic groupLogic = new GroupLogic();
 
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
@@ -26,9 +31,24 @@ public class SaveStudent extends HttpServlet {
 
         try {
             if (studentId.equals("")) {
-                //studentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
+                StudentFactory studentFactory = new StudentFactory(dataBaseCore);
+
+                Student student = studentFactory.createStudent(studentName, eMail, gitRepo,
+                        groupNumber, subGroupNumber);
+
+                dataBaseCore.create(student);
             } else {
-                //studentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
+                Student student = (Student) dataBaseCore.getById(Student.class, Integer.parseInt(studentId));
+
+                student.setFulName(studentName);
+                student.seteMail(eMail);
+                student.setGitURL(gitRepo);
+
+                Group group = groupLogic.getByNumber(groupNumber);
+
+                student.setSubGroup(group.getSubGroup(subGroupNumber));
+
+                dataBaseCore.update(student);
             }
         } catch (Exception e) {
             e.printStackTrace();

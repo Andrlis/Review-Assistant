@@ -1,4 +1,4 @@
-package resources.Controllers;
+package logics;
 
 import data.Student;
 import data.UniversityClass;
@@ -7,21 +7,21 @@ import data.group.SubGroup;
 import data.lab.IssuedLab;
 import data.lab.Lab;
 import data.mark.LabMark;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
-import resources.Hibernate.Interfaces.DataBaseCoreInterface;
+import dao.DataBaseCore;
+import exceptions.DataBaseCriteriaCountException;
+import exceptions.DataBaseQueryException;
+import dao.DataBaseCoreInterface;
 
 import java.util.Date;
 
-public class LabController {
+public class LabLogic {
     private DataBaseCoreInterface dataBaseCore;
 
-    public LabController() {
+    public LabLogic() {
         dataBaseCore = DataBaseCore.getInstance();
     }
 
-    public LabController(DataBaseCoreInterface core) {
+    public LabLogic(DataBaseCoreInterface core) {
         dataBaseCore = core;
     }
 
@@ -78,11 +78,11 @@ public class LabController {
     }
 
     public void issue(String groupNumber, String subGroupNumber, String data) throws DataBaseQueryException, DataBaseCriteriaCountException {
-        GroupController groupController = new GroupController(dataBaseCore);
+        GroupLogic groupLogic = new GroupLogic(dataBaseCore);
 
         Group group = null;
 
-        group = groupController.getByNumber(groupNumber);
+        group = groupLogic.getByNumber(groupNumber);
 
         SubGroup subGroup = group.getSubGroup(subGroupNumber);
 

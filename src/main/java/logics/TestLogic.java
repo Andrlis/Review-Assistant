@@ -1,25 +1,25 @@
-package resources.Controllers;
+package logics;
 
 
 import data.Student;
 import data.mark.TestMark;
 import data.test.Test;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
-import resources.Hibernate.Interfaces.DataBaseCoreInterface;
+import dao.DataBaseCore;
+import exceptions.DataBaseCriteriaCountException;
+import exceptions.DataBaseQueryException;
+import dao.DataBaseCoreInterface;
 
 import java.util.Date;
 import java.util.List;
 
-public class TestController {
+public class TestLogic {
     private DataBaseCoreInterface dataBaseCore;
 
-    public TestController() {
+    public TestLogic() {
         dataBaseCore = DataBaseCore.getInstance();
     }
 
-    public TestController(DataBaseCoreInterface core) {
+    public TestLogic(DataBaseCoreInterface core) {
         dataBaseCore = core;
     }
 

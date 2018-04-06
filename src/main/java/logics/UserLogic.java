@@ -1,20 +1,20 @@
-package resources.Controllers;
+package logics;
 
 import data.User;
-import resources.Hibernate.Controller.DataBaseCore;
-import resources.Hibernate.Exceptions.DataBaseCriteriaCountException;
-import resources.Hibernate.Exceptions.DataBaseQueryException;
-import resources.Hibernate.Interfaces.DataBaseCoreInterface;
+import dao.DataBaseCore;
+import exceptions.DataBaseCriteriaCountException;
+import exceptions.DataBaseQueryException;
+import dao.DataBaseCoreInterface;
 import resources.MD5Hash;
 
-public class UserController {
+public class UserLogic {
     private DataBaseCoreInterface dataBaseCore;
 
-    public UserController() {
+    public UserLogic() {
         dataBaseCore = DataBaseCore.getInstance();
     }
 
-    public UserController(DataBaseCoreInterface core) {
+    public UserLogic(DataBaseCoreInterface core) {
         dataBaseCore = core;
     }
 
