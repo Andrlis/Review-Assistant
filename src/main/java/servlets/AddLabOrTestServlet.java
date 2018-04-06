@@ -40,7 +40,7 @@ public class AddLabOrTestServlet extends HttpServlet {
             if (type.equals("lab")) {
                 labLogic.issue(groupNumber, subGroupNumber, date);
             } else {
-                testLogic.addNewTest();
+                testLogic.issue();
             }
         } catch (Exception e) {
             e.printStackTrace();

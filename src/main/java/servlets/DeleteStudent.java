@@ -1,6 +1,8 @@
 package servlets;
 
 import dao.DataBaseCore;
+import data.Student;
+import exceptions.DataBaseQueryException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +18,12 @@ public class DeleteStudent extends HttpServlet {
         DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         String studentId = (String) req.getParameter("studentId");
+
+        Student student;
+
         try {
-            dataBaseCore.delete(studentId);
+            student = (Student) dataBaseCore.getById(Student.class, Integer.parseInt(studentId));
+            dataBaseCore.delete(student);
         } catch (Exception e) {
             e.printStackTrace();
         }

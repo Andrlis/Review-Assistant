@@ -67,6 +67,7 @@ public class Student implements Serializable {
         this.labMarkList = new ArrayList<LabMark>();
         this.testMarkList = new ArrayList<TestMark>();
         this.commentList = new ArrayList<Comment>();
+        this.bonusMark = -1;
     }
 
     public Integer getId() {

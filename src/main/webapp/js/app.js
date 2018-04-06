@@ -295,7 +295,6 @@ function requestForSaveComment(commentMessage){
 function deleteComment() {
     requestForSaveComment("");
     $("#add-comment").modal('hide');
-    alert("delete");
 }
 
 //save comments from classes
@@ -303,10 +302,9 @@ function deleteComment() {
 function saveComment() {
     requestForSaveComment($("#comment-text").val());
     $("#add-comment").modal('hide');
-    alert("save");
 }
 
-function showComment(comment){//, xCoord, yCoord) {
+function showComment(comment) {//, xCoord, yCoord) {
     var commentWindow = $("" +
         "<div class=\"popup\" id=\"popup-add-comment\">\n" +
         "    <div id=\"add-comment\" class=\"modal fade\" role=\"dialog\">\n" +
@@ -314,7 +312,7 @@ function showComment(comment){//, xCoord, yCoord) {
         "            <div class=\"modal-content center-modal\" style=\"width: 230px;\">\n" +
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
-        "                    <h4 class=\"modal-title\">" + comment['student'] + " : " + comment['description'] + "</h4>\n" +
+        "                    <h4 class=\"modal-title\">" + comment['student'] + comment['description'] + "</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
         "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +

@@ -146,5 +146,9 @@ public class SubGroup {
                 ", group=" + group +
                 '}';
     }
+
+    public boolean equals(SubGroup subGroup){
+        return this.id.equals(subGroup.getId());
+    }
 }
 
