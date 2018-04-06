@@ -1,5 +1,7 @@
 package bsuirAPI.bsuirScheduleJson;
 
+import bsuirAPI.timetable.Schedule;
+
 import java.util.ArrayList;
 
 public class ScheduleKeeper {

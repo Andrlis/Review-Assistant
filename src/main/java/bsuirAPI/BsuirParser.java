@@ -1,5 +1,7 @@
 package bsuirAPI;
 
+import bsuirAPI.timetable.Lesson;
+import bsuirAPI.timetable.Schedule;
 import bsuirAPI.bsuirScheduleJson.*;
 import bsuirAPI.bsuirTimetable.DayTimetable;
 import bsuirAPI.bsuirTimetable.Subject;

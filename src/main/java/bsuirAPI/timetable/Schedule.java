@@ -1,4 +1,4 @@
-package bsuirAPI.bsuirScheduleJson;
+package bsuirAPI.timetable;
 
 import java.util.ArrayList;
 
@@ -22,5 +22,14 @@ public class Schedule {
 
     public void setLessons(ArrayList<Lesson> lessons) {
         this.lessons = lessons;
+    }
+
+    ArrayList<Lesson>getCurrentDayLessons(Integer currentWeek){
+        ArrayList<Lesson> currentDayLessons = new ArrayList<Lesson>();
+        for(Lesson lesson: lessons){
+            if(lesson.getWeekNumber().contains(currentWeek))
+                currentDayLessons.add(lesson);
+        }
+        return currentDayLessons;
     }
 }
