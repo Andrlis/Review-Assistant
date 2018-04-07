@@ -1,10 +1,10 @@
-DROP DATABASE IF EXISTS test1;
+DROP DATABASE IF EXISTS trtpo_system;
 SET NAMES 'utf8';
 SET SESSION collation_connection = 'utf8_general_ci';
 
-CREATE DATABASE test1 DEFAULT CHARACTER SET 'utf8';
+CREATE DATABASE trtpo_system DEFAULT CHARACTER SET 'utf8';
 
-USE test1;
+USE trtpo_system;
 
 CREATE TABLE users(
 id_user INTEGER AUTO_INCREMENT,
