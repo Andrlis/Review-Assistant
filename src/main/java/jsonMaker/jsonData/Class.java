@@ -1,8 +1,6 @@
-package resources.TableMaker.Data;
+package jsonMaker.jsonData;
 
 import data.UniversityClass;
-
-import java.util.Date;
 
 
 public class Class {

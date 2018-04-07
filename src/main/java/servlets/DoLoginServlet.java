@@ -4,7 +4,7 @@ import data.User;
 import logics.UserLogic;
 import exceptions.DataBaseCriteriaCountException;
 import exceptions.DataBaseQueryException;
-import resources.TableMaker.JsonMaker;
+import jsonMaker.JsonMaker;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

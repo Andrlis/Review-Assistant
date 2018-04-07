@@ -1,4 +1,4 @@
-package resources.TableMaker.Convetrters;
+package jsonMaker.convetrters;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

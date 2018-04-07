@@ -6,7 +6,7 @@ import data.mark.LabMark;
 import data.mark.TestMark;
 import dao.DataBaseCore;
 import exceptions.DataBaseQueryException;
-import resources.TableMaker.JsonMaker;
+import jsonMaker.JsonMaker;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

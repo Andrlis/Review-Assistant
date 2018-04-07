@@ -4,7 +4,7 @@ import data.User;
 import data.group.Group;
 import data.group.SubGroup;
 import logics.GroupLogic;
-import resources.TableMaker.JsonMaker;
+import jsonMaker.JsonMaker;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

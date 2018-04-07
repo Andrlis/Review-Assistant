@@ -1,4 +1,4 @@
-package resources.TableMaker.Data;
+package jsonMaker.jsonData;
 
 import data.Student;
 

@@ -1,4 +1,4 @@
-package resources.TableMaker;
+package jsonMaker;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,17 +10,17 @@ import data.lab.Lab;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import data.сomment.Comment;
+import jsonMaker.convetrters.*;
+import jsonMaker.jsonData.ItogMark;
 import logics.CommentLogic;
 import logics.TestLogic;
 import exceptions.DataBaseCriteriaCountException;
 import exceptions.DataBaseQueryException;
 import resources.TableMaker.Convetrters.*;
-import resources.TableMaker.Convetrters.UniversityClassConverter;
-import resources.TableMaker.Data.BonusMark;
-import resources.TableMaker.Data.ItogMark;
-import resources.TableMaker.Data.Class;
-import resources.TableMaker.Data.Key;
-import resources.TableMaker.Data.Template;
+import jsonMaker.jsonData.BonusMark;
+import jsonMaker.jsonData.Class;
+import jsonMaker.jsonData.Key;
+import jsonMaker.jsonData.Template;
 
 import java.util.*;
 

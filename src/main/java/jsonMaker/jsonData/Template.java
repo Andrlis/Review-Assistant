@@ -1,4 +1,4 @@
-package resources.TableMaker.Data;
+package jsonMaker.jsonData;
 
 public class Template {
     private String cellClass;
