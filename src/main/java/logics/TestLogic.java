@@ -51,6 +51,8 @@ public class TestLogic {
             testMark.setStudent(student);
             testMark.setTest(test);
 
+            test.addTestMark(testMark);
+
             dataBaseCore.create(testMark);
         }
     }

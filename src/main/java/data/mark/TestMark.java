@@ -22,7 +22,7 @@ public class TestMark {
     private Test test;
     @Column(name = "mark")
     private Integer mark;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_student")
     private Student student;
     @Column(name = "comment", length = 280)
