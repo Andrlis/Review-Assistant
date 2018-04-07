@@ -17,15 +17,16 @@ public class TestMark {
     @Column(name = "id_test_result")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne()
-    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_test")
     private Test test;
     @Column(name = "mark")
     private Integer mark;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
     private Student student;
+    @Column(name = "comment", length = 280)
+    private String comment;
 
     public TestMark() {
         mark = -1;
@@ -60,13 +61,11 @@ public class TestMark {
     }
 
     public String getComment() {
-        //TODO
-        return "Temp comment for test mark";
+        return this.comment;
     }
 
-    public void setComment(String comment) throws NoSuchMethodException {
-        //TODO
-        throw new NoSuchMethodException("Not imlemented method");
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public void setStudent(Student student) {

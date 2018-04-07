@@ -1,6 +1,7 @@
 package servlets;
 
 import data.mark.LabMark;
+import data.mark.TestMark;
 import data.сomment.Comment;
 import logics.CommentLogic;
 import dao.DataBaseCore;
@@ -50,7 +51,9 @@ public class SaveCommentServlet extends HttpServlet {
                     dataBaseCore.update(classComment);
                     break;
                 case "test" : //test
-                    break;
+                    TestMark testMark = (TestMark) dataBaseCore.getById(TestMark.class, secondCommentId);
+                    testMark.setComment(comment);
+                    dataBaseCore.update(testMark);
                 case "bonus" ://bonus
                     break;
             }

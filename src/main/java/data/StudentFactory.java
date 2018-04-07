@@ -25,8 +25,8 @@ public class StudentFactory {
         groupLogic = new GroupLogic(core);
     }
 
-    public Student createStudent(String studentName, String eMail, String gitRepo,
-                                 String groupNumber, String subGroupNumber){
+    public Student createInDataBaseStudent(String studentName, String eMail, String gitRepo,
+                                 String groupNumber, String subGroupNumber) throws DataBaseQueryException {
 
         Student student = new Student();
 
@@ -45,19 +45,20 @@ public class StudentFactory {
             labMark.setStudent(student);
 
             student.addLabMark(labMark);
+
+            //dataBaseCore.create(labMark);
         }
 
-        try {
-            for(Object o: dataBaseCore.getAll(Test.class)){
-                Test test = (Test) o;
+        for(Object o: dataBaseCore.getAll(Test.class)) {
+            Test test = (Test) o;
 
-                TestMark testMark = new TestMark();
-                testMark.setTest(test);
-                testMark.setStudent(student);
-                student.addTestMark(testMark);
-            }
-        } catch (DataBaseQueryException e) {
-            e.printStackTrace();
+            TestMark testMark = new TestMark();
+            testMark.setTest(test);
+            testMark.setStudent(student);
+
+            student.addTestMark(testMark);
+
+            //dataBaseCore.create(testMark);
         }
 
         return student;

@@ -33,7 +33,7 @@ public class SaveStudent extends HttpServlet {
             if (studentId.equals("")) {
                 StudentFactory studentFactory = new StudentFactory(dataBaseCore);
 
-                Student student = studentFactory.createStudent(studentName, eMail, gitRepo,
+                Student student = studentFactory.createInDataBaseStudent(studentName, eMail, gitRepo,
                         groupNumber, subGroupNumber);
 
                 dataBaseCore.create(student);

@@ -16,7 +16,6 @@ import logics.CommentLogic;
 import logics.TestLogic;
 import exceptions.DataBaseCriteriaCountException;
 import exceptions.DataBaseQueryException;
-import resources.TableMaker.Convetrters.*;
 import jsonMaker.jsonData.BonusMark;
 import jsonMaker.jsonData.Class;
 import jsonMaker.jsonData.Key;
