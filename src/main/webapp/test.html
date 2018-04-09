@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/app.js"></script>
+    <!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
     <link rel='stylesheet' href="bootstrap/css/bootstrap.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/app.css" media="screen">
     <link rel="stylesheet" href="external/css/font-awesome.css">
@@ -12,40 +12,166 @@
     <script src="external/js/jquery.js"></script>
     <script src="external/js/bootstrap.js"></script>
 
+    <!-- Include Required Prerequisites -->
     <script type="text/javascript" src="external/js/moment.js"></script>
 
+    <!-- Include Date Range Picker -->
     <script type="text/javascript" src="external/js/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="external/css/daterangepicker.css"/>
 
-
-    <title>Title</title>
+    <title>Review-Assistant</title>
+    <link rel="icon" href="picture/git.png">
 </head>
-<body>
+<body class="body-class">
+
+<nav class="navbar navbar-inverse menu-bar-class navbar-fixed-top">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li class="dropdown" style="height: 50px;">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                        class="glyphicon glyphicon-menu-hamburger menu-bar-button-class"></span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <button class="btn btn-linkk ch-tab-type" value="m">Группы</button>
+                    </li>
+                    <li>
+                        <button class="btn btn-linkk ch-tab-type" value="p">Лабараторные</button>
+                    </li>
+                    <li>
+                        <button class="btn btn-linkk ch-tab-type" value="e">Учётные записи</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 
-<div class="modal-dialog">
-    <div class="modal-content center-modal" style="width: 230px;">
+<div class="group-windows-container">
+
+    <div class="modal-content center-modal" id="group-window">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h5 class="modal-title" id="comment-student-name">Григорьев Иван - Лр № 4</h5>
+            <div class="btn-toolbar" role="toolbar">
+
+                <h4 class="pull-left"><strong>550503</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body" style="padding: 5px;">
-            <input type="hidden" id="comment-id" value="commentid">
-            <input type="hidden" id="second-comment-id" value="scommentid">
-            <input type="hidden" id="comment-type" value="type">
-            <form class="form-horizontal">
-                <textarea class="form-control" id="comment-text" rows="3">comment</textarea>
-            </form>
+        <div id="group-window-content">
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>1</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>2</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer" style="padding-top: 5px; padding-bottom: 5px; position: center">
-            <button type="button" class="btn btn-default" data-dismiss="modal"
-                    onclick="">Сохранить
-            </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal"
-                    onclick="">Удалить
-            </button>
+    </div>
+
+    <div class="modal-content center-modal" id="group-window">
+        <div class="modal-header">
+            <div class="btn-toolbar" role="toolbar">
+
+                <h4 class="pull-left"><strong>550503</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="group-window-content">
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>1</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>2</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content center-modal" id="group-window">
+        <div class="modal-header">
+            <div class="btn-toolbar" role="toolbar">
+
+                <h4 class="pull-left"><strong>550503</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="group-window-content">
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>1</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>2</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content center-modal" id="group-window">
+        <div class="modal-header">
+            <div class="btn-toolbar" role="toolbar">
+
+                <h4 class="pull-left"><strong>550503</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="group-window-content">
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>1</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+            <div id="sub-group-window-content">
+                <h4 class="pull-left"><strong>2</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content center-modal" id="group-window">
+
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-default" id="add-group-button"><span class="glyphicon glyphicon-plus"></span></button>
         </div>
     </div>
 </div>
+
 </body>
 </html>
