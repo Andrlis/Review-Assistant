@@ -1,5 +1,7 @@
-package bsuirAPI.bsuirScheduleJson;
+package bsuirAPI.jsonDeserislizers;
 
+import bsuirAPI.timetable.Lesson;
+import bsuirAPI.timetable.Schedule;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
