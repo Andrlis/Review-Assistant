@@ -1,4 +1,4 @@
-package bsuirAPI.bsuirScheduleJson;
+package bsuirAPI.jsonDeserislizers;
 
 import bsuirAPI.timetable.Lesson;
 import bsuirAPI.timetable.Schedule;
