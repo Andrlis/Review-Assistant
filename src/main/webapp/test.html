@@ -55,7 +55,7 @@
 
                 <h4 class="pull-left"><strong>Группа 550501</strong></h4>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-redact-group"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-edit-group"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-delete"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
                 </div>
             </div>
@@ -100,7 +100,7 @@
             <div id="sub-group-window-content">
                 <h4 class="pull-left"><strong>Подгруппа 2</strong></h4>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-redact-subgroup"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-edit-subgroup"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
                 </div>
             </div>
@@ -199,9 +199,9 @@
 </div>
 
 
-<!-- popup form for adding or redact group-->
-<div class="popup" id="popup-redact-group">
-    <div id="popup-form-redact-group" class="modal fade" role="dialog">
+<!-- popup form for adding or edit group-->
+<div class="popup" id="popup-edit-group">
+    <div id="popup-form-edit-group" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -230,8 +230,8 @@
     </div>
 </div>
 
-<!-- popup form for adding or redact group-->
-<div class="popup" id="popup-redact-group">
+<!-- popup form for adding or edit group-->
+<div class="popup" id="popup-edit-group">
     <div id="popup-form-add-subgroup" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -266,9 +266,9 @@
 </div>
 
 
-<!-- popup form for adding or redact group-->
-<div class="popup" id="popup-redact-group">
-    <div id="popup-form-redact-subgroup" class="modal fade" role="dialog">
+<!-- popup form for adding or edit group-->
+<div class="popup">
+    <div id="popup-form-edit-subgroup" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -346,8 +346,8 @@
                 <div class="modal-body">
                     <h4>Вы уверены?</h4>
                 </div>
-                <div class="modal-footer">
-                    <div class="btn-group" style="padding: 10px;">
+                <div class="modal-footer" style="padding: 10px;">
+                    <div class="btn-group" >
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
                             Удалить
                         </button>
