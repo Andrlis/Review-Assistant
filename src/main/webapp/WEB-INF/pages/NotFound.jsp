@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Not found</title>
+    <title>Review-Assistant.Not found</title>
+    <link rel="icon" href="picture/git.png">
 </head>
 <body>
 <h1>404</h1>

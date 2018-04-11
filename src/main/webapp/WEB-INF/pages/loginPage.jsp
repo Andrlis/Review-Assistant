@@ -9,11 +9,15 @@
         <!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
         <link rel='stylesheet' href="bootstrap/css/bootstrap.css" type='text/css' media='all'>
         <!--<link rel="stylesheet" href="css/app.css" media="screen">-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--%>
+        <link rel="stylesheet" href="external/css/font-awesome.css">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Авторизация</title>
+        <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+        <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+        <script src="external/js/jquery.js"></script>
+        <script src="external/js/bootstrap.js"></script>
+        <title>Review-Assistant.Authorization</title>
+        <link rel="icon" href="picture/git.png">
     </head>
     <body>
     <form action="/DoLoginServlet" method="POST">

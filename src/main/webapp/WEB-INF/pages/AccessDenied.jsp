@@ -9,7 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Access denied</title>
+    <title>Review-Assistant.Access denied</title>
+    <link rel="icon" href="picture/git.png">
 </head>
 <body>
 <div style="align: central">

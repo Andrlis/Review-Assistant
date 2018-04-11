@@ -1,25 +1,35 @@
-$(document).ready( function () {
+$(document).ready(function () {
     //setEventsToTable();
     //ShowMarksTable();
 
     $(".ch-tab-type").click(function () {
+
         var val = $(this).attr("value");
-        var cont = $(this).html();
-        $("#info-type").html(cont);
-        $("#info-type").attr("value", val);
-        if (val === 'm')
-        {
+        if (val === 's') {
+            $("#popup-edit-student").hide();
+            $("#popup-add-column").hide();
+            $('#statistic-period').daterangepicker({
+                locale: {
+                    format: 'DD.MM.YYYY'
+                }
+            });
+            $("#popup-statistic-file-window").show();
+            $("#statistic-file-window").modal('show');
+            return;
+        }
+        else if (val === 'm') {
             $("#popup-add-column").show();
             $("#popup-edit-student").hide();
-        } else if (val === 'e')
-        {
+        } else if (val === 'e') {
             $("#popup-edit-student").show();
             $("#popup-add-column").hide();
-        } else
-        {
+        } else {
             $("#popup-edit-student").hide();
             $("#popup-add-column").hide();
         }
+        var cont = $(this).html();
+        $("#info-type").html(cont);
+        $("#info-type").attr("value", val);
         loadTable();
     });
     $(".ch-tab-gr").click(function () {
@@ -32,11 +42,11 @@ $(document).ready( function () {
         loadTable();
     });
 
-    $("#lab-radio-button").click(function() {
+    $("#lab-radio-button").click(function () {
         $("#new-lab-date").show();
     });
 
-    $("#test-radio-button").click(function() {
+    $("#test-radio-button").click(function () {
         $("#new-lab-date").hide();
     });
 
@@ -45,9 +55,10 @@ $(document).ready( function () {
     $("#popup-edit-student").hide();*/
     $("#result-message").hide();
 
-    /*$("#choose-column-type").click(function() {
-        changeNewColumnType();
-    });*/
+    $("#statistic-tab").click(function () {
+
+    });
+
 });
 
 function isUserLoggedIn() {
@@ -62,12 +73,11 @@ function getSimpleCell(data) {
     cell.attr("data-type", data['type']);
     cell.attr("class", data['cell-class']);
     var link = data['link'];
-    if (link == null || link == "")
-    {
+    if (link == null || link == "") {
         cell.append(data['value']);
     }
     else {
-        var linkTag = $('<a></a>', {href : link, target : "_blank"});
+        var linkTag = $('<a></a>', {href: link, target: "_blank"});
         linkTag.append(data['value']);
         cell.append(linkTag);
     }
@@ -112,12 +122,12 @@ function getTableHeaderCollapse(headerArray) {
 
 function getTableBodyCollapse(dataArray, headerArray) {
     var body = $('<tbody style="visibility: collapse;"></tbody>');
-    dataArray.sort(function(a, b) {
+    dataArray.sort(function (a, b) {
         return a[headerArray[0]]['value'] > b[headerArray[0]]['value'];
     });
     var numberOfRow = 0;
     dataArray.forEach(function (data) {
-        numberOfRow ++;
+        numberOfRow++;
         body.append(getSimpleRow(data, headerArray, numberOfRow));
     });
     return body;
@@ -131,20 +141,20 @@ function getTableHeader(headerArray) {
 
 function getTableBody(dataArray, headerArray) {
     var body = $('<tbody></tbody>');
-    dataArray.sort(function(a, b) {
+    dataArray.sort(function (a, b) {
         return a[headerArray[0]]['value'] > b[headerArray[0]]['value'];
     });
     var numberOfRow = 0;
     dataArray.forEach(function (data) {
-        numberOfRow ++;
+        numberOfRow++;
         body.append(getSimpleRow(data, headerArray, numberOfRow));
     });
     return body;
 }
 
 function getHeader(data) {
-    var table ;
-    if(data['args'].length >= 8)
+    var table;
+    if (data['args'].length >= 8)
         table = $("<table style=\"margin-bottom: -1; margin-right: 14px;\"></table>");
     else
         table = $("<table style=\"margin-bottom: -1;\"></table>");
@@ -252,10 +262,84 @@ function loadTable() {
         "&subgroup=" + subgroup +
         "&type=" + type,
         dataType: "json",
-        success: function(data){
+        success: function (data) {
             successFunction(data);
         }
     });
+}
+
+
+//for showing window at any position
+function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
+    /*$("#class-comment").css("position", "absolute");
+    $("#class-comment").css("left", xCoord + "px");
+    $("#class-comment").css("top", yCoord + "px");*/
+
+    $("#class-comment").html(jQueryObject);
+    $("#add-comment").modal('show');
+}
+
+
+function requestForSaveComment(commentMessage){
+    $.ajax({
+        type: "POST",
+        url: "SaveCommentServlet",
+        data: "commentId=" + $("#comment-id").val() +
+        "&secondCommentId=" + $("#second-comment-id").val() +
+        "&type=" + $("#comment-type").val() +
+        "&comment=" + commentMessage
+    });
+}
+
+//save comments from classes
+function deleteComment() {
+    requestForSaveComment("");
+    $("#add-comment").modal('hide');
+    alert("delete");
+}
+
+//save comments from classes
+
+function saveComment() {
+    requestForSaveComment($("#comment-text").val());
+    $("#add-comment").modal('hide');
+    alert("save");
+}
+
+function showComment(comment){//, xCoord, yCoord) {
+    var commentWindow = $("" +
+        "<div class=\"popup\" id=\"popup-add-comment\">\n" +
+        "    <div id=\"add-comment\" class=\"modal fade\" role=\"dialog\">\n" +
+        "        <div class=\"modal-dialog\">\n" +
+        "            <div class=\"modal-content center-modal\">\n" +
+        "                <div class=\"modal-header\">\n" +
+        "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
+        "                    <h4 class=\"modal-title\">Комментарий</h4>\n" +
+        "                    <input type=\"text\" id=\"comment-student-name\" disabled value=\"" + comment['student'] + "\">\n" +
+        "                    <input type=\"text\" id=\"comment-description\" disabled value=\"" + comment['description'] + "\">\n" +
+        "                </div>\n" +
+        "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
+        "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +
+        "                    <input type=\"hidden\" id=\"second-comment-id\" value=\"" + comment['secondCommentId'] + "\">\n" +
+        "                    <input type=\"hidden\" id=\"comment-type\" value=\"" + comment['type'] + "\">\n" +
+        "                    <form class=\"form-horizontal\">\n" +
+        "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
+        "                    </form>\n" +
+        "                </div>\n" +
+        "                <div class=\"modal-footer\">\n" +
+        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+        "                            onclick=\"saveComment()\">Сохранить\n" +
+        "                    </button>\n" +
+        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+        "                            onclick=\"deleteComment()\">Удалить\n" +
+        "                    </button>\n" +
+        "                </div>\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "    </div>\n" +
+        "</div>");
+
+    showFormWithComment(commentWindow);//, xCoord, yCoord);
 }
 
 
@@ -265,12 +349,54 @@ function setEventsToTable() {
 
     //Event for click at button
     $("button.add-col-button").click(function () {
-        
+
         ShowCreateMarkFieldWind();
+    });
+
+
+    function requestForComment(type, commentId, secondCommentId) {
+        //Запрос на сервер за старым комментарием
+        $.ajax({
+            url: "GetComment",
+            data: "commentId=" + commentId +
+            "&secondCommentId=" + secondCommentId +
+            "&type=" + type,
+            dataType: "json",
+            success: showComment//, xCoord, yCoord)
+        });
+
+        //showCommentAtClass("Julia is cool");
+    }
+
+    //click left button at mouse
+    $(".bonus-mark-cell.editable").contextmenu(function (e) {
+        requestForComment("bonus", $(this).attr("data-id"), "");
+        return false;
+    });
+
+    //click left button at mouse
+    $(".test-mark-cell.editable").contextmenu(function (e) {
+        requestForComment("test", $(this).attr("data-id"), "");
+        return false;
+    });
+
+    //click left button at mouse
+    $(".lab-mark-cell.editable").contextmenu(function (e) {
+        requestForComment("lab", $(this).attr("data-id"), "");
+        return false;
+    });
+
+    //click left button at mouse
+    $(".presence-cell.editable").contextmenu(function (e) {
+        requestForComment("class",
+            $(this).parent().children().first().next().attr("data-id"),
+            $(this).attr("data-id"));
+        return false;
     });
 
     //Event for click at cell with presence
     $(".presence-cell.editable").click(function () {
+
         var studentId = $(this).parent().children().first().next().attr("data-id");
         var classId = $(this).attr("data-id");
 
@@ -317,7 +443,7 @@ function setEventsToTable() {
             var data_type = parent.attr("data-type");
             //////Нужна другая проверка в!!!!!
             if (isNaN(val))
-                val="";
+                val = "";
             parent.html(val);
             $.ajax({
                 url: "SaveMarkServlet?id=" + data_id +
@@ -340,26 +466,37 @@ function setEventsToTable() {
     });
 }
 
+
+function createStatisticFile() {
+    var group = $("#statistic-group-number").val();
+    var dates = $("#statistic-period").val().split(' - ');
+    //var till =
+    window.open('./CreateStatisticFile?' + "group=" + group +
+        "&from=" + dates[0] +
+        "&till=" + dates[1]);
+
+    $("#statistic-file-window").modal('hide');
+}
+
 /*
     functions for showing popup-add-column form: after pressing button "Добавить"
  */
 
-function formAndShowPopupFormAddColumn(data)
-{
+function formAndShowPopupFormAddColumn(data) {
     $("#new-column-type").html("");
 
     $("#new-lab-number").html(data['lab-number']);
     $("#new-test-number").html(data['test-number']);
 
-   /* var labOption = $("<option></option>");
-    labOption.attr("value", "lab");
-    labOption.html("Лабораторная работа " + data['lab-number']);
-    $("#new-column-type").append(labOption);
+    /* var labOption = $("<option></option>");
+     labOption.attr("value", "lab");
+     labOption.html("Лабораторная работа " + data['lab-number']);
+     $("#new-column-type").append(labOption);
 
-    var testOption = $("<option></option>");
-    testOption.attr("value", "test");
-    testOption.html("Контрольная работа " + data['test-number']);
-    $("#new-column-type").append(testOption);*/
+     var testOption = $("<option></option>");
+     testOption.attr("value", "test");
+     testOption.html("Контрольная работа " + data['test-number']);
+     $("#new-column-type").append(testOption);*/
 
     $("#new-lab-date").html("");
     data['dates'].forEach(function (date) {
@@ -373,8 +510,7 @@ function formAndShowPopupFormAddColumn(data)
     //disablePageEvents();
 }
 
-function showPopupFormAddColumn()
-{
+function showPopupFormAddColumn() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     $.ajax({
@@ -382,31 +518,27 @@ function showPopupFormAddColumn()
         "group=" + group +
         "&subgroup=" + subgroup,
         dataType: "json",
-        success: function(data){
+        success: function (data) {
             formAndShowPopupFormAddColumn(data);
         }
     });
 }
 
-function cancelPopupFormAddColumn()
-{
+function cancelPopupFormAddColumn() {
     $("#popup-form-add-column").removeClass("show");
     enablePageEvents();
 }
 
-function errorAddLabOrTestButton()
-{
+function errorAddLabOrTestButton() {
 
 }
 
-function succesAddLabOrTestButton()
-{
+function succesAddLabOrTestButton() {
     loadTable();
     setEventsToTable();
 }
 
-function addLabOrTestButton()
-{
+function addLabOrTestButton() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var type = $('#choose-column-type input:radio:checked').val();
@@ -440,15 +572,13 @@ function addLabOrTestButton()
 
 /*Functions for disable and enable page*/
 
-function disablePageEvents()
-{
+function disablePageEvents() {
     $("#navbar").addClass("disabled");
     $("#table-container").addClass("disabled");
     $("#table-title").addClass("disabled");
 }
 
-function enablePageEvents()
-{
+function enablePageEvents() {
     $("#navbar").removeClass("disabled");
     $("#table-container").removeClass("disabled");
     $("#table-title").removeClass("disabled");
@@ -458,8 +588,7 @@ function enablePageEvents()
     function for showing popup-edit-student form: after pressing button "Добавить студента"
  */
 
-function formAndShowPopupFormEditStudent(student)
-{
+function formAndShowPopupFormEditStudent(student) {
     $("#student-id").attr("value", student['id']);
     $("#student-name").val(student['name']);
     $("#student-surname").val(student['surname']);
@@ -469,8 +598,7 @@ function formAndShowPopupFormEditStudent(student)
     //disablePageEvents();
 }
 
-function showEmptyPopupFormEditStudent()
-{
+function showEmptyPopupFormEditStudent() {
     var student = {};
     student['id'] = "";
     student['name'] = "";
@@ -482,8 +610,7 @@ function showEmptyPopupFormEditStudent()
 
 }
 
-function showPopupFormEditStudent(event)
-{
+function showPopupFormEditStudent(event) {
     var row = $(event.target).parent();
     var children = row.children();
     var student = {};
@@ -498,52 +625,46 @@ function showPopupFormEditStudent(event)
     formAndShowPopupFormEditStudent(student);
 }
 
-function cancelPopupFormEditStudent()
-{
+
+function cancelPopupFormEditStudent() {
     //$("#popup-form-edit-student").removeClass("show");
 
     enablePageEvents();
 }
 
-function errorDeleteStudent()
-{
+function errorDeleteStudent() {
 
 }
 
 
-function successDeleteStudent()
-{
+function successDeleteStudent() {
     loadTable();
     setEventsToTable();
-   // cancelPopupFormEditStudent();
+    // cancelPopupFormEditStudent();
 }
 
-function deleteStudentButtonClick()
-{
+function deleteStudentButtonClick() {
     var studentId = $("#student-id").attr("value");
     $.ajax({
         url: "DeleteStudent?" +
         "studentId=" + studentId,
-        success: function(data){
+        success: function (data) {
             successDeleteStudent();
         }
     });
     //cancelPopupFormEditStudent();
 }
 
-function successSaveStudent()
-{
+function successSaveStudent() {
     loadTable();
     setEventsToTable();
 }
 
-function errorSaveStudent()
-{
+function errorSaveStudent() {
 
 }
 
-function saveStudentButtonClick()
-{
+function saveStudentButtonClick() {
     var group = $("#group-number").attr("value");
     var subgroup = $("#subgroup-number").attr("value");
     var studentName = $("#student-name").val();
@@ -597,6 +718,8 @@ function hideResultMessage() {
     var password = $("#login-password").val("");
     $("#result-message").hide();
 }
+
+
 
 
 

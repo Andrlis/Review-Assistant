@@ -59,8 +59,24 @@ public class TestMark {
         return student;
     }
 
+    public String getComment() {
+        //TODO
+        return "Temp comment for test mark";
+    }
+
+    public void setComment(String comment) throws NoSuchMethodException {
+        //TODO
+        throw new NoSuchMethodException("Not imlemented method");
+    }
+
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public double getRealMark() {
+        if (mark > 0)
+            return mark;
+        else return 0;
     }
 
     public static final Comparator<TestMark> COMPARATOR_BY_NUMBER_OF_TEST = new Comparator<TestMark>() {
@@ -69,4 +85,5 @@ public class TestMark {
             return testMark.getTest().getTestNumber() - t1.getTest().getTestNumber();
         }
     };
+
 }

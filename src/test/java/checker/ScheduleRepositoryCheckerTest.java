@@ -2,7 +2,6 @@ package checker;
 
 import data.group.Group;
 import data.group.GroupsKeeper;
-import resources.Hibernate.HibernateShell;
 import bsuirAPI.BsuirRequests;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -17,11 +16,12 @@ import org.powermock.api.mockito.PowerMockito;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import resources.Hibernate.HibernateCore;
 
 import java.util.Arrays;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(HibernateShell.class)
+@PrepareForTest(HibernateCore.class)
 public class ScheduleRepositoryCheckerTest {
     private GroupsKeeper groupsKeeper;
     private Group group;
@@ -69,13 +69,14 @@ public class ScheduleRepositoryCheckerTest {
 
     @Test
     public void testGroupScheduleCheck() throws Exception {
+        HibernateCore hibernateCore = HibernateCore.getInstance();
         System.out.println("test ScheduleChecker.groupScheduleCheck");
         SessionFactory mockSessionFactory = Mockito.mock(org.hibernate.SessionFactory.class);
         Configuration mockConfig = Mockito.mock(Configuration.class);
         Mockito.when(mockConfig.buildSessionFactory()).thenReturn(mockSessionFactory);
-        PowerMockito.mockStatic(HibernateShell.class);
+        PowerMockito.mockStatic(HibernateCore.class);
 
-        expect(HibernateShell.getGroupKeeper()).andReturn(groupsKeeper);
+        expect(hibernateCore.getGroupKeeper()).andReturn(groupsKeeper);
         expect(BsuirRequests.getTimetable((String)anyObject())).andReturn(strXml);
         expect(BsuirRequests.getCurrentWeek()).andReturn("1");
         PowerMockito.verifyStatic(VerificationModeFactory.times(1));

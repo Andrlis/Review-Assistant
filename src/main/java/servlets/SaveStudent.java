@@ -16,6 +16,7 @@ import java.io.IOException;
 public class SaveStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        StudentHibernateShell studentHibernateShell = new StudentHibernateShell();
         String groupNumber = (String) req.getParameter("group");
         String subGroupNumber = (String) req.getParameter("subgroup");
         String studentName = (String) req.getParameter("surname");
@@ -27,10 +28,10 @@ public class SaveStudent extends HttpServlet {
 
         try {
             if (studentId.equals("")) {
-                StudentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
+                studentHibernateShell.insertStudent(groupNumber, subGroupNumber, studentName, eMail, gitRepo);
             } else {
                 try {
-                    StudentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
+                    studentHibernateShell.updateStudent(studentId, studentName, eMail, gitRepo);
                 } catch (HibernateShellQueryException e) {
                     e.printStackTrace();
                 }

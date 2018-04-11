@@ -4,9 +4,12 @@ import data.group.SubGroup;
 import data.lab.Lab;
 import data.mark.LabMark;
 import data.mark.TestMark;
+import data.сomment.Comment;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import resources.Hibernate.CommentsHibernateShell;
+import resources.Hibernate.HibernateShellQueryException;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -55,11 +58,17 @@ public class Student implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group_subgroup")
     private SubGroup subGroup;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_student")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Comment> commentList;
+
 
     public Student() {
         this.missedUniversityClassesList = new ArrayList<UniversityClass>();
         this.labMarkList = new ArrayList<LabMark>();
         this.testMarkList = new ArrayList<TestMark>();
+        this.commentList = new ArrayList<Comment>();
     }
 
     public Integer getId() {
@@ -100,6 +109,26 @@ public class Student implements Serializable {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public String getCommentForBonusMark() {
+        return "Temp comment for bonus mark";
+    }
+
+    public void setCommentForBonusMark(String comment) throws NoSuchMethodException {
+        throw new NoSuchMethodException("Realise method");
+    }
+
+    public String getCommentForClass(Integer classId) {
+        CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
+
+        return commentsHibernateShell.getComment(id, classId);
+    }
+
+    public void setCommentForClass(Integer classId, String comment) throws NoSuchMethodException, HibernateShellQueryException {
+        CommentsHibernateShell commentsHibernateShell = new CommentsHibernateShell();
+
+        commentsHibernateShell.updateComment(id, classId, comment);
     }
 
     public List<LabMark> getLabMarkList() {
@@ -215,6 +244,18 @@ public class Student implements Serializable {
     public List<TestMark> sortTestMarkList() {
         Collections.sort(this.testMarkList, TestMark.COMPARATOR_BY_NUMBER_OF_TEST);
         return this.testMarkList;
+    }
+
+    public List<Comment> getCommentList(){
+        return this.commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList){
+        this.commentList = commentList;
+    }
+
+    public void addComment(Comment comment){
+        this.commentList.add(comment);
     }
 
     @Override

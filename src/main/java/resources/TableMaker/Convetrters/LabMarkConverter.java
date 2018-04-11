@@ -23,7 +23,7 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
 
         labObject.addProperty(
                 "cell-class",
-                "cell-ui mark-cell" + ( editable ? " editable " : " " ) +
+                "cell-ui mark-cell lab-mark-cell" + ( editable ? " editable " : " " ) +
                         getCoeff(src.getCoefficient())
         );
         labObject.addProperty(
@@ -37,6 +37,9 @@ public class LabMarkConverter implements JsonSerializer<LabMark> {
     }
 
     static public String getCoeff(Double coeff) {
+	    if(coeff == -2){
+	        return "cheat";
+        }
         if(coeff == -1 || coeff == null) {
             return "";
         }

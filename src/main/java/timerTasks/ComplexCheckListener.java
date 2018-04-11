@@ -29,9 +29,8 @@ public class ComplexCheckListener implements ServletContextListener {
             scheduler = new StdSchedulerFactory().getScheduler();
             scheduler.start();
             scheduler.scheduleJob(job, trigger);
-        }
-        catch (SchedulerException e) {
-            logger.error(e.getMessage());
+        } catch (SchedulerException e) {
+            logger.error(e.toString());
         }
     }
 
@@ -39,8 +38,8 @@ public class ComplexCheckListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContext) {
         try {
             scheduler.shutdown();
-        }   catch (SchedulerException e) {
-            logger.error(e.getMessage());
+        } catch (SchedulerException e) {
+            logger.error(e.toString());
         }
     }
 }

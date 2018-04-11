@@ -6,7 +6,7 @@ import data.Student;
 import data.UniversityClass;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.*;
-import resources.Hibernate.HibernateShell;
+import resources.Hibernate.HibernateCore;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -141,8 +141,9 @@ public class SubGroup {
 
     public void decreaseCoefficientOfLabs() {
         for (IssuedLab issuedLab: this.issuedLabsList) {
+            HibernateCore hibernateCore = HibernateCore.getInstance();
             issuedLab.decreaseCoefficient();
-            HibernateShell.update(issuedLab);
+            hibernateCore.update(issuedLab);
         }
     }
 

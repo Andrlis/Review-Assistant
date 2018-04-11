@@ -4,7 +4,6 @@ import data.Student;
 import data.group.GroupsKeeper;
 import data.group.SubGroup;
 import data.lab.LabsKeeper;
-import resources.Hibernate.HibernateShell;
 import resources.Hibernate.StudentHibernateShell;
 import resources.Hibernate.TestHibernateShell;
 

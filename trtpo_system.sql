@@ -92,6 +92,7 @@ id_student INTEGER,
 id_issued_lab INTEGER,
 coefficient DOUBLE NOT NULL,
 mark INTEGER NOT NULL,
+comment VARCHAR(280),
 PRIMARY KEY(id_lab_mark)
 );
 
@@ -117,3 +118,36 @@ id_student INTEGER,
 bonus INTEGER NOT NULL,
 PRIMARY KEY(id_bonus)
 );
+
+CREATE TABLE class_comments(
+id_class_comments INTEGER  AUTO_INCREMENT,
+id_class INTEGER,
+id_student INTEGER,
+comment VARCHAR(280),
+PRIMARY KEY(id_class_comments),
+FOREIGN KEY(id_class) REFERENCES classes(id_class),
+FOREIGN KEY(id_student) REFERENCES students(id_student)
+);
+
+CREATE TABLE lab_mark_comments(
+id_lab_mark_comments INTEGER  AUTO_INCREMENT,
+id_lab_mark INTEGER,
+id_student INTEGER,
+comment VARCHAR(280),
+PRIMARY KEY(id_lab_mark_comments),
+FOREIGN KEY(id_lab_mark) REFERENCES labs_marks(id_lab_mark),
+FOREIGN KEY(id_student) REFERENCES students(id_student)
+);
+
+
+/*
+ALTER TABLE labs_marks ADD comment VARCHAR(280) DEFAULT "" NOT NULL;
+
+CREATE TABLE class_comments
+(
+    id_class_comments INT PRIMARY KEY AUTO_INCREMENT,
+    id_student INT NOT NULL,
+    id_class INT NOT NULL,
+    comment VARCHAR(280) DEFAULT "" NOT NULL
+);
+ */

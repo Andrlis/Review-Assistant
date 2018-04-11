@@ -1,6 +1,9 @@
 package servlets;
 
-import resources.Hibernate.HibernateShell;
+
+import resources.Hibernate.BonusHibernateShell;
+import resources.Hibernate.LabsHibernateShell;
+import resources.Hibernate.TestHibernateShell;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,9 @@ import java.io.IOException;
 public class SaveMarkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LabsHibernateShell labsHibernateShell = new LabsHibernateShell();
+        TestHibernateShell testHibernateShell = new TestHibernateShell();
+        BonusHibernateShell bonusHibernateShell = new BonusHibernateShell();
         String id = (String) req.getParameter("id");
         String type = (String) req.getParameter("type");
         String value = (String) req.getParameter("value");
@@ -25,11 +31,11 @@ public class SaveMarkServlet extends HttpServlet {
             if (value.equals(""))
                 value="-1";
             if (type.equals("lab")) {
-                HibernateShell.updateLabMark(Integer.parseInt(id), Integer.parseInt(value));
+                labsHibernateShell.updateMark(Integer.parseInt(id), Integer.parseInt(value));
             } else if (type.equals("test")) {
-                HibernateShell.updateTestMark(Integer.parseInt(id), Integer.parseInt(value));
+                testHibernateShell.updateTestMark(Integer.parseInt(id), Integer.parseInt(value));
             } else if (type.equals("bonus")) {
-                HibernateShell.updateBonusMark(Integer.parseInt(id), Integer.parseInt(value));
+                bonusHibernateShell.updateBonusMark(id, Integer.parseInt(value));
             }
         } catch (Exception e) {
             e.printStackTrace();
