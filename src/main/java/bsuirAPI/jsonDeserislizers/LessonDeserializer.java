@@ -1,5 +1,6 @@
-package bsuirAPI.bsuirScheduleJson;
+package bsuirAPI.jsonDeserislizers;
 
+import bsuirAPI.timetable.Lesson;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -18,7 +19,7 @@ public class LessonDeserializer implements JsonDeserializer<Lesson> {
 
         JsonArray weeks = jsonObject.getAsJsonArray("weekNumber");
         for(JsonElement week: weeks){
-            lesson.getWeekNumber().add(new Integer(week.getAsInt()));
+            lesson.getWeekNumber().add(week.getAsInt());
         }
 
         return lesson;
