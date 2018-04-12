@@ -53,23 +53,23 @@
         <div class="modal-header">
             <div class="btn-toolbar" role="toolbar">
 
-                <h4 class="pull-left"><strong>550503</strong></h4>
+                <h4 class="pull-left"><strong>Группа 550501</strong></h4>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-edit-group"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-delete"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
                 </div>
             </div>
         </div>
         <div id="group-window-content">
             <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>1</strong></h4>
+                <h4 class="pull-left"><strong>Подгруппа 1</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-delete"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
                 </div>
             </div>
             <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>2</strong></h4>
+                <h4 class="pull-left"><strong>Подгруппа 2</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
@@ -82,7 +82,7 @@
         <div class="modal-header">
             <div class="btn-toolbar" role="toolbar">
 
-                <h4 class="pull-left"><strong>550503</strong></h4>
+                <h4 class="pull-left"><strong>Группа 550502</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
@@ -91,17 +91,39 @@
         </div>
         <div id="group-window-content">
             <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>1</strong></h4>
+                <h4 class="pull-left"><strong>Подгруппа 1</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
                 </div>
             </div>
             <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>2</strong></h4>
+                <h4 class="pull-left"><strong>Подгруппа 2</strong></h4>
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-edit-subgroup"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-content center-modal pull-top" id="group-window">
+        <div class="modal-header">
+            <div class="btn-toolbar" role="toolbar">
+
+                <h4 class="pull-left"><strong>Группа 550503</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                </div>
+            </div>
+        </div>
+        <div id="group-window-content">
+            <div id="sub-group-window-content">
+                <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-form-add-subgroup" onclick="showEmptyPopupFormEditStudent()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -111,7 +133,7 @@
         <div class="modal-header">
             <div class="btn-toolbar" role="toolbar">
 
-                <h4 class="pull-left"><strong>550503</strong></h4>
+                <h4 class="pull-left"><strong>Группа 550504</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
@@ -120,58 +142,226 @@
         </div>
         <div id="group-window-content">
             <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>1</strong></h4>
+                <h4 class="pull-left"><strong>Подгруппа 1</strong></h4>
                 <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
                     <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
                 </div>
             </div>
             <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>2</strong></h4>
                 <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal-content center-modal" id="group-window">
-        <div class="modal-header">
-            <div class="btn-toolbar" role="toolbar">
-
-                <h4 class="pull-left"><strong>550503</strong></h4>
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
-                </div>
-            </div>
-        </div>
-        <div id="group-window-content">
-            <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>1</strong></h4>
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
-                </div>
-            </div>
-            <div id="sub-group-window-content">
-                <h4 class="pull-left"><strong>2</strong></h4>
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-pencil"></span></button>
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-remove"></span></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-content center-modal" id="group-window">
+    <div class="modal-content center-modal" id="group-window" style="padding: 0px;">
 
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default" id="add-group-button"><span class="glyphicon glyphicon-plus"></span></button>
+            <button type="button" class="btn btn-default" id="add-group-button" data-toggle="modal" data-target="#popup-form-add-group" onclick="showEmptyPopupFormEditStudent()">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
         </div>
     </div>
 </div>
+
+<!-- popup form for adding or edditing group-->
+<div class="popup" id="popup-edit-student">
+    <div id="popup-form-add-group" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Добавление новой группы</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="width: 300px;">
+                        <span class="input-group-addon">№ группы</span>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- popup form for adding or edit group-->
+<div class="popup" id="popup-edit-group">
+    <div id="popup-form-edit-group" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Редактирование группы</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="width: 300px;">
+                        <span class="input-group-addon">№ группы</span>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- popup form for adding or edit group-->
+<div class="popup" id="popup-edit-group">
+    <div id="popup-form-add-subgroup" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Доавить подгруппу</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="input-group" style="width: 300px;">
+                        <span class="input-group-addon">Преподователь</span>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Загрузить
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- popup form for adding or edit group-->
+<div class="popup">
+    <div id="popup-form-edit-subgroup" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Редактировать подгруппу</h4>
+                </div>
+
+
+                <div class="modal-body">
+                    <div class="input-group" style="width: 300px;">
+                        <span class="input-group-addon">Преподователь</span>
+                        <input type="text" class="form-control">
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Имя пользователя</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Загрузить
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- popup form for adding or edditing group-->
+<div class="popup" id="popup-edit-student">
+    <div id="popup-form-delete" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content center-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Удаление</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Вы уверены?</h4>
+                </div>
+                <div class="modal-footer" style="padding: 10px;">
+                    <div class="btn-group" >
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Удалить
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveStudentButtonClick()">
+                            Отмена
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
