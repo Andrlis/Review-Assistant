@@ -22,7 +22,7 @@ public class Group {
     @Column(name = "group_number", length = 10)
     private String numberOfGroup;
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<SubGroup> subGroupList;
 
     public Group() {
