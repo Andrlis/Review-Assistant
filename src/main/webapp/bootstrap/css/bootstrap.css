@@ -6947,21 +6947,21 @@ a:hover {
   padding-bottom: 0px;
 }
 
-#group-window{
+.group-window{
   margin: 25px;
-  padding-bottom: 10px;
+  padding-bottom: 10px;s
   min-height: 170px;
   width: 330px;
 }
 
-#group-window-content {
+.group-window-content {
   width: 300px;
   height: 30px;
   padding-left: 60px;
 }
 
 
-#sub-group-window-content {
+.sub-group-window-content {
   height: -webkit-fill-available;
   margin: 12px;
 }
