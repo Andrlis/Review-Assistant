@@ -5,6 +5,7 @@ import resources.MD5Hash;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -16,20 +17,15 @@ public class User {
     private String username;
     @Column(name = "password", length = 100)
     private String password;
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_lecturer")
-    private Lecturer lecturer;
+    @Column (name = "role", length = 100)
+    private String role;
 
-    public User(){
-        this.username = null;
-        this.password = null;
-        this.lecturer = null;
-    }
+    public User(){ }
 
-    public User(String username, String password, Lecturer lecturer){
+    public User(String username, String password, String role){
         this.username = username;
         this.password = password;
-        this.lecturer = lecturer;
+        this.role = role;
     }
 
     public void setUsername(String username){
@@ -60,11 +56,5 @@ public class User {
         this.id = id;
     }
 
-    public Lecturer getLecturer() {
-        return lecturer;
-    }
-
-    public void setLecturer(Lecturer lecturer) {
-        this.lecturer = lecturer;
-    }
+    public boolean isAdmin() { return role.equals("ADMIN"); }
 }
