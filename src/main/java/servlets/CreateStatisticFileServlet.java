@@ -30,13 +30,10 @@ public class CreateStatisticFileServlet extends HttpServlet {
             Date fromDate = dateFormat.parse(fromDateString);
             Date toDate = dateFormat.parse(toDateString);
             String filePath = StatisticCollector.createStatisticFile(groupNumber, fromDate, toDate);
-            req.setAttribute("path", filePath);
             attachFile(resp, filePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //req.getRequestDispatcher("/DownloadFileServlet").forward(req, resp);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class StudInfoParser {
     }
 
     private static String getValidValue(Cell cell) {
-        if (cell.getCellTypeEnum() != CellType.STRING)
+        if (cell == null || cell.getCellTypeEnum() != CellType.STRING)
             return "";
         else return cell.getStringCellValue();
     }

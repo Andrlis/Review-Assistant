@@ -239,7 +239,6 @@ function formEditTable(data) {
     setEventsToTable();
 }
 
-
 function loadTable() {
     $("#table-header").html("");
     var div = $('<div style="width: 200px"></div>');
@@ -268,7 +267,6 @@ function loadTable() {
     });
 }
 
-
 //for showing window at any position
 function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
     /*$("#class-comment").css("position", "absolute");
@@ -279,8 +277,7 @@ function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
     $("#add-comment").modal('show');
 }
 
-
-function requestForSaveComment(commentMessage){
+function requestForSaveComment(commentMessage) {
     $.ajax({
         type: "POST",
         url: "SaveCommentServlet",
@@ -298,7 +295,6 @@ function deleteComment() {
 }
 
 //save comments from classes
-
 function saveComment() {
     requestForSaveComment($("#comment-text").val());
     $("#add-comment").modal('hide');
@@ -337,7 +333,6 @@ function showComment(comment) {//, xCoord, yCoord) {
 
     showFormWithComment(commentWindow);//, xCoord, yCoord);
 }
-
 
 //events for table with marks or presence
 function setEventsToTable() {
@@ -713,6 +708,18 @@ function hideResultMessage() {
     var username = $("#login-email").val("");
     var password = $("#login-password").val("");
     $("#result-message").hide();
+}
+
+function uploadFile() {
+    // var fileName = $("#uploaded-file").va
+    // if (fileName.a = endOf(".xls")) {
+    //     $.ajax({
+    //         url: "/UploadStatisticFileServlet"
+    //     })
+    // }
+    $.ajax({
+        url: "/UploadStudentInfoFileServlet"
+    })
 }
 
 
