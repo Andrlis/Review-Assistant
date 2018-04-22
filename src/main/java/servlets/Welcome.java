@@ -1,5 +1,6 @@
 package servlets;
 
+import data.User;
 import logics.GroupLogic;
 
 import java.io.IOException;
@@ -20,8 +21,16 @@ public class Welcome extends HttpServlet {
 
         try {
             request.setAttribute("groups", groupLogic.getAll());
+            User user = (User)request.getSession().getAttribute("user");
+
+            String redirection;
+            if (user != null && user.isAdmin())
+                redirection = "WEB-INF/pages/adminPage.jsp";
+            else
+                redirection = "WEB-INF/pages/index.jsp";
+
             request
-                    .getRequestDispatcher("WEB-INF/pages/index.jsp")
+                    .getRequestDispatcher(redirection)
                     .forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
