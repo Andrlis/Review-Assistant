@@ -1,137 +1,49 @@
+USE trtpo_system;
+
 SET NAMES 'utf8';
 SET CHARACTER SET 'utf8';
 SET SESSION collation_connection = 'utf8_general_ci';
-
-USE trtpo_system;
 
 INSERT INTO lecturers(full_name)
 VALUES ('Искра Наталья Александровна');
 INSERT INTO lecturers(full_name)
 VALUES ('Яночкин Алексей Леонидович');
 
-INSERT INTO users(username, password, id_lecturer)
-VALUES ("Iskra", "Iskra",
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Искра Наталья Александровна'));
-INSERT INTO users(username, password, id_lecturer)
-VALUES ("Yanochkin", "Yanochkin",
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Яночкин Алексей Леонидович'));
+INSERT INTO users(username, password, role)
+VALUES ("Iskra", "Iskra", "USER");
+INSERT INTO users(username, password, role)
+VALUES ("Yanochkin", "Yanochkin", "USER");
+INSERT INTO users(username, password, role)
+VALUES ("Admin", "Admin", "ADMIN");
 
-INSERT INTO groups(group_number, bsuir_api_group_id, amount_of_test)
-VALUES ('550501', '550501', 0);
-INSERT INTO groups(group_number, bsuir_api_group_id, amount_of_test)
-VALUES ('550502', '550502', 0);
-INSERT INTO groups(group_number, bsuir_api_group_id, amount_of_test)
-VALUES ('550503', '550503', 0);
-INSERT INTO groups(group_number, bsuir_api_group_id, amount_of_test)
-VALUES ('550504', '550504', 0);
 
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550501'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Яночкин Алексей Леонидович'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550501'), '1');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550501'),
-	"2018-01-11 18:45:00");
+INSERT INTO groups(group_number)
+VALUES ('550501');
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES ((
+  SELECT id_lecturer FROM groups WHERE group_number == '550501',
+  '1',
+  SELECT id_group FROM lecturers WHERE full_name == 'Искра Наталья Александровна'
+));
+INSERT INTO classes(id_subgroup, class_date)
+VALUES ((SELECT MAX(id_subgroup) from subgroups, "2018-01-11 18:45:00");
 
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550502'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Яночкин Алексей Леонидович'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550502'),
-	'1');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550502'),
-	"2018-01-12 18:45:00");
 
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550502'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Яночкин Алексей Леонидович'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550502'),
-	'2');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550502'),
-	"2018-01-22 18:45:00");
-
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550503'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Искра Наталья Александровна'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550503'),
-	'1');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550503'),
-	"2018-01-13 18:45:00");
-
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550503'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Искра Наталья Александровна'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550503'),
-	'2');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550503'),
-	"2018-01-23 18:45:00");
-
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550504'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Искра Наталья Александровна'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550504'),
-	'1');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550504'),
-	"2018-01-14 18:45:00");
-
-INSERT INTO groups_subgroups(id_group, id_lecturer)
-VALUES ((SELECT id_group FROM groups WHERE group_number='550504'),
-	(SELECT id_lecturer FROM lecturers WHERE full_name='Искра Наталья Александровна'));
-INSERT INTO subgroups (id_group_subgroup, subgroup_number)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550504'),
-	'2');
-INSERT INTO classes(id_group_subgroup, class_date)
-VALUES ((SELECT MAX(id_group_subgroup)
-	FROM groups_subgroups AS gr_sub
-	INNER JOIN groups AS gr ON gr.id_group=gr_sub.id_group
-	WHERE group_number='550504'),
-	"2018-01-24 18:45:00");
+INSERT INTO groups(group_number)
+VALUES ('550502');
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES ((
+  SELECT id_lecturer FROM groups WHERE group_number == '550502',
+  '1',
+  SELECT id_group FROM lecturers WHERE full_name == 'Яночкин Алексей Леонидович'
+));
+INSERT INTO classes(id_subgroup, class_date)
+VALUES ((SELECT MAX(id_subgroup) from subgroups, "2018-01-11 18:45:00");
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES ((
+  SELECT id_lecturer FROM groups WHERE group_number == '550502',
+  '2',
+  SELECT id_group FROM lecturers WHERE full_name == 'Яночкин Алексей Леонидович'
+));
+INSERT INTO classes(id_subgroup, class_date)
+VALUES ((SELECT MAX(id_subgroup) from subgroups, "2018-01-11 18:45:00");
