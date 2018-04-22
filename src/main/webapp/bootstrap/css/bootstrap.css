@@ -6941,15 +6941,14 @@ a:hover {
 
 #add-group-button{
   font-size: 50px;
-  border-color: white;
-  height:  170px;
+  height:  175px;
   width: 330px;
   padding-bottom: 0px;
 }
 
 .group-window{
   margin: 25px;
-  padding-bottom: 10px;s
+  padding-bottom: 10px;
   min-height: 170px;
   width: 330px;
 }
