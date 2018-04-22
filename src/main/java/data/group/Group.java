@@ -21,13 +21,9 @@ public class Group {
     private Integer id;
     @Column(name = "group_number", length = 10)
     private String numberOfGroup;
-    @Column(name = "bsuir_api_group_id", length = 10)
-    private String scheduleApiGroupNumber;
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<SubGroup> subGroupList;
-    @Column(name = "amount_of_test")
-    private Integer amountOfTest;
 
     public Group() {
         this.subGroupList = new ArrayList<SubGroup>();
@@ -49,14 +45,6 @@ public class Group {
         this.numberOfGroup = numberOfGroup;
     }
 
-    public String getScheduleApiGroupNumber() {
-        return scheduleApiGroupNumber;
-    }
-
-    public void setScheduleApiGroupNumber(String scheduleApiGroupNumber) {
-        this.scheduleApiGroupNumber = scheduleApiGroupNumber;
-    }
-
     public List<SubGroup> getSubGroupList() {
         return subGroupList;
     }
@@ -73,23 +61,10 @@ public class Group {
         this.subGroupList = subGroupList;
     }
 
-    public Integer getAmountOfTest() {
-        return amountOfTest;
-    }
-
-    public void setAmountOfTest(Integer amountOfTest) {
-        this.amountOfTest = amountOfTest;
-    }
-
     public void addSubGroup(SubGroup subGroup) {
         logger.info("Add subgroup(number " + subGroup.getSubGroupNumber() +") from group(" + this.getNumberOfGroup() + ").");
         if (!this.subGroupList.contains(subGroup))
             this.subGroupList.add(subGroup);
-    }
-
-    public void addTest() {
-        logger.info("Add test fron group(" + this.getNumberOfGroup() + ").");
-        this.amountOfTest++;
     }
 
     @Override

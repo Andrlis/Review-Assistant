@@ -10,7 +10,7 @@ CREATE TABLE users(
 id_user INTEGER AUTO_INCREMENT,
 username VARCHAR(100),
 password VARCHAR(100),
-id_lecturer INTEGER,
+role VARCHAR(100),
 PRIMARY KEY(id_user)
 );
 
@@ -23,24 +23,17 @@ PRIMARY KEY(id_lecturer)
 CREATE TABLE  groups(
 id_group INTEGER AUTO_INCREMENT,
 group_number VARCHAR(20),
-bsuir_api_group_id VARCHAR(20) NOT NULL,
-amount_of_test INTEGER NOT NULL,
 PRIMARY KEY(id_group)
-);
-
-CREATE TABLE groups_subgroups (
-id_group_subgroup INTEGER AUTO_INCREMENT,
-id_group INTEGER,
-id_lecturer INTEGER,
-PRIMARY KEY(id_group_subgroup)
 );
 
 CREATE TABLE subgroups (
 id_subgroup int AUTO_INCREMENT,
-id_group_subgroup INTEGER,
+id_group INTEGER,
 subgroup_number varchar(5) NOT NULL,
+id_lecturer INTEGER,
 PRIMARY KEY(id_subgroup),
-FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
+FOREIGN KEY(id_group) REFERENCES groups(id_group),
+FOREIGN KEY(id_lecturer) REFERENCES lecturers(id_lecturer)
 );
 
 CREATE TABLE students(
@@ -49,15 +42,15 @@ full_name varchar(100) NOT NULL,
 git_user_name varchar(30) NOT NULL,
 git_repo_name varchar(30) NOT NULL,
 email varchar(30) NULL,
-id_group_subgroup int,
+id_subgroup int,
 PRIMARY KEY(id_student),
-FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup)
+FOREIGN KEY(id_subgroup) REFERENCES subgroups(id_subgroup)
 );
 
 CREATE TABLE classes(
   id_class INTEGER AUTO_INCREMENT,
   class_date DATETIME NOT NULL,
-  id_group_subgroup INTEGER,
+  id_subgroup INTEGER,
   PRIMARY KEY(id_class)
 );
 
@@ -81,14 +74,14 @@ CREATE TABLE labs(
 CREATE TABLE issued_labs(
 id_issued_lab INTEGER AUTO_INCREMENT,
 id_lab INTEGER ,
-id_group_subgroup INTEGER,
+id_subgroup INTEGER,
 id_class_of_issue INTEGER,
 coefficient DOUBLE NOT NULL,
 id_class_deadline INTEGER,
 last_check_date_time DATETIME NOT NULL,
 PRIMARY KEY(id_issued_lab),
 FOREIGN KEY(id_lab) REFERENCES labs(id_lab),
-FOREIGN KEY(id_group_subgroup) REFERENCES groups_subgroups(id_group_subgroup),
+FOREIGN KEY(id_subgroup) REFERENCES subgroups(id_subgroup),
 FOREIGN KEY(id_class_of_issue) REFERENCES classes(id_class)
 );
 
@@ -142,25 +135,3 @@ FOREIGN KEY(id_class) REFERENCES classes(id_class),
 FOREIGN KEY(id_student) REFERENCES students(id_student)
 );
 
-CREATE TABLE lab_mark_comments(
-id_lab_mark_comments INTEGER  AUTO_INCREMENT,
-id_lab_mark INTEGER,
-id_student INTEGER,
-comment VARCHAR(280),
-PRIMARY KEY(id_lab_mark_comments),
-FOREIGN KEY(id_lab_mark) REFERENCES labs_marks(id_lab_mark),
-FOREIGN KEY(id_student) REFERENCES students(id_student)
-);
-
-
-/*
-ALTER TABLE labs_marks ADD comment VARCHAR(280) DEFAULT "" NOT NULL;
-
-CREATE TABLE class_comments
-(
-    id_class_comments INT PRIMARY KEY AUTO_INCREMENT,
-    id_student INT NOT NULL,
-    id_class INT NOT NULL,
-    comment VARCHAR(280) DEFAULT "" NOT NULL
-);
- */

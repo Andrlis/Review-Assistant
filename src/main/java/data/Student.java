@@ -54,7 +54,7 @@ public class Student implements Serializable {
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_group_subgroup")
+    @JoinColumn(name = "id_subgroup")
     private SubGroup subGroup;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")

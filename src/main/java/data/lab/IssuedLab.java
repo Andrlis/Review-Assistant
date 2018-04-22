@@ -57,7 +57,7 @@ public class IssuedLab implements Serializable {
     private List<Student>   studentControlList;
     @ManyToOne()
     @Cascade({org.hibernate.annotations.CascadeType.MERGE})
-    @JoinColumn(name = "id_group_subgroup")
+    @JoinColumn(name = "id_subgroup")
     private SubGroup        subGroup;
 
     public IssuedLab() {
