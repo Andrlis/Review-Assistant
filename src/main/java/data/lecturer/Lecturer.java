@@ -21,7 +21,7 @@ public class Lecturer {
     @Column(name = "full_name", length = 100)
     private String fullName;
     @OneToMany(mappedBy = "lecturer", cascade = CascadeType.MERGE)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<SubGroup> subGroupList;
 
 

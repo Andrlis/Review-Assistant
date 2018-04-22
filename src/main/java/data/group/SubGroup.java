@@ -29,16 +29,16 @@ public class SubGroup {
     private String subGroupNumber;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_subgroup")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<Student> studentsList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_subgroup")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<UniversityClass> universityClassesList;
     @OneToMany()
     @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "id_subgroup")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<IssuedLab> issuedLabsList;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_group")

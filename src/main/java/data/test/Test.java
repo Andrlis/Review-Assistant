@@ -27,7 +27,7 @@ public class Test {
     @Temporal(TemporalType.TIMESTAMP)
     private Date testDate;
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "test")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<TestMark> testMarkList;
 
     public Test() {

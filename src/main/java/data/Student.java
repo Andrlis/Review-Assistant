@@ -41,15 +41,15 @@ public class Student implements Serializable {
     @JoinTable(name = "absentees",
             joinColumns = @JoinColumn(name = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "id_class"))
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<UniversityClass> missedUniversityClassesList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<LabMark> labMarkList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<TestMark> testMarkList;
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;
@@ -58,7 +58,7 @@ public class Student implements Serializable {
     private SubGroup subGroup;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<Comment> commentList;
 
 

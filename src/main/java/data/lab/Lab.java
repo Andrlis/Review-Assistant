@@ -22,7 +22,7 @@ public class Lab {
     @Column(name = "key_word", length = 20)
     private String keyWord;
     @OneToMany(mappedBy = "labDescription", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     private List<IssuedLab> issuedLabList;
 
     public Lab() {
