@@ -88,6 +88,11 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 <a name="mtd"/>
 
 ## План мероприятий по устранению технического долга
+- Провести рефакторинг работы с БД
+- Провести рефакторинг работы с BSUIR API
+- Покрыть код тестами
+- Упростить структура БД
+- Уничтожить лишние ветки
 
 <a name="compare"/>
 
