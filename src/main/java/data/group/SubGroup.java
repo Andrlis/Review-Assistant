@@ -18,29 +18,26 @@ import java.util.List;
  * class containing information about subgroup and list of classes, list of laboratory work
  */
 @Entity
-@Table(name = "groups_subgroups")
-@SecondaryTable(name = "subgroups", pkJoinColumns =
-@PrimaryKeyJoinColumn(name = "id_group_subgroup", referencedColumnName = "id_group_subgroup"))
-@Proxy(lazy = false)
+@Table(name = "subgroups")
 public class SubGroup {
     private static final Logger logger = Logger.getLogger(SubGroup.class);
     @Id
-    @Column(name = "id_group_subgroup")
+    @Column(name = "id_subgroup")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "subgroup_number", table = "subgroups", length = 5)
     private String subGroupNumber;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_group_subgroup")
+    @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student> studentsList;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_group_subgroup")
+    @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> universityClassesList;
     @OneToMany()
     @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name = "id_group_subgroup")
+    @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabsList;
     @ManyToOne(cascade = CascadeType.ALL)

@@ -78,7 +78,6 @@ public class BsuirXmlParser implements BsuirParserInterface {
 
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) node;
-                group.setScheduleApiGroupNumber(element.getElementsByTagName("id").item(0).getTextContent());
                 group.setNumberOfGroup(element.getElementsByTagName("name").item(0).getTextContent());
                 groupList.add(group);
             }
