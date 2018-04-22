@@ -1,5 +1,6 @@
 <%@page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -67,14 +68,14 @@
                 <div class="btn-toolbar" role="toolbar">
                     <h4 class="pull-left">
                         <strong>
-                            Группа ${group.numberOfGroup}"
+                            Группа ${group.numberOfGroup}
                         </strong>
                     </h4>
                     <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-group">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-group" onclick="">
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete" onclick="">
                             <span class="glyphicon glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
@@ -89,20 +90,20 @@
                             </strong>
                         </h4>
                         <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default">
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-subgroup" onclick="">
                                 <span class="glyphicon glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete">
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete" onclick="">
                                 <span class="glyphicon glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
                     </div>
                 </c:forEach>
                 <c:choose>
-                    <c:when test="${group.subGroupList.length < 2}">
+                    <c:when test="${fn:length(group.subGroupList) < 2}">
                         <div class="sub-group-window-content">
                             <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default">
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-subgroup" onclick="">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </div>
@@ -116,7 +117,7 @@
     <!--Add new group-->
     <div class="modal-content center-modal group-window" style="padding: 0px;">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default" id="add-group-button" data-toggle="modal" data-target="#popup-add-group" onclick="">
+            <button type="button" class="btn btn-default" id="add-group-button" data-toggle="modal" data-target="#popup-edit-group" onclick="">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
@@ -124,8 +125,8 @@
 </div>
 
 <!-- popup form for adding or edditing group-->
-<div class="popup" id="popup-edit-group">
-    <div id="popup-form-edit-group" class="modal fade" role="dialog">
+<div class="popup">
+    <div id="popup-edit-group" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -223,8 +224,8 @@
 
 
 <!-- popup form for delete-->
-<div class="popup" id="popup-delete">
-    <div id="popup-form-delete" class="modal fade" role="dialog">
+<div class="popup">
+    <div id="popup-delete" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
