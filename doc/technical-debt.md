@@ -65,6 +65,9 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 
 ### Отсутствие автоматизации (тестов, сборки, развёртывания)
 Отсутсвует автоматизация(тестов, сборки, развёртывания)
+
+<a name="architecture_before"/>
+
 ### Запутанная архитектура и ненужные сложные зависимости
 Превосходный привер запутанной архитектуры - [усложнённая работа с БД](https://github.com/Andrlis/Review-Assistant/tree/5bd456b8c874fd04ebf2f4d1b27b021e63b9f9de/src/main/java/resources/Hibernate):
 
@@ -74,6 +77,9 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 - Отсутствие в коде интерфейсов.
 - Большое колличество повторяющегося кода.
 - Искуственно усложнённая работа с БД.
+
+[после исправления ТД](#architecture_after)
+
 ### Медленные / неэффективные средства
 Основное время работы нашего приложения - работа с БД. Время обращения увеличивается ещё больше из-за сложных зависимостей, лишних таблиц в БД, отсутсвия lazyCollection.
 ### Незакоммиченый код / долгоживущие ветки
@@ -132,3 +138,12 @@ public Object getById(Class c, Integer id) throws DataBaseQueryException {
 }
 ```
 [до устранения ТД](#duplicate_code_before)
+
+<a name="architecture_after"/>
+
+### Запутанная архитектура и ненужные сложные зависимости
+После рефакторинга были исправлены основные ошибки. Так же рефакторинг позволит в дальнейшем писать более качественные unit тесты, за счёт выделения основных интерфейсов.
+
+![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D0%B1%D0%B4%20%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%20%D1%80%D0%B5%D1%84%D0%B0%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D0%BD%D0%B3%D0%B0.jpg)
+
+[до устранения ТД](#architecture_before)
