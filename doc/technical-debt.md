@@ -61,7 +61,7 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
   return universityClass;
 }
 ```
-[после устранения ТД](duplicate_code_after)
+[после устранения ТД](#duplicate_code_after)
 
 ### Отсутствие автоматизации (тестов, сборки, развёртывания)
 Отсутсвует автоматизация(тестов, сборки, развёртывания)
