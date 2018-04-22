@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import data.Student;
 import data.UniversityClass;
+import data.group.Group;
 import data.group.SubGroup;
 import data.lab.IssuedLab;
 import data.lab.Lab;
+import data.lecturer.Lecturer;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import data.сomment.Comment;
@@ -24,6 +26,32 @@ import jsonMaker.jsonData.Template;
 import java.util.*;
 
 public class JsonMaker {
+    public static String getJsonGroups(List<Group> groups){
+        ArrayList<Map<String,Object>> groupArray = new ArrayList<>();
+        for (Group group : groups){
+            groupArray.add(getGroupMap(group));
+        }
+
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        if (!groupArray.isEmpty()) {
+            map.put("header", sortHeader(groupArray.get(0).keySet()));
+        } else {
+            map.put("header", new ArrayList<Object>());
+        }
+
+        map.put("args", groupArray);
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Group.class, new GroupConverter());
+        gsonBuilder.registerTypeAdapter(SubGroup.class, new SubGroupConverter());
+        gsonBuilder.registerTypeAdapter(Lecturer.class, new LecturerConverter());
+
+        Gson gson = gsonBuilder.create();
+
+        return gson.toJson(map);
+    }
+
     public static String getJsonSubGroupMarks(SubGroup subGroup, boolean editable) {
 
         ArrayList<Map<String, Object>> studentArray = new ArrayList<Map<String, Object>>();
@@ -259,6 +287,18 @@ public class JsonMaker {
         Gson gson = builder.create();
 
         return gson.toJson(map);
+    }
+
+    private static Map<String, Object> getGroupMap(Group group){
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("group", group);
+
+        for (SubGroup subGroup : group.getSubGroupList()){
+            map.put("subGroup", subGroup);
+            map.put("lecturer", subGroup.getLecturer());
+        }
+
+        return map;
     }
 
     private static Map<String, Object> getStudentMarkMap(Student student) {
