@@ -21,17 +21,18 @@ PRIMARY KEY(id_lecturer)
 );
 
 CREATE TABLE  groups(
+id_group int AUTO_INCREMENT,
 group_number VARCHAR(20),
-PRIMARY KEY(group_number)
+PRIMARY KEY(id_group)
 );
 
 CREATE TABLE subgroups (
 id_subgroup int AUTO_INCREMENT,
-group_number VARCHAR(20),
+id_group VARCHAR(20),
 subgroup_number varchar(5) NOT NULL,
 id_lecturer INTEGER,
 PRIMARY KEY(id_subgroup),
-FOREIGN KEY(group_number) REFERENCES groups(group_number),
+FOREIGN KEY(id_group) REFERENCES groups(id_group),
 FOREIGN KEY(id_lecturer) REFERENCES lecturers(id_lecturer)
 );
 

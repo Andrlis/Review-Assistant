@@ -16,6 +16,9 @@ import java.util.List;
 public class Group {
     private static final Logger logger = Logger.getLogger(Group.class);
     @Id
+    @Column(name = "id_group")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name = "group_number", length = 10)
     private String numberOfGroup;
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
@@ -24,6 +27,14 @@ public class Group {
 
     public Group() {
         this.subGroupList = new ArrayList<SubGroup>();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNumberOfGroup() {
