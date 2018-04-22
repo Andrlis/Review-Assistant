@@ -41,7 +41,7 @@ public class SubGroup {
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<IssuedLab> issuedLabsList;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_group")
+    @JoinColumn(name = "group_number")
     private Group group;
     @ManyToOne()
     @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})

@@ -15,7 +15,6 @@ public class GroupConverter implements JsonSerializer<Group> {
         JsonObject object = new JsonObject();
 
         object.addProperty("value", group.getNumberOfGroup());
-        object.addProperty("id", group.getId().toString());
         return object;
     }
 }
