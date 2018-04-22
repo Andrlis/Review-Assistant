@@ -9,6 +9,9 @@
 ## Технический долг в проекте
 
 ### Непонятный / нечитабельный код
+
+<a name="duplicate_code_before"/>
+
 ### Дублирующийся кода
 Отличный пример дублирующегося кода - бльшое количество методов get...ById при работе с БД([файл до рефакторинга](https://github.com/Andrlis/Review-Assistant/blob/18c70b3ffb3d62af002e02acb7dec2d4cb049ae8/src/main/java/resources/Hibernate/HibernateCore.java)):
 ```java
@@ -58,6 +61,7 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
   return universityClass;
 }
 ```
+[после устранения ТД](duplicate_code_after)
 
 ### Отсутствие автоматизации (тестов, сборки, развёртывания)
 Отсутсвует автоматизация(тестов, сборки, развёртывания)
@@ -97,16 +101,17 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 <a name="compare"/>
 
 ## Сравнение объёма долга и недоимплементированных фич
+Рефакторинг работы с БД и BSUIR API, в дальнейшем, позволит упростить написание unit тестов. И в целом упростит дальнейшее написание кода. Таким образос целесообразно провести данные мероприятия.
+
+Покрытие кода тестами позволит ускорить цикл интеграции.
 
 <a name="resault"/>
 
 ## Результаты устранения технического долга
 
-После рефакторинга были исправлены основные ошибки. Так же рефакторинг позволит в дальнейшем писать более качественные unit тесты, за счёт выделения основных интерфейсов().
+<a name="duplicate_code_after"/>
 
-
-
-
+### Дублирующийся кода
 После рефакторинга, для получения любой сущности по её id используется один метод([файл после рефакторинга](https://github.com/Andrlis/Review-Assistant/blob/master/src/main/java/dao/DataBaseCore.java)):
 ```java
 public Object getById(Class c, Integer id) throws DataBaseQueryException {
@@ -126,3 +131,4 @@ public Object getById(Class c, Integer id) throws DataBaseQueryException {
   return answer;
 }
 ```
+[до устранения ТД](#duplicate_code_before)
