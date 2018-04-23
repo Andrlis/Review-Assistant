@@ -10,7 +10,11 @@
 
 ### Непонятный / нечитабельный код
 
+<a name="unreadable_before"/>
+
 [Пример нечитабельного кода при проверке репозиториев](https://github.com/Andrlis/Review-Assistant/blob/b82484c6c66273e4c16f8190308cae94ff754020/src/main/java/checker/Checker.java)
+[после устранения ТД](#unreadable_after)
+
 <a name="duplicate_code_before"/>
 
 ### Дублирующийся кода
@@ -65,7 +69,7 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 [после устранения ТД](#duplicate_code_after)
 
 ### Отсутствие автоматизации (тестов, сборки, развёртывания)
-Отсутсвует автоматизация(тестов, сборки, развёртывания)
+Отсутсвует автоматизация тестов, сборки.
 
 <a name="architecture_before"/>
 
@@ -88,13 +92,17 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/%D0%B2%D0%B5%D1%82%D0%BA%D0%B8.jpg)
 
-Только одна из них(master) используется по назвачению.
-### Отсутствие / несоответствие технической документации
-Проблемы с документацией проявляются в отсутствии части отчётов по ЛР.
-### Отсутствие тестовой среды
-Из-за усложнённой структуры проекта, написание тестов становится сложной задачей.
-### Длинные циклы интеграции / отсутствие непрерывной интеграции
+Только одна из них (master) используется по назвачению.
 
+<a name="tests_defore"/>
+
+### Отсутствие тестовой среды
+До устранения ТД тесты находятся в неактуальном состоянии. В части тестов отсутствовола необъодимость. Некоторые тесты не работали либо работали неправильно.
+В проекте не использовалось мутационное тестирование.
+
+![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/%D1%82%D0%B5%D1%81%D1%82%D1%8B.jpg)
+
+[после устанения ТД](#tests_after)
 
 <a name="mtd"/>
 
@@ -115,6 +123,14 @@ public UniversityClass getUniversityClassById(Integer id) throws HibernateShellQ
 <a name="resault"/>
 
 ## Результаты устранения технического долга
+
+<a name="unreadable_after"/>
+
+### Непонятный / нечитабельный код
+Для устанения непонтного кода, был  применён патерн рефакторинга - Извлечение метода. Это позволило убрать слишком длинный метод, уменьшить сложностью внутри метода и облегчить последующую работу с ним. 
+[Код после рефакторинга](https://github.com/Andrlis/Review-Assistant/blob/master/src/main/java/checker/RepositoryChecker.java)
+
+[до устранения ТД](#unreadable_before)
 
 <a name="duplicate_code_after"/>
 
@@ -148,3 +164,9 @@ public Object getById(Class c, Integer id) throws DataBaseQueryException {
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%20%D1%81%20%D0%B1%D0%B4%20%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%20%D1%80%D0%B5%D1%84%D0%B0%D0%BA%D1%82%D0%BE%D1%80%D0%B8%D0%BD%D0%B3%D0%B0.jpg)
 
 [до устранения ТД](#architecture_before)
+
+<a name="tests_after"/>
+
+### Отсутствие тестовой среды
+
+[до устранения ТД](#tests_before)
