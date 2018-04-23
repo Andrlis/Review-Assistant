@@ -709,20 +709,3 @@ function hideResultMessage() {
     var password = $("#login-password").val("");
     $("#result-message").hide();
 }
-
-function uploadFile() {
-    // var fileName = $("#uploaded-file").va
-    // if (fileName.a = endOf(".xls")) {
-    //     $.ajax({
-    //         url: "/UploadStatisticFileServlet"
-    //     })
-    // }
-    $.ajax({
-        url: "/UploadStudentInfoFileServlet"
-    })
-}
-
-
-
-
-

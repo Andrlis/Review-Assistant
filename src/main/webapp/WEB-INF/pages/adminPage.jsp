@@ -24,6 +24,19 @@
 
     <title>Review-Assistant</title>
     <link rel="icon" href="picture/git.png">
+
+
+    <%--Created by Adrlis. For upload file input--%>
+    <style>
+        #uploaded-file {
+            width: 0.1px;
+            height: 0.1px;
+            position: absolute;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body class="body-class">
 
@@ -72,10 +85,12 @@
                         </strong>
                     </h4>
                     <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-group" onclick="">
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                data-target="#popup-edit-group" onclick="">
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete" onclick="">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete"
+                                onclick="">
                             <span class="glyphicon glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
@@ -90,10 +105,12 @@
                             </strong>
                         </h4>
                         <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-subgroup" onclick="">
+                            <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#popup-edit-subgroup" onclick="">
                                 <span class="glyphicon glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete" onclick="">
+                            <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#popup-delete" onclick="">
                                 <span class="glyphicon glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -103,7 +120,8 @@
                     <c:when test="${fn:length(group.subGroupList) < 2}">
                         <div class="sub-group-window-content">
                             <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-edit-subgroup" onclick="">
+                                <button type="button" class="btn btn-default" data-toggle="modal"
+                                        data-target="#popup-edit-subgroup" onclick="">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </div>
@@ -117,7 +135,8 @@
     <!--Add new group-->
     <div class="modal-content center-modal group-window" style="padding: 0px;">
         <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default" id="add-group-button" data-toggle="modal" data-target="#popup-edit-group" onclick="">
+            <button type="button" class="btn btn-default" id="add-group-button" data-toggle="modal"
+                    data-target="#popup-edit-group" onclick="">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
@@ -153,8 +172,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 <!-- popup form for adding or edit subgroup-->
@@ -216,6 +233,11 @@
                             Сохранить
                         </button>
                     </div>
+                    <div class="pull-left">
+                        <input id="uploaded-file" type="file" name="fileName" accept=".xls">
+                        <label for="uploaded-file" class="btn btn-default" style="width: auto; margin-left: 10%">Выберите
+                            файл</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,7 +260,7 @@
                     <h4>Вы уверены?</h4>
                 </div>
                 <div class="modal-footer" style="padding: 10px;">
-                    <div class="btn-group" >
+                    <div class="btn-group">
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
                             Удалить
                         </button>
