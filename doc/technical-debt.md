@@ -8,11 +8,11 @@
 
 ## Технический долг в проекте
 
-### Непонятный / нечитабельный код
-
 <a name="unreadable_before"/>
 
+### Непонятный / нечитабельный код
 [Пример нечитабельного кода при проверке репозиториев](https://github.com/Andrlis/Review-Assistant/blob/b82484c6c66273e4c16f8190308cae94ff754020/src/main/java/checker/Checker.java)
+
 [после устранения ТД](#unreadable_after)
 
 <a name="duplicate_code_before"/>
@@ -169,4 +169,4 @@ public Object getById(Class c, Integer id) throws DataBaseQueryException {
 
 ### Отсутствие тестовой среды
 
-[до устранения ТД](#tests_before)
+[до устранения ТД](#tests_defore)
