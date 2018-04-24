@@ -1,9 +1,12 @@
 package servlets;
 
+import dao.DataBaseCore;
 import data.User;
+import data.lecturer.Lecturer;
 import logics.GroupLogic;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,10 +27,13 @@ public class Welcome extends HttpServlet {
             User user = (User)request.getSession().getAttribute("user");
 
             String redirection;
-            if (user != null && user.isAdmin())
+            if (user != null && user.isAdmin()) {
+                request.setAttribute("lecturers", DataBaseCore.getInstance().getAll(Lecturer.class));
                 redirection = "WEB-INF/pages/adminPage.jsp";
-            else
+            }
+            else {
                 redirection = "WEB-INF/pages/index.jsp";
+            }
 
             request
                     .getRequestDispatcher(redirection)

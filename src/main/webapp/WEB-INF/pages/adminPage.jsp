@@ -188,33 +188,16 @@
                     <div class="modal-body">
                         <div class="input-group" style="width: 300px;">
                             <span class="input-group-addon">Преподаватель</span>
-                            <input type="" name="teacher" class="form-control">
+                            <select class="select-style" name="lecturer">
+                                <c:forEach items="${lecturers}" var="lec">
+                                    <option value="${lec.id}">${lec.fullName}</option>
+                                </c:forEach>
+                            </select>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Имя</th>
-                                    <th>Фамилия</th>
-                                    <th>Имя пользователя</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group pull-right">
-                            <input id="uploaded-file" type="file" name="file" accept=".xls">
-                            <label for="uploaded-file" class="btn btn-default" style="width: auto; margin-left: 10%">
-                                    Добавить студентов
-                            </label>
+                            <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить студентов">
                             <input type="submit" value="Сохранить">
                         </div>
 
