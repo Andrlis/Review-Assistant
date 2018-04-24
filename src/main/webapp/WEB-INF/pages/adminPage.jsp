@@ -27,7 +27,7 @@
 
 
     <%--Created by Adrlis. For upload file input--%>
-    <style>
+    <!--<style>
         #uploaded-file {
             width: 0.1px;
             height: 0.1px;
@@ -36,7 +36,7 @@
             overflow: hidden;
             opacity: 0;
         }
-    </style>
+    </style>-->
 </head>
 <body class="body-class">
 
@@ -178,68 +178,51 @@
 <div class="popup">
     <div id="popup-edit-subgroup" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content center-modal">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Редактировать подгруппу</h4>
-                </div>
-
-
-                <div class="modal-body">
-                    <div class="input-group" style="width: 300px;">
-                        <span class="input-group-addon">Преподаватель</span>
-                        <input type="text" class="form-control">
+                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Редактировать подгруппу</h4>
                     </div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Имя</th>
-                            <th>Фамилия</th>
-                            <th>Имя пользователя</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="modal-body">
+                        <div class="input-group" style="width: 300px;">
+                            <span class="input-group-addon">Преподаватель</span>
+                            <input type="" name="teacher" class="form-control">
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Имя пользователя</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-right">
+                            <input id="uploaded-file" type="file" name="file" accept=".xls">
+                            <label for="uploaded-file" class="btn btn-default" style="width: auto; margin-left: 10%">
+                                    Добавить студентов
+                            </label>
+                            <input type="submit" value="Сохранить">
+                        </div>
 
-                <div class="modal-footer">
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
-                            Добавить студентов
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
-                            Сохранить
-                        </button>
                     </div>
-                    <div class="pull-left">
-                        <input id="uploaded-file" type="file" name="fileName" accept=".xls">
-                        <label for="uploaded-file" class="btn btn-default" style="width: auto; margin-left: 10%">Выберите
-                            файл</label>
-                    </div>
-                </div>
+
+                </form>
             </div>
+
         </div>
     </div>
 </div>

@@ -21,13 +21,13 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(ServletFileUpload.isMultipartContent(request)){
             try {
+
+
                 List<FileItem> multiparts = new ServletFileUpload(
                         new DiskFileItemFactory()).parseRequest(request);
 
                 for(FileItem item : multiparts){
                     if(!item.isFormField()){
-                        if(!item.getName().endsWith(".xls"))
-                            throw new Exception("Incorrect file type. Please choose .xls file");
                         File uploadedFile = new File(item.getName());
                         item.write(uploadedFile);
 
