@@ -35,8 +35,7 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //String description = getValue(("description")); // Retrieves <input type="text" name="description">
-        String t = (String)request.getParameter("lecturer");
+
         if(ServletFileUpload.isMultipartContent(request)){
             try {
                 List<FileItem> multiparts = new ServletFileUpload(
@@ -51,7 +50,7 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
                         item.write(uploadedFile);
 
                         ArrayList<Student> test = StudInfoParser.parseStudentInfo(uploadedFile);
-                        test.toString();
+
                     }
                 }
 
@@ -60,11 +59,8 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
                 ex.printStackTrace();
             }
 
-        }else{
-            request.setAttribute("message",
-                    "Sorry this Servlet only handles file upload request");
         }
-
+        response.sendRedirect("/Welcome");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
