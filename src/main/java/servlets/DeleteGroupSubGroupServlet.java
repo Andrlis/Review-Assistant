@@ -30,8 +30,6 @@ public class DeleteGroupSubGroupServlet extends HttpServlet {
 
             SubGroup subGroup = group.getSubGroup(s[1]);
 
-            group.setSubGroupList(null);
-            subGroup.setGroup(null);
             try {
                 dataBaseCore.delete(subGroup);
             } catch (DataBaseQueryException e) {
@@ -40,19 +38,13 @@ public class DeleteGroupSubGroupServlet extends HttpServlet {
 
         } else {
             Group group = groupLogic.getByNumber(number);
-            List<SubGroup> subGroupList = group.getSubGroupList();
-            group.setSubGroupList(null);
             try {
-                for (SubGroup subGroup : subGroupList){
-                    dataBaseCore.delete(subGroup);
-                }
-
                 dataBaseCore.delete(group);
             } catch (DataBaseQueryException e) {
                 e.printStackTrace();
             }
         }
 
-
+        resp.sendRedirect("/Welcome");
     }
 }
