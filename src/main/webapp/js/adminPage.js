@@ -40,4 +40,23 @@ function showPopupFormEditGroup(groupNumber) {
     formAndShowPopupFormEditGroup(group);
 }
 
+function formAndShowPopupFormRemove(number) {
+    $("#number").val(number);
+
+    $("#popup-delete").modal('show');
+}
+
+function deleteGroupSubGroup() {
+    var number = $("#number").val();
+
+    $.post(
+        "DeleteGroupSubGroup",
+        {
+            number: number
+        },
+        successSaveGroup
+    );
+}
+
+
 
