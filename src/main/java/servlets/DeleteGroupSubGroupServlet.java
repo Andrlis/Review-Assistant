@@ -2,6 +2,7 @@ package servlets;
 
 import dao.DataBaseCore;
 import data.group.Group;
+import data.group.SubGroup;
 import exceptions.DataBaseQueryException;
 import logics.GroupLogic;
 
@@ -11,40 +12,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-
-@WebServlet("/SaveGroup")
-public class SaveGroupServlets extends HttpServlet {
+@WebServlet("/DeleteGroupSubGroup")
+public class DeleteGroupSubGroupServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GroupLogic groupLogic = new GroupLogic();
         DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
-        String groupNumber = (String) req.getParameter("groupNumber");
-        String newGroupNumber = (String) req.getParameter("newGroupNumber");
+        String number = (String) req.getParameter("number");
 
-        if(groupNumber.equals("")){
-            Group group = new Group();
-            group.setNumberOfGroup(newGroupNumber);
+        String s[] = number.split("_");
+
+        if(s.length == 2){
+            Group group = groupLogic.getByNumber(s[0]);
+
+            SubGroup subGroup = group.getSubGroup(s[1]);
 
             try {
-                dataBaseCore.create(group);
+                dataBaseCore.delete(subGroup);
             } catch (DataBaseQueryException e) {
                 e.printStackTrace();
             }
+
         } else {
-            Group group = groupLogic.getByNumber(groupNumber);
-
-            group.setNumberOfGroup(newGroupNumber);
-
-            //group.setSubGroupList(null);
-
+            Group group = groupLogic.getByNumber(number);
             try {
-                dataBaseCore.update(group);
+                dataBaseCore.delete(group);
             } catch (DataBaseQueryException e) {
                 e.printStackTrace();
             }
         }
+
         resp.sendRedirect("/Welcome");
     }
 }

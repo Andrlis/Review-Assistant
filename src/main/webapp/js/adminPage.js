@@ -1,22 +1,8 @@
 
-function successSaveGroup() {
+function redirection() {
     window.location = "/Welcome"
 }
 
-
-function editGroupButton() {
-    var group_number = $("#group_number").val();
-    var new_group_number = $("#new_group_number").val();
-
-    $.post(
-        "SaveGroup",
-        {
-            newGroupNumber: new_group_number,
-            groupNumber: group_number
-        },
-        successSaveGroup
-    );
-}
 
 function formAndShowPopupFormEditGroup(group) {
     $("#group_number").val(group['groupNumber']);
@@ -39,5 +25,13 @@ function showPopupFormEditGroup(groupNumber) {
 
     formAndShowPopupFormEditGroup(group);
 }
+
+function formAndShowPopupFormRemove(number) {
+    $("#number").val(number);
+
+    $("#popup-delete").modal('show');
+}
+
+
 
 

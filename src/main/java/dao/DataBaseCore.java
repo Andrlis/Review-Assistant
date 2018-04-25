@@ -91,9 +91,11 @@ public class DataBaseCore implements DataBaseCoreInterface {
 
         final Session session = getSession();
 
+        Object o = session.merge(object);
+
         try {
             session.getTransaction().begin();
-            session.update(object);
+            session.update(o);
             session.getTransaction().commit();
         } catch (Exception e) {
             throw new DataBaseQueryException(e);
@@ -109,11 +111,12 @@ public class DataBaseCore implements DataBaseCoreInterface {
         logger.info("DataBaseCore.delete(). " + object.getClass().getName());
 
         final Session session = getSession();
+        Object o = session.merge(object);
 
         try {
             session.getTransaction().begin();
             session.flush();
-            session.delete(object);
+            session.delete(o);
             session.flush();
             session.getTransaction().commit();
         } catch (Exception e) {

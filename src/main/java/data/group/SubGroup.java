@@ -35,12 +35,11 @@ public class SubGroup {
     @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<UniversityClass> universityClassesList;
-    @OneToMany()
-    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<IssuedLab> issuedLabsList;
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_group")
     private Group group;
     @ManyToOne()

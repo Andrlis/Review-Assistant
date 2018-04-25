@@ -90,8 +90,8 @@
                                 onclick="showPopupFormEditGroup('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete"
-                                onclick="">
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                onclick="formAndShowPopupFormRemove('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
@@ -111,7 +111,7 @@
                                 <span class="glyphicon glyphicon glyphicon-pencil"></span>
                             </button>
                             <button type="button" class="btn btn-default" data-toggle="modal"
-                                    data-target="#popup-delete" onclick="">
+                                    onclick="formAndShowPopupFormRemove('${group.numberOfGroup}_${num.count}')">
                                 <span class="glyphicon glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -166,7 +166,7 @@
 
                     <div class="modal-footer">
                         <div class="btn-group pull-right">
-                            <input type="submit" class="btn btn-default" data-dismiss="modal" value="Сохранить"/>
+                            <input type="submit" class="btn btn-default" value="Сохранить" onclose="redirection()"/>
                         </div>
                     </div>
                 </form>
@@ -200,7 +200,7 @@
                     <div class="modal-footer">
                         <div class="btn-group pull-right">
                             <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить студентов">
-                            <input type="submit" value="Сохранить">
+                            <input type="submit" value="Сохранить" onclick="redirection()">
                         </div>
 
                     </div>
@@ -220,23 +220,24 @@
 
             <!-- Modal content-->
             <div class="modal-content center-modal">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Удаление</h4>
-                </div>
-                <div class="modal-body">
-                    <h4>Удаление невоможно будет отменить.</h4>
-                </div>
-                <div class="modal-footer" style="padding: 10px;">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal" onclick="">
-                            Удалить
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
-                            Отмена
-                        </button>
+                <form action="DeleteGroupSubGroup" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Удаление</h4>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <h4>Удаление невоможно будет отменить.</h4>
+                        <input name="number" id="number" hidden>
+                    </div>
+                    <div class="modal-footer" style="padding: 10px;">
+                        <div class="btn-group">
+                            <input type="submit" class="btn btn-default btn-danger" value="Удалить" onclick="redirection()"/>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
+                                Отмена
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
 
         </div>
