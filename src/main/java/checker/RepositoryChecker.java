@@ -1,6 +1,7 @@
 package checker;
 
 
+import dao.DataBaseCoreInterface;
 import data.group.Group;
 import data.group.SubGroup;
 import data.lab.IssuedLab;
@@ -23,45 +24,54 @@ import java.util.List;
 public class RepositoryChecker {
     private static final Logger logger = Logger.getLogger(RepositoryChecker.class);
 
+    private DataBaseCoreInterface dataBaseCore;
+
+    public RepositoryChecker() {
+        dataBaseCore = DataBaseCore.getInstance();
+    }
+
+    public RepositoryChecker(DataBaseCoreInterface core) {
+        dataBaseCore = core;
+    }
+
     /**
      * Check issue labs in all groups.
      *
      * @param groupList
      */
-    static public void checkForCommitsInGroups(List<Group> groupList) throws CheckException {
+    public void checkForCommitsInGroups(List<Group> groupList) throws CheckException {
         logger.info("Start check for commits of all the groups.");
 
         //loop by group
         for (Group currentGroup : groupList) {
             logger.info("Check commits of " + currentGroup.toString());
-            RepositoryChecker.checkForCommitsInGroup(currentGroup);
+            checkForCommitsInGroup(currentGroup);
         }
         logger.info("End check for commits in all the groups.");
     }
 
-    private static void checkForCommitsInGroup(Group group) throws CheckException {
+    private void checkForCommitsInGroup(Group group) throws CheckException {
         logger.info("Start check for commits of " + group.toString());
         //loop by subgroup
         for (SubGroup currentSubGroup : group.getSubGroupList()) {
             logger.info("Check commits of " + currentSubGroup.toString());
-            RepositoryChecker.checkForCommitsInSubgroup(currentSubGroup);
+            checkForCommitsInSubgroup(currentSubGroup);
         }
         logger.info("End check for commits in group.");
     }
 
-    private static void checkForCommitsInSubgroup(SubGroup subGroup) throws CheckException {
+    private void checkForCommitsInSubgroup(SubGroup subGroup) throws CheckException {
         logger.info("Start check for commits of " + subGroup.toString());
         //loop by issue lab for subgroup
 
         for (IssuedLab currentIssuedLab : subGroup.getIssuedLabsList()) {
-
-            RepositoryChecker.checkIssuedLab(currentIssuedLab);
+            checkIssuedLab(currentIssuedLab);
         }
 
         logger.info("End check for commits is group.");
     }
 
-    static private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
+    private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
         DataBaseCore dataBaseCore = DataBaseCore.getInstance();
         Date newDateOfLastRepoCheck = new Date();
@@ -69,7 +79,7 @@ public class RepositoryChecker {
         //loop by students who did not pass the lab
         for (Student currentStudent : issuedLab.getStudentControlList()) {
             try {
-                RepositoryChecker.checkStudent(currentStudent, issuedLab);
+                checkStudent(currentStudent, issuedLab);
             } catch (CheckException e) {
                 throw new CheckException(e);
             }
@@ -91,7 +101,7 @@ public class RepositoryChecker {
      * @return true if deadline should be changed or false if not
      * @throws CheckException
      */
-    static private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
+    private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
         DataBaseCore dataBaseCore = DataBaseCore.getInstance();
         Date commitDate;

@@ -1,6 +1,7 @@
 package checker;
 
 import bsuirAPI.BsuirParserFactory;
+import dao.DataBaseCoreInterface;
 import data.group.Group;
 import data.group.SubGroup;
 import data.UniversityClass;
@@ -14,6 +15,7 @@ import bsuirAPI.timetable.*;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Andrey.
@@ -22,12 +24,22 @@ import java.util.Date;
 public class ScheduleChecker {
     private static final Logger logger = Logger.getLogger(ScheduleChecker.class);
 
-    public static void groupScheduleCheck() throws Exception {
+    private DataBaseCoreInterface dataBaseCore;
+
+    public ScheduleChecker() {
+        dataBaseCore = DataBaseCore.getInstance();
+    }
+
+    public ScheduleChecker(DataBaseCoreInterface core) {
+        dataBaseCore = core;
+    }
+
+
+    public void groupScheduleCheck(List<Group> groups) throws Exception {
         logger.info("Start schedule check.");
         Timetable timetable;
-        GroupLogic groupLogic = new GroupLogic();
 
-        for (Group group : groupLogic.getAll()) {
+        for (Group group : groups) {
 
             logger.info("Current group number : " + group.getNumberOfGroup() + ".");
 
@@ -44,11 +56,11 @@ public class ScheduleChecker {
                     logger.info("Current lesson for subgroup number " + subgroupNumber + ".");
                     if (subgroupNumber.equals("0")) {
                         for (SubGroup subGroup : group.getSubGroupList())
-                            ScheduleChecker.addNewClassDate(subGroup,
+                            addNewClassDate(subGroup,
                                     TimeLogic.getTodayDatePlusTime(lesson.getLessonTime()),
                                     hasCoefficientOfLabsBeenChanged);
                     } else {
-                        ScheduleChecker.addNewClassDate(group.getSubGroup(subgroupNumber),
+                        addNewClassDate(group.getSubGroup(subgroupNumber),
                                 TimeLogic.getTodayDatePlusTime(lesson.getLessonTime()),
                                 hasCoefficientOfLabsBeenChanged);
                     }
@@ -59,9 +71,9 @@ public class ScheduleChecker {
         logger.info("End schedule check.");
     }
 
-    private static void addNewClassDate(SubGroup subGroup, Date date, boolean[] hasCoefficientOfLabsBeenChanged) {
+    private void addNewClassDate(SubGroup subGroup, Date date,
+                                 boolean[] hasCoefficientOfLabsBeenChanged) {
         UniversityClass universityClass = new UniversityClass();
-        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
         universityClass.setDate(date);
         universityClass.setSubGroup(subGroup);

@@ -9,6 +9,7 @@ import checker.ScheduleChecker;
 
 import java.util.*;
 
+import dao.DataBaseCore;
 import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -18,7 +19,15 @@ import logics.GroupLogic;
 public class ComplexCheckTask implements Job {
 
     private static final Logger logger = Logger.getLogger(ComplexCheckTask.class);
-    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Minsk"));
+    private ScheduleChecker scheduleChecker;
+    private RepositoryChecker repositoryChecker;
+    private Calendar calendar;
+
+    public ComplexCheckTask() {
+        calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Minsk"));
+        scheduleChecker = new ScheduleChecker();
+        repositoryChecker = new RepositoryChecker();
+    }
 
     /*
         Temporary container for holidays.
@@ -38,12 +47,14 @@ public class ComplexCheckTask implements Job {
         try {
             logger.info("Start scheduled task.");
             GroupLogic groupLogic = new GroupLogic();
+            DataBaseCore dataBaseCore = DataBaseCore.getInstance();
 
-            RepositoryChecker.checkForCommitsInGroups(groupLogic.getAll());
+            repositoryChecker.checkForCommitsInGroups(groupLogic.getAll());
 
             if(isMidnight() && !isSunday() && !isHoliday()) {
                 logger.info("Check student`s timetable at midnight.");
-                ScheduleChecker.groupScheduleCheck();
+
+                scheduleChecker.groupScheduleCheck(groupLogic.getAll());
             }
         } catch (Exception e) {
             logger.error(e.toString());
