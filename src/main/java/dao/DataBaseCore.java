@@ -11,8 +11,10 @@ import exceptions.DataBaseCriteriaCountException;
 import exceptions.DataBaseQueryException;
 
 import javax.persistence.criteria.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 public class DataBaseCore implements DataBaseCoreInterface {
     private final Logger logger = Logger.getLogger(DataBaseCore.class);
     private final SessionFactory ourSessionFactory;

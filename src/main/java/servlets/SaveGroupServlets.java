@@ -23,19 +23,22 @@ public class SaveGroupServlets extends HttpServlet {
         String groupNumber = (String) req.getParameter("groupNumber");
         String newGroupNumber = (String) req.getParameter("newGroupNumber");
 
-        if(newGroupNumber.equals("")){
+        if(groupNumber.equals("")){
             Group group = new Group();
-            group.setNumberOfGroup(groupNumber);
+            group.setNumberOfGroup(newGroupNumber);
 
             try {
                 dataBaseCore.create(group);
             } catch (DataBaseQueryException e) {
                 e.printStackTrace();
             }
-        } else{
+        } else {
             Group group = groupLogic.getByNumber(groupNumber);
 
             group.setNumberOfGroup(newGroupNumber);
+
+            group.setSubGroupList(null);
+
 
             try {
                 dataBaseCore.update(group);

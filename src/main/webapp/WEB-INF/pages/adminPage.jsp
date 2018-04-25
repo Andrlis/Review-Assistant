@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/adminPage.js"></script>
     <!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
     <link rel='stylesheet' href="bootstrap/css/bootstrap.css" type='text/css' media='all'>
     <link rel="stylesheet" href="css/app.css" media="screen">
@@ -86,7 +87,7 @@
                     </h4>
                     <div class="btn-group pull-right">
                         <button type="button" class="btn btn-default" data-toggle="modal"
-                                data-target="#popup-edit-group" onclick="">
+                                onclick="showPopupFormEditGroup('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete"
@@ -136,7 +137,7 @@
     <div class="modal-content center-modal group-window" style="padding: 0px;">
         <div class="btn-group pull-right">
             <button type="button" class="btn btn-default" id="add-group-button" data-toggle="modal"
-                    data-target="#popup-edit-group" onclick="">
+                    onclick="showEmptyPopupFormEditGroup()">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
         </div>
@@ -150,24 +151,25 @@
 
             <!-- Modal content-->
             <div class="modal-content center-modal">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Редактирование группы</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group" style="width: 300px;">
-                        <span class="input-group-addon">№ группы</span>
-                        <input type="text" class="form-control">
+                <form action="SaveGroup" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Редактирование группы</h4>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <div class="form-group input-group" style="width: 300px;">
+                            <span class="input-group-addon">№ группы</span>
+                            <input class="form-control" type="text" name="newGroupNumber"  id="new_group_number">
+                            <input name="groupNumber" id="group_number" hidden>
+                        </div>
+                    </div>
 
-                <div class="modal-footer">
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
-                            Сохранить
-                        </button>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-right">
+                            <input type="submit" class="btn btn-default" data-dismiss="modal" value="Сохранить"/>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -240,11 +242,11 @@
                     <h4 class="modal-title">Удаление</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>Вы уверены?</h4>
+                    <h4>Удаление невоможно будет отменить.</h4>
                 </div>
                 <div class="modal-footer" style="padding: 10px;">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
+                        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal" onclick="">
                             Удалить
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
