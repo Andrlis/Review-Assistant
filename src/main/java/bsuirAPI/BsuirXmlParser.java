@@ -35,7 +35,7 @@ public class BsuirXmlParser implements BsuirParserInterface {
             Schedule schedule = new Schedule();
             for (int lesson_id = 0; lesson_id < scheduleModelNodes.getLength(); lesson_id++) {
 
-                if (scheduleModelNodes.item(lesson_id).getNodeName() == "schedule") {
+                if (scheduleModelNodes.item(lesson_id).getNodeName().equals("schedule")) {
 
                     Element xmlSubject = (Element) scheduleModelNodes.item(lesson_id);
                     Lesson lesson = new Lesson();
@@ -53,7 +53,7 @@ public class BsuirXmlParser implements BsuirParserInterface {
 
                     schedule.getLessons().add(lesson);
 
-                } else if (scheduleModelNodes.item(lesson_id).getNodeName() == "weekDay") {
+                } else if (scheduleModelNodes.item(lesson_id).getNodeName().equals("weekDay")) {
                     schedule.setWeekDay(scheduleModelNodes.item(lesson_id).getTextContent());
                 }
             }
@@ -61,28 +61,5 @@ public class BsuirXmlParser implements BsuirParserInterface {
             timetable.getSchedules().add(schedule);
         }
         return timetable;
-    }
-
-    public static ArrayList<Group> parseGroups(String groups) throws Exception {
-        ArrayList<Group> groupList = new ArrayList<Group>();
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse(new InputSource(new ByteArrayInputStream(groups.getBytes("utf-8"))));
-
-        doc.getDocumentElement().normalize();
-        NodeList nodeList = doc.getElementsByTagName("studentGroup");
-
-        for (int temp = 0; temp < nodeList.getLength(); temp++) {
-            Node node = nodeList.item(temp);
-            Group group = new Group();
-
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element element = (Element) node;
-                group.setNumberOfGroup(element.getElementsByTagName("name").item(0).getTextContent());
-                groupList.add(group);
-            }
-        }
-
-        return groupList;
     }
 }

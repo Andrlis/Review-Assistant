@@ -85,7 +85,7 @@ public class ScheduleChecker {
         try {
             dataBaseCore.create(universityClass);
         } catch (DataBaseQueryException e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
         }
     }
 }
