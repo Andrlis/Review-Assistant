@@ -37,8 +37,7 @@ public class SaveGroupServlets extends HttpServlet {
 
             group.setNumberOfGroup(newGroupNumber);
 
-            group.setSubGroupList(null);
-
+            //group.setSubGroupList(null);
 
             try {
                 dataBaseCore.update(group);
@@ -46,5 +45,6 @@ public class SaveGroupServlets extends HttpServlet {
                 e.printStackTrace();
             }
         }
+        resp.sendRedirect("/Welcome");
     }
 }

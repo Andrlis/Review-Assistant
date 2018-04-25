@@ -39,7 +39,7 @@ public class SubGroup {
     @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<IssuedLab> issuedLabsList;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_group")
     private Group group;
     @ManyToOne()
