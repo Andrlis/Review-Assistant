@@ -166,7 +166,7 @@
 
                     <div class="modal-footer">
                         <div class="btn-group pull-right">
-                            <input type="submit" class="btn btn-default" data-dismiss="modal" value="Сохранить"/>
+                            <input type="submit" class="btn btn-default" value="Сохранить" onclick="successSaveGroup()"/>
                         </div>
                     </div>
                 </form>
