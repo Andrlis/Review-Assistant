@@ -90,8 +90,8 @@
                                 onclick="showPopupFormEditGroup('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#popup-delete"
-                                onclick="">
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                onclick="formAndShowPopupFormRemove('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
@@ -111,7 +111,7 @@
                                 <span class="glyphicon glyphicon glyphicon-pencil"></span>
                             </button>
                             <button type="button" class="btn btn-default" data-toggle="modal"
-                                    data-target="#popup-delete" onclick="">
+                                    onclick="formAndShowPopupFormRemove('${group.numberOfGroup}_${num.count}')">
                                 <span class="glyphicon glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -226,10 +226,11 @@
                 </div>
                 <div class="modal-body">
                     <h4>Удаление невоможно будет отменить.</h4>
+                    <input name="number" id="number" hidden>
                 </div>
                 <div class="modal-footer" style="padding: 10px;">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal" onclick="">
+                        <button type="button" class="btn btn-default btn-danger" data-dismiss="modal" onclick="deleteGroupSubGroup()">
                             Удалить
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">
