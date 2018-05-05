@@ -36,4 +36,4 @@ Review Assistant
 - [Архитектурное решение](./doc/files/6sem/ArchitectureSolution.md)
 - [Парное программирование](./doc/files/6sem/report_programming_by_pairs.md)
 - [Технический долг](./doc/files/6sem/technical-debt.md)
-- [Исправление ГУИ](./)
+- Исправление ГУИ
