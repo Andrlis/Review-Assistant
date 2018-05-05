@@ -28,6 +28,12 @@ Review Assistant
 
 Удобные ссылки
 --------------
-[Документация](https://github.com/Andrlis/TRTPOControlSystem/tree/master/doc)
+[Документация](./doc)
 
-[Спецификафия требований](https://github.com/Andrlis/Review-Assistant/blob/master/doc/%D0%A1%D0%BF%D0%B5%D1%86%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F%20%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9.md)
+[Спецификафия требований](./doc/files/5sem/Спецификация%20требований.md)
+
+## Лабораторные работы 6 семестр:
+- [Архитектурное решение](./doc/files/6sem/ArchitectureSolution.md)
+- [Парное программирование](./doc/files/6sem/report_programming_by_pairs.md)
+- [Технический долг](./doc/files/6sem/technical-debt.md)
+- [Исправление ГУИ](./)
