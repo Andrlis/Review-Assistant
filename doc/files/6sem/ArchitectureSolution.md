@@ -23,19 +23,19 @@
   - Хэширование: применить алгоритм SHA-1, который позволяет шифровать пароли без возможности разшифрования.
  ## 6. To be architecture:
  1. Диаграмма компонентов.
-![alt text](../resource/Component-Deployment.png)
+![alt text](../../resource/Component-Deployment.png)
  2. Диаграмма классов.
-![alt text](../resource/CD1.jpg)
+![alt text](../../resource/CD1.jpg)
  3. Структура базы данных.
-![alt text](../resource/DB1.jpg)
+![alt text](../../resource/DB1.jpg)
 
  # Часть 2
  ## As is architecture:
   1. Диаграмма компонентов.
-![alt text](../resource/Component-Deployment.png)
+![alt text](../../resource/Component-Deployment.png)
  2. Диаграмма классов.
-![alt text](../resource/CD2.jpg)
+![alt text](../../resource/CD2.jpg)
  3. Структура базы данных.
-![alt text](../resource/DB2.jpg)
+![alt text](../../resource/DB2.jpg)
  # Часть 3
    Добавление в приложение нового функционала вызвало внесение некоторых корректировок в структуру БД и привело к изменениям архитектуры, которые заметны на диаграммах классов.   
