@@ -178,7 +178,7 @@ public class JsonMaker {
         String type = "bonus";
         String commentId = "" + student.getId();
         String secondCommentId = "";
-        String comment = student.getCommentForBonusMark();
+        String comment = student.getComment();
 
         return JsonMaker.formJsonForComment(
                 studentName, descr,

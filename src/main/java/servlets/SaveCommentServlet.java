@@ -1,5 +1,6 @@
 package servlets;
 
+import data.Student;
 import data.mark.LabMark;
 import data.mark.TestMark;
 import data.сomment.Comment;
@@ -51,10 +52,13 @@ public class SaveCommentServlet extends HttpServlet {
                     dataBaseCore.update(classComment);
                     break;
                 case "test" : //test
-                    TestMark testMark = (TestMark) dataBaseCore.getById(TestMark.class, secondCommentId);
+                    TestMark testMark = (TestMark) dataBaseCore.getById(TestMark.class, commentEntityId);
                     testMark.setComment(comment);
                     dataBaseCore.update(testMark);
                 case "bonus" ://bonus
+                    Student student = (Student) dataBaseCore.getById(Student.class, commentEntityId);
+                    student.setComment(comment);
+                    dataBaseCore.update(student);
                     break;
             }
         } catch (DataBaseQueryException | DataBaseCriteriaCountException e) {
