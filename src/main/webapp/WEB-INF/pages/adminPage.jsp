@@ -105,7 +105,7 @@
                                 Подгруппа ${num.count}
                             </strong>
                         </h4>
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button type="button"
                                     class="btn btn-default"
                                     data-toggle="modal"
@@ -206,7 +206,7 @@
                     </div>
                     <input type="hidden" id="id-gr-sub-lec" name="number" value=""/>
                     <div class="modal-footer">
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить файл"/>
                             <input type="submit" value="Добавить студентов" onclick="redirection()"/>
                         </div>

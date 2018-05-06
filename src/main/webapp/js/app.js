@@ -709,3 +709,27 @@ function hideResultMessage() {
     var password = $("#login-password").val("");
     $("#result-message").hide();
 }
+
+function showLoginModal() {
+    $('#popup-login').modal('show');
+    $('#login-email').focus();
+}
+
+$(document).ready(function(){
+    $('#login-email').keypress(function(e){
+        if(e.keyCode==13)
+            $('#login_button').click();
+    });
+    $('#login-password').keypress(function(e){
+        if(e.keyCode==13)
+            $('#login_button').click();
+    });
+    $('#login-email').keypress(function(e){
+        if(e.keyCode==27)
+            $('#login_hibe').click();
+    });
+    $('#login-password').keypress(function(e){
+        if(e.keyCode==27)
+            $('#login_hibe').click();
+    });
+});

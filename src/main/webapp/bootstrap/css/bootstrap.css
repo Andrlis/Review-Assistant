@@ -6935,7 +6935,7 @@ a:hover {
 
 .group-windows-container{
   position: center;
-  padding-left: 30px;
+  padding-left: 5%;
   padding-top: 70px;
 }
 
@@ -6949,7 +6949,7 @@ a:hover {
 .group-window{
   margin: 25px;
   padding-bottom: 10px;
-  min-height: 170px;
+  min-height: 175px;
   width: 330px;
 }
 

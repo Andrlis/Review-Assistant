@@ -76,7 +76,7 @@
         <c:choose>
             <c:when test="${sessionScope.user == null}">
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="login"><a data-toggle="modal" data-target="#popup-login" class="references"><span
+                    <li id="login"><a data-toggle="modal" class="references" onclick="showLoginModal()"><span
                             class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span
                             class=" menu-bar-button-class"> Войти</span></a></li>
                 </ul>
@@ -253,36 +253,35 @@
 <c:if test="${sessionScope.user == null}">
 
     <div class="popup">
-        <div id="popup-login" class="modal fade" role="dialog">
+        <div id="popup-login" class="modal" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content center-modal">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;
+                        <button id="login_hibe" type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;
                         </button>
                         <h4 class="modal-title">Пожалуйста авторизуйтесь</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="login-email">Логин</label>
+                        <div class="form-group input-group" style="width: 226px;">
+                            <span class="input-group-addon" style="width: 74px;">Логин</span>
                             <input class="form-control" id="login-email" type="text">
                         </div>
-                        <div class="form-group">
-                            <label for="login-password">Пароль</label>
+                        <div class="form-group input-group" style="width: 226px; margin: 0px;">
+                            <span class="input-group-addon">Пароль</span>
                             <input class="form-control" id="login-password" type="password">
                         </div>
                     </div>
                     <input id="result-message" readonly>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" onclick="loginButtonClick()">Войти</button>
+                        <button id="login_button" type="button" class="btn btn-default" onclick="loginButtonClick()">Войти</button>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-
 
 </c:if>
 
