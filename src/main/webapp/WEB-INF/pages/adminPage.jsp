@@ -193,7 +193,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Редактировать подгруппу</h4>
                 </div>
-                <form method="post" action="/SaveSubGroup">
+                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="input-group" style="width: 300px;">
                             <span class="input-group-addon">Преподаватель</span>
@@ -205,13 +205,10 @@
                         </div>
                     </div>
                     <input type="hidden" id="id-gr-sub-lec" name="number" value=""/>
-                    <input type="submit" value="Сохранить" onclick="redirection()">
-                </form>
-                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data">
                     <div class="modal-footer">
                         <div class="btn-group">
-                            <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить файл" required>
-                            <input type="submit" value="Добавить студентов" onclick="redirection()">
+                            <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить файл"/>
+                            <input type="submit" value="Добавить студентов" onclick="redirection()"/>
                         </div>
                     </div>
                 </form>

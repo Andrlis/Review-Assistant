@@ -78,6 +78,14 @@ public class SubGroup {
         this.studentsList = studentsList;
     }
 
+    public void addStudents(List<Student> studentsList) {
+        for (Student student: studentsList) {
+            student.setSubGroup(this);
+            this.addStudent(student);
+        }
+    }
+
+
     public List<UniversityClass> getUniversityClassesList() {
         return universityClassesList;
     }

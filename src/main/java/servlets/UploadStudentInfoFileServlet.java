@@ -1,7 +1,15 @@
 package servlets;
 
+import dao.DataBaseCore;
 import data.Student;
+import data.group.Group;
+import data.group.SubGroup;
+import data.lecturer.Lecturer;
+import exceptions.DataBaseCriteriaCountException;
+import exceptions.DataBaseQueryException;
+import logics.GroupLogic;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import resources.StudInfoParser;
@@ -18,48 +26,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 @MultipartConfig
 @WebServlet("/UploadStudentInfoFileServlet")
 public class UploadStudentInfoFileServlet extends HttpServlet {
 
-    private static String getValue(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream),1);
-        StringBuilder  value  = new StringBuilder();
-        char[]         buffer = new char[1024];
-        for (int length = 0; (length = reader.read(buffer)) > 0;) {
-            value.append(buffer, 0, length);
-        }
-        return value.toString();
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(ServletFileUpload.isMultipartContent(request)){
+        String             lecturerId            = null;
+        String             subgroupIdentificator = null;
+        ArrayList<Student> studentArrayList      = new ArrayList<>();
+
+        if (ServletFileUpload.isMultipartContent(request)) {
+
+            List<FileItem> multiparts = null;
             try {
-                List<FileItem> multiparts = new ServletFileUpload(
+                multiparts = new ServletFileUpload(
                         new DiskFileItemFactory()).parseRequest(request);
-
-                for(FileItem item : multiparts){
-                    if(item.getFieldName().equals("teacher")){
-                        item.getName();
-                    } else if(!item.isFormField()){
-
-                        File uploadedFile = new File(item.getName());
-                        item.write(uploadedFile);
-
-                        ArrayList<Student> test = StudInfoParser.parseStudentInfo(uploadedFile);
-
-                    }
-                }
-
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (FileUploadException e) {
+                e.printStackTrace();
             }
 
+            for (FileItem item : multiparts) {
+                if (item.isFormField()) {
+                    String fieldName  = item.getFieldName();
+                    String fieldValue = item.getString();
+                    if (fieldName.equals("number")) {
+                        subgroupIdentificator = fieldValue;
+                    } else if (fieldName.equals("lecturer")) {
+                        lecturerId = fieldValue;
+                    }
+                } else {
+                    File uploadedFile = new File(item.getName());
+                    try {
+                        item.write(uploadedFile);
+                        studentArrayList = StudInfoParser.parseStudentInfo(uploadedFile);
+                    } catch (Exception e) {
+                    }
+                }
+            }
         }
+
+        try {
+            DataBaseCore dataBaseCore = DataBaseCore.getInstance();
+            GroupLogic   groupLogic   = new GroupLogic();
+            String       s[]          = subgroupIdentificator.split("_");
+            Group        group        = groupLogic.getByNumber(s[0]);
+            SubGroup     subGroup;
+
+            if (s.length == 2) {
+                subGroup = group.getSubGroup(s[1]);
+            } else {
+                subGroup = new SubGroup();
+                subGroup.setSubGroupNumber("" + (group.getSubGroupList().size() + 1));
+                subGroup.setGroup(group);
+                group.addSubGroup(subGroup);
+            }
+
+            Lecturer lecturer;
+            lecturer = (Lecturer) dataBaseCore.getById(Lecturer.class, Integer.parseInt(lecturerId));
+            subGroup.setLecturer(lecturer);
+            subGroup.addStudents(studentArrayList);
+
+            dataBaseCore.update(group);
+        } catch (DataBaseQueryException e) {
+            e.printStackTrace();
+        }
+
         response.sendRedirect("/Welcome");
     }
 
