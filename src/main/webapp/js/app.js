@@ -686,6 +686,7 @@ function successDoLoginServlet(data) {
     }
     else {
         $("#result-message").val(result['message']);
+        $("#result-message").html(result['message'])
         $("#result-message").show();
     }
 }
