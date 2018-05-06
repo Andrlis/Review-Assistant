@@ -585,6 +585,21 @@ function formAndShowPopupFormEditStudent(student) {
     $("#student-surname").val(student['surname']);
     $("#student-eMail").val(student['eMail']);
     $("#student-git").val(student['git']);
+    if(student['type'] == "add"){
+        $("#popup-edit-student-title").html("Добавить студента");
+        $("#student-btn-group").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+            "                                    onclick=\"saveStudentButtonClick()\">Сохранить\n" +
+            "                            </button>");
+    } else {
+        $("#popup-edit-student-title").html(student['surname'] + " " + student['name']);
+        $("#student-btn-group").html("<button id=\"delete-student-button\" type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\"\n" +
+            "                                    onclick=\"deleteStudentButtonClick()\">Удалить\n" +
+            "                            </button>\n" +
+            "                            <button id=\"save-student-button\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+            "                                    onclick=\"saveStudentButtonClick()\">Сохранить\n" +
+            "                            </button>")
+    }
+    $("#student-surname").focus();
     $("#popup-form-edit-student").modal('show');
     //disablePageEvents();
 }
@@ -596,6 +611,7 @@ function showEmptyPopupFormEditStudent() {
     student['surname'] = "";
     student['eMail'] = "";
     student['git'] = "";
+    student['type'] = "add";
     $("#delete-student-button").hide();
     formAndShowPopupFormEditStudent(student);
 
@@ -612,6 +628,7 @@ function showPopupFormEditStudent(event) {
     student['id'] = children.first().next().attr("data-id");
     student['eMail'] = children.first().next().next().html();
     student['git'] = children.first().next().next().next().html();
+    student['type'] = "edit";
     $("#delete-student-button").show();
     formAndShowPopupFormEditStudent(student);
 }
@@ -716,6 +733,7 @@ function showLoginModal() {
     $('#login-email').focus();
 }
 
+
 $(document).ready(function(){
     $('#login-email').keypress(function(e){
         if(e.keyCode==13)
@@ -733,4 +751,39 @@ $(document).ready(function(){
         if(e.keyCode==27)
             $('#login_hibe').click();
     });
+
+
+    $('#student-name').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-surname').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-eMail').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-git').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-name').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-hibe').click();
+    });
+    $('#student-surname').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-hibe').click();
+    });
+    $('#student-eMail').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-hibe').click();
+    });
+    $('#student-git').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-hibe').click();
+    });
+
 });
