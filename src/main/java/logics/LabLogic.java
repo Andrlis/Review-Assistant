@@ -69,7 +69,7 @@ public class LabLogic {
         issuedLab.setSubGroup(subGroup);
 
         subGroup.addIssuedLab(issuedLab);
-        lab.getIssuedLabList().add(issuedLab);
+        lab.addIssuedLab(issuedLab);
 
         dataBaseCore.create(issuedLab);
 

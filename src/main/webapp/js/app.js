@@ -108,11 +108,37 @@ function getSimpleRow(data, header, number) {
 function getHeaderRow(headerArray) {
     var headerRow = $('<tr style="font-weight: bold;"></tr>');
     headerRow.append(getCell("№"));
+
     headerArray.forEach(function (column) {
-        headerRow.append(getHeaderCell(column));
+        var t = column.replace(/\d/g, '');
+        var n = column.replace(/\D/g, '');
+
+        switch (t){
+            case 'student':
+                tr = 'студент';
+                break;
+            case 'lab':
+                tr = 'л.р. ' + n;
+                break;
+            case 'test':
+                tr = 'тест ' + n;
+                break;
+            case 'bonus':
+                tr = 'бонус';
+                break;
+            case 'itog':
+                tr = 'итог';
+                break;
+            default:
+                tr = column;
+        }
+
+        headerRow.append(getHeaderCell(tr));
     });
     return headerRow;
 }
+
+
 
 function getTableHeaderCollapse(headerArray) {
     var header = $('<thead class="table-header" style="visibility: collapse;"></thead>');
@@ -370,17 +396,35 @@ function setEventsToTable() {
         requestForComment("bonus", $(this).attr("data-id"), "");
         return false;
     });
+    $(".bonus-mark-cell.editable").keypress(function(e){
+        if(e.keyCode==13) {
+            $("input:focus").blur();
+            $("input[type='text']:focus").blur();
+        }
+    });
 
     //click left button at mouse
     $(".test-mark-cell.editable").contextmenu(function (e) {
         requestForComment("test", $(this).attr("data-id"), "");
         return false;
     });
+    $(".test-mark-cell.editable").keypress(function(e){
+        if(e.keyCode==13) {
+            $("input:focus").blur();
+            $("input[type='text']:focus").blur();
+        }
+    });
 
     //click left button at mouse
     $(".lab-mark-cell.editable").contextmenu(function (e) {
         requestForComment("lab", $(this).attr("data-id"), "");
         return false;
+    });
+    $(".lab-mark-cell.editable").keypress(function(e){
+        if(e.keyCode==13) {
+            $("input:focus").blur();
+            $("input[type='text']:focus").blur();
+        }
     });
 
     //click left button at mouse
@@ -776,19 +820,19 @@ $(document).ready(function(){
             $('#save-student-button').click();
     });
     $('#student-name').keypress(function(e){
-        if(e.keyCode==13)
+        if(e.keyCode==27)
             $('#save-student-hibe').click();
     });
     $('#student-surname').keypress(function(e){
-        if(e.keyCode==13)
+        if(e.keyCode==27)
             $('#save-student-hibe').click();
     });
     $('#student-eMail').keypress(function(e){
-        if(e.keyCode==13)
+        if(e.keyCode==27)
             $('#save-student-hibe').click();
     });
     $('#student-git').keypress(function(e){
-        if(e.keyCode==13)
+        if(e.keyCode==27)
             $('#save-student-hibe').click();
     });
 });

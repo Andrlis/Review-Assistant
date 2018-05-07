@@ -26,7 +26,7 @@ public class Test {
     @Column(name = "test_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date testDate;
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "test")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "test")
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<TestMark> testMarkList;
 

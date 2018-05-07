@@ -128,7 +128,8 @@
                                 <button type="button"
                                         class="btn btn-default"
                                         data-toggle="modal"
-                                        onclick="showPopupFormEditSubGroup('${group.numberOfGroup}')">
+                                        onclick="showPopupFormEditSubGroup('${group.numberOfGroup}')"
+                                        style="padding-top: 4px; padding-bottom: 8px;">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </div>

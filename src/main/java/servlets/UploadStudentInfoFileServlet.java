@@ -2,6 +2,7 @@ package servlets;
 
 import dao.DataBaseCore;
 import data.Student;
+import data.StudentFactory;
 import data.group.Group;
 import data.group.SubGroup;
 import data.lecturer.Lecturer;
@@ -86,6 +87,11 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
             lecturer = (Lecturer) dataBaseCore.getById(Lecturer.class, Integer.parseInt(lecturerId));
             subGroup.setLecturer(lecturer);
             subGroup.addStudents(studentArrayList);
+
+            StudentFactory studentFactory = new StudentFactory();
+            for (Student stud : studentArrayList){
+                studentFactory.addMarksFromStudent(stud, subGroup);
+            }
 
             dataBaseCore.update(group);
         } catch (DataBaseQueryException e) {

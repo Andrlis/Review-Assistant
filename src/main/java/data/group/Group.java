@@ -68,6 +68,10 @@ public class Group {
             this.subGroupList.add(subGroup);
     }
 
+    public void removeSubGroup(SubGroup subGroup) {
+        this.subGroupList.remove(subGroup);
+    }
+
     @Override
     public String toString() {
         return "Group{" +

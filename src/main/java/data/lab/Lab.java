@@ -75,6 +75,14 @@ public class Lab {
         this.issuedLabList = issuedLabList;
     }
 
+    public void removeIssuedLab(IssuedLab issuedLab){
+        this.issuedLabList.remove(issuedLab);
+    }
+
+    public void addIssuedLab(IssuedLab issuedLab){
+        this.issuedLabList.add(issuedLab);
+    }
+
     @Override
     public String toString() {
         return "Lab{" +

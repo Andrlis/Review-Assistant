@@ -176,7 +176,7 @@
                         <div class="form-group input-group" style="width: 313px;">
                             <span class="input-group-addon" style="width: 85px;">Номер группы</span>
                             <select class="select-style" name="statistic-group-number" id="statistic-group-number"
-                                    style="margin: 0px; width: 100%; border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+                                    style="height: 34px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                                 <c:forEach items="${groups}" var="group">
                                     <option><c:out value="${group.numberOfGroup}"/></option>
                                     </span>
