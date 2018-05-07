@@ -33,8 +33,7 @@ public class IssuedLab implements Serializable {
     @Column(name = "id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer         id;
-    @ManyToOne()
-    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_lab")
     private Lab             labDescription;
     @OneToOne(cascade = CascadeType.MERGE)

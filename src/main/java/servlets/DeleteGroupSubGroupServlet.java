@@ -30,6 +30,8 @@ public class DeleteGroupSubGroupServlet extends HttpServlet {
 
             SubGroup subGroup = group.getSubGroup(s[1]);
 
+            group.getSubGroupList().remove(subGroup);
+
             try {
                 dataBaseCore.delete(subGroup);
             } catch (DataBaseQueryException e) {

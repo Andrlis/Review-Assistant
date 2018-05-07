@@ -91,7 +91,7 @@
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-default" data-toggle="modal"
-                                onclick="formAndShowPopupFormRemove('${group.numberOfGroup}')">
+                                onclick="showPopupFormRemove('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-remove"></span>
                         </button>
                     </div>

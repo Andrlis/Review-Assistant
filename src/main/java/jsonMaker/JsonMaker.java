@@ -149,6 +149,7 @@ public class JsonMaker {
         map.put("type",type);
         map.put("commentId", commentId);
         map.put("secondCommentId", secondCommentId);
+        comment = (comment == null) ? "" : comment;
         map.put("comment", comment);
 
         GsonBuilder builder = new GsonBuilder();

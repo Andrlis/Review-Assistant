@@ -1,6 +1,7 @@
 package data.group;
 
 import org.apache.log4j.Logger;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -21,7 +22,7 @@ public class Group {
     private Integer id;
     @Column(name = "group_number", length = 10)
     private String numberOfGroup;
-    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<SubGroup> subGroupList;
 

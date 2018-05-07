@@ -25,6 +25,10 @@ public class LabLogic {
         dataBaseCore = core;
     }
 
+    public Integer getAmountOfAllLabs() throws DataBaseQueryException {
+        return dataBaseCore.getCount(Lab.class);
+    }
+
     public Integer getNextNumber() throws DataBaseQueryException {
         return dataBaseCore.getCount(Lab.class) + 1;
     }
@@ -45,11 +49,12 @@ public class LabLogic {
 
     public void issue(SubGroup subGroup, UniversityClass universityClass) throws DataBaseQueryException, DataBaseCriteriaCountException {
         Lab lab;
-        if (getNextNumber() == subGroup.getIssuedLabsList().size() + 1) {
-            lab = this.addNewLab();
+        Integer currentAmountOfIssuedLabs = subGroup.getIssuedLabsList().size();
+
+        if(currentAmountOfIssuedLabs < this.getAmountOfAllLabs()){
+            lab = this.getByNumber("" + (currentAmountOfIssuedLabs + 1));
         } else {
-            Integer labNumber = subGroup.getIssuedLabsList().size();
-            lab = this.getByNumber(labNumber.toString());
+            lab = this.addNewLab();
         }
 
         IssuedLab issuedLab = new IssuedLab();
@@ -57,16 +62,16 @@ public class LabLogic {
         issuedLab.setLabDescription(lab);
         issuedLab.setUniversityClassOfIssue(universityClass);
         issuedLab.setCoefficientOfCurrentDeadline(1.0);
-        //TODO getNextLab
-        issuedLab.setCurrentDeadline(universityClass);
         issuedLab.setDateOfLastRepoCheck(new Date());
+        issuedLab.setCurrentDeadline(universityClass);
+        //TODO getNextLab
         issuedLab.setStudentControlList(subGroup.getStudentsList());
         issuedLab.setSubGroup(subGroup);
 
+        subGroup.addIssuedLab(issuedLab);
+        lab.getIssuedLabList().add(issuedLab);
 
         dataBaseCore.create(issuedLab);
-
-        subGroup.addIssuedLab(issuedLab);
 
         for (Student student : subGroup.getStudentsList()) {
             LabMark labMark = new LabMark();
