@@ -195,9 +195,9 @@
                 </div>
                 <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <div class="input-group" style="width: 300px;">
+                        <div class="form-group  input-group" style="margin: 0px; width: 470px;">
                             <span class="input-group-addon">Преподаватель</span>
-                            <select class="select-style" name="lecturer">
+                            <select class="select-style" name="lecturer" style="font-size: 22px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                                 <c:forEach items="${lecturers}" var="lec">
                                     <option value="${lec.id}">${lec.fullName}</option>
                                 </c:forEach>
@@ -206,9 +206,13 @@
                     </div>
                     <input type="hidden" id="id-gr-sub-lec" name="number" value=""/>
                     <div class="modal-footer">
-                        <div class="btn-group pull-right">
-                            <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить файл"/>
-                            <input type="submit" value="Добавить студентов" onclick="redirection()"/>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn">
+                                <input class="form-control-file" id="uploaded-file" type="file" name="file" accept=".xls"  value="Добавить файл"/>
+                            </label>
+                            <label class="btn">
+                                <input type="submit" value="Добавить студентов" onclick="redirection()"/>
+                            </label>
                         </div>
                     </div>
                 </form>

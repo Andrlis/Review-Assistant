@@ -315,11 +315,11 @@ function showComment(comment) {//, xCoord, yCoord) {
         "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"second-comment-id\" value=\"" + comment['secondCommentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"comment-type\" value=\"" + comment['type'] + "\">\n" +
-        "                    <form class=\"form-horizontal\" style=\"margin: 0px;\">\n" +
-        "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\" autofocus>" + comment['comment'] + "</textarea>\n" +
+        "                    <form class=\"form-horizontal\" style=\"margin: 10px;\">\n" +
+        "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
         "                    </form>\n" +
         "                </div>\n" +
-        "                <div class=\"modal-footer \" style=\"padding-top: 5px; padding-bottom: 5px; padding-right: 5px; position: center\">\n" +
+        "                <div class=\"modal-footer \" style=\"padding-top: 5px; padding-bottom: 5px; padding-right: 15px; position: center\">\n" +
         "                    <div class=\"btn-group btn-group-toggle\">\n" +
         "                        <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\"\n" +
         "                                onclick=\"deleteComment()\">Удалить\n" +
