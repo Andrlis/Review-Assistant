@@ -275,6 +275,7 @@ function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
 
     $("#class-comment").html(jQueryObject);
     $("#add-comment").modal('show');
+    $("comment-text").focus();
 }
 
 function requestForSaveComment(commentMessage) {
@@ -308,28 +309,31 @@ function showComment(comment) {//, xCoord, yCoord) {
         "            <div class=\"modal-content center-modal\" style=\"width: 230px;\">\n" +
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
-        "                    <h4 class=\"modal-title\">" + comment['student'] + comment['description'] + "</h4>\n" +
+        "                    <h4 class=\"modal-title\">" + comment['student'] + " " + comment['description'] + "</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
         "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"second-comment-id\" value=\"" + comment['secondCommentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"comment-type\" value=\"" + comment['type'] + "\">\n" +
-        "                    <form class=\"form-horizontal\">\n" +
-        "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
+        "                    <form class=\"form-horizontal\" style=\"margin: 0px;\">\n" +
+        "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\" autofocus>" + comment['comment'] + "</textarea>\n" +
         "                    </form>\n" +
         "                </div>\n" +
-        "                <div class=\"modal-footer\" style=\"padding-top: 5px; padding-bottom: 5px; position: center\">\n" +
-        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
-        "                            onclick=\"saveComment()\">Сохранить\n" +
-        "                    </button>\n" +
-        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
-        "                            onclick=\"deleteComment()\">Удалить\n" +
-        "                    </button>\n" +
+        "                <div class=\"modal-footer \" style=\"padding-top: 5px; padding-bottom: 5px; padding-right: 5px; position: center\">\n" +
+        "                    <div class=\"btn-group btn-group-toggle\">\n" +
+        "                        <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\"\n" +
+        "                                onclick=\"deleteComment()\">Удалить\n" +
+        "                        </button>\n" +
+        "                        <button id=\"save-comment\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+        "                                onclick=\"saveComment()\">Сохранить\n" +
+        "                        </button>\n" +
+        "                    </div>\n" +
         "                </div>\n" +
         "            </div>\n" +
         "        </div>\n" +
         "    </div>\n" +
         "</div>");
+
 
     showFormWithComment(commentWindow);//, xCoord, yCoord);
 }
@@ -785,5 +789,4 @@ $(document).ready(function(){
         if(e.keyCode==13)
             $('#save-student-hibe').click();
     });
-
 });
