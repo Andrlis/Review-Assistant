@@ -275,7 +275,7 @@ function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
 
     $("#class-comment").html(jQueryObject);
     $("#add-comment").modal('show');
-    $("comment-text").focus();
+    $("#comment-text").focus();
 }
 
 function requestForSaveComment(commentMessage) {
@@ -309,7 +309,8 @@ function showComment(comment) {//, xCoord, yCoord) {
         "            <div class=\"modal-content center-modal\" style=\"width: 230px;\">\n" +
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
-        "                    <h4 class=\"modal-title\">" + comment['student'] + " " + comment['description'] + "</h4>\n" +
+        "                    <h4 class=\"modal-title\" style=\"margin-left: 12px;\">" + comment['student']  + "</h4>\n" +
+        "                    <h4 class=\"modal-title\">" + comment['description'] + "</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
         "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +
@@ -336,6 +337,7 @@ function showComment(comment) {//, xCoord, yCoord) {
 
 
     showFormWithComment(commentWindow);//, xCoord, yCoord);
+    $("#comment-text").focus();
 }
 
 //events for table with marks or presence
@@ -603,8 +605,8 @@ function formAndShowPopupFormEditStudent(student) {
             "                                    onclick=\"saveStudentButtonClick()\">Сохранить\n" +
             "                            </button>")
     }
-    $("#student-surname").focus();
     $("#popup-form-edit-student").modal('show');
+    $("#student-surname").focus();
     //disablePageEvents();
 }
 

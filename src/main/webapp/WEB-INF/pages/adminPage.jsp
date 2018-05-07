@@ -157,13 +157,13 @@
 
             <!-- Modal content-->
             <div class="modal-content center-modal">
-                <form action="SaveGroup" method="post">
+                <form action="SaveGroup" method="post" style="margin: 0px;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Редактирование группы</h4>
+                        <h4 id="group-window-title" class="modal-title">Редактирование группы</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group input-group" style="width: 300px;">
+                        <div class="form-group input-group" style="width: 300px; margin: 0px;">
                             <span class="input-group-addon">№ группы</span>
                             <input class="form-control" type="text" name="newGroupNumber"  id="new_group_number">
                             <input name="groupNumber" id="group_number" hidden>
@@ -191,13 +191,13 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Редактировать подгруппу</h4>
+                    <h4 id="subgroup-window-title" class="modal-title">Редактировать подгруппу</h4>
                 </div>
-                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data">
+                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data" style="margin: 0px;">
                     <div class="modal-body">
-                        <div class="form-group  input-group" style="margin: 0px; width: 470px;">
+                        <div class="form-group  input-group" style="margin: 0px; margin-left: 16px; width: 350px;">
                             <span class="input-group-addon">Преподаватель</span>
-                            <select class="select-style" name="lecturer" style="font-size: 22px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+                            <select class="select-style" name="lecturer" style="height: 28px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                                 <c:forEach items="${lecturers}" var="lec">
                                     <option value="${lec.id}">${lec.fullName}</option>
                                 </c:forEach>
@@ -211,7 +211,7 @@
                                 <input class="form-control-file" id="uploaded-file" type="file" name="file" accept=".xls"  value="Добавить файл"/>
                             </label>
                             <label class="btn">
-                                <input type="submit" value="Добавить студентов" onclick="redirection()"/>
+                                <input type="submit" value="Сохранить" onclick="redirection()"/>
                             </label>
                         </div>
                     </div>

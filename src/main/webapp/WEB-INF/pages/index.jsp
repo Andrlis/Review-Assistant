@@ -273,7 +273,7 @@
                             <input class="form-control" id="login-password" type="password">
                         </div>
                     </div>
-                    <h5 class="text-danger" id="result-message"></h5>
+                    <h5 class="text-danger" id="result-message" style="margin-top: 0px;"></h5>
                     <div class="modal-footer">
                         <button id="login_button" type="button" class="btn btn-default" onclick="loginButtonClick()">
                             Войти

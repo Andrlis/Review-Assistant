@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class Lab {
     private List<IssuedLab> issuedLabList;
 
     public Lab() {
+        this.issuedLabList = new ArrayList<>();
     }
 
     @Override
