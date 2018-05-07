@@ -54,17 +54,5 @@ public class StudentFactory {
 
             //dataBaseCore.create(labMark);
         }
-
-        for(Object o: dataBaseCore.getAll(Test.class)) {
-            Test test = (Test) o;
-
-            TestMark testMark = new TestMark();
-            testMark.setTest(test);
-            testMark.setStudent(student);
-
-            student.addTestMark(testMark);
-
-            //dataBaseCore.create(testMark);
-        }
     }
 }
