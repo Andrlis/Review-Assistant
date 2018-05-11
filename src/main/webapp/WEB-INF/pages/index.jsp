@@ -76,7 +76,7 @@
         <c:choose>
             <c:when test="${sessionScope.user == null}">
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="login"><a data-toggle="modal" data-target="#popup-login" class="references"><span
+                    <li id="login"><a data-toggle="modal" class="references" onclick="showLoginModal()"><span
                             class="glyphicon glyphicon-log-in menu-bar-button-class"></span><span
                             class=" menu-bar-button-class"> Войти</span></a></li>
                 </ul>
@@ -121,7 +121,6 @@
     </div>
 
 
-
     <!-- popup form for adding column with lab or test-->
     <div class="popup" id="popup-add-column">
         <!--<button data-toggle="modal" data-target="#addLabTest" onclick="showPopupFormAddColumn()">Добавить</button>-->
@@ -147,7 +146,7 @@
                         </label>
                     </div>
                     <div>
-                        <select class="select-style" name="new-lab-date" id="new-lab-date">
+                        <select class="select-style" name="new-lab-date" id="new-lab-date" style="margin: 10px;">
 
                         </select>
                     </div>
@@ -174,25 +173,29 @@
                         <h4 class="modal-title">Сбор статистики</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="statistic-group-number">Номер группы: </label>
-                            <select class="select-style" name="statistic-group-number" id="statistic-group-number">
+                        <div class="form-group input-group" style="width: 313px;">
+                            <span class="input-group-addon" style="width: 85px;">Номер группы</span>
+                            <select class="select-style" name="statistic-group-number" id="statistic-group-number"
+                                    style="height: 34px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                                 <c:forEach items="${groups}" var="group">
                                     <option><c:out value="${group.numberOfGroup}"/></option>
                                     </span>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="statistic-period">Период: </label>
+                        <div class="form-group input-group" style="margin: 0px;">
+                            <span class="input-group-addon" style="width: 117px;">Период</span>
                             <input type="text" class="form-control" id="statistic-period" name="statistic-period"
                                    placeholder="Выберите период времени" required>
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" onclick="createStatisticFile()">Создать</button>
-                        <button type="button" class="btn btn-default" onclick="" disabled>Все файлы</button>
+                        <div class="btn-group btn-group-toggle">
+                            <button type="button" class="btn btn-default" onclick="createStatisticFile()">Создать
+                            </button>
+                            <button type="button" class="btn btn-default" onclick="" disabled>Все файлы</button>
+                        </div>
                     </div>
                 </div>
 
@@ -212,35 +215,31 @@
                 <!-- Modal content-->
                 <div class="modal-content center-modal">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Добавить нового студента</h4>
+                        <button id="save-student-hibe" type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 id="popup-edit-student-title" class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
                         <input id="student-id" hidden>
-                        <div class="form-group">
-                            <label for="student-surname">Фамилия</label>
+                        <div class="form-group input-group" style="width: 300px;">
+                            <span class="input-group-addon" style="width: 85px;">Фамилия</span>
                             <input class="form-control" id="student-surname" type="text">
                         </div>
-                        <div class="form-group">
-                            <label for="student-name">Имя</label>
+                        <div class="form-group input-group" style="width: 300px;">
+                            <span class="input-group-addon" style="width: 85px;">Имя</span>
                             <input class="form-control" id="student-name" type="text">
                         </div>
-                        <div class="form-group">
-                            <label for="student-eMail">eMail</label>
+                        <div class="form-group input-group" style="width: 300px;">
+                            <span class="input-group-addon" style="width: 85px;">eMail</span>
                             <input class="form-control" id="student-eMail" type="text">
                         </div>
-                        <div class="form-group">
-                            <label for="student-git">git URL</label>
+                        <div class="form-group input-group" style="width: 300px; margin: 0px">
+                            <span class="input-group-addon" style="width: 85px;">git URL</span>
                             <input class="form-control" id="student-git" type="text">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="delete-student-button" type="button" class="btn btn-default" data-dismiss="modal"
-                                onclick="deleteStudentButtonClick()">Удалить
-                        </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"
-                                onclick="saveStudentButtonClick()">Сохранить
-                        </button>
+                        <div id="student-btn-group" class="btn-group btn-group-toggle">
+                        </div>
                     </div>
                 </div>
 
@@ -253,36 +252,38 @@
 <c:if test="${sessionScope.user == null}">
 
     <div class="popup">
-        <div id="popup-login" class="modal fade" role="dialog">
+        <div id="popup-login" class="modal" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content center-modal">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" onclick="hideResultMessage()">&times;
+                        <button id="login_hibe" type="button" class="close" data-dismiss="modal"
+                                onclick="hideResultMessage()">&times;
                         </button>
                         <h4 class="modal-title">Пожалуйста авторизуйтесь</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="login-email">Логин</label>
+                        <div class="form-group input-group" style="width: 226px;">
+                            <span class="input-group-addon" style="width: 74px;">Логин</span>
                             <input class="form-control" id="login-email" type="text">
                         </div>
-                        <div class="form-group">
-                            <label for="login-password">Пароль</label>
+                        <div class="form-group input-group" style="width: 226px; margin: 0px;">
+                            <span class="input-group-addon">Пароль</span>
                             <input class="form-control" id="login-password" type="password">
                         </div>
                     </div>
-                    <input id="result-message" readonly>
+                    <h5 class="text-danger" id="result-message" style="margin-top: 0px;"></h5>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" onclick="loginButtonClick()">Войти</button>
+                        <button id="login_button" type="button" class="btn btn-default" onclick="loginButtonClick()">
+                            Войти
+                        </button>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-
 
 </c:if>
 

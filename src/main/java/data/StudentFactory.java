@@ -39,6 +39,12 @@ public class StudentFactory {
 
         student.setSubGroup(subGroup);
 
+        addMarksFromStudent(student, subGroup);
+
+        return student;
+    }
+
+    public void addMarksFromStudent(Student student, SubGroup subGroup) throws DataBaseQueryException {
         for(IssuedLab issuedLab : subGroup.getIssuedLabsList()){
             LabMark labMark = new LabMark();
             labMark.setIssuedLab(issuedLab);
@@ -48,19 +54,5 @@ public class StudentFactory {
 
             //dataBaseCore.create(labMark);
         }
-
-        for(Object o: dataBaseCore.getAll(Test.class)) {
-            Test test = (Test) o;
-
-            TestMark testMark = new TestMark();
-            testMark.setTest(test);
-            testMark.setStudent(student);
-
-            student.addTestMark(testMark);
-
-            //dataBaseCore.create(testMark);
-        }
-
-        return student;
     }
 }

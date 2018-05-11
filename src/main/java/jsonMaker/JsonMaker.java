@@ -149,6 +149,7 @@ public class JsonMaker {
         map.put("type",type);
         map.put("commentId", commentId);
         map.put("secondCommentId", secondCommentId);
+        comment = (comment == null) ? "" : comment;
         map.put("comment", comment);
 
         GsonBuilder builder = new GsonBuilder();
@@ -178,7 +179,7 @@ public class JsonMaker {
         String type = "bonus";
         String commentId = "" + student.getId();
         String secondCommentId = "";
-        String comment = student.getCommentForBonusMark();
+        String comment = student.getComment();
 
         return JsonMaker.formJsonForComment(
                 studentName, descr,

@@ -53,6 +53,8 @@ public class Student implements Serializable {
     private List<TestMark> testMarkList;
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;
+    @Column(name = "comment", table = "bonuses")
+    private String bonusComment;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_subgroup")
     private SubGroup subGroup;
@@ -263,5 +265,13 @@ public class Student implements Serializable {
         if(this.missedUniversityClassesList.contains(universityClass)){
             this.missedUniversityClassesList.remove(universityClass);
         }
+    }
+
+    public String getComment() {
+        return bonusComment;
+    }
+
+    public void setComment(String comment) {
+        this.bonusComment = comment;
     }
 }

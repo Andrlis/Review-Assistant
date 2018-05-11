@@ -39,7 +39,7 @@ public class SubGroup {
     @JoinColumn(name = "id_subgroup")
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<IssuedLab> issuedLabsList;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group")
     private Group group;
     @ManyToOne()
@@ -77,6 +77,14 @@ public class SubGroup {
     public void setStudentsList(List<Student> studentsList) {
         this.studentsList = studentsList;
     }
+
+    public void addStudents(List<Student> studentsList) {
+        for (Student student: studentsList) {
+            student.setSubGroup(this);
+            this.addStudent(student);
+        }
+    }
+
 
     public List<UniversityClass> getUniversityClassesList() {
         return universityClassesList;

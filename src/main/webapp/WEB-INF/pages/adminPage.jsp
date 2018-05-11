@@ -91,7 +91,7 @@
                             <span class="glyphicon glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="button" class="btn btn-default" data-toggle="modal"
-                                onclick="formAndShowPopupFormRemove('${group.numberOfGroup}')">
+                                onclick="showPopupFormRemove('${group.numberOfGroup}')">
                             <span class="glyphicon glyphicon glyphicon-remove"></span>
                         </button>
                     </div>
@@ -105,7 +105,7 @@
                                 Подгруппа ${num.count}
                             </strong>
                         </h4>
-                        <div class="btn-group">
+                        <div class="btn-group pull-right">
                             <button type="button"
                                     class="btn btn-default"
                                     data-toggle="modal"
@@ -128,7 +128,8 @@
                                 <button type="button"
                                         class="btn btn-default"
                                         data-toggle="modal"
-                                        onclick="showPopupFormEditSubGroup('${group.numberOfGroup}')">
+                                        onclick="showPopupFormEditSubGroup('${group.numberOfGroup}')"
+                                        style="padding-top: 4px; padding-bottom: 8px;">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </div>
@@ -157,13 +158,13 @@
 
             <!-- Modal content-->
             <div class="modal-content center-modal">
-                <form action="SaveGroup" method="post">
+                <form action="SaveGroup" method="post" style="margin: 0px;">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Редактирование группы</h4>
+                        <h4 id="group-window-title" class="modal-title">Редактирование группы</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group input-group" style="width: 300px;">
+                        <div class="form-group input-group" style="width: 300px; margin: 0px;">
                             <span class="input-group-addon">№ группы</span>
                             <input class="form-control" type="text" name="newGroupNumber"  id="new_group_number">
                             <input name="groupNumber" id="group_number" hidden>
@@ -191,13 +192,13 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Редактировать подгруппу</h4>
+                    <h4 id="subgroup-window-title" class="modal-title">Редактировать подгруппу</h4>
                 </div>
-                <form method="post" action="/SaveSubGroup">
+                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data" style="margin: 0px;">
                     <div class="modal-body">
-                        <div class="input-group" style="width: 300px;">
+                        <div class="form-group  input-group" style="margin: 0px; margin-left: 16px; width: 350px;">
                             <span class="input-group-addon">Преподаватель</span>
-                            <select class="select-style" name="lecturer">
+                            <select class="select-style" name="lecturer" style="height: 28px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                                 <c:forEach items="${lecturers}" var="lec">
                                     <option value="${lec.id}">${lec.fullName}</option>
                                 </c:forEach>
@@ -205,13 +206,14 @@
                         </div>
                     </div>
                     <input type="hidden" id="id-gr-sub-lec" name="number" value=""/>
-                    <input type="submit" value="Сохранить" onclick="redirection()">
-                </form>
-                <form method="post" action="/UploadStudentInfoFileServlet" enctype="multipart/form-data">
                     <div class="modal-footer">
-                        <div class="btn-group">
-                            <input id="uploaded-file" type="file" name="file" accept=".xls" value="Добавить файл" required>
-                            <input type="submit" value="Добавить студентов" onclick="redirection()">
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn">
+                                <input class="form-control-file" id="uploaded-file" type="file" name="file" accept=".xls"  value="Добавить файл"/>
+                            </label>
+                            <label class="btn">
+                                <input type="submit" value="Сохранить" onclick="redirection()"/>
+                            </label>
                         </div>
                     </div>
                 </form>

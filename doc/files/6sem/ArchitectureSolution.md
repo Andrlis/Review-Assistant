@@ -23,19 +23,23 @@
   - Хэширование: применить алгоритм SHA-1, который позволяет шифровать пароли без возможности разшифрования.
  ## 6. To be architecture:
  1. Диаграмма компонентов.
-![alt text](https://raw.githubusercontent.com/Andrlis/Review-Assistant/master/doc/Component-Deployment.png)
+![alt text](../../resource/Component-Deployment.png)
  2. Диаграмма классов.
-![alt text](https://raw.githubusercontent.com/Andrlis/Review-Assistant/master/doc/CD1.jpg)
+![alt text](../../resource/CD1.jpg)
  3. Структура базы данных.
-![alt text](https://raw.githubusercontent.com/Andrlis/Review-Assistant/master/doc/DB1.jpg)
+![alt text](../../resource/DB1.jpg)
 
  # Часть 2
  ## As is architecture:
   1. Диаграмма компонентов.
-![alt text](https://raw.githubusercontent.com/Andrlis/Review-Assistant/master/doc/Component-Deployment.png)
+![alt text](../../resource/Component-Deployment.png)
  2. Диаграмма классов.
-![alt text](https://raw.githubusercontent.com/Andrlis/Review-Assistant/master/doc/CD2.jpg)
+![alt text](../../resource/CD2.jpg)
  3. Структура базы данных.
-![alt text](https://raw.githubusercontent.com/Andrlis/Review-Assistant/master/doc/DB2.jpg)
+![alt text](../../resource/DB2.jpg)
  # Часть 3
-   Добавление в приложение нового функционала вызвало внесение некоторых корректировок в структуру БД и привело к изменениям архитектуры, которые заметны на диаграммах классов.   
+ ## Вывод:
+   Добавление в приложение нового функционала вызвало внесение некоторых корректировок в структуру БД и привело к изменениям архитектуры, которые заметны на диаграммах классов.
+   Структура классов упрощена. Были убраны лишние зависимости и в структуре БД.
+   При проектировании не в полнной мере получается оценить препятсвия и ошибки, которые могут возникнуть во время реализации и проявиться лишь на этапе тестирования. Поэтому некоторые решения нельзя назвать спланированными. Они используются для устраниния ошибок, и не всегда однозначно верные, так как могут ухудшать гибкость и расширяемость приложения.    
+   

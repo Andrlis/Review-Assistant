@@ -108,11 +108,37 @@ function getSimpleRow(data, header, number) {
 function getHeaderRow(headerArray) {
     var headerRow = $('<tr style="font-weight: bold;"></tr>');
     headerRow.append(getCell("№"));
+
     headerArray.forEach(function (column) {
-        headerRow.append(getHeaderCell(column));
+        var t = column.replace(/\d/g, '');
+        var n = column.replace(/\D/g, '');
+
+        switch (t){
+            case 'student':
+                tr = 'студент';
+                break;
+            case 'lab':
+                tr = 'л.р. ' + n;
+                break;
+            case 'test':
+                tr = 'тест ' + n;
+                break;
+            case 'bonus':
+                tr = 'бонус';
+                break;
+            case 'itog':
+                tr = 'итог';
+                break;
+            default:
+                tr = column;
+        }
+
+        headerRow.append(getHeaderCell(tr));
     });
     return headerRow;
 }
+
+
 
 function getTableHeaderCollapse(headerArray) {
     var header = $('<thead class="table-header" style="visibility: collapse;"></thead>');
@@ -275,6 +301,7 @@ function showFormWithComment(jQueryObject) {//, xCoord, yCoord) {
 
     $("#class-comment").html(jQueryObject);
     $("#add-comment").modal('show');
+    $("#comment-text").focus();
 }
 
 function requestForSaveComment(commentMessage) {
@@ -308,30 +335,35 @@ function showComment(comment) {//, xCoord, yCoord) {
         "            <div class=\"modal-content center-modal\" style=\"width: 230px;\">\n" +
         "                <div class=\"modal-header\">\n" +
         "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
-        "                    <h4 class=\"modal-title\">" + comment['student'] + comment['description'] + "</h4>\n" +
+        "                    <h4 class=\"modal-title\" style=\"margin-left: 12px;\">" + comment['student']  + "</h4>\n" +
+        "                    <h4 class=\"modal-title\">" + comment['description'] + "</h4>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\" style=\"padding: 5px;\">\n" +
         "                    <input type=\"hidden\" id=\"comment-id\" value=\"" + comment['commentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"second-comment-id\" value=\"" + comment['secondCommentId'] + "\">\n" +
         "                    <input type=\"hidden\" id=\"comment-type\" value=\"" + comment['type'] + "\">\n" +
-        "                    <form class=\"form-horizontal\">\n" +
+        "                    <form class=\"form-horizontal\" style=\"margin: 10px;\">\n" +
         "                        <textarea class=\"form-control\" id=\"comment-text\" rows=\"3\">" + comment['comment'] + "</textarea>\n" +
         "                    </form>\n" +
         "                </div>\n" +
-        "                <div class=\"modal-footer\" style=\"padding-top: 5px; padding-bottom: 5px; position: center\">\n" +
-        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
-        "                            onclick=\"saveComment()\">Сохранить\n" +
-        "                    </button>\n" +
-        "                    <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
-        "                            onclick=\"deleteComment()\">Удалить\n" +
-        "                    </button>\n" +
+        "                <div class=\"modal-footer \" style=\"padding-top: 5px; padding-bottom: 5px; padding-right: 15px; position: center\">\n" +
+        "                    <div class=\"btn-group btn-group-toggle\">\n" +
+        "                        <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\"\n" +
+        "                                onclick=\"deleteComment()\">Удалить\n" +
+        "                        </button>\n" +
+        "                        <button id=\"save-comment\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+        "                                onclick=\"saveComment()\">Сохранить\n" +
+        "                        </button>\n" +
+        "                    </div>\n" +
         "                </div>\n" +
         "            </div>\n" +
         "        </div>\n" +
         "    </div>\n" +
         "</div>");
 
+
     showFormWithComment(commentWindow);//, xCoord, yCoord);
+    $("#comment-text").focus();
 }
 
 //events for table with marks or presence
@@ -364,17 +396,35 @@ function setEventsToTable() {
         requestForComment("bonus", $(this).attr("data-id"), "");
         return false;
     });
+    $(".bonus-mark-cell.editable").keypress(function(e){
+        if(e.keyCode==13) {
+            $("input:focus").blur();
+            $("input[type='text']:focus").blur();
+        }
+    });
 
     //click left button at mouse
     $(".test-mark-cell.editable").contextmenu(function (e) {
         requestForComment("test", $(this).attr("data-id"), "");
         return false;
     });
+    $(".test-mark-cell.editable").keypress(function(e){
+        if(e.keyCode==13) {
+            $("input:focus").blur();
+            $("input[type='text']:focus").blur();
+        }
+    });
 
     //click left button at mouse
     $(".lab-mark-cell.editable").contextmenu(function (e) {
         requestForComment("lab", $(this).attr("data-id"), "");
         return false;
+    });
+    $(".lab-mark-cell.editable").keypress(function(e){
+        if(e.keyCode==13) {
+            $("input:focus").blur();
+            $("input[type='text']:focus").blur();
+        }
     });
 
     //click left button at mouse
@@ -585,7 +635,22 @@ function formAndShowPopupFormEditStudent(student) {
     $("#student-surname").val(student['surname']);
     $("#student-eMail").val(student['eMail']);
     $("#student-git").val(student['git']);
+    if(student['type'] == "add"){
+        $("#popup-edit-student-title").html("Добавить студента");
+        $("#student-btn-group").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+            "                                    onclick=\"saveStudentButtonClick()\">Сохранить\n" +
+            "                            </button>");
+    } else {
+        $("#popup-edit-student-title").html(student['surname'] + " " + student['name']);
+        $("#student-btn-group").html("<button id=\"delete-student-button\" type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\"\n" +
+            "                                    onclick=\"deleteStudentButtonClick()\">Удалить\n" +
+            "                            </button>\n" +
+            "                            <button id=\"save-student-button\" type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\"\n" +
+            "                                    onclick=\"saveStudentButtonClick()\">Сохранить\n" +
+            "                            </button>")
+    }
     $("#popup-form-edit-student").modal('show');
+    $("#student-surname").focus();
     //disablePageEvents();
 }
 
@@ -596,6 +661,7 @@ function showEmptyPopupFormEditStudent() {
     student['surname'] = "";
     student['eMail'] = "";
     student['git'] = "";
+    student['type'] = "add";
     $("#delete-student-button").hide();
     formAndShowPopupFormEditStudent(student);
 
@@ -612,6 +678,7 @@ function showPopupFormEditStudent(event) {
     student['id'] = children.first().next().attr("data-id");
     student['eMail'] = children.first().next().next().html();
     student['git'] = children.first().next().next().next().html();
+    student['type'] = "edit";
     $("#delete-student-button").show();
     formAndShowPopupFormEditStudent(student);
 }
@@ -686,6 +753,7 @@ function successDoLoginServlet(data) {
     }
     else {
         $("#result-message").val(result['message']);
+        $("#result-message").html(result['message'])
         $("#result-message").show();
     }
 }
@@ -709,3 +777,62 @@ function hideResultMessage() {
     var password = $("#login-password").val("");
     $("#result-message").hide();
 }
+
+function showLoginModal() {
+    $('#popup-login').modal('show');
+    $('#login-email').focus();
+}
+
+
+$(document).ready(function(){
+    $('#login-email').keypress(function(e){
+        if(e.keyCode==13)
+            $('#login_button').click();
+    });
+    $('#login-password').keypress(function(e){
+        if(e.keyCode==13)
+            $('#login_button').click();
+    });
+    $('#login-email').keypress(function(e){
+        if(e.keyCode==27)
+            $('#login_hibe').click();
+    });
+    $('#login-password').keypress(function(e){
+        if(e.keyCode==27)
+            $('#login_hibe').click();
+    });
+
+
+    $('#student-name').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-surname').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-eMail').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-git').keypress(function(e){
+        if(e.keyCode==13)
+            $('#save-student-button').click();
+    });
+    $('#student-name').keypress(function(e){
+        if(e.keyCode==27)
+            $('#save-student-hibe').click();
+    });
+    $('#student-surname').keypress(function(e){
+        if(e.keyCode==27)
+            $('#save-student-hibe').click();
+    });
+    $('#student-eMail').keypress(function(e){
+        if(e.keyCode==27)
+            $('#save-student-hibe').click();
+    });
+    $('#student-git').keypress(function(e){
+        if(e.keyCode==27)
+            $('#save-student-hibe').click();
+    });
+});
