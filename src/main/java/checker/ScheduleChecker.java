@@ -40,7 +40,6 @@ public class ScheduleChecker {
         Timetable timetable;
 
         for (Group group : groups) {
-
             logger.info("Current group number : " + group.getNumberOfGroup() + ".");
 
             timetable = BsuirParserFactory.getParser().parseTimetable(
