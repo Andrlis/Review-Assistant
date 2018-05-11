@@ -22,8 +22,8 @@ public class Lab {
     private Integer numberOfLab;
     @Column(name = "key_word", length = 20)
     private String keyWord;
-    @OneToMany(mappedBy = "labDescription", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "labDescription", cascade = CascadeType.MERGE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabList;
 
     public Lab() {

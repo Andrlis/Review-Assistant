@@ -6,7 +6,6 @@ import data.StudentFactory;
 import data.group.Group;
 import data.group.SubGroup;
 import data.lecturer.Lecturer;
-import exceptions.DataBaseCriteriaCountException;
 import exceptions.DataBaseQueryException;
 import logics.GroupLogic;
 import org.apache.commons.fileupload.FileItem;
@@ -21,7 +20,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,19 +79,23 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
                 subGroup.setSubGroupNumber("" + (group.getSubGroupList().size() + 1));
                 subGroup.setGroup(group);
                 group.addSubGroup(subGroup);
+                dataBaseCore.create(subGroup);
             }
 
             Lecturer lecturer;
             lecturer = (Lecturer) dataBaseCore.getById(Lecturer.class, Integer.parseInt(lecturerId));
             subGroup.setLecturer(lecturer);
-            subGroup.addStudents(studentArrayList);
 
             StudentFactory studentFactory = new StudentFactory();
             for (Student stud : studentArrayList){
-                studentFactory.addMarksFromStudent(stud, subGroup);
+                studentFactory.addMarksToStudent(stud, subGroup);
             }
 
-            dataBaseCore.update(group);
+            subGroup.addStudents(studentArrayList);
+
+
+
+            dataBaseCore.update(subGroup);
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         }
