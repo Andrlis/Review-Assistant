@@ -368,6 +368,21 @@ function showComment(comment) {//, xCoord, yCoord) {
     $("#comment-text").focus();
 }
 
+//save issued lab edited by lecturer
+function saveEditedIssuedLab(){
+    var id = $("#id-of-edited-lab").val();
+    var coef = $("#current-coef-of-lab").val();
+
+    $.ajax({
+        url: "/SaveEditedIssuedLab?" +
+        "id=" + id +
+        "&coef=" + coef
+    });
+
+    $("#edit-issued-lab").modal('hide');
+}
+
+
 //events for table with marks or presence
 function setEventsToTable() {
 
@@ -435,19 +450,6 @@ function setEventsToTable() {
             $(this).attr("data-id"));
         return false;
     });
-
-    function saveEditedIssuedLab(){
-        var id = $("#id-of-edited-lab").val();
-        var coef = $("#current-coef-of-lab").val();
-
-        $.ajax({
-            url: "/SaveEditedIssuedLab?" +
-            "id=" + id +
-            "&coef=" + coef
-        });
-
-        $("#edit-issued-lab").modal('hide');
-    }
 
     function showFormWithEditingOfIssuedLab(data) {
         $("#id-of-edited-lab").val(data['id']);

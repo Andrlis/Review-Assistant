@@ -1,3 +1,49 @@
+.form-header{
+    background-color: #e1fffa;
+}
+
+.form-close-button{
+    margin-top: -12px;
+    margin-right: -9px;
+    padding: 0;
+}
+
+.form-title{
+    font-size: 20px;
+    font-style: normal;
+    font-family: initial;
+    font-weight: 300;
+}
+
+.form-style{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0;
+}
+
+.form-label{
+    font-size: 20px;
+    font-style: normal;
+    font-family: initial;
+    font-weight: 100;
+}
+
+.form-select{
+    margin-top: 3px;
+    padding: 0;
+    border-color: silver;
+}
+
+.form-button{
+    width: 100%;
+    margin-left: 7px;
+    padding: 0;
+    border-color: silver;
+    background-color: #e1fffa;
+}
+
 
 .fixed{
     position: fixed;

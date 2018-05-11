@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 @WebServlet("/GetCoefficientOfLab")
 public class GetCoefficientOfLabServlet extends HttpServlet {
@@ -30,6 +31,7 @@ public class GetCoefficientOfLabServlet extends HttpServlet {
         String subgroupNumber = (String) req.getParameter("subgroup");
         String labDescription = ((String) req.getParameter("lab"));
         String labNumber = labDescription.split(" ")[1];
+
 
         GroupLogic groupLogic = new GroupLogic();
         Group group = groupLogic.getByNumber(groupNumber);

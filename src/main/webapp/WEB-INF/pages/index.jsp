@@ -122,25 +122,27 @@
 
                 <!-- Modal content-->
                 <div class="modal-content center-modal">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;
+                    <div class="modal-header form-header">
+                        <button type="button" class="close form-close-button" data-dismiss="modal">&times;
                         </button>
-                        <h4 class="modal-title">Редактирование</h4>
-                        <h4 class="modal-title" id="edited-lab-description"></h4>
+                        <h4 class="modal-title form-title">Редактирование</h4>
+                        <h4 class="modal-title form-title" id="edited-lab-description"></h4>
                     </div>
 
-                    <form>
-                        <label for="current-coef-of-lab">Коеффициент ЛР</label>
-                        <select class="select-style" name="current-coef-of-lab" id="current-coef-of-lab">
+                    <form class="form-style">
+                        <label for="current-coef-of-lab" class="form-label">Коеффициент ЛР</label>
+                        <select class="select-style form-select" name="current-coef-of-lab" id="current-coef-of-lab">
                                 style="height: 34px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                             <option>0.0</option>
                             <option>0.4</option>
                             <option>0.6</option>
                             <option>0.8</option>
-                            <option>1</option>
+                            <option>1.0</option>
                         </select>
                         <input type="hidden" name="id-of-edited-lab" id="id-of-edited-lab"/>
-                        <input type="button" value="Сохранить" onclick="saveEditedIssuedLab()"/>
+                        <div class="modal-footer">
+                            <input type="button" value="Сохранить" onclick="saveEditedIssuedLab()" class="form-button">
+                        </div>
                     </form>
                 </div>
             </div>
