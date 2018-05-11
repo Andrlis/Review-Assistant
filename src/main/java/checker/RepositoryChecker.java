@@ -73,7 +73,6 @@ public class RepositoryChecker {
 
     private void checkIssuedLab(IssuedLab issuedLab) throws CheckException {
         logger.info("Check lab number " + issuedLab.toString());
-        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
         Date newDateOfLastRepoCheck = new Date();
 
         //loop by students who did not pass the lab
@@ -103,7 +102,6 @@ public class RepositoryChecker {
      */
     private void checkStudent(Student student, IssuedLab issuedLab) throws CheckException {
         LabMark labMark = student.getLabMark(issuedLab.getLabDescription());
-        DataBaseCore dataBaseCore = DataBaseCore.getInstance();
         Date commitDate;
 
         //Check if there link to github repository

@@ -1,16 +1,16 @@
 package checker;
 
 import bsuirAPI.BsuirParserFactory;
+import bsuirAPI.BsuirRequestFactory;
+import bsuirAPI.BsuirRequestInterface;
 import dao.DataBaseCoreInterface;
 import data.group.Group;
 import data.group.SubGroup;
 import data.UniversityClass;
 import data.lab.IssuedLab;
-import logics.GroupLogic;
 import dao.DataBaseCore;
 import exceptions.DataBaseQueryException;
 import resources.TimeLogic;
-import bsuirAPI.BsuirRequests;
 import bsuirAPI.timetable.*;
 import org.apache.log4j.Logger;
 
@@ -25,13 +25,16 @@ public class ScheduleChecker {
     private static final Logger logger = Logger.getLogger(ScheduleChecker.class);
 
     private DataBaseCoreInterface dataBaseCore;
+    private BsuirRequestInterface bsuirRequestInterface;
 
     public ScheduleChecker() {
         dataBaseCore = DataBaseCore.getInstance();
+        bsuirRequestInterface = BsuirRequestFactory.getRequest();
     }
 
-    public ScheduleChecker(DataBaseCoreInterface core) {
+    public ScheduleChecker(DataBaseCoreInterface core, BsuirRequestInterface request) {
         dataBaseCore = core;
+        bsuirRequestInterface = request;
     }
 
 
@@ -43,11 +46,11 @@ public class ScheduleChecker {
             logger.info("Current group number : " + group.getNumberOfGroup() + ".");
 
             timetable = BsuirParserFactory.getParser().parseTimetable(
-                    BsuirRequests.getTimetable(group.getNumberOfGroup()));
+                    bsuirRequestInterface.getTimetable(group.getNumberOfGroup()));
 
             boolean[] hasCoefficientOfLabsBeenChanged = new boolean[group.getSubGroupList().size()];
             for (Lesson lesson : timetable.getCurrentDaySchedule(
-                    new Integer(BsuirRequests.getCurrentWeek()))) {
+                    new Integer(bsuirRequestInterface.getCurrentWeek()))) {
 
                 if (lesson.getSubject().equals("ТРиТПО") && lesson.getLessonType().equals("ЛР")) {
                     String subgroupNumber = String.valueOf(lesson.getNumSubgroup());
