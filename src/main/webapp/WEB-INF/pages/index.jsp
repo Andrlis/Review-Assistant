@@ -115,10 +115,39 @@
 </div>
 
 <c:if test="${sessionScope.user != null}">
-    <!-- form for comments-->
-    <div id="class-comment">
 
+    <div class="popup">
+        <div id="edit-issued-lab" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content center-modal">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;
+                        </button>
+                        <h4 class="modal-title">Редактирование</h4>
+                        <h4 class="modal-title" id="edited-lab-description"></h4>
+                    </div>
+
+                    <form>
+                        <label for="current-coef-of-lab">Коеффициент ЛР</label>
+                        <select class="select-style" name="current-coef-of-lab" id="current-coef-of-lab">
+                                style="height: 34px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+                            <option>0.0</option>
+                            <option>0.4</option>
+                            <option>0.6</option>
+                            <option>0.8</option>
+                            <option>1</option>
+                        </select>
+                        <input type="hidden" name="id-of-edited-lab" id="id-of-edited-lab"/>
+                        <input type="button" value="Сохранить" onclick="saveEditedIssuedLab()"/>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 
 
     <!-- popup form for adding column with lab or test-->
@@ -179,7 +208,6 @@
                                     style="height: 34px;font-size: 14px;margin: 0px;width: 100%;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
                                 <c:forEach items="${groups}" var="group">
                                     <option><c:out value="${group.numberOfGroup}"/></option>
-                                    </span>
                                 </c:forEach>
                             </select>
                         </div>

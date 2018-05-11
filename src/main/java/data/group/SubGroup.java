@@ -102,6 +102,19 @@ public class SubGroup {
         this.issuedLabsList = issuedLabsList;
     }
 
+    public IssuedLab getIssuedLabByNumber(String number) {
+        IssuedLab issuedLab = null;
+        for(IssuedLab lab: issuedLabsList){
+            if(lab.getLabDescription().getNumberOfLab().equals(Integer.parseInt(number))){
+                issuedLab = lab;
+                break;
+            }
+        }
+
+        return issuedLab;
+    }
+
+
     public void addStudent(Student student) {
         logger.info("Add student(" + student.getFulName() + ") from subgroup(" + group.getNumberOfGroup() + ", " + subGroupNumber + ").");
         this.studentsList.add(student);

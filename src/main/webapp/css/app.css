@@ -48,6 +48,14 @@ td > input{
     background: silver;
 }
 
+.student-is-not-admissible {
+    background: rgb(255,0,0);
+}
+
+.student-is-admissible {
+    background: rgb(117, 225, 120);
+}
+
 .coef-10 {
     background: rgb(117, 225, 120);
 }

@@ -26,6 +26,7 @@ import jsonMaker.jsonData.Template;
 import java.util.*;
 
 public class JsonMaker {
+
     public static String getJsonGroups(List<Group> groups){
         ArrayList<Map<String,Object>> groupArray = new ArrayList<>();
         for (Group group : groups){
@@ -267,6 +268,9 @@ public class JsonMaker {
 
         map.put("type", "IssuedLab");
         map.put("issued-lab-data", lab);
+        map.put("id", lab.getId());
+        map.put("lab", "ЛР " + lab.getLabDescription().getNumberOfLab());
+        map.put("coef", lab.getCoefficientOfCurrentDeadline());
 
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(IssuedLab.class, new IssuedLabConverter());
