@@ -91,11 +91,9 @@ public class DataBaseCore implements DataBaseCoreInterface {
 
         final Session session = getSession();
 
-        Object o = session.merge(object);
-
         try {
             session.getTransaction().begin();
-            session.update(o);
+            session.update(object);
             session.getTransaction().commit();
         } catch (Exception e) {
             throw new DataBaseQueryException(e);

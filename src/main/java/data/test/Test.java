@@ -1,7 +1,9 @@
 package data.test;
 
+import data.Student;
 import data.mark.TestMark;
 import org.apache.log4j.Logger;
+import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -26,19 +28,24 @@ public class Test {
     @Column(name = "test_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date testDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "test")
-    @LazyCollection(LazyCollectionOption.TRUE)
-    private List<TestMark> testMarkList;
+
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "tests_result",
+            joinColumns = @JoinColumn(name = "id_test"),
+            inverseJoinColumns = @JoinColumn(name = "id_student"))
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Student>   studentControlList;
+
 
     public Test() {
-        this.testMarkList = new ArrayList<TestMark>();
+        this.studentControlList = new ArrayList<>();
     }
 
-    public Test(Integer id, Integer testNumber, Date testDate, List<TestMark> testMarkList) {
+    public Test(Integer id, Integer testNumber, Date testDate, List<Student> students) {
         this.id = id;
         this.testNumber = testNumber;
         this.testDate = testDate;
-        this.testMarkList = testMarkList;
+        this.studentControlList = students;
     }
 
     public Integer getId() {
@@ -65,16 +72,15 @@ public class Test {
         this.testDate = testDate;
     }
 
-    public List<TestMark> getTestMarkList() {
-        return testMarkList;
+    public void addStudent(Student student) {
+        this.studentControlList.add(student);
     }
 
-    public void setTestMarkList(List<TestMark> testMarkList) {
-        this.testMarkList = testMarkList;
+    public List<Student> getStudentControlList() {
+        return studentControlList;
     }
 
-    public void addTestMark(TestMark testMark) {
-        logger.info("Add test mark(" + testMark.getStudent().getFulName() + ", " + testMark.getMark() + ") from test mark list(" + testNumber + ")");
-        this.testMarkList.add(testMark);
+    public void setStudentControlList(List<Student> studentControlList) {
+        this.studentControlList = studentControlList;
     }
 }
