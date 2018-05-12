@@ -84,7 +84,6 @@ public class SubGroup {
         }
     }
 
-
     public List<UniversityClass> getUniversityClassesList() {
         return universityClassesList;
     }
