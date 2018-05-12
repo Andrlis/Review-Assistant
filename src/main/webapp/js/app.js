@@ -132,8 +132,10 @@ function getHeaderRow(headerArray) {
             default:
                 tr = column;
         }
-
-        headerRow.append(getHeaderCell(tr));
+        cell = getHeaderCell(tr);
+        if(t == 'lab' && $("#logout").is("li"))
+            $(cell).addClass("editable-lab");
+        headerRow.append(cell);
     });
     return headerRow;
 }
@@ -366,9 +368,23 @@ function showComment(comment) {//, xCoord, yCoord) {
     $("#comment-text").focus();
 }
 
+//save issued lab edited by lecturer
+function saveEditedIssuedLab(){
+    var id = $("#id-of-edited-lab").val();
+    var coef = $("#current-coef-of-lab").val();
+
+    $.ajax({
+        url: "/SaveEditedIssuedLab?" +
+        "id=" + id +
+        "&coef=" + coef
+    });
+
+    $("#edit-issued-lab").modal('hide');
+}
+
+
 //events for table with marks or presence
 function setEventsToTable() {
-
 
     //Event for click at button
     $("button.add-col-button").click(function () {
@@ -433,6 +449,35 @@ function setEventsToTable() {
             $(this).parent().children().first().next().attr("data-id"),
             $(this).attr("data-id"));
         return false;
+    });
+
+    function showFormWithEditingOfIssuedLab(data) {
+        $("#id-of-edited-lab").val(data['id']);
+        $("#edited-lab-description").text(data['lab']);
+        $("#current-coef-of-lab").val(data['coef']);
+        $("#edit-issued-lab").modal('show');
+    }
+
+    function requestForCoefficient(group, subgroup, lab){
+        $.ajax({
+            url: "/GetCoefficientOfLab?" +
+            "group=" + group +
+            "&subgroup=" + subgroup +
+            "&lab=" + lab,
+            dataType: "json",
+            success: function (data) {
+                showFormWithEditingOfIssuedLab(data);
+            }
+        });
+    }
+
+///////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //click left button at mouse
+    $(".editable-lab").click(function (e) {
+        var group = $("#group-number").text().replace(/\D/g, '');
+        var subgroup = $("#subgroup-number").text().replace(/\D/g, '');
+        var lab = $(this).text();
+        requestForCoefficient(group, subgroup, lab);
     });
 
     //Event for click at cell with presence

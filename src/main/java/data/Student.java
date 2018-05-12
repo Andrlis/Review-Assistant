@@ -41,15 +41,15 @@ public class Student implements Serializable {
     @JoinTable(name = "absentees",
             joinColumns = @JoinColumn(name = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "id_class"))
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> missedUniversityClassesList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<LabMark> labMarkList;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<TestMark> testMarkList;
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;

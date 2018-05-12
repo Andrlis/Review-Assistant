@@ -15,7 +15,7 @@ public class StudentFactory {
     DataBaseCoreInterface dataBaseCore;
     GroupLogic groupLogic;
 
-    public StudentFactory(){
+    public StudentFactory() {
         dataBaseCore = DataBaseCore.getInstance();
         groupLogic = new GroupLogic();
     }
@@ -26,7 +26,7 @@ public class StudentFactory {
     }
 
     public Student createInDataBaseStudent(String studentName, String eMail, String gitRepo,
-                                 String groupNumber, String subGroupNumber) throws DataBaseQueryException {
+                                           String groupNumber, String subGroupNumber) throws DataBaseQueryException {
 
         Student student = new Student();
 
@@ -39,20 +39,30 @@ public class StudentFactory {
 
         student.setSubGroup(subGroup);
 
-        addMarksFromStudent(student, subGroup);
+        addMarksToStudent(student, subGroup);
 
         return student;
     }
 
-    public void addMarksFromStudent(Student student, SubGroup subGroup) throws DataBaseQueryException {
-        for(IssuedLab issuedLab : subGroup.getIssuedLabsList()){
+    public void addMarksToStudent(Student student, SubGroup subGroup) throws DataBaseQueryException {
+        for (IssuedLab issuedLab : subGroup.getIssuedLabsList()) {
             LabMark labMark = new LabMark();
             labMark.setIssuedLab(issuedLab);
+
+            issuedLab.getStudentControlList().add(student);
+
             labMark.setStudent(student);
 
             student.addLabMark(labMark);
+        }
 
-            //dataBaseCore.create(labMark);
+        for (Object o : dataBaseCore.getAll(Test.class)) {
+            Test test = (Test) o;
+            TestMark testMark = new TestMark();
+            testMark.setTest(test);
+            testMark.setStudent(student);
+
+            student.addTestMark(testMark);
         }
     }
 }

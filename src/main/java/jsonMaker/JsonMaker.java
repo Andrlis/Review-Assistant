@@ -23,9 +23,12 @@ import jsonMaker.jsonData.Class;
 import jsonMaker.jsonData.Key;
 import jsonMaker.jsonData.Template;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class JsonMaker {
+
     public static String getJsonGroups(List<Group> groups){
         ArrayList<Map<String,Object>> groupArray = new ArrayList<>();
         for (Group group : groups){
@@ -264,9 +267,15 @@ public class JsonMaker {
 
     public static String getIssuedLabJson(IssuedLab lab) {
         Map<String, Object> map = new LinkedHashMap<>();
+        double coef = lab.getCoefficientOfCurrentDeadline();
+
+        String coefStr = String.format(Locale.US, "%.1f", coef);
 
         map.put("type", "IssuedLab");
         map.put("issued-lab-data", lab);
+        map.put("id", lab.getId());
+        //map.put("lab", "ЛР " + lab.getLabDescription().getNumberOfLab());
+        map.put("coef", coefStr);
 
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(IssuedLab.class, new IssuedLabConverter());

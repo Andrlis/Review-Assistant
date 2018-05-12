@@ -52,7 +52,7 @@ public class IssuedLab implements Serializable {
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
     @FilterJoinTable(name = "coefficientFilter", condition = ":border >= coefficient")
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student>   studentControlList;
     @ManyToOne()
     @Cascade({org.hibernate.annotations.CascadeType.MERGE})
