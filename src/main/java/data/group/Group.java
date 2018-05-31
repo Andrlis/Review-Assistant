@@ -22,8 +22,7 @@ public class Group {
     private Integer id;
     @Column(name = "group_number", length = 10)
     private String numberOfGroup;
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
     private List<SubGroup> subGroupList;
 
     public Group() {

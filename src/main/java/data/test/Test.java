@@ -29,11 +29,10 @@ public class Test {
     @Temporal(TemporalType.TIMESTAMP)
     private Date testDate;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "tests_result",
             joinColumns = @JoinColumn(name = "id_test"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student>   studentControlList;
 
 

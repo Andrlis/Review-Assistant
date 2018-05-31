@@ -37,30 +37,26 @@ public class Student implements Serializable {
     private String gitUserName;
     @Column(name = "email", length = 30)
     private String eMail;
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "absentees",
             joinColumns = @JoinColumn(name = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "id_class"))
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UniversityClass> missedUniversityClassesList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<LabMark> labMarkList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<TestMark> testMarkList;
     @Column(name = "bonus", table = "bonuses")
     private Integer bonusMark;
     @Column(name = "comment", table = "bonuses")
     private String bonusComment;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_subgroup")
     private SubGroup subGroup;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_student")
-    @LazyCollection(LazyCollectionOption.TRUE)
     private List<Comment> commentList;
 
 

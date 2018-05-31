@@ -27,18 +27,15 @@ public class SubGroup {
     private Integer id;
     @Column(name = "subgroup_number", table = "subgroups", length = 5)
     private String subGroupNumber;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_subgroup")
-    @LazyCollection(LazyCollectionOption.TRUE)
     private List<Student> studentsList;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_subgroup")
-    @LazyCollection(LazyCollectionOption.TRUE)
-    private List<UniversityClass> universityClassesList;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_subgroup")
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<IssuedLab> issuedLabsList;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_subgroup")
+    private List<UniversityClass> universityClassesList;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_group")
     private Group group;

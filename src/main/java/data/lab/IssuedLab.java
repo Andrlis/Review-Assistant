@@ -33,7 +33,7 @@ public class IssuedLab implements Serializable {
     @Column(name = "id_issued_lab")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer         id;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "id_lab")
     private Lab             labDescription;
     @OneToOne(cascade = CascadeType.MERGE)
@@ -47,15 +47,13 @@ public class IssuedLab implements Serializable {
     @Column(name = "last_check_date_time", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date            dateOfLastRepoCheck;
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "labs_marks",
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
     @FilterJoinTable(name = "coefficientFilter", condition = ":border >= coefficient")
-    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Student>   studentControlList;
     @ManyToOne()
-    @Cascade({org.hibernate.annotations.CascadeType.MERGE})
     @JoinColumn(name = "id_subgroup")
     private SubGroup        subGroup;
 

@@ -12,10 +12,10 @@ public class Comment {
     @Column(name = "id_class_comments")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_student")
     private Student student;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_class")
     private UniversityClass universityClass;
     @Column(name = "comment", length = 280)
