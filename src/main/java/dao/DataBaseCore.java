@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import exceptions.DataBaseCriteriaCountException;
@@ -55,11 +56,15 @@ public class DataBaseCore implements DataBaseCoreInterface {
         logger.info("DataBaseCore.getById(). " + c.getName());
 
         final Session session = getSession();
+        Transaction transaction = null;
         Object answer;
 
         try {
+            transaction = session.beginTransaction();
             answer = (Object) session.get(c, id);
+            transaction.commit();
         } catch (Exception e) {
+            if (transaction != null ) transaction.rollback();
             throw new DataBaseQueryException(e);
         } finally {
             session.close();
@@ -73,10 +78,14 @@ public class DataBaseCore implements DataBaseCoreInterface {
         logger.info("DataBaseCore.create(). " + object.getClass().getName());
 
         final Session session = getSession();
+        Transaction transaction = null;
 
         try {
+            transaction = session.beginTransaction();
             session.save(object);
+            transaction.commit();
         } catch (Exception e) {
+            if ( transaction != null ) transaction.rollback();
             throw new DataBaseQueryException(e);
         } finally {
             session.close();
@@ -90,12 +99,15 @@ public class DataBaseCore implements DataBaseCoreInterface {
         logger.info("DataBaseCore.update(). " + object.getClass().getName());
 
         final Session session = getSession();
+        Transaction transaction = null;
 
         try {
-            session.getTransaction().begin();
+            transaction = session.beginTransaction();
+            transaction.begin();
             session.update(object);
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
+            if ( transaction != null ) transaction.rollback();
             throw new DataBaseQueryException(e);
         } finally {
             session.close();
@@ -109,15 +121,16 @@ public class DataBaseCore implements DataBaseCoreInterface {
         logger.info("DataBaseCore.delete(). " + object.getClass().getName());
 
         final Session session = getSession();
-        Object o = session.merge(object);
+        Transaction transaction = null;
 
         try {
-            session.getTransaction().begin();
+            transaction = session.beginTransaction();
             session.flush();
-            session.delete(o);
+            session.delete(object);
             session.flush();
-            session.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
+            if ( transaction != null ) transaction.rollback();
             throw new DataBaseQueryException(e);
         } finally {
             session.close();

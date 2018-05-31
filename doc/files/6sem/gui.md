@@ -37,19 +37,19 @@ Web-приложение не учитывает особенности поль
 
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_authorization_before.png)
 
-##### После:
+#### После:
 
   ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_authorization_after.png)
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_authorization_after1.png)
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_authorization_after2.png)
 
 ### Форма для редактирование информации о студенте
-##### До
+#### До
 
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_add_student.png)
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_delete_student_defore.png)
 
-##### После
+#### После
 
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_add_student_after.png)
 ![](https://github.com/Andrlis/Review-Assistant/blob/master/doc/resource/lr6/lr6_delete_student_after.png)
