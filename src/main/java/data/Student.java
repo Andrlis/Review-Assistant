@@ -52,7 +52,7 @@ public class Student implements Serializable {
     private Integer bonusMark;
     @Column(name = "comment", table = "bonuses")
     private String bonusComment;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_subgroup")
     private SubGroup subGroup;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

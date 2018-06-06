@@ -277,6 +277,8 @@
         </div>
     </div>
 
+    <div id="class-comment"></div>
+
 </c:if>
 
 <c:if test="${sessionScope.user == null}">

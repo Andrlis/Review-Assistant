@@ -99,11 +99,11 @@ public class DataBaseCore implements DataBaseCoreInterface {
         logger.info("DataBaseCore.update(). " + object.getClass().getName());
 
         final Session session = getSession();
-        Transaction transaction = null;
+        Transaction transaction = session.getTransaction();
 
         try {
-            transaction = session.beginTransaction();
-            transaction.begin();
+            if (!transaction.isActive())
+                transaction.begin();
             session.update(object);
             transaction.commit();
         } catch (Exception e) {
