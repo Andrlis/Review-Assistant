@@ -16,11 +16,11 @@ public class LabMark {
     @Column(name = "id_lab_mark")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "coefficient")
+    @Column(name = "coefficient", columnDefinition = "default '-1.0'")
     private Double coefficient;
-    @Column(name = "mark")
+    @Column(name = "mark", columnDefinition = "default '-1'")
     private Integer mark;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "id_issued_lab")
     private IssuedLab issuedLab;
     @ManyToOne(cascade = CascadeType.MERGE)

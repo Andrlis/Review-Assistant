@@ -153,6 +153,8 @@ public class DataBaseCore implements DataBaseCoreInterface {
              count = q.getResultList().size();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
             throw new DataBaseQueryException(e);
+        } finally {
+            session.close();
         }
 
         return count;
@@ -184,6 +186,10 @@ public class DataBaseCore implements DataBaseCoreInterface {
             object = q.getSingleResult();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
             throw new DataBaseQueryException(e);
+        } finally {
+            if(session.isOpen()){
+                session.close();
+            }
         }
 
         return object;
@@ -215,6 +221,10 @@ public class DataBaseCore implements DataBaseCoreInterface {
             number = q.getResultList().size();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
             throw new DataBaseQueryException(e);
+        } finally {
+            if(session.isOpen()){
+                session.close();
+            }
         }
 
         return number;
@@ -239,6 +249,20 @@ public class DataBaseCore implements DataBaseCoreInterface {
         }
 
         return answer;
+    }
+
+    public void noteStudentPresence(String studentId, String classId) throws DataBaseQueryException {
+        final Session session = getSession();
+        try {
+            session.getTransaction().begin();
+            session.createSQLQuery( "DELETE FROM absentees WHERE id_class = " + classId + " and id_student = " + studentId).executeUpdate();
+            session.getTransaction().commit();
+        } catch (javax.persistence.TransactionRequiredException ex) {
+            throw new DataBaseQueryException(ex);
+        } finally {
+            session.close();
+        }
+
     }
 
     private Predicate[] getPredicates(Class c,CriteriaBuilder builder, Root<Object> root, Object... criteria) {

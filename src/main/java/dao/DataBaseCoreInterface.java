@@ -18,4 +18,6 @@ public interface DataBaseCoreInterface {
     Object getByCriteria(Class c, Object ... criteria) throws DataBaseQueryException, DataBaseCriteriaCountException;
     Integer getNumberCriteria(Class c, Object ... criteria) throws DataBaseQueryException, DataBaseCriteriaCountException;
     List<Object> getAll(Class c) throws DataBaseQueryException ;
+
+    public void noteStudentPresence(String studentId, String classId) throws DataBaseQueryException;
 }

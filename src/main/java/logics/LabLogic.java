@@ -68,17 +68,8 @@ public class LabLogic {
         issuedLab.setStudentControlList(subGroup.getStudentsList());
         issuedLab.setSubGroup(subGroup);
 
-        subGroup.addIssuedLab(issuedLab);
-        lab.addIssuedLab(issuedLab);
 
         dataBaseCore.create(issuedLab);
-
-        for (Student student : subGroup.getStudentsList()) {
-            LabMark labMark = new LabMark();
-            labMark.setIssuedLab(issuedLab);
-            labMark.setStudent(student);
-            dataBaseCore.create(labMark);
-        }
 
     }
 

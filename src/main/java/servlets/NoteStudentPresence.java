@@ -20,14 +20,16 @@ public class NoteStudentPresence extends HttpServlet {
         String studentId = (String) req.getParameter("studentId");
         String classId = (String) req.getParameter("classId");
         try {
-            Student student = (Student) dataBaseCore.getById(Student.class,
-                    Integer.parseInt(studentId));
-            UniversityClass universityClass = (UniversityClass) dataBaseCore.getById(UniversityClass.class,
-                    Integer.parseInt(classId));
+//            Student student = (Student) dataBaseCore.getById(Student.class,
+//                    Integer.parseInt(studentId));
+//            UniversityClass universityClass = (UniversityClass) dataBaseCore.getById(UniversityClass.class,
+//                    Integer.parseInt(classId));
 
-            student.removeMissedClass(universityClass);
+            dataBaseCore.noteStudentPresence(studentId, classId);
 
-            dataBaseCore.update(student);
+//            student.removeMissedClass(universityClass);
+//
+//            dataBaseCore.update(student);
         } catch (Exception e) {
             e.printStackTrace();
         }

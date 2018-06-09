@@ -59,6 +59,11 @@ public class ScheduleCheckerTest {
         public List<Object> getAll(Class c) throws DataBaseQueryException {
             return new ArrayList<>();
         }
+
+        @Override
+        public void noteStudentPresence(String studentId, String classId) throws DataBaseQueryException {
+
+        }
     }
 
     private class BsuirRequestTest implements BsuirRequestInterface {

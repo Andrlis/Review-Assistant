@@ -49,11 +49,13 @@ public class StudentFactory {
             LabMark labMark = new LabMark();
             labMark.setIssuedLab(issuedLab);
 
-            issuedLab.getStudentControlList().add(student);
+            //issuedLab.getStudentControlList().add(student);
 
             labMark.setStudent(student);
 
             student.addLabMark(labMark);
+
+
         }
 
         for (Object o : dataBaseCore.getAll(Test.class)) {

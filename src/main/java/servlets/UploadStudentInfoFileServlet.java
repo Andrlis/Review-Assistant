@@ -89,13 +89,16 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
             StudentFactory studentFactory = new StudentFactory();
             for (Student stud : studentArrayList){
                 studentFactory.addMarksToStudent(stud, subGroup);
+                //subGroup.addStudent(stud);
+
+                //dataBaseCore.create(stud);
             }
 
-            subGroup.addStudents(studentArrayList);
+           subGroup.addStudents(studentArrayList);
 
 
 
-            dataBaseCore.update(subGroup);
+           dataBaseCore.update(subGroup);
         } catch (DataBaseQueryException e) {
             e.printStackTrace();
         }

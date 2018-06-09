@@ -47,10 +47,11 @@ public class IssuedLab implements Serializable {
     @Column(name = "last_check_date_time", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date            dateOfLastRepoCheck;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "labs_marks",
             joinColumns = @JoinColumn(name = "id_issued_lab"),
             inverseJoinColumns = @JoinColumn(name = "id_student"))
+    @LazyCollection(LazyCollectionOption.FALSE)
     @FilterJoinTable(name = "coefficientFilter", condition = ":border >= coefficient")
     private List<Student>   studentControlList;
     @ManyToOne()
