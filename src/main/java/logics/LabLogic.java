@@ -63,7 +63,7 @@ public class LabLogic {
         issuedLab.setUniversityClassOfIssue(universityClass);
         issuedLab.setCoefficientOfCurrentDeadline(1.0);
         issuedLab.setDateOfLastRepoCheck(new Date());
-        issuedLab.setCurrentDeadline(universityClass);
+        //issuedLab.setCurrentDeadline(universityClass);
         //TODO getNextLab
         issuedLab.setStudentControlList(subGroup.getStudentsList());
         issuedLab.setSubGroup(subGroup);

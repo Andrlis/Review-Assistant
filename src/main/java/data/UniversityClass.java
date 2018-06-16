@@ -17,10 +17,12 @@ public class UniversityClass {
     @Column(name = "id_class")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "class_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @ManyToOne(cascade = CascadeType.MERGE)
+
+    @ManyToOne
     @JoinColumn(name = "id_subgroup")
     private SubGroup subGroup;
 

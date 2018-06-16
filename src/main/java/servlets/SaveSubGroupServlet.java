@@ -45,7 +45,7 @@ public class SaveSubGroupServlet extends HttpServlet {
         if(s.length == 2){
             subGroup.setSubGroupNumber(s[1]);
         } else {
-            subGroup.setSubGroupNumber(String.valueOf((group.getSubGroupList().size() + 1)));
+            subGroup.setSubGroupNumber("" + group.getNumberForNextSubgroup());
         }
 
         try {

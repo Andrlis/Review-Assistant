@@ -72,6 +72,16 @@ public class Group {
         this.subGroupList.remove(subGroup);
     }
 
+    public Integer getNumberForNextSubgroup(){
+        int len = this.getSubGroupList().size();
+        if (len == 1)
+            if (this.getSubGroupList().get(0).getSubGroupNumber().equals("1"))
+                return 2;
+            else
+                return 1;
+        return len + 1;
+    }
+
     @Override
     public String toString() {
         return "Group{" +

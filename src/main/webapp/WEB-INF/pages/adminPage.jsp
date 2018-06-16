@@ -98,24 +98,24 @@
                 </div>
             </div>
             <div class="group-window-content">
-                <c:forEach var="subgroup" items="${group.subGroupList}" varStatus="num">
+                <c:forEach var="subgroup" items="${group.subGroupList}">
                     <div class="sub-group-window-content">
                         <h4 class="pull-left">
                             <strong>
-                                Подгруппа ${num.count}
+                                Подгруппа ${subgroup.subGroupNumber}
                             </strong>
                         </h4>
                         <div class="btn-group pull-right">
                             <button type="button"
                                     class="btn btn-default"
                                     data-toggle="modal"
-                                    onclick="showPopupFormEditSubGroup('${group.numberOfGroup}_${num.count}')">
+                                    onclick="showPopupFormEditSubGroup('${group.numberOfGroup}_${subgroup.subGroupNumber}')">
                                 <span class="glyphicon glyphicon glyphicon-pencil"></span>
                             </button>
                             <button type="button"
                                     class="btn btn-default"
                                     data-toggle="modal"
-                                    onclick="showPopupFormRemove('${group.numberOfGroup}_${num.count}')">
+                                    onclick="showPopupFormRemove('${group.numberOfGroup}_${subgroup.subGroupNumber}')">
                                 <span class="glyphicon glyphicon glyphicon-remove"></span>
                             </button>
                         </div>

@@ -76,7 +76,7 @@ public class UploadStudentInfoFileServlet extends HttpServlet {
                 subGroup = group.getSubGroup(s[1]);
             } else {
                 subGroup = new SubGroup();
-                subGroup.setSubGroupNumber("" + (group.getSubGroupList().size() + 1));
+                subGroup.setSubGroupNumber("" + group.getNumberForNextSubgroup());
                 subGroup.setGroup(group);
                 group.addSubGroup(subGroup);
                 dataBaseCore.create(subGroup);
