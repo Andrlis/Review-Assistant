@@ -1,5 +1,5 @@
 .form-header{
-    background-color: #e1fffa;
+    /*background-color: #e1fffa;*/
 }
 
 .form-close-button{
@@ -39,14 +39,12 @@
 .form-button{
     width: 100%;
     margin-left: 7px;
+    margin-right: 0;
     padding: 0;
-    border-color: silver;
-    background-color: #e1fffa;
-}
-.lol{
 
+    /*border-color: silver;*/
+    /*background-color: #e1fffa;*/
 }
-
 .fixed{
     position: fixed;
     z-index: 100;

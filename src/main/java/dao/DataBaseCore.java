@@ -246,6 +246,8 @@ public class DataBaseCore implements DataBaseCoreInterface {
             answer = q.getResultList();
         } catch (org.hibernate.NonUniqueResultException | javax.persistence.NoResultException e){
             throw new DataBaseQueryException(e);
+        } finally {
+            session.close();
         }
 
         return answer;
