@@ -34,7 +34,7 @@ VALUES (
 
 INSERT INTO classes (class_date, id_subgroup)
 VALUES (
-  "2018-01-11 18:45:00",
+  "2018-06-11 18:45:00",
   (SELECT MAX(id_subgroup)
    FROM subgroups WHERE id_group IN (
      SELECT id_group FROM groups WHERE group_number = '550501'))
@@ -57,7 +57,7 @@ VALUES (
 
 INSERT INTO classes (class_date, id_subgroup)
 VALUES (
-  "2018-01-11 18:45:00",
+  "2018-06-11 18:45:00",
   (SELECT MIN(id_subgroup)
    FROM subgroups WHERE id_group IN (
      SELECT id_group FROM groups WHERE group_number = '550502'))
@@ -76,8 +76,90 @@ VALUES (
 
 INSERT INTO classes (class_date, id_subgroup)
 VALUES (
-  "2018-01-11 18:45:00",
+  "2018-06-11 18:45:00",
   (SELECT MAX(id_subgroup)
    FROM subgroups WHERE id_group IN (
      SELECT id_group FROM groups WHERE group_number = '550502'))
+);
+
+INSERT INTO groups (group_number)
+VALUES ('550503');
+
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES (
+  (SELECT id_group
+   FROM groups
+   WHERE group_number = '550503'),
+  '1',
+  (SELECT id_lecturer
+   FROM lecturers
+   WHERE full_name = 'Яночкин Алексей Леонидович')
+);
+
+INSERT INTO classes (class_date, id_subgroup)
+VALUES (
+  "2018-06-11 18:45:00",
+  (SELECT MIN(id_subgroup)
+   FROM subgroups WHERE id_group IN (
+     SELECT id_group FROM groups WHERE group_number = '550503'))
+);
+
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES (
+  (SELECT id_group
+   FROM groups
+   WHERE group_number = '550503'),
+  '2',
+  (SELECT id_lecturer
+   FROM lecturers
+   WHERE full_name = 'Яночкин Алексей Леонидович')
+);
+
+INSERT INTO classes (class_date, id_subgroup)
+VALUES (
+  "2018-06-11 18:45:00",
+  (SELECT MAX(id_subgroup)
+   FROM subgroups WHERE id_group IN (
+     SELECT id_group FROM groups WHERE group_number = '550503'))
+);
+
+INSERT INTO groups (group_number)
+VALUES ('550504');
+
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES (
+  (SELECT id_group
+   FROM groups
+   WHERE group_number = '550504'),
+  '1',
+  (SELECT id_lecturer
+   FROM lecturers
+   WHERE full_name = 'Яночкин Алексей Леонидович')
+);
+
+INSERT INTO classes (class_date, id_subgroup)
+VALUES (
+  "2018-06-11 18:45:00",
+  (SELECT MIN(id_subgroup)
+   FROM subgroups WHERE id_group IN (
+     SELECT id_group FROM groups WHERE group_number = '550504'))
+);
+
+INSERT INTO subgroups (id_group, subgroup_number, id_lecturer)
+VALUES (
+  (SELECT id_group
+   FROM groups
+   WHERE group_number = '550504'),
+  '2',
+  (SELECT id_lecturer
+   FROM lecturers
+   WHERE full_name = 'Яночкин Алексей Леонидович')
+);
+
+INSERT INTO classes (class_date, id_subgroup)
+VALUES (
+  "2018-06-11 18:45:00",
+  (SELECT MAX(id_subgroup)
+   FROM subgroups WHERE id_group IN (
+     SELECT id_group FROM groups WHERE group_number = '550504'))
 );
